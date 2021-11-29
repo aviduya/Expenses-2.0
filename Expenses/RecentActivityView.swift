@@ -22,9 +22,6 @@ struct RecentActivityView: View {
             print("Error has occured with CoreData")
         }
     }
-    
-    //TODO: Tired, need to format date to proper string to show in recent view.
-    
 
     func convertDate(date: Date) -> String {
         let formatter = DateFormatter()
@@ -34,22 +31,16 @@ struct RecentActivityView: View {
         return formatter.string(from: date)
     }
         
-        
     var body: some View {
         List {
             Section {
                 ForEach(expenses) { expense in
-                    HStack {
-                        if let name = expense.name {
-                            Text(name)
-                        }
-                        Spacer()
-                        Text("$\(expense.amount, specifier: "%.2f")")
-                            .opacity(0.5)
-                        if let expenseDate = expense.date {
-                            Text(convertDate(date: expenseDate))
-                        }
-                    }
+                    RecentRowView(
+                        name: expense.name ?? "Error",
+                        date: convertDate(date: expense.date ?? Date.now),
+                        amount: expense.amount,
+                        category: expense.category ?? "Error")
+                    
                 }
                 .onDelete(perform: deleteExpense)
             } header: {
@@ -65,11 +56,5 @@ struct RecentActivityView: View {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .foregroundColor(Color(.systemFill))
         }
-    }
-}
-
-struct RecentActivityView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecentActivityView()
     }
 }

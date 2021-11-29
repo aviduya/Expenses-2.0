@@ -49,11 +49,15 @@ struct AddExpenseView: View {
                 Divider()
                     .padding(.horizontal)
                 
+                TextField("Item Purchased", text: $name)
+                    .padding()
+                    .font(Font.largeTitle.weight(.bold))
+                    .keyboardType(.decimalPad)
+                    .multilineTextAlignment(.center)
+    
                 Form {
                     Section {
                         DatePicker(selection: $date, in: ...Date(), displayedComponents: .date, label: {Text("Date")})
-                        TextField("Item Purchased", text: $name)
-        
                     }
                     
                     Section {
