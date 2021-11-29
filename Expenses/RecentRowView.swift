@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//let categories = ["Groceries", "Bills", "Personal", "Other", "Necesities"]
 enum CategorySymbols: String  {
     case groceries = "cart"
     case bills = "list.bullet.rectangle.portrait"

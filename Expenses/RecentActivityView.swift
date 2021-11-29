@@ -22,7 +22,7 @@ struct RecentActivityView: View {
             print("Error has occured with CoreData")
         }
     }
-
+    
     func convertDate(date: Date) -> String {
         let formatter = DateFormatter()
         
