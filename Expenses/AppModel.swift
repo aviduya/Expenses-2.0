@@ -35,6 +35,14 @@ enum Types: String, CaseIterable, Identifiable {
     case inperson = "In-Person"
 }
 
+enum CategorySymbols: String  {
+    case groceries = "cart"
+    case bills = "list.bullet.rectangle.portrait"
+    case personal = "person.fill"
+    case other = "questionmark"
+    case necesities = "person.text.rectangle.fill"
+}
+
 extension String {
     func toDouble() -> Double? {
         return NumberFormatter().number(from: self)?.doubleValue

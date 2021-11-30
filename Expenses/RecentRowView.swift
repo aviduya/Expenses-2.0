@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-enum CategorySymbols: String  {
-    case groceries = "cart"
-    case bills = "list.bullet.rectangle.portrait"
-    case personal = "person.fill"
-    case other = "questionmark"
-    case necesities = "person.text.rectangle.fill"
-}
-
 struct RecentRowView: View {
     var name: String
     var date: String

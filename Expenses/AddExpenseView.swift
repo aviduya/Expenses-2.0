@@ -18,7 +18,7 @@ struct AddExpenseView: View {
     @State private var type: Types = .inperson
     @State private var category: Categories = .personal
     @State private var date = Date()
- 
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -37,7 +37,7 @@ struct AddExpenseView: View {
                     .font(Font.largeTitle.weight(.bold))
                     .keyboardType(.decimalPad)
                     .multilineTextAlignment(.center)
-    
+                
                 Form {
                     Section {
                         DatePicker(selection: $date, in: ...Date(), displayedComponents: .date, label: {Text("Date")})
