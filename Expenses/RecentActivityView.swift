@@ -10,6 +10,7 @@ import SwiftUI
 struct RecentActivityView: View {
     @Environment(\.managedObjectContext) var dataModel
     @FetchRequest(sortDescriptors: []) var expenses: FetchedResults<Expense>
+    var viewModel = RecentActivityViewModel()
     
     func deleteExpense(at offsets: IndexSet) {
         for index in offsets {
@@ -22,14 +23,6 @@ struct RecentActivityView: View {
             print("Error has occured with CoreData")
         }
     }
-    
-    func convertDate(date: Date) -> String {
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "MMM d, YY"
-        
-        return formatter.string(from: date)
-    }
         
     var body: some View {
         List {
@@ -37,7 +30,7 @@ struct RecentActivityView: View {
                 ForEach(expenses) { expense in
                     RecentRowView(
                         name: expense.name ?? "Error",
-                        date: convertDate(date: expense.date ?? Date.now),
+                        date: viewModel.convertDate(date: expense.date ?? Date.now),
                         amount: expense.amount,
                         category: expense.category ?? "Error")
                     

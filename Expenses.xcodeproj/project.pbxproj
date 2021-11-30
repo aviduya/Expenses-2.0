@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E04251A27543CAF009EFE6A /* RecentRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04251927543CAF009EFE6A /* RecentRowView.swift */; };
+		0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */; };
+		0E28470E2755CD52006CD281 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppModel.swift */; };
 		0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68B274F13C200F10D5C /* ExpensesApp.swift */; };
 		0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68D274F13C200F10D5C /* ContentView.swift */; };
 		0E83B690274F13C200F10D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B68F274F13C200F10D5C /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		0E04251927543CAF009EFE6A /* RecentRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRowView.swift; sourceTree = "<group>"; };
+		0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityViewModel.swift; sourceTree = "<group>"; };
+		0E28470D2755CD52006CD281 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0E83B688274F13C200F10D5C /* Expenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E83B68B274F13C200F10D5C /* ExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesApp.swift; sourceTree = "<group>"; };
 		0E83B68D274F13C200F10D5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,9 +67,11 @@
 			children = (
 				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
 				0E83B69E274F168500F10D5C /* AddExpenseView.swift */,
+				0E28470D2755CD52006CD281 /* AppModel.swift */,
 				0E83B69C274F159C00F10D5C /* DataController.swift */,
 				0E83B68D274F13C200F10D5C /* ContentView.swift */,
 				0E83B6A02752DF2B00F10D5C /* RecentActivityView.swift */,
+				0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */,
 				0E04251927543CAF009EFE6A /* RecentRowView.swift */,
 				0E83B699274F141A00F10D5C /* Expenses.xcdatamodeld */,
 				0E83B68F274F13C200F10D5C /* Assets.xcassets */,
@@ -154,6 +160,8 @@
 			files = (
 				0E04251A27543CAF009EFE6A /* RecentRowView.swift in Sources */,
 				0E83B6A12752DF2B00F10D5C /* RecentActivityView.swift in Sources */,
+				0E28470E2755CD52006CD281 /* AppModel.swift in Sources */,
+				0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */,
 				0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */,
 				0E83B69D274F159C00F10D5C /* DataController.swift in Sources */,
 				0E83B69F274F168500F10D5C /* AddExpenseView.swift in Sources */,

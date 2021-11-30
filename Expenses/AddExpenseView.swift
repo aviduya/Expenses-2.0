@@ -7,35 +7,18 @@
 
 import SwiftUI
 
-extension String {
-    func toDouble() -> Double? {
-        return NumberFormatter().number(from: self)?.doubleValue
-    }
-}
-
 struct AddExpenseView: View {
     @Environment(\.managedObjectContext) var dataModel
     @Environment(\.dismiss) var dismiss
     
-    //TODO: Create a field for asking what type of expense would it be. 
-    
     @State private var amount = ""
     @State private var name = ""
-    @State private var bank = "Charles Schwab"
+    @State private var bank: Banks = .schwab
     @State private var merchant = ""
-    @State private var type = "In-Person"
-    @State private var category = ""
+    @State private var type: Types = .inperson
+    @State private var category: Categories = .personal
     @State private var date = Date()
-        
-    let banks: [String] = ["Chase", "Capital One", "Apple Card", "Charles Schwab", "American Express"]
-    
-    let types = ["Online", "In-Person"]
-    
-    let categories = ["Groceries", "Bills", "Personal", "Other", "Necesities"]
-     
-    
  
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -63,20 +46,21 @@ struct AddExpenseView: View {
                     Section {
                         TextField("Merchant", text: $merchant)
                         Picker("Bank", selection: $bank) {
-                            ForEach(banks, id: \.self) {
-                                Text($0)
+                            ForEach(Banks.allCases, id: \.self) { bank in
+                                Text(bank.rawValue.capitalized).tag(bank)
                             }
                         }
                         .pickerStyle(.menu)
                         Picker("Category", selection: $category) {
-                            ForEach(categories, id: \.self) {
-                                Text($0)
+                            ForEach(Categories.allCases, id: \.self) { category in
+                                Text(category.rawValue.capitalized).tag(category)
                             }
                         }
                         .pickerStyle(.menu)
                         Picker("Type", selection: $type) {
-                            ForEach(types, id: \.self) {
-                                Text($0)
+                            ForEach(Types.allCases, id: \.self) { type in
+                                Text(type.rawValue.capitalized)
+                                    .tag(type)
                             }
                         }
                         .pickerStyle(.segmented)
@@ -108,14 +92,13 @@ struct AddExpenseView: View {
     func saveExpense() {
         let newExpense = Expense(context: dataModel)
         newExpense.id = UUID()
-        // Converts the amount String -> Double? Unwrapped since CoreData init(<Double?>)
         newExpense.amount = Double(self.amount) ?? 0.0
         newExpense.date = date
         newExpense.name = name
         newExpense.merchant = merchant
-        newExpense.bank = bank
-        newExpense.type = type
-        newExpense.category = category
+        newExpense.bank = bank.rawValue
+        newExpense.type = type.rawValue
+        newExpense.category = category.rawValue
         
         try? dataModel.save()
         dismiss()
