@@ -35,7 +35,6 @@ struct AddExpenseView: View {
                 TextField("Item Purchased", text: $name)
                     .padding()
                     .font(Font.largeTitle.weight(.bold))
-                    .keyboardType(.decimalPad)
                     .multilineTextAlignment(.center)
                 
                 Form {

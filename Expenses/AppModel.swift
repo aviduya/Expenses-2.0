@@ -43,8 +43,27 @@ enum CategorySymbols: String  {
     case necesities = "person.text.rectangle.fill"
 }
 
+enum Months: String, Identifiable, CaseIterable {
+    var id: String {self.rawValue}
+    
+    case jan = "January"
+    case feb = "Febuary"
+    case mar = "March"
+    case apr = "April"
+    case may = "May"
+    case jun = "June"
+    case jul = "July"
+    case aug = "August"
+    case sep = "September"
+    case oct = "October"
+    case nov = "November"
+    case dec = "December"
+}
+
 extension String {
     func toDouble() -> Double? {
         return NumberFormatter().number(from: self)?.doubleValue
     }
 }
+
+

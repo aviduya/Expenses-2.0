@@ -25,7 +25,6 @@ struct RecentActivityView: View {
     }
         
     var body: some View {
-        List {
             Section {
                 ForEach(expenses) { expense in
                     RecentRowView(
@@ -39,15 +38,10 @@ struct RecentActivityView: View {
             } header: {
                 HStack {
                     Image(systemName: "hourglass")
-                    Text("Recent Activity")
+                    Text("Recent Transactions")
+                    Spacer()
                 }
             }
-            
-        }
 
-        .background {
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .foregroundColor(Color(.systemFill))
-        }
     }
 }

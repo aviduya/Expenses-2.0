@@ -10,28 +10,63 @@ import SwiftUI
 struct ContentView: View {
     @State private var showingAddExpense = false
     
-    
-    
     var body: some View {
+        
         NavigationView {
-            RecentActivityView()
-                .navigationTitle("Expenses")
-                .toolbar {
-                    EditButton()
+            
+            VStack {
+                MonthView()
+                    .frame(height: 180)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .padding()
+                List {
+                    RecentActivityView()
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            showingAddExpense.toggle()
-                        } label: {
-                            Image(systemName: "plus")
-                        }
+
+            }
+            .navigationTitle(greeting)
+            .toolbar {
+                EditButton()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingAddExpense.toggle()
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
+            }
         }
         .sheet(isPresented: $showingAddExpense) {
             AddExpenseView()
         }
+    }
+
+    var greeting: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        let newDay = 0
+        let noon = 12
+        let sunset = 18
+        let midnight = 24
+        
+        var greeting = ""
+        
+        switch hour {
+            
+        case newDay ..< noon:
+            greeting = "Good Morning Olivia!"
+        case noon ..< sunset:
+            greeting = "Good Afternoon!"
+        case sunset ..< midnight:
+            greeting = "Good Evening!"
+            
+        default:
+            greeting = "Hello!"
+        }
+        
+        return greeting
+        
     }
     
 }
