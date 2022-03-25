@@ -9,7 +9,8 @@ import SwiftUI
 
 struct RecentActivityView: View {
     @Environment(\.managedObjectContext) var dataModel
-    @FetchRequest(sortDescriptors: []) var expenses: FetchedResults<Expense>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var expenses: FetchedResults<Expense>
+    
     var viewModel = RecentActivityViewModel()
     
     func deleteExpense(at offsets: IndexSet) {
@@ -37,7 +38,6 @@ struct RecentActivityView: View {
                 .onDelete(perform: deleteExpense)
             } header: {
                 HStack {
-                    Image(systemName: "hourglass")
                     Text("Recent Transactions")
                     Spacer()
                 }

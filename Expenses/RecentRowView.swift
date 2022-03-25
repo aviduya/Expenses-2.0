@@ -38,7 +38,9 @@ struct RecentRowView: View {
             Image(systemName: convertSymbols(category))
             VStack(alignment: .leading) {
                 Text(name)
+                    .bold()
                 Text(date)
+                    .font(.caption)
                     .opacity(0.5)
             }
             Spacer()

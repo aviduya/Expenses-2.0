@@ -15,10 +15,10 @@ struct ContentView: View {
         NavigationView {
             
             VStack {
-                MonthView()
-                    .frame(height: 180)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .padding()
+                HomeSummaryView(
+                    topCategory: "Shopping",
+                    mostUsedPayment: "Schawb")
+                
                 List {
                     RecentActivityView()
                 }
@@ -71,8 +71,3 @@ struct ContentView: View {
     
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
