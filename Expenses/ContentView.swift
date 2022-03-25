@@ -16,7 +16,6 @@ struct ContentView: View {
             
             VStack {
                 HomeSummaryView(
-                    topCategory: "Shopping",
                     mostUsedPayment: "Schawb")
                 
                 List {
