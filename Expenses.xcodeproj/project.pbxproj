@@ -19,6 +19,10 @@
 		0E83B69F274F168500F10D5C /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B69E274F168500F10D5C /* AddExpenseView.swift */; };
 		0E83B6A12752DF2B00F10D5C /* RecentActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B6A02752DF2B00F10D5C /* RecentActivityView.swift */; };
 		0E96B75227ED27EF00C7FD9C /* HomeSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96B75127ED27EF00C7FD9C /* HomeSummaryView.swift */; };
+		0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */; };
+		0EDA98DA27F3A66E007E86A5 /* AddTransactionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */; };
+		0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */; };
+		0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,10 @@
 		0E83B69E274F168500F10D5C /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		0E83B6A02752DF2B00F10D5C /* RecentActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityView.swift; sourceTree = "<group>"; };
 		0E96B75127ED27EF00C7FD9C /* HomeSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSummaryView.swift; sourceTree = "<group>"; };
+		0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsModel.swift; sourceTree = "<group>"; };
+		0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsVM.swift; sourceTree = "<group>"; };
+		0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsContainer.xcdatamodel; sourceTree = "<group>"; };
+		0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +75,8 @@
 		0E83B68A274F13C200F10D5C /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
+				0EDA98D327F3A1AB007E86A5 /* AddTransactions */,
+				0EDA98D227F3A19F007E86A5 /* Home */,
 				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
 				0E83B69E274F168500F10D5C /* AddExpenseView.swift */,
 				0E28470D2755CD52006CD281 /* AppModel.swift */,
@@ -77,6 +87,7 @@
 				0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */,
 				0E04251927543CAF009EFE6A /* RecentRowView.swift */,
 				0E83B699274F141A00F10D5C /* Expenses.xcdatamodeld */,
+				0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */,
 				0E83B68F274F13C200F10D5C /* Assets.xcassets */,
 				0E83B691274F13C200F10D5C /* Preview Content */,
 			);
@@ -89,6 +100,47 @@
 				0E83B692274F13C200F10D5C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0EDA98D227F3A19F007E86A5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0EDA98D327F3A1AB007E86A5 /* AddTransactions */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA98D627F3A1D8007E86A5 /* Model */,
+				0EDA98D527F3A1D1007E86A5 /* ViewModel */,
+				0EDA98D427F3A1C8007E86A5 /* View */,
+			);
+			path = AddTransactions;
+			sourceTree = "<group>";
+		};
+		0EDA98D427F3A1C8007E86A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EDA98D527F3A1D1007E86A5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EDA98D627F3A1D8007E86A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,10 +216,14 @@
 				0E04251A27543CAF009EFE6A /* RecentRowView.swift in Sources */,
 				0E83B6A12752DF2B00F10D5C /* RecentActivityView.swift in Sources */,
 				0E96B75227ED27EF00C7FD9C /* HomeSummaryView.swift in Sources */,
+				0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */,
+				0EDA98DA27F3A66E007E86A5 /* AddTransactionsVM.swift in Sources */,
 				0E28470E2755CD52006CD281 /* AppModel.swift in Sources */,
 				0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */,
+				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
 				0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */,
 				0E83B69D274F159C00F10D5C /* DataController.swift in Sources */,
+				0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */,
 				0E83B69F274F168500F10D5C /* AddExpenseView.swift in Sources */,
 				0E83B69B274F141A00F10D5C /* Expenses.xcdatamodeld in Sources */,
 				0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */,
@@ -382,6 +438,16 @@
 			);
 			currentVersion = 0E83B69A274F141A00F10D5C /* Expenses.xcdatamodel */;
 			path = Expenses.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */,
+			);
+			currentVersion = 0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */;
+			path = TransactionsContainer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
