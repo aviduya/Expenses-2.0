@@ -55,46 +55,51 @@ extension AddTransactionView {
     
     
     private var formBox: some View {
-        Form {
-    
-            Section(header: Text("Transaction Details")) {
-                
-                TextField("Amount", value: $model.amount, format: .currency(code: "usd"))
-                TextField("Item", text: $model.name)
-                    .onTapGesture {
-                        model.name = ""
-                    }
-                TextField("Merchant", text: $model.merchant)
-                Picker("bank", selection: $model.bank) {
-                    ForEach(Banks.allCases, id: \.self) { bank in
-                        Text(bank.rawValue.capitalized).tag(bank)                    }
-                }
-                .pickerStyle(.menu)
-                Picker("Category", selection: $model.category) {
-                    ForEach(Categories.allCases, id: \.self) { category in
-                        Text(category.rawValue.capitalized).tag(category)                    }
-                }
-                .pickerStyle(.menu)
-                
-                DatePicker(selection: $model.date,
-                    in: ...Date(),
-                    displayedComponents: .date,
-                    label: {
-                        Text("Date of Purchase")
-                    }
-                )
-                
-                
-                
-                Picker("Type", selection: $model.type) {
-                    ForEach(Types.allCases, id: \.self) { type in
-                        Text(type.rawValue.capitalized)
-                            .tag(type)
-                    }
-                }
-                .pickerStyle(.segmented)
+        
+        ScrollView {
+            VStack {
+                InputFieldValueView(input: $model.amount)
             }
         }
+           
+                
+               
+                
+//                TextField("Amount", value: $model.amount, format: .currency(code: "usd"))
+//                TextField("Item", text: $model.name)
+//                    .onTapGesture {
+//                        model.name = ""
+//                    }
+//                TextField("Merchant", text: $model.merchant)
+//                Picker("bank", selection: $model.bank) {
+//                    ForEach(Banks.allCases, id: \.self) { bank in
+//                        Text(bank.rawValue.capitalized).tag(bank)                    }
+//                }
+//                .pickerStyle(.menu)
+//                Picker("Category", selection: $model.category) {
+//                    ForEach(Categories.allCases, id: \.self) { category in
+//                        Text(category.rawValue.capitalized).tag(category)                    }
+//                }
+//                .pickerStyle(.menu)
+//
+//                DatePicker(selection: $model.date,
+//                    in: ...Date(),
+//                    displayedComponents: .date,
+//                    label: {
+//                        Text("Date of Purchase")
+//                    }
+//                )
+//
+//
+//
+//                Picker("Type", selection: $model.type) {
+//                    ForEach(Types.allCases, id: \.self) { type in
+//                        Text(type.rawValue.capitalized)
+//                            .tag(type)
+//                    }
+//                }
+//                .pickerStyle(.segmented)
+            
     }
    
 

@@ -56,11 +56,7 @@ class AddTransactionsVM: ObservableObject {
             newTransaction.date = date
 
             saveData()
-
-
         }
-    
-
     
     func saveData() {
         do {

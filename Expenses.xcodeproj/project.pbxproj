@@ -23,6 +23,7 @@
 		0EDA98DA27F3A66E007E86A5 /* AddTransactionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */; };
 		0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */; };
 		0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */; };
+		0EDA98E227F7DACB007E86A5 /* InputFieldValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98E127F7DACB007E86A5 /* InputFieldValueView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsVM.swift; sourceTree = "<group>"; };
 		0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsContainer.xcdatamodel; sourceTree = "<group>"; };
 		0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
+		0EDA98E127F7DACB007E86A5 /* InputFieldValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldValueView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		0EDA98D327F3A1AB007E86A5 /* AddTransactions */ = {
 			isa = PBXGroup;
 			children = (
+				0EDA98E027F7DA84007E86A5 /* SubViews */,
 				0EDA98D627F3A1D8007E86A5 /* Model */,
 				0EDA98D527F3A1D1007E86A5 /* ViewModel */,
 				0EDA98D427F3A1C8007E86A5 /* View */,
@@ -141,6 +144,14 @@
 				0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0EDA98E027F7DA84007E86A5 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA98E127F7DACB007E86A5 /* InputFieldValueView.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +232,7 @@
 				0E28470E2755CD52006CD281 /* AppModel.swift in Sources */,
 				0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */,
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
+				0EDA98E227F7DACB007E86A5 /* InputFieldValueView.swift in Sources */,
 				0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */,
 				0E83B69D274F159C00F10D5C /* DataController.swift in Sources */,
 				0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */,
