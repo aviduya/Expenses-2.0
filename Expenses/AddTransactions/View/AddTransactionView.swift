@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CustomInputFieldsFramework
 
 struct AddTransactionView: View {
     
@@ -14,7 +15,7 @@ struct AddTransactionView: View {
     @State var model =
     AddTransactionsModel(
         amount: nil,
-        name: "Item",
+        name: "",
         bank: .schwab,
         merchant: "",
         type: .inperson,
@@ -36,14 +37,12 @@ struct AddTransactionView: View {
 
 extension AddTransactionView {
     private var header: some View {
-        
             VStack(alignment: .leading, spacing: 20) {
+                Text(model.name)
+                    .font(Font.system(.largeTitle, design: .default).weight(.bold))        
                 Text("$\(model.amount ?? 0.0,specifier: "%.2f")")
                     .font(Font.system(.largeTitle, design: .rounded).weight(.bold))
-                Text(model.name)
-                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
-                    .opacity(model.name == "Item" ? 0.30 : 1)
-                
+                        
                 Divider()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -55,12 +54,19 @@ extension AddTransactionView {
     
     
     private var formBox: some View {
-        
+            
         ScrollView {
-            VStack {
-                InputFieldValueView(input: $model.amount)
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Transaction Details")
+                    .font(.subheadline)
+                    .opacity(0.30)
+                InputValueField(input: $model.amount)
+                InputTextField(input: $model.name)
+                DatePickerView(date: $model.date)
+                GroupBoxPickersView(categories: $model.category, banks: $model.bank)
             }
         }
+        .padding()
            
                 
                
@@ -105,9 +111,3 @@ extension AddTransactionView {
 
     
 }
-
-// TODO: Create individual components for inputs in addTransactionViews
-// TODO: Create new Handler of Core Data that can manage containers throughout lifecycle
-// TODO: Refine Recent Row Views and move over to MVVM.
-// TODO: Look into core data relationship and additional entitities
-// TODO: GitHub problem indicator for project and task management.

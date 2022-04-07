@@ -10,6 +10,8 @@
 		0E04251A27543CAF009EFE6A /* RecentRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04251927543CAF009EFE6A /* RecentRowView.swift */; };
 		0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */; };
 		0E28470E2755CD52006CD281 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppModel.swift */; };
+		0E7F643B27FA82E7002C3449 /* CustomInputFieldsFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7F643A27FA82E7002C3449 /* CustomInputFieldsFramework */; };
+		0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */; };
 		0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68B274F13C200F10D5C /* ExpensesApp.swift */; };
 		0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68D274F13C200F10D5C /* ContentView.swift */; };
 		0E83B690274F13C200F10D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B68F274F13C200F10D5C /* Assets.xcassets */; };
@@ -23,13 +25,13 @@
 		0EDA98DA27F3A66E007E86A5 /* AddTransactionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */; };
 		0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */; };
 		0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */; };
-		0EDA98E227F7DACB007E86A5 /* InputFieldValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98E127F7DACB007E86A5 /* InputFieldValueView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0E04251927543CAF009EFE6A /* RecentRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRowView.swift; sourceTree = "<group>"; };
 		0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityViewModel.swift; sourceTree = "<group>"; };
 		0E28470D2755CD52006CD281 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBoxPickersView.swift; sourceTree = "<group>"; };
 		0E83B688274F13C200F10D5C /* Expenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E83B68B274F13C200F10D5C /* ExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesApp.swift; sourceTree = "<group>"; };
 		0E83B68D274F13C200F10D5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,7 +46,6 @@
 		0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsVM.swift; sourceTree = "<group>"; };
 		0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsContainer.xcdatamodel; sourceTree = "<group>"; };
 		0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
-		0EDA98E127F7DACB007E86A5 /* InputFieldValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldValueView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E7F643B27FA82E7002C3449 /* CustomInputFieldsFramework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +116,6 @@
 		0EDA98D327F3A1AB007E86A5 /* AddTransactions */ = {
 			isa = PBXGroup;
 			children = (
-				0EDA98E027F7DA84007E86A5 /* SubViews */,
 				0EDA98D627F3A1D8007E86A5 /* Model */,
 				0EDA98D527F3A1D1007E86A5 /* ViewModel */,
 				0EDA98D427F3A1C8007E86A5 /* View */,
@@ -126,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */,
+				0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -146,14 +148,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0EDA98E027F7DA84007E86A5 /* SubViews */ = {
-			isa = PBXGroup;
-			children = (
-				0EDA98E127F7DACB007E86A5 /* InputFieldValueView.swift */,
-			);
-			path = SubViews;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -170,6 +164,9 @@
 			dependencies = (
 			);
 			name = Expenses;
+			packageProductDependencies = (
+				0E7F643A27FA82E7002C3449 /* CustomInputFieldsFramework */,
+			);
 			productName = Expenses;
 			productReference = 0E83B688274F13C200F10D5C /* Expenses.app */;
 			productType = "com.apple.product-type.application";
@@ -198,6 +195,9 @@
 				Base,
 			);
 			mainGroup = 0E83B67F274F13C100F10D5C;
+			packageReferences = (
+				0E7F643927FA82E7002C3449 /* XCRemoteSwiftPackageReference "Input-Field-Framework" */,
+			);
 			productRefGroup = 0E83B689274F13C200F10D5C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -230,9 +230,9 @@
 				0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */,
 				0EDA98DA27F3A66E007E86A5 /* AddTransactionsVM.swift in Sources */,
 				0E28470E2755CD52006CD281 /* AppModel.swift in Sources */,
+				0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */,
 				0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */,
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
-				0EDA98E227F7DACB007E86A5 /* InputFieldValueView.swift in Sources */,
 				0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */,
 				0E83B69D274F159C00F10D5C /* DataController.swift in Sources */,
 				0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */,
@@ -441,6 +441,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0E7F643927FA82E7002C3449 /* XCRemoteSwiftPackageReference "Input-Field-Framework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aviduya/Input-Field-Framework.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0E7F643A27FA82E7002C3449 /* CustomInputFieldsFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E7F643927FA82E7002C3449 /* XCRemoteSwiftPackageReference "Input-Field-Framework" */;
+			productName = CustomInputFieldsFramework;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0E83B699274F141A00F10D5C /* Expenses.xcdatamodeld */ = {

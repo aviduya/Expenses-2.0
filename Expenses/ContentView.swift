@@ -54,7 +54,7 @@ struct ContentView: View {
         switch hour {
             
         case newDay ..< noon:
-            greeting = "Good Morning Olivia!"
+            greeting = "Good Morning!"
         case noon ..< sunset:
             greeting = "Good Afternoon!"
         case sunset ..< midnight:

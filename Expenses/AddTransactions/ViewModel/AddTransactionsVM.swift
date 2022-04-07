@@ -65,8 +65,7 @@ class AddTransactionsVM: ObservableObject {
         } catch let error {
             print("Error Saving. \(error)")
         }
-        
-       
+
     }
     
     

@@ -22,17 +22,12 @@ struct InputFieldValueView: View {
                 VStack {
                     TextField("", value: $input, format: .currency(code: "usd"))
                         .font(Font.headline.weight(.bold))
-
                         .multilineTextAlignment(.trailing)
-                    Divider()
-                        .padding(.leading, 150)
                 }
                 .padding()
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .clipped()
             .background(selectedMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-
-        .padding(.all)
     }
 }

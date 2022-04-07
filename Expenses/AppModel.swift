@@ -23,8 +23,20 @@ enum Categories: String, CaseIterable, Identifiable {
     case groceries = "Groceries"
     case bills = "Bills"
     case personal = "Personal"
-    case other = "Necesities"
-    case necesities = "Other"
+    case other = "Other"
+    case necesities = "Necesities"
+    
+    var icon: String {
+        switch self {
+            
+        case.groceries: return "cart"
+        case.bills: return "list.bullet.rectangle.portrait"
+        case.personal: return "person.fill"
+        case.necesities: return "person.text.rectangle.fill"
+        case.other: return "questionmark"
+            
+        }
+    }
     
 }
 
@@ -58,12 +70,6 @@ enum Months: String, Identifiable, CaseIterable {
     case oct = "October"
     case nov = "November"
     case dec = "December"
-}
-
-extension String {
-    func toDouble() -> Double? {
-        return NumberFormatter().number(from: self)?.doubleValue
-    }
 }
 
 
