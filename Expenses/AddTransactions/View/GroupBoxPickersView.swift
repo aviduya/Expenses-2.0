@@ -16,7 +16,6 @@ struct GroupBoxPickersView: View {
     var body: some View {
         HStack {
             HStack {
-                Image(systemName: categories.icon)
                 Menu(content: {
                     Section {
                         Picker("", selection: $categories) {
@@ -31,17 +30,18 @@ struct GroupBoxPickersView: View {
                         
                     }
                 }, label: {
-                    Text(categories.id)
+                    Image(systemName: "list.bullet.indent")
+                        .padding(.vertical)
+                        .font(.title)
                 })
-                
-                
+                Text(categories.id)
+                    .bold()
                 
             }
             .modifier(GroupedModifier())
             
             HStack {
-                Image(systemName: "creditcard.circle")
-                    .font(.title)
+                
                 Menu(content: {
                     Section {
                         Picker("", selection: $banks) {
@@ -55,11 +55,15 @@ struct GroupBoxPickersView: View {
                         
                     }
                 }, label: {
-                    Text(banks.id)
-                        .bold()
+                
+                    Image(systemName: "building.columns")
+                        .padding(.vertical)
+                        .font(.title)
+                        
                 })
                 
-                
+                Text(banks.id)
+                    .bold()
                 
             }
             .modifier(GroupedModifier())
@@ -69,28 +73,13 @@ struct GroupBoxPickersView: View {
 
 fileprivate struct GroupedModifier: ViewModifier {
     func body(content: Content) -> some View {
-        content
-            .padding(.all)
-            .frame(maxWidth: .infinity, minHeight: 75, alignment: .leading)
-            .clipped()
-            .background(RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .fill(Color(.systemFill)))
-    }
-}
-
-fileprivate struct CardGroupBoxStyle: GroupBoxStyle {
-    
-    let material: Material = .thin
-    
-    func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: .leading) {
-            configuration.label
-            configuration.content
-        }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(material)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         
+        let material: Material = .thin
+        
+        content
+            .frame(maxWidth: .infinity, minHeight: 75, alignment: .leading)
+            .padding()
+            .background(material, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+
     }
 }

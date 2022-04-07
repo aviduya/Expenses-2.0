@@ -12,7 +12,7 @@ enum Banks: String, CaseIterable, Identifiable  {
     
     case chase = "Chase"
     case capitalone = "Capital One"
-    case apple = "Apple Card"
+    case apple = "Apple"
     case schwab = "Charles Schwab"
     case amex = "American Express"
 }
@@ -38,13 +38,6 @@ enum Categories: String, CaseIterable, Identifiable {
         }
     }
     
-}
-
-enum Types: String, CaseIterable, Identifiable {
-    var id: String{self.rawValue}
-    
-    case online = "Online"
-    case inperson = "In-Person"
 }
 
 enum CategorySymbols: String  {

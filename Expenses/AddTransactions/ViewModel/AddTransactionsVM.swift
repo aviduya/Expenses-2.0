@@ -41,7 +41,6 @@ class AddTransactionsVM: ObservableObject {
         name: String,
         bank: Banks,
         merchant: String,
-        type: Types,
         category: Categories,
         date: Date) {
 
@@ -51,7 +50,6 @@ class AddTransactionsVM: ObservableObject {
             newTransaction.name = name
             newTransaction.bank = bank.rawValue
             newTransaction.merchant = merchant
-            newTransaction.type = type.rawValue
             newTransaction.category = category.rawValue
             newTransaction.date = date
 

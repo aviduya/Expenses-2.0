@@ -13,7 +13,6 @@ struct AddTransactionsModel {
     var name: String
     var bank: Banks
     var merchant :String
-    var type: Types
     var category: Categories
     var date: Date
     

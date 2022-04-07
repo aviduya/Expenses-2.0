@@ -15,7 +15,6 @@ struct AddExpenseView: View {
     @State private var name = ""
     @State private var bank: Banks = .schwab
     @State private var merchant = ""
-    @State private var type: Types = .inperson
     @State private var category: Categories = .personal
     @State private var date = Date()
     
@@ -56,13 +55,6 @@ struct AddExpenseView: View {
                             }
                         }
                         .pickerStyle(.menu)
-                        Picker("Type", selection: $type) {
-                            ForEach(Types.allCases, id: \.self) { type in
-                                Text(type.rawValue.capitalized)
-                                    .tag(type)
-                            }
-                        }
-                        .pickerStyle(.segmented)
                         
                     } header: {
                         Text("Additional Details")
@@ -96,7 +88,6 @@ struct AddExpenseView: View {
         newExpense.name = name
         newExpense.merchant = merchant
         newExpense.bank = bank.rawValue
-        newExpense.type = type.rawValue
         newExpense.category = category.rawValue
         
         try? dataModel.save()
