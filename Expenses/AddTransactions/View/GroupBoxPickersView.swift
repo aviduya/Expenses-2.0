@@ -12,7 +12,6 @@ struct GroupBoxPickersView: View {
     @Binding var categories: Categories
     @Binding var banks: Banks
     
-    
     var body: some View {
         HStack {
             HStack {
@@ -80,6 +79,5 @@ fileprivate struct GroupedModifier: ViewModifier {
             .frame(maxWidth: .infinity, minHeight: 75, alignment: .leading)
             .padding()
             .background(material, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-
     }
 }

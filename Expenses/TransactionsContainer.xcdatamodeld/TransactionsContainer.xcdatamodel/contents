@@ -7,9 +7,8 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="merchant" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="TransactionEntity" positionX="-54" positionY="-9" width="128" height="134"/>
+        <element name="TransactionEntity" positionX="-54" positionY="-9" width="128" height="119"/>
     </elements>
 </model>

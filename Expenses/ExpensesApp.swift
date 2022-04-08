@@ -13,11 +13,8 @@ struct ExpensesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
-            AddTransactionView()
-            
-//            ContentView()
-//                .environment(\.managedObjectContext, dataController.container.viewContext)
+            ContentView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

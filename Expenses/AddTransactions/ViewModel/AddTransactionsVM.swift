@@ -28,6 +28,7 @@ class AddTransactionsVM: ObservableObject {
     
     func fetchTransactions() {
         let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
         do  {
            savedEntities = try container.viewContext.fetch(request)
@@ -37,7 +38,7 @@ class AddTransactionsVM: ObservableObject {
     }
     
     func addTransactions(
-        amount: Double,
+        amount: Double?,
         name: String,
         bank: Banks,
         merchant: String,
@@ -46,7 +47,7 @@ class AddTransactionsVM: ObservableObject {
 
             let newTransaction = TransactionEntity(context: container.viewContext)
 
-            newTransaction.amount = amount
+            newTransaction.amount = amount ?? 0.0
             newTransaction.name = name
             newTransaction.bank = bank.rawValue
             newTransaction.merchant = merchant
@@ -54,6 +55,8 @@ class AddTransactionsVM: ObservableObject {
             newTransaction.date = date
 
             saveData()
+            
+            print(savedEntities)
         }
     
     func saveData() {

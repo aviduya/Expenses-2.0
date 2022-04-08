@@ -9,7 +9,7 @@ import SwiftUI
 import CustomInputFieldsFramework
 
 struct AddTransactionView: View {
-    
+    @Environment(\.dismiss) var dismiss
     @StateObject var vm = AddTransactionsVM()
     
     @State var model =
@@ -26,7 +26,6 @@ struct AddTransactionView: View {
             VStack {
                 header
                 formBox
-                Spacer()
             }
             .navigationTitle("Add Expense")
         
@@ -46,36 +45,44 @@ extension AddTransactionView {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .clipped()
-            .padding()
+            .padding(.horizontal)
         
     }
     
     
-    
     private var formBox: some View {
             
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Transaction Details")
                     .font(.subheadline)
                     .opacity(0.30)
                 InputValueField(input: $model.amount)
-                InputTextField(input: $model.name)
+                InputTextField(input: $model.name, placeholder: "Item...")
+                InputTextField(input: $model.merchant, placeholder: "Merchant...")
                 DatePickerView(date: $model.date)
                 GroupBoxPickersView(categories: $model.category, banks: $model.bank)
                 Button(action: {
-                                    }) {
-                    Text("Save Expense")
+                    vm.addTransactions(
+                        amount: model.amount,
+                        name: model.name,
+                        bank: model.bank,
+                        merchant: model.merchant,
+                        category: model.category,
+                        date: model.date)
+                    dismiss()
+                }) {
+                    Text("Save")
                 }.buttonStyle(CustomButtonStyle())
             }
+            .padding()
         }
-        .padding()
             
     }
 }
 
 fileprivate struct CustomButtonStyle: ButtonStyle {
-    public func makeBody(configuration: Self.Configuration) -> some View {
+    fileprivate func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .font(Font.body.weight(.medium))
             .padding(.vertical, 20)
