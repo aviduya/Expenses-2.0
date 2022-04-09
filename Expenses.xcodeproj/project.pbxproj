@@ -16,11 +16,12 @@
 		0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68D274F13C200F10D5C /* ContentView.swift */; };
 		0E83B690274F13C200F10D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B68F274F13C200F10D5C /* Assets.xcassets */; };
 		0E83B693274F13C200F10D5C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B692274F13C200F10D5C /* Preview Assets.xcassets */; };
-		0E83B69B274F141A00F10D5C /* Expenses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B699274F141A00F10D5C /* Expenses.xcdatamodeld */; };
 		0E83B69D274F159C00F10D5C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B69C274F159C00F10D5C /* DataController.swift */; };
 		0E83B69F274F168500F10D5C /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B69E274F168500F10D5C /* AddExpenseView.swift */; };
 		0E83B6A12752DF2B00F10D5C /* RecentActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B6A02752DF2B00F10D5C /* RecentActivityView.swift */; };
 		0E96B75227ED27EF00C7FD9C /* HomeSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E96B75127ED27EF00C7FD9C /* HomeSummaryView.swift */; };
+		0EBBB43427FFF46C00F0A875 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBB43327FFF46C00F0A875 /* CoreDataHandler.swift */; };
+		0EBBB4362800D10300F0A875 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBB4352800D10300F0A875 /* HomeView.swift */; };
 		0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */; };
 		0EDA98DA27F3A66E007E86A5 /* AddTransactionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */; };
 		0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */; };
@@ -37,11 +38,12 @@
 		0E83B68D274F13C200F10D5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0E83B68F274F13C200F10D5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E83B692274F13C200F10D5C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0E83B69A274F141A00F10D5C /* Expenses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Expenses.xcdatamodel; sourceTree = "<group>"; };
 		0E83B69C274F159C00F10D5C /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		0E83B69E274F168500F10D5C /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		0E83B6A02752DF2B00F10D5C /* RecentActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityView.swift; sourceTree = "<group>"; };
 		0E96B75127ED27EF00C7FD9C /* HomeSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSummaryView.swift; sourceTree = "<group>"; };
+		0EBBB43327FFF46C00F0A875 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		0EBBB4352800D10300F0A875 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsModel.swift; sourceTree = "<group>"; };
 		0EDA98D927F3A66E007E86A5 /* AddTransactionsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsVM.swift; sourceTree = "<group>"; };
 		0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsContainer.xcdatamodel; sourceTree = "<group>"; };
@@ -79,18 +81,18 @@
 		0E83B68A274F13C200F10D5C /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
+				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
+				0EBBB43227FFF44E00F0A875 /* Handlers */,
 				0EDA98D327F3A1AB007E86A5 /* AddTransactions */,
 				0EDA98D227F3A19F007E86A5 /* Home */,
-				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
 				0E83B69E274F168500F10D5C /* AddExpenseView.swift */,
 				0E28470D2755CD52006CD281 /* AppModel.swift */,
 				0E83B69C274F159C00F10D5C /* DataController.swift */,
 				0E83B68D274F13C200F10D5C /* ContentView.swift */,
-				0E96B75127ED27EF00C7FD9C /* HomeSummaryView.swift */,
 				0E83B6A02752DF2B00F10D5C /* RecentActivityView.swift */,
 				0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */,
+				0E96B75127ED27EF00C7FD9C /* HomeSummaryView.swift */,
 				0E04251927543CAF009EFE6A /* RecentRowView.swift */,
-				0E83B699274F141A00F10D5C /* Expenses.xcdatamodeld */,
 				0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */,
 				0E83B68F274F13C200F10D5C /* Assets.xcassets */,
 				0E83B691274F13C200F10D5C /* Preview Content */,
@@ -106,9 +108,42 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		0EBBB43227FFF44E00F0A875 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				0EBBB43327FFF46C00F0A875 /* CoreDataHandler.swift */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
+		0EBBB4372800D11000F0A875 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0EBBB4382800D11700F0A875 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EBBB4392800D12000F0A875 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0EDA98D227F3A19F007E86A5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0EBBB4392800D12000F0A875 /* Models */,
+				0EBBB4382800D11700F0A875 /* ViewModel */,
+				0EBBB4372800D11000F0A875 /* Views */,
+				0EBBB4352800D10300F0A875 /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -225,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E04251A27543CAF009EFE6A /* RecentRowView.swift in Sources */,
+				0EBBB43427FFF46C00F0A875 /* CoreDataHandler.swift in Sources */,
 				0E83B6A12752DF2B00F10D5C /* RecentActivityView.swift in Sources */,
 				0E96B75227ED27EF00C7FD9C /* HomeSummaryView.swift in Sources */,
 				0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */,
@@ -236,8 +272,8 @@
 				0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */,
 				0E83B69D274F159C00F10D5C /* DataController.swift in Sources */,
 				0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */,
+				0EBBB4362800D10300F0A875 /* HomeView.swift in Sources */,
 				0E83B69F274F168500F10D5C /* AddExpenseView.swift in Sources */,
-				0E83B69B274F141A00F10D5C /* Expenses.xcdatamodeld in Sources */,
 				0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,16 +498,6 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		0E83B699274F141A00F10D5C /* Expenses.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				0E83B69A274F141A00F10D5C /* Expenses.xcdatamodel */,
-			);
-			currentVersion = 0E83B69A274F141A00F10D5C /* Expenses.xcdatamodel */;
-			path = Expenses.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

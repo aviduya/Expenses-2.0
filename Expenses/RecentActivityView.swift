@@ -8,34 +8,22 @@
 import SwiftUI
 
 struct RecentActivityView: View {
-    @Environment(\.managedObjectContext) var dataModel
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var expenses: FetchedResults<Expense>
+
+    @StateObject var core = AddTransactionsVM()
     
     var viewModel = RecentActivityViewModel()
-    
-    func deleteExpense(at offsets: IndexSet) {
-        for index in offsets {
-            let expense = expenses[index]
-            dataModel.delete(expense)
-        }
-        do {
-            try dataModel.save()
-        } catch {
-            print("Error has occured with CoreData")
-        }
-    }
         
     var body: some View {
             Section {
-                ForEach(expenses) { expense in
+                ForEach(core.savedEntities) { transactions in
                     RecentRowView(
-                        name: expense.name ?? "Error",
-                        date: viewModel.convertDate(date: expense.date ?? Date.now),
-                        amount: expense.amount,
-                        category: expense.category ?? "Error")
+                        name: transactions.name ?? "Error",
+                        date: viewModel.convertDate(date: transactions.date ?? Date.now),
+                        amount: transactions.amount,
+                        category: transactions.category ?? "Error")
                     
                 }
-                .onDelete(perform: deleteExpense)
+                .onDelete(perform: core.deleteTransactions)
             } header: {
                 HStack {
                     Text("Recent Transactions")

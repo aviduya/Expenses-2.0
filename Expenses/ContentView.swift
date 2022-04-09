@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showingAddExpense = false
     
+    @State private var showingAddExpense = false
+    @StateObject var core = AddTransactionsVM()
     var body: some View {
         
         NavigationView {
             
             VStack {
-                HomeSummaryView(
-                    mostUsedPayment: "Schawb")
+//                HomeSummaryView()
                 
-                List {
-                    RecentActivityView()
+                List(core.savedEntities) { entity in
+                    Text("\(entity.amount)")
                 }
 
             }

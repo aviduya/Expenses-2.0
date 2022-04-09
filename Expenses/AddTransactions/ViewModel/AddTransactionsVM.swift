@@ -24,12 +24,14 @@ class AddTransactionsVM: ObservableObject {
             }
         }
         fetchTransactions()
+        
     }
     
     func fetchTransactions() {
+        
         let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        
+
         do  {
            savedEntities = try container.viewContext.fetch(request)
         } catch let error {
@@ -55,14 +57,22 @@ class AddTransactionsVM: ObservableObject {
             newTransaction.date = date
 
             saveData()
-            
             print(savedEntities)
         }
     
+    func deleteTransactions(_ indexSet: IndexSet) {
+        guard let index = indexSet.first else { return }
+        let entity = savedEntities[index]
+        
+        container.viewContext.delete(entity)
+        saveData()
+        print(savedEntities.count)
+    }
+    
     func saveData() {
         do {
-            try container.viewContext.save()
             fetchTransactions()
+            try container.viewContext.save()
         } catch let error {
             print("Error Saving. \(error)")
         }

@@ -30,6 +30,9 @@ struct AddTransactionView: View {
             .navigationTitle("Add Expense")
         
         }
+        .onDisappear {
+            vm.fetchTransactions()
+        }
     }
 }
 
