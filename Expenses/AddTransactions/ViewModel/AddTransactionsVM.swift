@@ -23,6 +23,7 @@ class AddTransactionsVM: ObservableObject {
                 print("Loaded Core Data")
             }
         }
+        
         fetchTransactions()
         
     }
@@ -34,6 +35,7 @@ class AddTransactionsVM: ObservableObject {
 
         do  {
            savedEntities = try container.viewContext.fetch(request)
+            self.objectWillChange.send()
         } catch let error {
             print("Error Fetching. \(error)")
         }
@@ -48,7 +50,8 @@ class AddTransactionsVM: ObservableObject {
         date: Date) {
 
             let newTransaction = TransactionEntity(context: container.viewContext)
-
+            
+            newTransaction.id = UUID()
             newTransaction.amount = amount ?? 0.0
             newTransaction.name = name
             newTransaction.bank = bank.rawValue
@@ -56,7 +59,7 @@ class AddTransactionsVM: ObservableObject {
             newTransaction.category = category.rawValue
             newTransaction.date = date
 
-            saveData()
+          saveData()
             print(savedEntities)
         }
     

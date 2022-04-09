@@ -11,5 +11,9 @@ import Foundation
 class CoreDataHandler: ObservableObject {
     static let dataManager = CoreDataHandler()
     
+    @Published var transactions: [AddTransactionsModel] = []
+    var entity: [TransactionEntity] = []
+    
+    
     
 }
