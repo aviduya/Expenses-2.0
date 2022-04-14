@@ -10,30 +10,32 @@ import SwiftUI
 struct HomeView: View {
     
     @State var isPresented: Bool = false
-    @StateObject var core = AddTransactionsVM()
+    @ObservedObject var vm = HomeViewModel()
+    @StateObject var dataManager = CoreDataHandler()
     
     var body: some View {
-        List {
-            ForEach(core.savedEntities, id: \.self) { e in
-                VStack {
-                    Text("\(e.amount)")
-                    Text(e.name ?? "Error")
-                }
-
-                
-           
+        NavigationView {
+            
+            VStack {                
+                transactionsList // ListView of Transactions 
             }
-            .onDelete(perform: core.deleteTransactions)
-        Button(action: {isPresented.toggle()}, label: {Text("Press me")})
-
-                .sheet(isPresented: $isPresented, onDismiss: {
-                    core.fetchTransactions()
-                }) {
+            .navigationTitle(vm.greeting)
+            .toolbar {
+                EditButton()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        isPresented.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $isPresented, onDismiss: { dataManager.fetchTransactions() }) {
             AddTransactionView()
         }
-        
-        
     }
-}
-
+    
 }

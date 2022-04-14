@@ -10,6 +10,8 @@
 		0E04251A27543CAF009EFE6A /* RecentRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04251927543CAF009EFE6A /* RecentRowView.swift */; };
 		0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */; };
 		0E28470E2755CD52006CD281 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppModel.swift */; };
+		0E5C762B2808C4D1006E4D02 /* HomeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */; };
+		0E5C762D2808C513006E4D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762C2808C513006E4D02 /* HomeViewModel.swift */; };
 		0E7F643B27FA82E7002C3449 /* CustomInputFieldsFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7F643A27FA82E7002C3449 /* CustomInputFieldsFramework */; };
 		0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */; };
 		0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68B274F13C200F10D5C /* ExpensesApp.swift */; };
@@ -32,6 +34,8 @@
 		0E04251927543CAF009EFE6A /* RecentRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentRowView.swift; sourceTree = "<group>"; };
 		0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityViewModel.swift; sourceTree = "<group>"; };
 		0E28470D2755CD52006CD281 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeExtensions.swift; sourceTree = "<group>"; };
+		0E5C762C2808C513006E4D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBoxPickersView.swift; sourceTree = "<group>"; };
 		0E83B688274F13C200F10D5C /* Expenses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expenses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E83B68B274F13C200F10D5C /* ExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesApp.swift; sourceTree = "<group>"; };
@@ -62,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E5C762E2808C808006E4D02 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0E83B67F274F13C100F10D5C = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +138,7 @@
 		0EBBB4382800D11700F0A875 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0E5C762C2808C513006E4D02 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -140,6 +153,7 @@
 		0EDA98D227F3A19F007E86A5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0E5C762E2808C808006E4D02 /* Extensions */,
 				0EBBB4392800D12000F0A875 /* Models */,
 				0EBBB4382800D11700F0A875 /* ViewModel */,
 				0EBBB4372800D11000F0A875 /* Views */,
@@ -260,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E04251A27543CAF009EFE6A /* RecentRowView.swift in Sources */,
+				0E5C762D2808C513006E4D02 /* HomeViewModel.swift in Sources */,
 				0EBBB43427FFF46C00F0A875 /* CoreDataHandler.swift in Sources */,
 				0E83B6A12752DF2B00F10D5C /* RecentActivityView.swift in Sources */,
 				0E96B75227ED27EF00C7FD9C /* HomeSummaryView.swift in Sources */,
@@ -270,6 +285,7 @@
 				0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */,
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
 				0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */,
+				0E5C762B2808C4D1006E4D02 /* HomeExtensions.swift in Sources */,
 				0E83B69D274F159C00F10D5C /* DataController.swift in Sources */,
 				0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */,
 				0EBBB4362800D10300F0A875 /* HomeView.swift in Sources */,

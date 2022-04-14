@@ -9,21 +9,21 @@
 //import Foundation
 //
 //struct HomeSummaryView: View {
-//    
+//
 //    @StateObject var core = AddTransactionsVM()
-//    
-//    
-//    //A Computed property that calculate the total from the purchases 
+//
+//
+//    //A Computed property that calculate the total from the purchases
 //    var spentToday: Double {
 //        var total = 0.0
-//        
+//
 //        for expense in core {
 //            total += expense.amount
 //        }
-//        
+//
 //        return total
 //    }
-//    
+//
 //    //A Computed property that appends to an empty array from CoreData which filters most exisiting element.
 //    var topCategory: [String] {
 //        let expenseCategory = core
@@ -31,28 +31,28 @@
 //        for expense in expenseCategory {
 //            topExpense.append(expense.category ?? "Error")
 //        }
-//        
+//
 //        return topExpense.filtered()
-//        
+//
 //    }
-//    
+//
 //    //A Computed property that appends to an empty array from CoreData which filters most exisiting element.
 //    var topPayment: [String] {
 //        let expensePayment = core
 //        var topPayment: [String] = []
-//        
+//
 //        for expense in expensePayment {
 //            topPayment.append(expense.bank ?? "Error")
 //        }
-//        
+//
 //        return topPayment.filtered()
 //    }
-//    
+//
 //    var body: some View {
-//        
+//
 //        VStack(alignment: .leading, spacing: 20) {
-//    
-//            
+//
+//
 //            VStack(alignment: .leading) {
 //                Text("Spent Today")
 //                    .font(.system(size: 30, weight: .regular, design: .default))
@@ -78,18 +78,18 @@
 //        .frame(maxWidth: .infinity, alignment: .leading)
 //        .clipped()
 //        .padding(.leading, 30.0)
-//        
+//
 //    }
 //}
 //
 //
 //
 //extension Array where Element: Equatable {
-//    
+//
 //    func filtered() -> [Element] {
 //        let countedSet = NSCountedSet(array: self)
 //        let mostPopularElement = self.max { countedSet.count(for: $0) < countedSet.count(for: $1) }
 //        return self.filter { $0 == mostPopularElement }
 //    }
-//    
+//
 //}

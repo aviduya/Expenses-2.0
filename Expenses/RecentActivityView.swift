@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecentActivityView: View {
 
-    @StateObject var core = AddTransactionsVM()
+    @StateObject var core = CoreDataHandler()
     
     var viewModel = RecentActivityViewModel()
         

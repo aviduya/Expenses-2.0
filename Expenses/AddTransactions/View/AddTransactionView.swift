@@ -10,7 +10,7 @@ import CustomInputFieldsFramework
 
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var vm = AddTransactionsVM()
+    @StateObject var vm = CoreDataHandler()
     
     @State var model =
     AddTransactionsModel(

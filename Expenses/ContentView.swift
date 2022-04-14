@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var showingAddExpense = false
-    @StateObject var core = AddTransactionsVM()
+    @StateObject var core = CoreDataHandler()
     var body: some View {
         
         NavigationView {
