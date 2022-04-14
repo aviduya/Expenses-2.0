@@ -35,7 +35,6 @@ class AddTransactionsVM: ObservableObject {
 
         do  {
            savedEntities = try container.viewContext.fetch(request)
-            self.objectWillChange.send()
         } catch let error {
             print("Error Fetching. \(error)")
         }
@@ -60,7 +59,6 @@ class AddTransactionsVM: ObservableObject {
             newTransaction.date = date
 
           saveData()
-            print(savedEntities)
         }
     
     func deleteTransactions(_ indexSet: IndexSet) {

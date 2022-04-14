@@ -26,7 +26,9 @@ struct HomeView: View {
             .onDelete(perform: core.deleteTransactions)
         Button(action: {isPresented.toggle()}, label: {Text("Press me")})
 
-        .sheet(isPresented: $isPresented) {
+                .sheet(isPresented: $isPresented, onDismiss: {
+                    core.fetchTransactions()
+                }) {
             AddTransactionView()
         }
         
