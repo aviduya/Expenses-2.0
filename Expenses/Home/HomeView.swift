@@ -16,7 +16,8 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             
-            VStack {                
+            VStack {
+                HomeSummary
                 transactionsList // ListView of Transactions 
             }
             .navigationTitle(vm.greeting)
@@ -33,7 +34,7 @@ struct HomeView: View {
                 }
             }
         }
-        .sheet(isPresented: $isPresented, onDismiss: { dataManager.fetchTransactions() }) {
+        .sheet(isPresented: $isPresented, onDismiss: { dataManager.fetchTransactions(); vm.runAllComp() }) {
             AddTransactionView()
         }
     }

@@ -10,9 +10,14 @@ import SwiftUI
 
 extension HomeView {
      var transactionsList: some View {
-        List(dataManager.savedEntities) { entity in
-            Text("\(entity.amount)")
+         List {
+             ForEach(dataManager.savedEntities) { data in
+                 Text("\(data.amount)")
+             }
+             .onDelete(perform: dataManager.deleteTransactions)
+            
         }
+         
     }
     
     var HomeSummary: some View {
@@ -23,21 +28,21 @@ extension HomeView {
                 Text("Spent Today")
                     .font(.system(size: 30, weight: .regular, design: .default))
                     .opacity(0.5)
-                Text("$\(spentToday, specifier: "%.2f")")
+                Text("$\(vm.spentToday, specifier: "%.2f")")
                     .font(.system(size: 35, weight: .regular, design: .rounded))
             }
             VStack(alignment: .leading) {
                 Text("Top Category")
                     .font(.headline)
                     .opacity(0.5)
-                Text(topCategory.first ?? "Error")
+                Text(vm.topCategory)
                     .font(Font.system(.largeTitle, design: .default).weight(.medium))
             }
             VStack(alignment: .leading) {
                 Text("Most Used payment")
                     .font(.headline)
                     .opacity(0.5)
-                Text(topPayment.first ?? "Error")
+                Text(vm.topPayment)
                     .font(Font.system(.largeTitle, design: .default).weight(.medium))
             }
         }

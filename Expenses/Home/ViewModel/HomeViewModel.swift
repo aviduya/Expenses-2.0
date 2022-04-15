@@ -14,12 +14,21 @@ class HomeViewModel: ObservableObject {
     @Published var greeting: String = "Hello!"
     @Published var spentToday: Double = 0.0
     @Published var topCategory: String = ""
-    @Published var topPayment: [String] = []
+    @Published var topPayment: String = ""
     
     init() {
         computedGreeting()
+        runAllComp()
+        
+        print(runAllComp())
+    }
+    
+    
+    func runAllComp() {
         computedSpent()
         computedCat()
+        computedPay()
+        
     }
     
     
@@ -31,7 +40,7 @@ class HomeViewModel: ObservableObject {
             totalAmount += savedAmount.amount
         }
         
-        totalAmount = spentToday
+        spentToday = totalAmount
     }
     
     func computedCat() {
@@ -47,6 +56,21 @@ class HomeViewModel: ObservableObject {
             return arry.filtered()
         }
         topCategory = topCat.first ?? "Error"
+    }
+    
+    func computedPay() {
+        let data = CoreDataHandler()
+        
+        var topPay: [String] {
+             var arry: [String] = []
+            
+            for pay in data.savedEntities {
+                arry.append(pay.bank ?? "Error")
+            }
+            
+            return arry.filtered()
+        }
+        topPayment = topPay.first ?? "Error"
     }
     
     
