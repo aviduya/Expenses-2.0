@@ -10,7 +10,7 @@ import Expenses_UI_Library
 
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var vm = CoreDataHandler()
+    @StateObject var dataManager = CoreDataHandler()
     
     @State var model =
     AddTransactionsModel(
@@ -31,7 +31,7 @@ struct AddTransactionView: View {
         
         }
         .onDisappear {
-            vm.fetchTransactions()
+            dataManager.fetchTransactions()
         }
     }
 }
@@ -66,7 +66,7 @@ extension AddTransactionView {
                 DatePickerView(date: $model.date)
                 GroupBoxPickersView(categories: $model.category, banks: $model.bank)
                 Button(action: {
-                    vm.addTransactions(
+                    dataManager.addTransactions(
                         amount: model.amount,
                         name: model.name,
                         bank: model.bank,

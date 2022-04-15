@@ -30,10 +30,6 @@ extension HomeView {
             }
             .padding(.leading, 25)
         }
-        
-        
-        
-        
     }
     
     var HomeSummary: some View {
