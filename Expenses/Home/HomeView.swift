@@ -34,7 +34,7 @@ struct HomeView: View {
                 }
             }
         }
-        .sheet(isPresented: $isPresented, onDismiss: { dataManager.fetchTransactions(); vm.runAllComp() }) {
+        .sheet(isPresented: $isPresented, onDismiss: { dataManager.fetchTransactions() }) {
             AddTransactionView()
         }
     }
