@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecentRowView: View {
+struct RecentRowView2: View {
     var name: String
     var date: String
     var amount: Double

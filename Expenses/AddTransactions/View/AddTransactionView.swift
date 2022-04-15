@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CustomInputFieldsFramework
+import Expenses_UI_Library
 
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss

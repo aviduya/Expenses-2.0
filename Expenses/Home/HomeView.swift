@@ -16,10 +16,14 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             
-            VStack {
+            VStack(spacing: 20) {
                 HomeSummary
-                transactionsList // ListView of Transactions 
+                    .padding(.leading, 25)
+
+                transactionsList
+                
             }
+            
             .navigationTitle(vm.greeting)
             .toolbar {
                 EditButton()
@@ -34,6 +38,7 @@ struct HomeView: View {
                 }
             }
         }
+        
         .sheet(isPresented: $isPresented, onDismiss: { dataManager.fetchTransactions() }) {
             AddTransactionView()
         }

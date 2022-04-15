@@ -7,25 +7,37 @@
 
 import Foundation
 import SwiftUI
+import Expenses_UI_Library
 
 //MARK: Extracted Views of HomeView
 
 extension HomeView {
     
     var transactionsList: some View {
-        List {
-            ForEach(dataManager.savedEntities) { data in
-                Text("\(data.amount)")
+        
+        Section {
+            List {
+                ForEach(dataManager.savedEntities) { data in
+                    RecentRowView(item: data.name ?? "", date: vm.convertDate(date: data.date ?? Date()), amount: data.amount , category: data.category ?? "")
+                }
+                .onDelete(perform: dataManager.deleteTransactions)
             }
-            .onDelete(perform: dataManager.deleteTransactions)
-            
+        } header: {
+            HStack{
+                Text("Recent Transactions")
+                    .bold()
+                Spacer()
+            }
+            .padding(.leading, 25)
         }
+        
+        
+        
         
     }
     
     var HomeSummary: some View {
         VStack(alignment: .leading, spacing: 20) {
-            
             
             VStack(alignment: .leading) {
                 Text("Spent Today")
@@ -51,11 +63,10 @@ extension HomeView {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .clipped()
-        .padding(.leading, 30.0)
     }
 }
 
-//MARK: Computed Properties returning data. 
+//MARK: Computed Properties returning data.
 
 extension HomeView {
     
@@ -75,7 +86,7 @@ extension HomeView {
         
         for transaction in dataManager.savedEntities {
             arry.append(transaction.category ?? "")
-
+            
         }
         
         return arry.filtered().first ?? "No Category Recorded"

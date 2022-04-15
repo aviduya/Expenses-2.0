@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0E04251A27543CAF009EFE6A /* RecentRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E04251927543CAF009EFE6A /* RecentRowView.swift */; };
+		0E044AF328094AEB00A4FDB5 /* Expenses_UI_Library in Frameworks */ = {isa = PBXBuildFile; productRef = 0E044AF228094AEB00A4FDB5 /* Expenses_UI_Library */; };
 		0E28470A2754D1BD006CD281 /* RecentActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2847092754D1BD006CD281 /* RecentActivityViewModel.swift */; };
 		0E28470E2755CD52006CD281 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppModel.swift */; };
 		0E5C762B2808C4D1006E4D02 /* HomeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */; };
 		0E5C762D2808C513006E4D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762C2808C513006E4D02 /* HomeViewModel.swift */; };
-		0E7F643B27FA82E7002C3449 /* CustomInputFieldsFramework in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7F643A27FA82E7002C3449 /* CustomInputFieldsFramework */; };
 		0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */; };
 		0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68B274F13C200F10D5C /* ExpensesApp.swift */; };
 		0E83B68E274F13C200F10D5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68D274F13C200F10D5C /* ContentView.swift */; };
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7F643B27FA82E7002C3449 /* CustomInputFieldsFramework in Frameworks */,
+				0E044AF328094AEB00A4FDB5 /* Expenses_UI_Library in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +214,7 @@
 			);
 			name = Expenses;
 			packageProductDependencies = (
-				0E7F643A27FA82E7002C3449 /* CustomInputFieldsFramework */,
+				0E044AF228094AEB00A4FDB5 /* Expenses_UI_Library */,
 			);
 			productName = Expenses;
 			productReference = 0E83B688274F13C200F10D5C /* Expenses.app */;
@@ -245,7 +245,7 @@
 			);
 			mainGroup = 0E83B67F274F13C100F10D5C;
 			packageReferences = (
-				0E7F643927FA82E7002C3449 /* XCRemoteSwiftPackageReference "Input-Field-Framework" */,
+				0E044AF128094AEB00A4FDB5 /* XCRemoteSwiftPackageReference "Expenses-UI-Library" */,
 			);
 			productRefGroup = 0E83B689274F13C200F10D5C /* Products */;
 			projectDirPath = "";
@@ -495,9 +495,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0E7F643927FA82E7002C3449 /* XCRemoteSwiftPackageReference "Input-Field-Framework" */ = {
+		0E044AF128094AEB00A4FDB5 /* XCRemoteSwiftPackageReference "Expenses-UI-Library" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aviduya/Input-Field-Framework.git";
+			repositoryURL = "https://github.com/aviduya/Expenses-UI-Library.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -506,10 +506,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0E7F643A27FA82E7002C3449 /* CustomInputFieldsFramework */ = {
+		0E044AF228094AEB00A4FDB5 /* Expenses_UI_Library */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0E7F643927FA82E7002C3449 /* XCRemoteSwiftPackageReference "Input-Field-Framework" */;
-			productName = CustomInputFieldsFramework;
+			package = 0E044AF128094AEB00A4FDB5 /* XCRemoteSwiftPackageReference "Expenses-UI-Library" */;
+			productName = Expenses_UI_Library;
 		};
 /* End XCSwiftPackageProductDependency section */
 
