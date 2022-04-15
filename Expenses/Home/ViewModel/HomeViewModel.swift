@@ -28,9 +28,7 @@ class HomeViewModel: ObservableObject {
         computedSpent()
         computedCat()
         computedPay()
-        
     }
-    
     
     func computedSpent() {
         let data = CoreDataHandler()

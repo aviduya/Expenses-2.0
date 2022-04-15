@@ -9,20 +9,21 @@ import Foundation
 import SwiftUI
 
 extension HomeView {
-     var transactionsList: some View {
-         List {
-             ForEach(dataManager.savedEntities) { data in
-                 Text("\(data.amount)")
-             }
-             .onDelete(perform: dataManager.deleteTransactions)
+    
+    var transactionsList: some View {
+        List {
+            ForEach(dataManager.savedEntities) { data in
+                Text("\(data.amount)")
+            }
+            .onDelete(perform: dataManager.deleteTransactions)
             
         }
-         
+        
     }
     
     var HomeSummary: some View {
         VStack(alignment: .leading, spacing: 20) {
-    
+            
             
             VStack(alignment: .leading) {
                 Text("Spent Today")

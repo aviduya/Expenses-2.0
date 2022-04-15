@@ -31,9 +31,9 @@ class CoreDataHandler: ObservableObject {
         
         let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-
+        
         do  {
-           savedEntities = try container.viewContext.fetch(request)
+            savedEntities = try container.viewContext.fetch(request)
         } catch let error {
             print("Error Fetching. \(error)")
         }
@@ -46,7 +46,7 @@ class CoreDataHandler: ObservableObject {
         merchant: String,
         category: Categories,
         date: Date) {
-
+            
             let newTransaction = TransactionEntity(context: container.viewContext)
             
             newTransaction.id = UUID()
@@ -56,11 +56,12 @@ class CoreDataHandler: ObservableObject {
             newTransaction.merchant = merchant
             newTransaction.category = category.rawValue
             newTransaction.date = date
-
-          saveData()
+            
+            saveData()
         }
     
     func deleteTransactions(_ indexSet: IndexSet) {
+        let updater = HomeViewModel()
         guard let index = indexSet.first else { return }
         let entity = savedEntities[index]
         
@@ -76,10 +77,10 @@ class CoreDataHandler: ObservableObject {
         } catch let error {
             print("Error Saving. \(error)")
         }
-
+        
     }
     
     
     
-
+    
 }
