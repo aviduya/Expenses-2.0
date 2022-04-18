@@ -61,7 +61,6 @@ class CoreDataHandler: ObservableObject {
         }
     
     func deleteTransactions(_ indexSet: IndexSet) {
-        let updater = HomeViewModel()
         guard let index = indexSet.first else { return }
         let entity = savedEntities[index]
         
