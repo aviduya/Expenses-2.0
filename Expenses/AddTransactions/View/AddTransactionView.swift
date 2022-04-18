@@ -30,6 +30,7 @@ struct AddTransactionView: View {
                 formBox
             }
             .navigationTitle("Add Expense")
+            .navigationBarTitleDisplayMode(.inline)
             
         }
         .alert("Complete Details", isPresented: $showingAlert) {
