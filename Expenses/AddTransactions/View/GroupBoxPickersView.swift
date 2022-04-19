@@ -29,18 +29,11 @@ struct GroupBoxPickersView: View {
                         
                     }
                 }, label: {
-                    Image(systemName: "list.bullet.indent")
-                        .padding(.vertical)
-                        .font(.title)
+                    catLabel
                 })
-                Text(categories.id)
-                    .bold()
-                
             }
-            .modifier(GroupedModifier())
             
             HStack {
-                
                 Menu(content: {
                     Section {
                         Picker("", selection: $banks) {
@@ -54,30 +47,47 @@ struct GroupBoxPickersView: View {
                         
                     }
                 }, label: {
-                
-                    Image(systemName: "building.columns")
-                        .padding(.vertical)
-                        .font(.title)
-                        
+                    bankLabel
                 })
-                
-                Text(banks.id)
-                    .bold()
-                
             }
-            .modifier(GroupedModifier())
+            
         }
     }
 }
 
 fileprivate struct GroupedModifier: ViewModifier {
     func body(content: Content) -> some View {
-        
         let material: Material = .thin
         
         content
             .frame(maxWidth: .infinity, minHeight: 75, alignment: .leading)
             .padding()
             .background(material, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+    }
+}
+
+
+extension GroupBoxPickersView {
+    
+    var bankLabel: some View {
+        HStack {
+            Image(systemName: "building.columns")
+                .font(.title)
+            Text(banks.id)
+                .bold()
+        }
+        .padding(.vertical)
+        .modifier(GroupedModifier())
+    }
+    
+    var catLabel: some View {
+        HStack {
+            Image(systemName: "list.bullet.indent")
+                .font(.title)
+            Text(categories.id)
+                .bold()
+        }
+        .padding(.vertical)
+        .modifier(GroupedModifier())
     }
 }
