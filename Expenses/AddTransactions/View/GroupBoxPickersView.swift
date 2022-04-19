@@ -92,7 +92,7 @@ extension GroupBoxPickersView {
         HStack {
             Image(systemName: "list.bullet.indent")
                 .font(.title)
-            Text(banks.id)
+            Text(categories.id)
                 .bold()
         }
         .padding(.vertical)

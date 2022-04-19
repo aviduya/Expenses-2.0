@@ -31,8 +31,18 @@ struct AddTransactionView: View {
             }
             .navigationTitle("Add Expense")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Cancel")
+                    }
+                }
+            }
             
         }
+        
         .alert("Complete Details", isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         }
@@ -47,7 +57,8 @@ extension AddTransactionView {
         VStack(alignment: .leading, spacing: 20) {
             Text(model.name)
                 .font(Font.system(.largeTitle, design: .default).weight(.bold))
-            Text("$\(model.amount ?? 0.0,specifier: "%.2f")")
+                .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+            Text("$\(model.amount ?? 0.0, specifier: "%.2f")")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.bold))
             
             Divider()
