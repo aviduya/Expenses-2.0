@@ -22,9 +22,7 @@ class CoreDataHandler: ObservableObject {
                 print("Loaded Core Data")
             }
         }
-        
         fetchTransactions()
-        
     }
     
     func fetchTransactions() {
@@ -78,8 +76,4 @@ class CoreDataHandler: ObservableObject {
         }
         
     }
-    
-    
-    
-    
 }

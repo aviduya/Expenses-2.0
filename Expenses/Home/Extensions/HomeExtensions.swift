@@ -14,7 +14,6 @@ import Expenses_UI_Library
 extension HomeView {
     
     var transactionsList: some View {
-        
         Section {
             List {
                 ForEach(dataManager.savedEntities) { data in
@@ -75,7 +74,6 @@ extension HomeView {
         
         return total
     }
-    
     
     var topCat: String {
         var arry: [String] = []

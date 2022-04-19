@@ -31,11 +31,9 @@ struct GroupBoxPickersView: View {
                 }, label: {
                     catLabel
                 })
-                
             }
             
             HStack {
-                
                 Menu(content: {
                     Section {
                         Picker("", selection: $banks) {
@@ -49,13 +47,8 @@ struct GroupBoxPickersView: View {
                         
                     }
                 }, label: {
-                
                     bankLabel
-                        
                 })
-                
-                
-                
             }
             
         }
@@ -64,7 +57,6 @@ struct GroupBoxPickersView: View {
 
 fileprivate struct GroupedModifier: ViewModifier {
     func body(content: Content) -> some View {
-        
         let material: Material = .thin
         
         content
@@ -76,7 +68,7 @@ fileprivate struct GroupedModifier: ViewModifier {
 
 
 extension GroupBoxPickersView {
-
+    
     var bankLabel: some View {
         HStack {
             Image(systemName: "building.columns")
