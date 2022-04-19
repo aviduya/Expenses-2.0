@@ -15,9 +15,9 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
+            VStack() {
                 HomeSummary
-                    .padding(.leading, 25)
+                    .padding(.leading)
                 transactionsList
             }
             .navigationTitle(vm.greeting)

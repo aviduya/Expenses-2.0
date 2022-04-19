@@ -11,25 +11,35 @@ import Expenses_UI_Library
 
 //MARK: Extracted Views of HomeView
 
+
+
 extension HomeView {
     
     var transactionsList: some View {
-        Section {
-            List {
+        List {
+            Section {
                 ForEach(dataManager.savedEntities) { data in
                     RecentRowView(item: data.name ?? "", date: vm.convertDate(date: data.date ?? Date()), amount: data.amount , category: data.category ?? "")
+                      
                 }
                 .onDelete(perform: dataManager.deleteTransactions)
+                
+            } header: {
+                HStack{
+                    Image(systemName: "calendar")
+                    Text("Today's Transactions")
+                }
+            } footer: {
+                Text("\(dataManager.savedEntities.count) Transactions")
             }
-        } header: {
-            HStack{
-                Text("Recent Transactions")
-                    .bold()
-                Spacer()
-            }
-            .padding(.leading, 25)
+            
         }
+        .onAppear(perform: {
+                UITableView.appearance().contentInset.top = -35
+            })
+        .listStyle(.insetGrouped)
     }
+    
     
     var HomeSummary: some View {
         VStack(alignment: .leading, spacing: 20) {
