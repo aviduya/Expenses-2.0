@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E044AF328094AEB00A4FDB5 /* Expenses_UI_Library in Frameworks */ = {isa = PBXBuildFile; productRef = 0E044AF228094AEB00A4FDB5 /* Expenses_UI_Library */; };
+		0E0ED65728120BB900A318E6 /* AllTransacitonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */; };
+		0E0ED65A2812172C00A318E6 /* AllTransactionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */; };
 		0E28470E2755CD52006CD281 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppModel.swift */; };
 		0E5C762B2808C4D1006E4D02 /* HomeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */; };
 		0E5C762D2808C513006E4D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762C2808C513006E4D02 /* HomeViewModel.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransacitonsView.swift; sourceTree = "<group>"; };
+		0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsVM.swift; sourceTree = "<group>"; };
 		0E28470D2755CD52006CD281 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeExtensions.swift; sourceTree = "<group>"; };
 		0E5C762C2808C513006E4D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -61,6 +65,31 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		0E0ED65428120B4500A318E6 /* AllTransactions */ = {
+			isa = PBXGroup;
+			children = (
+				0E0ED658281216EE00A318E6 /* ViewModel */,
+				0E0ED65528120BA300A318E6 /* Views */,
+			);
+			path = AllTransactions;
+			sourceTree = "<group>";
+		};
+		0E0ED65528120BA300A318E6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0E0ED658281216EE00A318E6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0E5C762E2808C808006E4D02 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +117,7 @@
 		0E83B68A274F13C200F10D5C /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
+				0E0ED65428120B4500A318E6 /* AllTransactions */,
 				0E044AF42809F87E00A4FDB5 /* Core */,
 				0EBBB43227FFF44E00F0A875 /* Handlers */,
 				0EDA98D327F3A1AB007E86A5 /* AddTransactions */,
@@ -268,7 +298,9 @@
 				0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */,
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
 				0E5C762B2808C4D1006E4D02 /* HomeExtensions.swift in Sources */,
+				0E0ED65A2812172C00A318E6 /* AllTransactionsVM.swift in Sources */,
 				0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */,
+				0E0ED65728120BB900A318E6 /* AllTransacitonsView.swift in Sources */,
 				0EBBB4362800D10300F0A875 /* HomeView.swift in Sources */,
 				0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */,
 			);
