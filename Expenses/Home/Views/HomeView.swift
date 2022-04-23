@@ -12,6 +12,7 @@ struct HomeView: View {
     @State var isPresented: Bool = false
     @ObservedObject var vm = HomeViewModel()
     @StateObject var dataManager = CoreDataHandler()
+    @StateObject var evm = AllTransactionsViewModel()
     
     var body: some View {
         NavigationView {

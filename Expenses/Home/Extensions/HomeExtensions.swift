@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Expenses_UI_Library
 
 //MARK: Extracted Views of HomeView
 
@@ -16,8 +15,8 @@ extension HomeView {
     var transactionsList: some View {
         List {
             Section {
-                ForEach(dataManager.savedEntities.prefix(2)) { data in
-                    RecentRowView(
+                ForEach(dataManager.savedEntities.prefix(5)) { data in
+                    RowView(
                         item: data.name ?? "",
                         date: vm.convertDate(date: data.date ?? Date()),
                         amount: data.amount ,
@@ -72,6 +71,7 @@ extension HomeView {
                     .opacity(0.5)
                 Text(topPayment)
                     .font(Font.system(.largeTitle, design: .default).weight(.medium))
+                    .overlay(BadgeView(count: 5))
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -83,10 +83,12 @@ extension HomeView {
 
 extension HomeView {
     
+    
+    
     var spentToday: Double {
         var total = 0.0
         
-        for transaction in dataManager.savedEntities {
+        for transaction in evm.today {
             total += transaction.amount
         }
         

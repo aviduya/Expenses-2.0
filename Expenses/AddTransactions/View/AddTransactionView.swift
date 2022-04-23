@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Expenses_UI_Library
 
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
@@ -78,10 +77,11 @@ extension AddTransactionView {
                     .font(.subheadline)
                     .opacity(0.30)
                 InputValueField(input: $model.amount, isValidated: $fieldsValid)
-                InputTextField(input: $model.name, placeholder: "Item...", isValidated: $fieldsValid)
-                InputTextField(input: $model.merchant, placeholder: "Merchant...", isValidated: $fieldsValid)
+                InputTextField(input: $model.name, isValidated: $fieldsValid, placeholder: "Item...")
+                InputTextField(input: $model.merchant, isValidated: $fieldsValid, placeholder: "Merchant...")
                 DatePickerView(date: $model.date)
                 GroupBoxPickersView(categories: $model.category, banks: $model.bank)
+                Spacer()
                 Button(action: {
                     save()
                 }) {
@@ -120,17 +120,3 @@ extension AddTransactionView {
     }
 }
 
-fileprivate struct CustomButtonStyle: ButtonStyle {
-    fileprivate func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .font(Font.body.weight(.medium))
-            .padding(.vertical, 20)
-            .foregroundColor(Color.white)
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 14.0, style: .continuous)
-                    .fill(Color.accentColor)
-            )
-            .opacity(configuration.isPressed ? 0.4 : 1.0)
-    }
-}

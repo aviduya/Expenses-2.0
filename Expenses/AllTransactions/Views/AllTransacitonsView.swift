@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Expenses_UI_Library
 
 struct AllTransacitonsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -106,7 +105,7 @@ extension AllTransacitonsView {
         
         List {
             ForEach(vm.today) { t in
-                RecentRowView(
+                RowView(
                     item: t.name ?? "",
                     date: vm.convertDate(date: t.date ?? Date()),
                     amount: t.amount,
@@ -121,7 +120,7 @@ extension AllTransacitonsView {
         
         List {
             ForEach(vm.week) { t in
-                RecentRowView(
+                RowView(
                     item: t.name ?? "",
                     date: vm.convertDate(date: t.date ?? Date()),
                     amount: t.amount,
@@ -137,7 +136,7 @@ extension AllTransacitonsView {
         
         List {
             ForEach(vm.month) { t in
-                RecentRowView(
+                RowView(
                     item: t.name ?? "",
                     date: vm.convertDate(date: t.date ?? Date()),
                     amount: t.amount,
@@ -154,20 +153,3 @@ extension AllTransacitonsView {
     
 }
 
-struct Badge: View {
-    let count: Int
-
-    var body: some View {
-        ZStack(alignment: .topTrailing) {
-            Color.clear
-            Text(String(count))
-                .font(.system(size: 16))
-                .padding(5)
-                .background(Color.red)
-                .clipShape(Circle())
-                // custom positioning in the top-right corner
-                .alignmentGuide(.top) { $0[.bottom] }
-                .alignmentGuide(.trailing) { $0[.trailing] - $0.width * 0.25 }
-        }
-    }
-}
