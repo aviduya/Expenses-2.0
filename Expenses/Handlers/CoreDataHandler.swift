@@ -20,10 +20,10 @@ class CoreDataHandler: ObservableObject {
     private var formatFrom: String = "%@ <= %K"
     private var formatTo: String = "%K < %@"
     
-    let container: NSPersistentContainer
+    private let container: NSPersistentContainer
     
-    let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
-    var calendar = Calendar.current
+    private let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+    private var calendar = Calendar.current
     
     private init() {
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
@@ -50,7 +50,7 @@ class CoreDataHandler: ObservableObject {
         }
     }
     
-    func fetchTransactionsToday() {
+    private func fetchTransactionsToday() {
         
         let dateFrom = calendar.startOfDay(for: Date())
         let dateTo = calendar.date(byAdding: .day, value: 1,  to: dateFrom)
@@ -68,7 +68,7 @@ class CoreDataHandler: ObservableObject {
         }
     }
     
-    func fetchTransactionsWeek() {
+    private func fetchTransactionsWeek() {
         
         let dateFrom = calendar.startOfDay(for: Date().startOfWeek())
         let dateTo = calendar.date(byAdding: .day, value: 7,  to: dateFrom)
@@ -86,7 +86,7 @@ class CoreDataHandler: ObservableObject {
         }
     }
     
-    func fetchTransactionsMonth() {
+    private func fetchTransactionsMonth() {
         
         let dateFrom = Date().getThisMonthStart()
         let dateTo = Date().getThisMonthEnd()
