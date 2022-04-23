@@ -9,6 +9,9 @@ import CoreData
 import Foundation
 
 class CoreDataHandler: ObservableObject {
+    
+    static let shared = CoreDataHandler()
+    
     @Published var savedEntities: [TransactionEntity] = []
     @Published var today: [TransactionEntity] = []
     @Published var week: [TransactionEntity] = []
@@ -19,7 +22,7 @@ class CoreDataHandler: ObservableObject {
     let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
     var calendar = Calendar.current
     
-    init() {
+    private init() {
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         calendar.timeZone = NSTimeZone.local
         container = NSPersistentContainer(name: "TransactionsContainer")

@@ -10,7 +10,7 @@ import SwiftUI
 struct AllTransacitonsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @StateObject private var dm = CoreDataHandler()
+    @StateObject private var dm = CoreDataHandler.shared
     @ObservedObject private var vm = AllTransactionsViewModel()
     
     @State private var page: s = .today
