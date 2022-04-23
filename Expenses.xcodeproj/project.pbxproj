@@ -10,6 +10,7 @@
 		0E044AF328094AEB00A4FDB5 /* Expenses_UI_Library in Frameworks */ = {isa = PBXBuildFile; productRef = 0E044AF228094AEB00A4FDB5 /* Expenses_UI_Library */; };
 		0E0ED65728120BB900A318E6 /* AllTransacitonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */; };
 		0E0ED65A2812172C00A318E6 /* AllTransactionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */; };
+		0E0ED65D28136ACD00A318E6 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED65C28136ACD00A318E6 /* DateExtensions.swift */; };
 		0E28470E2755CD52006CD281 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppModel.swift */; };
 		0E5C762B2808C4D1006E4D02 /* HomeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */; };
 		0E5C762D2808C513006E4D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762C2808C513006E4D02 /* HomeViewModel.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransacitonsView.swift; sourceTree = "<group>"; };
 		0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsVM.swift; sourceTree = "<group>"; };
+		0E0ED65C28136ACD00A318E6 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		0E28470D2755CD52006CD281 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeExtensions.swift; sourceTree = "<group>"; };
 		0E5C762C2808C513006E4D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		0E044AF42809F87E00A4FDB5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0E0ED65B28136ABB00A318E6 /* Extensions */,
 				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
 				0E28470D2755CD52006CD281 /* AppModel.swift */,
 			);
@@ -88,6 +91,14 @@
 				0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E0ED65B28136ABB00A318E6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0E0ED65C28136ACD00A318E6 /* DateExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0E5C762E2808C808006E4D02 /* Extensions */ = {
@@ -297,6 +308,7 @@
 				0E28470E2755CD52006CD281 /* AppModel.swift in Sources */,
 				0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */,
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
+				0E0ED65D28136ACD00A318E6 /* DateExtensions.swift in Sources */,
 				0E5C762B2808C4D1006E4D02 /* HomeExtensions.swift in Sources */,
 				0E0ED65A2812172C00A318E6 /* AllTransactionsVM.swift in Sources */,
 				0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */,

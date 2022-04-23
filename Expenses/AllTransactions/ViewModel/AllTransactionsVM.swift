@@ -31,9 +31,9 @@ class AllTransactionsViewModel: ObservableObject {
                 print("Success")
             }
         }
-        
         fetchTransactionsToday()
         fetchTransactionsWeek()
+        fetchTransactionsMonth()
     }
     
     func fetchTransactionsToday() {
@@ -72,6 +72,24 @@ class AllTransactionsViewModel: ObservableObject {
         }
     }
     
+    func fetchTransactionsMonth() {
+        
+        let dateFrom = Date().getThisMonthStart()
+        let dateTo = Date().getThisMonthEnd()
+        
+        let fromPredicate = NSPredicate(format: "%@ <= %K", dateFrom! as NSDate, #keyPath(TransactionEntity.date))
+        let toPredicate = NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        
+        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+        request.predicate = datePredicate
+        
+        do  {
+            month = try container.viewContext.fetch(request)
+        } catch let error {
+            print("Error Fetching. \(error)")
+        }
+    }
+    
     func convertDate(date: Date) -> String {
         let formatter = DateFormatter()
         
@@ -81,12 +99,4 @@ class AllTransactionsViewModel: ObservableObject {
     }
 }
 
-extension Calendar {
-    static let gregorian = Calendar(identifier: .gregorian)
-}
 
-extension Date {
-    func startOfWeek(using calendar: Calendar = .gregorian) -> Date {
-        calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
-    }
-}

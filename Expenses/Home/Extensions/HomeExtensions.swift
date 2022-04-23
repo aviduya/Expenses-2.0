@@ -26,19 +26,25 @@ extension HomeView {
                 .onDelete(perform: dataManager.deleteTransactions)
                 
             } header: {
-                    Text("Recent Transactions")
+                Text("Recent Transactions")
             } footer: {
                 HStack {
                     Text("\(dataManager.savedEntities.count) Transactions")
                     Spacer()
-                    NavigationLink(destination: AllTransacitonsView(), label: { Text("View All") })
+                    NavigationLink(destination: AllTransacitonsView(), label: {
+                        HStack{
+                            Text("View All")
+                            Image(systemName: "chevron.right")
+                        }
+                        
+                    })
                 }
             }
             
         }
         .onAppear(perform: {
-                UITableView.appearance().contentInset.top = -35
-            })
+            UITableView.appearance().contentInset.top = -35
+        })
         .listStyle(.insetGrouped)
     }
     

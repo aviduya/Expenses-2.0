@@ -15,7 +15,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            VStack() {
+            VStack {
                 HomeSummary
                     .padding(.leading)
                 transactionsList
