@@ -17,6 +17,9 @@ class CoreDataHandler: ObservableObject {
     @Published var week: [TransactionEntity] = []
     @Published var month: [TransactionEntity] = []
     
+    private var formatFrom: String = "%@ <= %K"
+    private var formatTo: String = "%K < %@"
+    
     let container: NSPersistentContainer
     
     let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
@@ -37,10 +40,6 @@ class CoreDataHandler: ObservableObject {
     }
     
     func fetchTransactions() {
-        
-        let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        
         do  {
             savedEntities = try container.viewContext.fetch(request)
             fetchTransactionsToday()
@@ -56,8 +55,8 @@ class CoreDataHandler: ObservableObject {
         let dateFrom = calendar.startOfDay(for: Date())
         let dateTo = calendar.date(byAdding: .day, value: 1,  to: dateFrom)
         
-        let fromPredicate = NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
-        let toPredicate = NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        let fromPredicate = NSPredicate(format: formatFrom, dateFrom as NSDate, #keyPath(TransactionEntity.date))
+        let toPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), dateTo! as NSDate)
         
         let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
         request.predicate = datePredicate
@@ -74,8 +73,8 @@ class CoreDataHandler: ObservableObject {
         let dateFrom = calendar.startOfDay(for: Date().startOfWeek())
         let dateTo = calendar.date(byAdding: .day, value: 7,  to: dateFrom)
         
-        let fromPredicate = NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
-        let toPredicate = NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        let fromPredicate = NSPredicate(format: formatFrom, dateFrom as NSDate, #keyPath(TransactionEntity.date))
+        let toPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), dateTo! as NSDate)
         
         let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
         request.predicate = datePredicate
@@ -92,8 +91,8 @@ class CoreDataHandler: ObservableObject {
         let dateFrom = Date().getThisMonthStart()
         let dateTo = Date().getThisMonthEnd()
         
-        let fromPredicate = NSPredicate(format: "%@ <= %K", dateFrom! as NSDate, #keyPath(TransactionEntity.date))
-        let toPredicate = NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        let fromPredicate = NSPredicate(format: formatFrom, dateFrom! as NSDate, #keyPath(TransactionEntity.date))
+        let toPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), dateTo! as NSDate)
         
         let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
         request.predicate = datePredicate
