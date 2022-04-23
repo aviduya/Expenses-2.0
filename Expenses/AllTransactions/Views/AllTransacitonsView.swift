@@ -37,21 +37,19 @@ struct AllTransacitonsView: View {
             
         }
         
-        
-        
     }
     
     var body: some View {
         
         VStack {
             Picker("", selection: $page) {
-                Text("Today")
+                Text("Today (\(dm.today.count))")
                     .tag(s.today)
-                Text("Last 7 Days")
+                Text("7 Days (\(dm.week.count))")
                     .tag(s.seven)
-                Text("Month")
+                Text("Month (\(dm.month.count))")
                     .tag(s.month)
-                Text("Year")
+                Text("All")
                     .tag(s.year)
             }
             .pickerStyle(.segmented)
