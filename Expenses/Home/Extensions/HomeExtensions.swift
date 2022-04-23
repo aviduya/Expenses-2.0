@@ -88,7 +88,7 @@ extension HomeView {
     var spentToday: Double {
         var total = 0.0
         
-        for transaction in evm.today {
+        for transaction in dataManager.today {
             total += transaction.amount
         }
         

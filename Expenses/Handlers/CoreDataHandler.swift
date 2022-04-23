@@ -10,10 +10,15 @@ import Foundation
 
 class CoreDataHandler: ObservableObject {
     @Published var savedEntities: [TransactionEntity] = []
+    @Published var today: [TransactionEntity] = []
     
     let container: NSPersistentContainer
+    let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+    var calendar = Calendar.current
     
     init() {
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        calendar.timeZone = NSTimeZone.local
         container = NSPersistentContainer(name: "TransactionsContainer")
         container.loadPersistentStores { (description, error) in
             if let error = error {
@@ -32,6 +37,25 @@ class CoreDataHandler: ObservableObject {
         
         do  {
             savedEntities = try container.viewContext.fetch(request)
+            fetchTransactionsToday()
+        } catch let error {
+            print("Error Fetching. \(error)")
+        }
+    }
+    
+    func fetchTransactionsToday() {
+        
+        let dateFrom = calendar.startOfDay(for: Date())
+        let dateTo = calendar.date(byAdding: .day, value: 1,  to: dateFrom)
+        
+        let fromPredicate = NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
+        let toPredicate = NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        
+        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+        request.predicate = datePredicate
+        
+        do  {
+            today = try container.viewContext.fetch(request)
         } catch let error {
             print("Error Fetching. \(error)")
         }
