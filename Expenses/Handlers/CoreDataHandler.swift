@@ -11,8 +11,11 @@ import Foundation
 class CoreDataHandler: ObservableObject {
     @Published var savedEntities: [TransactionEntity] = []
     @Published var today: [TransactionEntity] = []
+    @Published var week: [TransactionEntity] = []
+    @Published var month: [TransactionEntity] = []
     
     let container: NSPersistentContainer
+    
     let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
     var calendar = Calendar.current
     
@@ -38,6 +41,8 @@ class CoreDataHandler: ObservableObject {
         do  {
             savedEntities = try container.viewContext.fetch(request)
             fetchTransactionsToday()
+            fetchTransactionsWeek()
+            fetchTransactionsMonth()
         } catch let error {
             print("Error Fetching. \(error)")
         }
@@ -56,6 +61,42 @@ class CoreDataHandler: ObservableObject {
         
         do  {
             today = try container.viewContext.fetch(request)
+        } catch let error {
+            print("Error Fetching. \(error)")
+        }
+    }
+    
+    func fetchTransactionsWeek() {
+        
+        let dateFrom = calendar.startOfDay(for: Date().startOfWeek())
+        let dateTo = calendar.date(byAdding: .day, value: 7,  to: dateFrom)
+        
+        let fromPredicate = NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
+        let toPredicate = NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        
+        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+        request.predicate = datePredicate
+        
+        do  {
+            week = try container.viewContext.fetch(request)
+        } catch let error {
+            print("Error Fetching. \(error)")
+        }
+    }
+    
+    func fetchTransactionsMonth() {
+        
+        let dateFrom = Date().getThisMonthStart()
+        let dateTo = Date().getThisMonthEnd()
+        
+        let fromPredicate = NSPredicate(format: "%@ <= %K", dateFrom! as NSDate, #keyPath(TransactionEntity.date))
+        let toPredicate = NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        
+        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+        request.predicate = datePredicate
+        
+        do  {
+            month = try container.viewContext.fetch(request)
         } catch let error {
             print("Error Fetching. \(error)")
         }

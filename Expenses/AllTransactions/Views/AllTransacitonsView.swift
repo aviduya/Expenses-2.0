@@ -10,7 +10,8 @@ import SwiftUI
 struct AllTransacitonsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @StateObject private var vm = AllTransactionsViewModel()
+    @StateObject private var dm = CoreDataHandler()
+    @ObservedObject private var vm = AllTransactionsViewModel()
     
     @State private var page: s = .today
     @State private var isPresented: Bool = false
@@ -104,7 +105,7 @@ extension AllTransacitonsView {
         
         
         List {
-            ForEach(vm.today) { t in
+            ForEach(dm.today) { t in
                 RowView(
                     item: t.name ?? "",
                     date: vm.convertDate(date: t.date ?? Date()),
@@ -119,7 +120,7 @@ extension AllTransacitonsView {
         
         
         List {
-            ForEach(vm.week) { t in
+            ForEach(dm.week) { t in
                 RowView(
                     item: t.name ?? "",
                     date: vm.convertDate(date: t.date ?? Date()),
@@ -135,7 +136,7 @@ extension AllTransacitonsView {
         
         
         List {
-            ForEach(vm.month) { t in
+            ForEach(dm.month) { t in
                 RowView(
                     item: t.name ?? "",
                     date: vm.convertDate(date: t.date ?? Date()),
