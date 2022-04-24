@@ -11,66 +11,24 @@ struct AllTransacitonsView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @StateObject private var dm = CoreDataHandler.shared
-    @ObservedObject private var vm = AllTransactionsViewModel()
-    
-    @State private var page: s = .today
-    @State private var isPresented: Bool = false
-    
-    private enum s: Hashable {
-        case today
-        case seven
-        case month
-        case year
-    }
-    
-    private var status: String {
-        
-        switch page {
-        case .today:
-            return "Today's Transactions"
-        case .seven:
-            return "Last 7 Days"
-        case .month:
-            return "This Month"
-        case .year:
-            return "This Year"
-            
-        }
-        
-    }
+    @StateObject private var vm = AllTransactionsViewModel()
     
     var body: some View {
         
-        VStack {
-            Picker("", selection: $page) {
-                Text("Today (\(dm.today.count))")
-                    .tag(s.today)
-                Text("7 Days (\(dm.week.count))")
-                    .tag(s.seven)
-                Text("Month (\(dm.month.count))")
-                    .tag(s.month)
-                Text("All")
-                    .tag(s.year)
-            }
-            .pickerStyle(.segmented)
-            .padding([.top, .horizontal])
-            
-            NavigationView {
-                
-                VStack {
-                    TabView (selection: $page) {
-                        
-                        today
-                            .tag(s.today)
-                        week
-                            .tag(s.seven)
-                        month
-                            .tag(s.month)
-                        year
-                            .tag(s.year)
-                    }
+        ScrollView {
+            VStack {
+                switch vm.page {
+                case .today:
+                    GridView()
+                case .seven:
+                    week
+                case .month:
+                    month
+                case .year:
+                    year
                 }
             }
+            .padding()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -82,20 +40,45 @@ struct AllTransacitonsView: View {
                         }
                     }
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    Menu {
+                        Picker("Sort by", selection: $vm.page) {
+                            HStack {
+                                Text("Today (\(dm.today.count))")
+                                Spacer()
+                                Image(systemName: "calendar")
+                            }
+                            .tag(selectedFilter.today)
+                            Text("7 Days (\(dm.week.count))")
+                                .tag(selectedFilter.seven)
+                            Text("Month (\(dm.month.count))")
+                                .tag(selectedFilter.month)
+                            Text("All")
+                                .tag(selectedFilter.year)
+                        }
+                    } label: {
+                        
+                        HStack {
+                            Image(systemName: "square.3.stack.3d.top.filled")
+                            Text("Filter")
+                        }
+                        
+                        
+                        
+                        
+                    }
+                    
+                    
+                }
             }
             .navigationBarBackButtonHidden(true)
-            .navigationBarTitle(status)
-            
+            .navigationBarTitle(vm.status)
         }
-        .sheet(isPresented: $isPresented) {
-            AddTransactionView()
-        }
-        
-        
         
     }
-    
 }
+
 
 extension AllTransacitonsView {
     
@@ -111,21 +94,21 @@ extension AllTransacitonsView {
                     category: t.category ?? "")
             }
         }
+        .padding()
         
     }
     
     var week: some View {
         
         
-        List {
-            ForEach(dm.week) { t in
-                RowView(
-                    item: t.name ?? "",
-                    date: vm.convertDate(date: t.date ?? Date()),
-                    amount: t.amount,
-                    category: t.category ?? "")
-            }
+        ForEach(dm.week) { t in
+            RowView(
+                item: t.name ?? "",
+                date: vm.convertDate(date: t.date ?? Date()),
+                amount: t.amount,
+                category: t.category ?? "")
         }
+        
         
         
     }
@@ -133,14 +116,13 @@ extension AllTransacitonsView {
     var month: some View {
         
         
-        List {
-            ForEach(dm.month) { t in
-                RowView(
-                    item: t.name ?? "",
-                    date: vm.convertDate(date: t.date ?? Date()),
-                    amount: t.amount,
-                    category: t.category ?? "")
-            }
+        
+        ForEach(dm.month) { t in
+            RowView(
+                item: t.name ?? "",
+                date: vm.convertDate(date: t.date ?? Date()),
+                amount: t.amount,
+                category: t.category ?? "")
         }
         
         

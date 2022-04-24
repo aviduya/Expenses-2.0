@@ -18,9 +18,15 @@ struct CalendarView: View {
         VStack(alignment: .leading) {
             
             VStack(alignment: .leading) {
+                Text("Date")
+                    .font(.body)
+                    .opacity(0.3)
                 Text(date(date: input))
                     .font(.title)
                     .bold()
+                Text("Time")
+                    .font(.body)
+                    .opacity(0.3)
                 Text(am(date: input))
                     .font(.title)
             }

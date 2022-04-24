@@ -9,7 +9,32 @@ import Foundation
 import CoreData
 
 
+enum selectedFilter: Hashable {
+     case today
+     case seven
+     case month
+     case year
+ }
+
 class AllTransactionsViewModel: ObservableObject {
+    
+    @Published var page: selectedFilter = .today
+    
+    var status: String {
+        
+        switch page {
+        case .today:
+            return "Today's Transactions"
+        case .seven:
+            return "Last 7 Days"
+        case .month:
+            return "This Month"
+        case .year:
+            return "This Year"
+            
+        }
+        
+    }
 
     func convertDate(date: Date) -> String {
         let formatter = DateFormatter()
