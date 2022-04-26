@@ -11,7 +11,7 @@ struct HomeView: View {
     
     @State var isPresented: Bool = false
     @ObservedObject var vm = HomeViewModel()
-    @StateObject var dataManager = CoreDataHandler.shared
+    @StateObject var dm = CoreDataHandler.shared
     
     var body: some View {
         NavigationView {
@@ -34,7 +34,8 @@ struct HomeView: View {
                 }
             }
         }
-        .sheet(isPresented: $isPresented, onDismiss: { dataManager.fetchTransactions() }) {
+        .onAppear(perform: dm.fetchTransactions)
+        .sheet(isPresented: $isPresented, onDismiss: { dm.fetchTransactions() }) {
             AddTransactionView()
         }
     }

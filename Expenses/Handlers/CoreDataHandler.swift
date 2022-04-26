@@ -115,6 +115,7 @@ class CoreDataHandler: ObservableObject {
             let newTransaction = TransactionEntity(context: container.viewContext)
             
             newTransaction.id = UUID()
+            
             newTransaction.amount = amount ?? 0.0
             newTransaction.name = name
             newTransaction.bank = bank.rawValue

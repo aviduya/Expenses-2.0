@@ -15,7 +15,7 @@ extension HomeView {
     var transactionsList: some View {
         ScrollView {
             Section {
-                ForEach(dataManager.savedEntities.prefix(5)) { data in
+                ForEach(dm.savedEntities.prefix(5)) { data in
                     RowView(
                         item: data.name ?? "",
                         date: vm.convertDate(date: data.date ?? Date()),
@@ -33,7 +33,7 @@ extension HomeView {
                 }
             } footer: {
                 HStack {
-                    Text("\(dataManager.savedEntities.count) Transactions")
+                    Text("\(dm.savedEntities.count) Transactions")
                     Spacer()
                     NavigationLink(destination: AllTransacitonsView(), label: {
                         HStack{
@@ -89,7 +89,7 @@ extension HomeView {
     var spentToday: Double {
         var total = 0.0
         
-        for transaction in dataManager.today {
+        for transaction in dm.today {
             total += transaction.amount
         }
         
@@ -99,7 +99,7 @@ extension HomeView {
     var topCat: String {
         var arry: [String] = []
         
-        for transaction in dataManager.savedEntities {
+        for transaction in dm.savedEntities {
             arry.append(transaction.category ?? "")
             
         }
@@ -110,7 +110,7 @@ extension HomeView {
     var topPayment: String {
         var arry: [String] = []
         
-        for transaction in dataManager.savedEntities {
+        for transaction in dm.savedEntities {
             arry.append(transaction.bank ?? "")
         }
         
