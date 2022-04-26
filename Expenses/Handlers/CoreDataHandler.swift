@@ -131,7 +131,6 @@ class CoreDataHandler: ObservableObject {
         
         container.viewContext.delete(entity)
         saveData()
-        print(savedEntities.count)
     }
     
     func saveData() {

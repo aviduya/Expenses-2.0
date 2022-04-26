@@ -13,7 +13,7 @@ import SwiftUI
 extension HomeView {
     
     var transactionsList: some View {
-        List {
+        ScrollView {
             Section {
                 ForEach(dataManager.savedEntities.prefix(5)) { data in
                     RowView(
@@ -22,10 +22,15 @@ extension HomeView {
                         amount: data.amount ,
                         category: data.category ?? "")
                 }
-                .onDelete(perform: dataManager.deleteTransactions)
+
                 
             } header: {
-                Text("Recent Transactions")
+                HStack {
+                    Text("Most recent transactions")
+                        .bold()
+                        .opacity(0.63)
+                    Spacer()
+                }
             } footer: {
                 HStack {
                     Text("\(dataManager.savedEntities.count) Transactions")
@@ -39,12 +44,11 @@ extension HomeView {
                     })
                 }
             }
-            
         }
         .onAppear(perform: {
             UITableView.appearance().contentInset.top = -35
         })
-        .listStyle(.insetGrouped)
+        .padding()
     }
     
     
@@ -71,7 +75,6 @@ extension HomeView {
                     .opacity(0.5)
                 Text(topPayment)
                     .font(Font.system(.largeTitle, design: .default).weight(.medium))
-                    .overlay(BadgeView(count: 5))
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -82,8 +85,6 @@ extension HomeView {
 //MARK: Computed Properties returning data.
 
 extension HomeView {
-    
-    
     
     var spentToday: Double {
         var total = 0.0

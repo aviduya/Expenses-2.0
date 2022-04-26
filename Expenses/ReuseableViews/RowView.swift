@@ -14,6 +14,8 @@ struct RowView: View {
     @State var amount: Double?
     @State var category: String
     
+    private let material: Material = .regularMaterial
+    
     var body: some View {
         HStack {
             Image(systemName: convertSymbols(category))
@@ -29,25 +31,30 @@ struct RowView: View {
             Spacer()
             Text("$\(amount ?? 0.0, specifier: "%.2f")")
         }
+        .padding(10)
+        .background(material, in: RoundedRectangle(cornerRadius: 10))
+        
+        
     }
     
-    func convertSymbols(_ category: String) -> String {
-        
-        switch category.lowercased() {
-        case "groceries":
-            return "cart"
-        case "bills":
-            return "list.bullet.rectangle.portrait"
-        case "personal":
-            return "person.fill"
-        case "necesities":
-            return "person.text.rectangle.fill"
-        case "other":
-            return "questionmark"
-        default:
-            return "xmark.diamond"
-        }
     
+}
+
+func convertSymbols(_ category: String) -> String {
+    
+    switch category.lowercased() {
+    case "groceries":
+        return "cart"
+    case "bills":
+        return "list.bullet.rectangle.portrait"
+    case "personal":
+        return "person.fill"
+    case "necesities":
+        return "person.text.rectangle.fill"
+    case "other":
+        return "questionmark"
+    default:
+        return "xmark.diamond"
     }
     
 }
