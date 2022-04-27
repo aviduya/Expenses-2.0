@@ -36,12 +36,14 @@ extension HomeView {
                 }
             } footer: {
                 HStack {
-                    Text("\(dm.all.count) Transactions")
+            
                     Spacer()
                     NavigationLink(destination: AllTransacitonsView(), label: {
-                        HStack{
-                            Text("View All")
-                            Image(systemName: "chevron.right")
+                        HStack {
+                           
+                                Text("View All \(dm.all.count) Transactions")
+                                Image(systemName: "chevron.right")
+                            
                         }
                         
                     })
@@ -59,7 +61,7 @@ extension HomeView {
         VStack(alignment: .leading, spacing: 20) {
             
             VStack(alignment: .leading) {
-                Text("Spent Today")
+                Text("Spent Today \(diffPercentage)")
                     .font(.system(size: 30, weight: .regular, design: .default))
                     .opacity(0.5)
                 Text("$\(spentToday, specifier: "%.2f")")
@@ -88,8 +90,9 @@ extension HomeView {
 //MARK: Computed Properties returning data.
 
 extension HomeView {
-    
+
     var spentToday: Double {
+        
         var total = 0.0
         
         for transaction in dm.today {
@@ -98,6 +101,28 @@ extension HomeView {
         
         return total
     }
+    
+    var spentYesterday: Double {
+        
+        var total = 0.0
+    
+        for transaction in dm.yesterday {
+            total += transaction.amount
+        }
+        
+        return total
+    }
+    
+    
+    
+    var diffPercentage: Double {
+        
+        let difference = spentToday - spentYesterday
+        
+        return (difference / spentYesterday) * 100
+    }
+    
+    
     
     var topCat: String {
         var arry: [String] = []

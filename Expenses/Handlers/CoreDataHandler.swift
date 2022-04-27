@@ -12,6 +12,7 @@ class CoreDataHandler: ObservableObject {
     
     static let shared = CoreDataHandler()
     
+    @Published var yesterday: [TransactionEntity] = []
     @Published var today: [TransactionEntity] = []
     @Published var week: [TransactionEntity] = []
     @Published var month: [TransactionEntity] = []
@@ -44,6 +45,9 @@ class CoreDataHandler: ObservableObject {
     
     func getEverything() {
 
+        let yesterdayDateTo = calendar.startOfDay(for: Date())
+        let yesterdayDateFrom = calendar.date(byAdding: .day, value: -1, to: yesterdayDateTo)
+        
         let todayDateFrom = calendar.startOfDay(for: Date())
         let todayDateTo = calendar.date(byAdding: .day, value: 1, to: todayDateFrom)
         
@@ -52,6 +56,9 @@ class CoreDataHandler: ObservableObject {
         
         let monthDateFrom = Date().getThisMonthStart()
         let monthDateTo = Date().getThisMonthEnd()
+        
+        let yesterdayFromPredicate = NSPredicate(format: formatFrom, yesterdayDateFrom! as NSDate, #keyPath(TransactionEntity.date))
+        let yesterdayPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), yesterdayDateTo as NSDate)
         
         let todayFromPredicate = NSPredicate(format: formatFrom, todayDateFrom as NSDate, #keyPath(TransactionEntity.date))
         let todayPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), todayDateTo! as NSDate)
@@ -62,10 +69,13 @@ class CoreDataHandler: ObservableObject {
         let monthFromPredicate = NSPredicate(format: formatFrom, monthDateFrom! as NSDate, #keyPath(TransactionEntity.date))
         let monthPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), monthDateTo! as NSDate)
         
+        let yesterdayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let todayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let weekRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let monthRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         
+        let yesterdayDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [yesterdayFromPredicate, yesterdayPredicate])
+        yesterdayRequest.predicate = yesterdayDatePredicate
         
         let todayDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [todayFromPredicate, todayPredicate])
         todayRequest.predicate = todayDatePredicate
@@ -79,6 +89,7 @@ class CoreDataHandler: ObservableObject {
         
         do  {
             all = try container.viewContext.fetch(request)
+            yesterday = try container.viewContext.fetch(yesterdayRequest)
             today = try container.viewContext.fetch(todayRequest)
             week = try container.viewContext.fetch(weekRequest)
             month = try container.viewContext.fetch(monthRequest)
