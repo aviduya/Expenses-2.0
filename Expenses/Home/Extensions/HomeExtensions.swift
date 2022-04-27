@@ -15,12 +15,15 @@ extension HomeView {
     var transactionsList: some View {
         ScrollView {
             Section {
-                ForEach(dm.all.prefix(5)) { data in
+                ForEach(dm.all.prefix(5)) { t in
                     RowView(
-                        item: data.name ?? "",
-                        date: vm.convertDate(date: data.date ?? Date()),
-                        amount: data.amount ,
-                        category: data.category ?? "")
+                        entity: t,
+                        entities: $dm.all,
+                        onDelete: dm.deleteTransactions(_:),
+                        item: t.name ?? "",
+                        date: vm.convertDate(date: t.date ?? Date()),
+                        amount: t.amount,
+                        category: t.category ?? "")
                 }
 
                 

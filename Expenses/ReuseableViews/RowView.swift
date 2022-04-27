@@ -7,7 +7,15 @@
 
 import SwiftUI
 
+
+
 struct RowView: View {
+    
+    @Environment(\.editMode) var editMode
+    
+    let entity: TransactionEntity
+    @Binding var entities: [TransactionEntity]
+    let onDelete: (IndexSet) -> ()
     
     @State var item: String
     @State var date: String
@@ -18,8 +26,21 @@ struct RowView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: convertSymbols(category))
-                .frame(width: 30)
+            
+            if self.editMode?.wrappedValue == .active {
+                Button(action: {
+                    if let index = entities.firstIndex(of: entity) {
+                        self.onDelete(IndexSet(integer: index))
+                    }
+                }) {
+                    Image(systemName: "minus.circle")
+                        .foregroundColor(Color.red)
+                        .frame(width: 30)
+                }
+            } else {
+                Image(systemName: convertSymbols(category))
+                    .frame(width: 30)
+            }
             Divider()
             VStack(alignment: .leading) {
                 Text(item)
@@ -57,10 +78,4 @@ func convertSymbols(_ category: String) -> String {
         return "xmark.diamond"
     }
     
-}
-
-struct RowView_Previews: PreviewProvider {
-    static var previews: some View {
-        RowView(item: "", date: "", category: "")
-    }
 }

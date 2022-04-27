@@ -74,6 +74,7 @@ struct AllTransacitonsView: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle(vm.status)
+            .navigationBarItems(trailing: EditButton())
         }.onAppear(perform: dm.getEverything)
         
     }
@@ -85,6 +86,9 @@ extension AllTransacitonsView {
     var today: some View {
         ForEach(dm.today) { t in
             RowView(
+                entity: t,
+                entities: $dm.all,
+                onDelete: dm.deleteTransactions(_:),
                 item: t.name ?? "",
                 date: vm.convertDate(date: t.date ?? Date()),
                 amount: t.amount,
@@ -95,6 +99,9 @@ extension AllTransacitonsView {
     var week: some View {
         ForEach(dm.week) { t in
             RowView(
+                entity: t,
+                entities: $dm.all,
+                onDelete: dm.deleteTransactions(_:),
                 item: t.name ?? "",
                 date: vm.convertDate(date: t.date ?? Date()),
                 amount: t.amount,
@@ -105,6 +112,9 @@ extension AllTransacitonsView {
     var month: some View {
         ForEach(dm.month) { t in
             RowView(
+                entity: t,
+                entities: $dm.all,
+                onDelete: dm.deleteTransactions(_:),
                 item: t.name ?? "",
                 date: vm.convertDate(date: t.date ?? Date()),
                 amount: t.amount,
@@ -116,13 +126,26 @@ extension AllTransacitonsView {
     var year: some View {
         ForEach(dm.all) { t in
             RowView(
+                entity: t,
+                entities: $dm.all,
+                onDelete: dm.deleteTransactions(_:),
                 item: t.name ?? "",
                 date: vm.convertDate(date: t.date ?? Date()),
                 amount: t.amount,
                 category: t.category ?? "")
+                
+//            .overlay(
+//                withAnimation {
+//                    DeleteButton(number: t, entity: $dm.all, onDelete: dm.deleteTransactions)
+//                }
+//
+//            )
             
         }
     }
     
+    
+    
 }
+
 
