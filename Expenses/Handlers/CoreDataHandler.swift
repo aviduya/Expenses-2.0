@@ -12,17 +12,20 @@ class CoreDataHandler: ObservableObject {
     
     static let shared = CoreDataHandler()
     
-    @Published var savedEntities: [TransactionEntity] = []
     @Published var today: [TransactionEntity] = []
     @Published var week: [TransactionEntity] = []
     @Published var month: [TransactionEntity] = []
+    @Published var all: [TransactionEntity] = []
     
-    private var formatFrom: String = "%@ <= %K"
-    private var formatTo: String = "%K < %@"
-    
+    private let formatFrom: String = "%@ <= %K"
+    private let formatTo: String = "%K < %@"
+   
+
     private let container: NSPersistentContainer
     
     private let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+    
+    
     private var calendar = Calendar.current
     
     private init() {
@@ -36,72 +39,54 @@ class CoreDataHandler: ObservableObject {
                 print("Loaded Core Data")
             }
         }
-        fetchTransactions()
+        getEverything()
     }
     
-    func fetchTransactions() {
+    func getEverything() {
+
+        let todayDateFrom = calendar.startOfDay(for: Date())
+        let todayDateTo = calendar.date(byAdding: .day, value: 1, to: todayDateFrom)
+        
+        let weekDateFrom = calendar.startOfDay(for: Date().startOfWeek())
+        let weekDateTo = calendar.date(byAdding: .day, value: 7,  to: weekDateFrom)
+        
+        let monthDateFrom = Date().getThisMonthStart()
+        let monthDateTo = Date().getThisMonthEnd()
+        
+        let todayFromPredicate = NSPredicate(format: formatFrom, todayDateFrom as NSDate, #keyPath(TransactionEntity.date))
+        let todayPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), todayDateTo! as NSDate)
+        
+        let weekFromPredicate = NSPredicate(format: formatFrom, weekDateFrom as NSDate, #keyPath(TransactionEntity.date))
+        let weekPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), weekDateTo! as NSDate)
+        
+        let monthFromPredicate = NSPredicate(format: formatFrom, monthDateFrom! as NSDate, #keyPath(TransactionEntity.date))
+        let monthPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), monthDateTo! as NSDate)
+        
+        let todayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+        let weekRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+        let monthRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+        
+        
+        let todayDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [todayFromPredicate, todayPredicate])
+        todayRequest.predicate = todayDatePredicate
+        
+        let weekDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [weekFromPredicate, weekPredicate])
+        weekRequest.predicate = weekDatePredicate
+        
+        let monthDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [monthFromPredicate, monthPredicate])
+        monthRequest.predicate = monthDatePredicate
+        
+        
         do  {
-            savedEntities = try container.viewContext.fetch(request)
-            fetchTransactionsToday()
-            fetchTransactionsWeek()
-            fetchTransactionsMonth()
+            all = try container.viewContext.fetch(request)
+            today = try container.viewContext.fetch(todayRequest)
+            week = try container.viewContext.fetch(weekRequest)
+            month = try container.viewContext.fetch(monthRequest)
         } catch let error {
             print("Error Fetching. \(error)")
         }
-    }
-    
-    private func fetchTransactionsToday() {
         
-        let dateFrom = calendar.startOfDay(for: Date())
-        let dateTo = calendar.date(byAdding: .day, value: 1,  to: dateFrom)
         
-        let fromPredicate = NSPredicate(format: formatFrom, dateFrom as NSDate, #keyPath(TransactionEntity.date))
-        let toPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), dateTo! as NSDate)
-        
-        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
-        request.predicate = datePredicate
-        
-        do  {
-            today = try container.viewContext.fetch(request)
-        } catch let error {
-            print("Error Fetching. \(error)")
-        }
-    }
-    
-    private func fetchTransactionsWeek() {
-        
-        let dateFrom = calendar.startOfDay(for: Date().startOfWeek())
-        let dateTo = calendar.date(byAdding: .day, value: 7,  to: dateFrom)
-        
-        let fromPredicate = NSPredicate(format: formatFrom, dateFrom as NSDate, #keyPath(TransactionEntity.date))
-        let toPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), dateTo! as NSDate)
-        
-        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
-        request.predicate = datePredicate
-        
-        do  {
-            week = try container.viewContext.fetch(request)
-        } catch let error {
-            print("Error Fetching. \(error)")
-        }
-    }
-    
-    private func fetchTransactionsMonth() {
-        
-        let dateFrom = Date().getThisMonthStart()
-        let dateTo = Date().getThisMonthEnd()
-        
-        let fromPredicate = NSPredicate(format: formatFrom, dateFrom! as NSDate, #keyPath(TransactionEntity.date))
-        let toPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), dateTo! as NSDate)
-        
-        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
-        request.predicate = datePredicate
-        
-        do  {
-            month = try container.viewContext.fetch(request)
-        } catch let error {
-            print("Error Fetching. \(error)")
-        }
     }
     
     func addTransactions(
@@ -128,7 +113,7 @@ class CoreDataHandler: ObservableObject {
     
     func deleteTransactions(_ indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
-        let entity = savedEntities[index]
+        let entity = all[index]
         
         container.viewContext.delete(entity)
         saveData()
@@ -136,7 +121,7 @@ class CoreDataHandler: ObservableObject {
     
     func saveData() {
         do {
-            fetchTransactions()
+            getEverything()
             try container.viewContext.save()
         } catch let error {
             print("Error Saving. \(error)")

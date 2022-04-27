@@ -15,7 +15,7 @@ extension HomeView {
     var transactionsList: some View {
         ScrollView {
             Section {
-                ForEach(dm.savedEntities.prefix(5)) { data in
+                ForEach(dm.all.prefix(5)) { data in
                     RowView(
                         item: data.name ?? "",
                         date: vm.convertDate(date: data.date ?? Date()),
@@ -26,14 +26,14 @@ extension HomeView {
                 
             } header: {
                 HStack {
-                    Text("Most recent transactions")
+                    Text("5 Most recent transactions")
                         .bold()
                         .opacity(0.63)
                     Spacer()
                 }
             } footer: {
                 HStack {
-                    Text("\(dm.savedEntities.count) Transactions")
+                    Text("\(dm.all.count) Transactions")
                     Spacer()
                     NavigationLink(destination: AllTransacitonsView(), label: {
                         HStack{
@@ -99,7 +99,7 @@ extension HomeView {
     var topCat: String {
         var arry: [String] = []
         
-        for transaction in dm.savedEntities {
+        for transaction in dm.all {
             arry.append(transaction.category ?? "")
             
         }
@@ -110,7 +110,7 @@ extension HomeView {
     var topPayment: String {
         var arry: [String] = []
         
-        for transaction in dm.savedEntities {
+        for transaction in dm.all {
             arry.append(transaction.bank ?? "")
         }
         

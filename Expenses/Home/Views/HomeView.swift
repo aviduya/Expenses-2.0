@@ -34,8 +34,8 @@ struct HomeView: View {
                 }
             }
         }
-        .onAppear(perform: dm.fetchTransactions)
-        .sheet(isPresented: $isPresented, onDismiss: { dm.fetchTransactions() }) {
+        .onAppear(perform: dm.getEverything)
+        .sheet(isPresented: $isPresented, onDismiss: { dm.getEverything() }) {
             AddTransactionView()
         }
     }

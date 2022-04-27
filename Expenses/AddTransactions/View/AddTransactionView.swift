@@ -46,7 +46,7 @@ struct AddTransactionView: View {
             Button("OK", role: .cancel) { }
         }
         .onDisappear {
-            dataManager.fetchTransactions()
+            dataManager.getEverything()
         }
     }
 }

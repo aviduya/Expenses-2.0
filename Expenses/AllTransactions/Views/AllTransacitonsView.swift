@@ -60,7 +60,7 @@ struct AllTransacitonsView: View {
                             .tag(selectedFilter.month)
                             
                             HStack {
-                                Text("All Transactions [\(dm.savedEntities.count)]")
+                                Text("All Transactions [\(dm.all.count)]")
                             }
                             .tag(selectedFilter.year)
                         }
@@ -74,7 +74,7 @@ struct AllTransacitonsView: View {
             }
             .navigationBarBackButtonHidden(true)
             .navigationBarTitle(vm.status)
-        }.onAppear(perform: dm.fetchTransactions)
+        }.onAppear(perform: dm.getEverything)
         
     }
 }
@@ -114,7 +114,7 @@ extension AllTransacitonsView {
     }
     
     var year: some View {
-        ForEach(dm.savedEntities) { t in
+        ForEach(dm.all) { t in
             RowView(
                 item: t.name ?? "",
                 date: vm.convertDate(date: t.date ?? Date()),

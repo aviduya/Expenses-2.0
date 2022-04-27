@@ -10,13 +10,11 @@
 		0E0ED65728120BB900A318E6 /* AllTransacitonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */; };
 		0E0ED65A2812172C00A318E6 /* AllTransactionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */; };
 		0E0ED65D28136ACD00A318E6 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED65C28136ACD00A318E6 /* DateExtensions.swift */; };
-		0E0ED6602813BEB800A318E6 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED65F2813BEB800A318E6 /* BadgeView.swift */; };
 		0E0ED6632813C48200A318E6 /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6622813C48200A318E6 /* InputTextField.swift */; };
 		0E0ED6652813C62400A318E6 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6642813C62400A318E6 /* RowView.swift */; };
 		0E0ED6672813C6A300A318E6 /* InputValueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6662813C6A300A318E6 /* InputValueField.swift */; };
 		0E0ED6692813C71D00A318E6 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6682813C71D00A318E6 /* DatePickerView.swift */; };
 		0E0ED66B2813CC5B00A318E6 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED66A2813CC5B00A318E6 /* CustomButtonStyle.swift */; };
-		0E0ED66D28149CC100A318E6 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED66C28149CC100A318E6 /* GridView.swift */; };
 		0E28470E2755CD52006CD281 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppModel.swift */; };
 		0E5C762B2808C4D1006E4D02 /* HomeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */; };
 		0E5C762D2808C513006E4D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762C2808C513006E4D02 /* HomeViewModel.swift */; };
@@ -36,13 +34,11 @@
 		0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransacitonsView.swift; sourceTree = "<group>"; };
 		0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsVM.swift; sourceTree = "<group>"; };
 		0E0ED65C28136ACD00A318E6 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
-		0E0ED65F2813BEB800A318E6 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		0E0ED6622813C48200A318E6 /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
 		0E0ED6642813C62400A318E6 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 		0E0ED6662813C6A300A318E6 /* InputValueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValueField.swift; sourceTree = "<group>"; };
 		0E0ED6682813C71D00A318E6 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		0E0ED66A2813CC5B00A318E6 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
-		0E0ED66C28149CC100A318E6 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		0E28470D2755CD52006CD281 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		0E5C762A2808C4D1006E4D02 /* HomeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeExtensions.swift; sourceTree = "<group>"; };
 		0E5C762C2808C513006E4D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -116,13 +112,11 @@
 		0E0ED65E2813BE9D00A318E6 /* ReuseableViews */ = {
 			isa = PBXGroup;
 			children = (
-				0E0ED65F2813BEB800A318E6 /* BadgeView.swift */,
 				0E0ED6622813C48200A318E6 /* InputTextField.swift */,
 				0E0ED6642813C62400A318E6 /* RowView.swift */,
 				0E0ED6662813C6A300A318E6 /* InputValueField.swift */,
 				0E0ED6682813C71D00A318E6 /* DatePickerView.swift */,
 				0E0ED66A2813CC5B00A318E6 /* CustomButtonStyle.swift */,
-				0E0ED66C28149CC100A318E6 /* GridView.swift */,
 			);
 			path = ReuseableViews;
 			sourceTree = "<group>";
@@ -341,10 +335,8 @@
 				0E0ED66B2813CC5B00A318E6 /* CustomButtonStyle.swift in Sources */,
 				0E28470E2755CD52006CD281 /* AppModel.swift in Sources */,
 				0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */,
-				0E0ED6602813BEB800A318E6 /* BadgeView.swift in Sources */,
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
 				0E0ED6692813C71D00A318E6 /* DatePickerView.swift in Sources */,
-				0E0ED66D28149CC100A318E6 /* GridView.swift in Sources */,
 				0E0ED6632813C48200A318E6 /* InputTextField.swift in Sources */,
 				0E0ED6652813C62400A318E6 /* RowView.swift in Sources */,
 				0E0ED65D28136ACD00A318E6 /* DateExtensions.swift in Sources */,
