@@ -61,9 +61,28 @@ extension HomeView {
         VStack(alignment: .leading, spacing: 20) {
             
             VStack(alignment: .leading) {
-                Text("Spent Today \(diffPercentage)")
-                    .font(.system(size: 30, weight: .regular, design: .default))
-                    .opacity(0.5)
+                
+                    Text("Spent Today")
+                        .font(.system(size: 30, weight: .regular, design: .default))
+                        .opacity(0.5)
+                    if diffPercentage > 0 {
+                        
+                        HStack {
+                            Image(systemName: "arrow.up.right")
+                                .foregroundColor(Color.red)
+                            Text("\(diffPercentage.rounded(), specifier: "%2.f")%")
+                        }
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                    } else if diffPercentage < 0 {
+                        HStack {
+                            Text("\(diffPercentage.rounded(), specifier: "%2.f")%")
+                            Image(systemName: "arrow.down.right")
+                                .foregroundColor(Color.green)
+                        }
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                    }
+                
+                
                 Text("$\(spentToday, specifier: "%.2f")")
                     .font(.system(size: 35, weight: .regular, design: .rounded))
             }
@@ -144,4 +163,7 @@ extension HomeView {
         
         return arry.filtered().first ?? "No Payment Recorded"
     }
-}
+    }
+    
+
+
