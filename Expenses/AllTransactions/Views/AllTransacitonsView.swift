@@ -13,6 +13,8 @@ struct AllTransacitonsView: View {
     @StateObject private var dm = CoreDataHandler.shared
     @StateObject private var vm = AllTransactionsViewModel()
     
+    private let error = "Something went wrong"
+    
     var body: some View {
         
         ScrollView {
@@ -90,7 +92,7 @@ extension AllTransacitonsView {
                 entities: $dm.all,
                 onDelete: dm.deleteTransactions(_:),
                 item: t.name ?? "",
-                date: vm.convertDate(date: t.date ?? Date()),
+                date: t.date?.formatted() ?? error,
                 amount: t.amount,
                 category: t.category ?? "")
         }
@@ -103,7 +105,7 @@ extension AllTransacitonsView {
                 entities: $dm.all,
                 onDelete: dm.deleteTransactions(_:),
                 item: t.name ?? "",
-                date: vm.convertDate(date: t.date ?? Date()),
+                date: t.date?.formatted() ?? error,
                 amount: t.amount,
                 category: t.category ?? "")
         }
@@ -116,7 +118,7 @@ extension AllTransacitonsView {
                 entities: $dm.all,
                 onDelete: dm.deleteTransactions(_:),
                 item: t.name ?? "",
-                date: vm.convertDate(date: t.date ?? Date()),
+                date: t.date?.formatted() ?? error,
                 amount: t.amount,
                 category: t.category ?? "")
         }
@@ -130,22 +132,11 @@ extension AllTransacitonsView {
                 entities: $dm.all,
                 onDelete: dm.deleteTransactions(_:),
                 item: t.name ?? "",
-                date: vm.convertDate(date: t.date ?? Date()),
+                date: t.date?.formatted() ?? error,
                 amount: t.amount,
                 category: t.category ?? "")
-                
-//            .overlay(
-//                withAnimation {
-//                    DeleteButton(number: t, entity: $dm.all, onDelete: dm.deleteTransactions)
-//                }
-//
-//            )
-            
         }
     }
-    
-    
-    
 }
 
 

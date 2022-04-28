@@ -21,11 +21,11 @@ extension HomeView {
                         entities: $dm.all,
                         onDelete: dm.deleteTransactions(_:),
                         item: t.name ?? "",
-                        date: vm.convertDate(date: t.date ?? Date()),
+                        date: t.date?.formatted() ?? "Something went wrong",
                         amount: t.amount,
                         category: t.category ?? "")
                 }
-
+                
                 
             } header: {
                 HStack {
@@ -36,13 +36,13 @@ extension HomeView {
                 }
             } footer: {
                 HStack {
-            
+                    
                     Spacer()
                     NavigationLink(destination: AllTransacitonsView(), label: {
                         HStack {
-                           
-                                Text("View All \(dm.all.count) Transactions")
-                                Image(systemName: "chevron.right")
+                            
+                            Text("View All \(dm.all.count) Transactions")
+                            Image(systemName: "chevron.right")
                             
                         }
                         
@@ -56,31 +56,30 @@ extension HomeView {
         .padding()
     }
     
-    
     var HomeSummary: some View {
         VStack(alignment: .leading, spacing: 20) {
             
             VStack(alignment: .leading) {
                 
-                    Text("Spent Today")
-                        .font(.system(size: 30, weight: .regular, design: .default))
-                        .opacity(0.5)
-                    if diffPercentage > 0 {
-                        
-                        HStack {
-                            Image(systemName: "arrow.up.right")
-                                .foregroundColor(Color.red)
-                            Text("\(diffPercentage.rounded(), specifier: "%2.f")%")
-                        }
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                    } else if diffPercentage < 0 {
-                        HStack {
-                            Text("\(diffPercentage.rounded(), specifier: "%2.f")%")
-                            Image(systemName: "arrow.down.right")
-                                .foregroundColor(Color.green)
-                        }
-                        .font(.system(size: 20, weight: .bold, design: .default))
+                Text("Spent Today")
+                    .font(.system(size: 30, weight: .regular, design: .default))
+                    .opacity(0.5)
+                if diffPercentage > 0 {
+                    
+                    HStack {
+                        Image(systemName: "arrow.up.right")
+                            .foregroundColor(Color.red)
+                        Text("\(diffPercentage.rounded(), specifier: "%2.f")%")
                     }
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                } else if diffPercentage < 0{
+                    HStack {
+                        Text("\(diffPercentage.rounded(), specifier: "%2.f")% +" )
+                        Image(systemName: "arrow.down.right")
+                            .foregroundColor(Color.green)
+                    }
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                }
                 
                 
                 Text("$\(spentToday, specifier: "%.2f")")
@@ -109,7 +108,7 @@ extension HomeView {
 //MARK: Computed Properties returning data.
 
 extension HomeView {
-
+    
     var spentToday: Double {
         
         var total = 0.0
@@ -124,7 +123,7 @@ extension HomeView {
     var spentYesterday: Double {
         
         var total = 0.0
-    
+        
         for transaction in dm.yesterday {
             total += transaction.amount
         }
@@ -140,7 +139,7 @@ extension HomeView {
         
         return (difference / spentYesterday) * 100
     }
-    
+  
     
     
     var topCat: String {
@@ -163,7 +162,7 @@ extension HomeView {
         
         return arry.filtered().first ?? "No Payment Recorded"
     }
-    }
-    
+}
+
 
 

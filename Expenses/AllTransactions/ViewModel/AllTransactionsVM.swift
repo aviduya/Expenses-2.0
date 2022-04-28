@@ -33,15 +33,6 @@ class AllTransactionsViewModel: ObservableObject {
             return "All Transactions"
             
         }
-        
-    }
-
-    func convertDate(date: Date) -> String {
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "MMM d, YY"
-        
-        return formatter.string(from: date)
     }
 }
 

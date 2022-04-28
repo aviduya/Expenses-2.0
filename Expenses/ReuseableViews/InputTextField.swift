@@ -48,10 +48,3 @@ struct InputTextField: View {
         .background(material, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 }
-
-
-struct InputTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        InputTextField(input: .constant("Item"), isValidated: .constant(false), placeholder: "")
-    }
-}

@@ -105,10 +105,3 @@ struct DatePickerView: View {
     }
     
 }
-
-
-struct DatePickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        DatePickerView(date: .constant(Date()))
-    }
-}

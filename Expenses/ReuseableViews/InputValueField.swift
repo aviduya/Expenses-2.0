@@ -47,9 +47,3 @@ struct InputValueField: View {
       }
   }
 }
-
-struct InputValueField_Previews: PreviewProvider {
-    static var previews: some View {
-        InputValueField(input: .constant(12.0), isValidated: .constant(true))
-    }
-}
