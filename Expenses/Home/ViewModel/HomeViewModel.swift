@@ -41,23 +41,5 @@ class HomeViewModel: ObservableObject {
         
         greeting = message
     }
-    
-    func convertDate(date: Date) -> String {
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "MMM d, YY"
-        
-        return formatter.string(from: date)
-    }
-    
 }
 
-extension Array where Element: Equatable {
-
-    func filtered() -> [Element] {
-        let countedSet = NSCountedSet(array: self)
-        let mostPopularElement = self.max { countedSet.count(for: $0) < countedSet.count(for: $1) }
-        return self.filter { $0 == mostPopularElement }
-    }
-
-}

@@ -7,47 +7,81 @@
 
 import Foundation
 import SwiftUI
-import Expenses_UI_Library
 
 //MARK: Extracted Views of HomeView
-
-
 
 extension HomeView {
     
     var transactionsList: some View {
-        List {
+        ScrollView {
             Section {
-                ForEach(dataManager.savedEntities) { data in
-                    RecentRowView(item: data.name ?? "", date: vm.convertDate(date: data.date ?? Date()), amount: data.amount , category: data.category ?? "")
-                      
+                ForEach(dm.all.prefix(5)) { t in
+                    RowView(
+                        entity: t,
+                        entities: $dm.all,
+                        onDelete: dm.deleteTransactions(_:),
+                        item: t.name ?? "",
+                        date: t.date?.formatted() ?? "Something went wrong",
+                        amount: t.amount,
+                        category: t.category ?? "")
                 }
-                .onDelete(perform: dataManager.deleteTransactions)
+                
                 
             } header: {
-                HStack{
-                    Image(systemName: "calendar")
-                    Text("Today's Transactions")
+                HStack {
+                    Text("5 Most recent transactions")
+                        .bold()
+                        .opacity(0.63)
+                    Spacer()
                 }
             } footer: {
-                Text("\(dataManager.savedEntities.count) Transactions")
+                HStack {
+                    
+                    Spacer()
+                    NavigationLink(destination: AllTransacitonsView(), label: {
+                        HStack {
+                            
+                            Text("View All \(dm.all.count) Transactions")
+                            Image(systemName: "chevron.right")
+                            
+                        }
+                        
+                    })
+                }
             }
-            
         }
         .onAppear(perform: {
-                UITableView.appearance().contentInset.top = -35
-            })
-        .listStyle(.insetGrouped)
+            UITableView.appearance().contentInset.top = -35
+        })
+        .padding()
     }
-    
     
     var HomeSummary: some View {
         VStack(alignment: .leading, spacing: 20) {
             
             VStack(alignment: .leading) {
+                
                 Text("Spent Today")
                     .font(.system(size: 30, weight: .regular, design: .default))
                     .opacity(0.5)
+                if diffPercentage > 0 {
+                    
+                    HStack {
+                        Image(systemName: "arrow.up.right")
+                            .foregroundColor(Color.red)
+                        Text("\(diffPercentage.rounded(), specifier: "%2.f")%")
+                    }
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                } else if diffPercentage < 0{
+                    HStack {
+                        Text("\(diffPercentage.rounded(), specifier: "%2.f")% +" )
+                        Image(systemName: "arrow.down.right")
+                            .foregroundColor(Color.green)
+                    }
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                }
+                
+                
                 Text("$\(spentToday, specifier: "%.2f")")
                     .font(.system(size: 35, weight: .regular, design: .rounded))
             }
@@ -76,19 +110,42 @@ extension HomeView {
 extension HomeView {
     
     var spentToday: Double {
+        
         var total = 0.0
         
-        for transaction in dataManager.savedEntities {
+        for transaction in dm.today {
             total += transaction.amount
         }
         
         return total
     }
     
+    var spentYesterday: Double {
+        
+        var total = 0.0
+        
+        for transaction in dm.yesterday {
+            total += transaction.amount
+        }
+        
+        return total
+    }
+    
+    
+    
+    var diffPercentage: Double {
+        
+        let difference = spentToday - spentYesterday
+        
+        return (difference / spentYesterday) * 100
+    }
+  
+    
+    
     var topCat: String {
         var arry: [String] = []
         
-        for transaction in dataManager.savedEntities {
+        for transaction in dm.all {
             arry.append(transaction.category ?? "")
             
         }
@@ -99,10 +156,13 @@ extension HomeView {
     var topPayment: String {
         var arry: [String] = []
         
-        for transaction in dataManager.savedEntities {
+        for transaction in dm.all {
             arry.append(transaction.bank ?? "")
         }
         
         return arry.filtered().first ?? "No Payment Recorded"
     }
 }
+
+
+

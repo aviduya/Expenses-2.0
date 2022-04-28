@@ -11,11 +11,11 @@ struct HomeView: View {
     
     @State var isPresented: Bool = false
     @ObservedObject var vm = HomeViewModel()
-    @StateObject var dataManager = CoreDataHandler()
+    @StateObject var dm = CoreDataHandler.shared
     
     var body: some View {
         NavigationView {
-            VStack() {
+            VStack {
                 HomeSummary
                     .padding(.leading)
                 transactionsList
@@ -34,7 +34,8 @@ struct HomeView: View {
                 }
             }
         }
-        .sheet(isPresented: $isPresented, onDismiss: { dataManager.fetchTransactions() }) {
+        .onAppear(perform: dm.getEverything)
+        .sheet(isPresented: $isPresented, onDismiss: { dm.getEverything() }) {
             AddTransactionView()
         }
     }
