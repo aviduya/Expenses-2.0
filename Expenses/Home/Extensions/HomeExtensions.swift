@@ -13,6 +13,7 @@ import SwiftUI
 extension HomeView {
     
     var transactionsList: some View {
+        
         ScrollView {
             Section {
                 ForEach(dm.all.prefix(5)) { t in
@@ -25,35 +26,27 @@ extension HomeView {
                         amount: t.amount,
                         category: t.category ?? "")
                 }
-                
-                
-            } header: {
-                HStack {
-                    Text("5 Most recent transactions")
-                        .bold()
-                        .opacity(0.63)
-                    Spacer()
-                }
-            } footer: {
-                HStack {
-                    
-                    Spacer()
-                    NavigationLink(destination: AllTransacitonsView(), label: {
-                        HStack {
-                            
-                            Text("View All \(dm.all.count) Transactions")
-                            Image(systemName: "chevron.right")
-                            
-                        }
-                        
-                    })
-                }
             }
         }
-        .onAppear(perform: {
-            UITableView.appearance().contentInset.top = -35
-        })
-        .padding()
+        .padding(.horizontal)
+    }
+    
+    var HomeNavigation: some View {
+        HStack {
+            Text("5 Most recent transactions")
+                .bold()
+                .opacity(0.63)
+            Spacer()
+            NavigationLink(destination: AllTransacitonsView(), label: {
+                HStack {
+                    
+                    Text("View All")
+                    Image(systemName: "chevron.right")
+                    
+                }
+                
+            })
+        }.padding([.horizontal, .top])
     }
     
     var HomeSummary: some View {
@@ -74,9 +67,10 @@ extension HomeView {
                     .font(.system(size: 20, weight: .bold, design: .default))
                 } else if diffPercentage < 0{
                     HStack {
-                        Text("\(diffPercentage.rounded(), specifier: "%2.f")% +" )
                         Image(systemName: "arrow.down.right")
                             .foregroundColor(Color.green)
+                        Text("\(diffPercentage.rounded(), specifier: "%2.f")%" )
+                        
                     }
                     .font(.system(size: 20, weight: .bold, design: .default))
                 }

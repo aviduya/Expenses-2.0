@@ -18,6 +18,7 @@ struct HomeView: View {
             VStack {
                 HomeSummary
                     .padding(.leading)
+                HomeNavigation
                 transactionsList
             }
             .navigationTitle(vm.greeting)

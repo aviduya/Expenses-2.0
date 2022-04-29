@@ -10,16 +10,16 @@ import SwiftUI
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var dataManager = CoreDataHandler.shared
-    @State var fieldsValid = true
-    @State var showingAlert = false
+    @State private var fieldsValid = true
+    @State private var showingAlert = false
     
     @State var model =
     AddTransactionsModel(
         amount: nil,
         name: "",
-        bank: .schwab,
+        bank: "",
         merchant: "",
-        category: .personal,
+        category: "",
         date: Date())
     
     var body: some View {
@@ -27,6 +27,13 @@ struct AddTransactionView: View {
             VStack {
                 header
                 formBox
+                Button(action: {
+                    save()
+                }) {
+                    Text("Save")
+                }
+                .padding()
+                .buttonStyle(CustomButtonStyle())
             }
             .navigationTitle("Add Expense")
             .navigationBarTitleDisplayMode(.inline)
@@ -53,10 +60,20 @@ struct AddTransactionView: View {
 
 extension AddTransactionView {
     private var header: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text(model.name)
-                .font(Font.system(.largeTitle, design: .default).weight(.bold))
-                .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+        VStack(alignment: .leading) {
+            
+            if model.name.isEmpty {
+                Text("Name...")
+                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
+                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+                    .opacity(0.33)
+            } else {
+                Text(model.name)
+                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
+                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+            }
+            
+            
             Text("$\(model.amount ?? 0.0, specifier: "%.2f")")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.bold))
             
@@ -71,6 +88,7 @@ extension AddTransactionView {
     
     private var formBox: some View {
         
+        
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Transaction Details")
@@ -80,16 +98,12 @@ extension AddTransactionView {
                 InputTextField(input: $model.name, isValidated: $fieldsValid, placeholder: "Item...")
                 InputTextField(input: $model.merchant, isValidated: $fieldsValid, placeholder: "Merchant...")
                 DatePickerView(date: $model.date)
-                GroupBoxPickersView(categories: $model.category, banks: $model.bank)
-                Spacer()
-                Button(action: {
-                    save()
-                }) {
-                    Text("Save")
-                }.buttonStyle(CustomButtonStyle())
+                GroupBoxPickersView(categoryInput: $model.category, bankInput: $model.bank)
             }
             .padding()
+            
         }
+        
         
     }
     

@@ -6,63 +6,40 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum Banks: String, CaseIterable, Identifiable  {
-    var id: String {self.rawValue}
-    
-    case chase = "Chase"
-    case capitalone = "Capital One"
-    case apple = "Apple"
-    case schwab = "Charles Schwab"
-    case amex = "American Express"
+struct CategoryModel:Hashable, Identifiable {
+    var id: String
+    var symbol: String
 }
 
-enum Categories: String, CaseIterable, Identifiable {
-    var id: String {self.rawValue}
+struct BankModel: Hashable, Identifiable {
+    var id: String
+    var color: Color
+}
+
+
+
+class AppModel: ObservableObject {
     
-    case groceries = "Groceries"
-    case bills = "Bills"
-    case personal = "Personal"
-    case other = "Other"
-    case necesities = "Necesities"
+    @Published var banks: [BankModel] = [
+        BankModel(id: "Chase", color: .blue),
+        BankModel(id: "Capital One", color: .red),
+        BankModel(id: "Apple", color: .white),
+        BankModel(id: "Schwab", color: .teal),
+        BankModel(id: "Amex", color: .orange)
+    ]
     
-    var icon: String {
-        switch self {
-            
-        case.groceries: return "cart"
-        case.bills: return "list.bullet.rectangle.portrait"
-        case.personal: return "person.fill"
-        case.necesities: return "person.text.rectangle.fill"
-        case.other: return "questionmark"
-            
-        }
+    @Published var categories: [CategoryModel] = [
+        CategoryModel(id: "Groceries", symbol: "cart"),
+        CategoryModel(id: "Biils", symbol: "list.bullet.rectangle.portrait"),
+        CategoryModel(id: "Personal", symbol: "person.fill"),
+        CategoryModel(id: "Necesities", symbol: "person.text.rectangle.fill"),
+        CategoryModel(id: "Other", symbol: "questionmark")
+    ]
+    
+    init() {
     }
     
-}
-
-enum CategorySymbols: String  {
-    case groceries = "cart"
-    case bills = "list.bullet.rectangle.portrait"
-    case personal = "person.fill"
-    case other = "questionmark"
-    case necesities = "person.text.rectangle.fill"
-}
-
-enum Months: String, Identifiable, CaseIterable {
-    var id: String {self.rawValue}
     
-    case jan = "January"
-    case feb = "Febuary"
-    case mar = "March"
-    case apr = "April"
-    case may = "May"
-    case jun = "June"
-    case jul = "July"
-    case aug = "August"
-    case sep = "September"
-    case oct = "October"
-    case nov = "November"
-    case dec = "December"
 }
-
-

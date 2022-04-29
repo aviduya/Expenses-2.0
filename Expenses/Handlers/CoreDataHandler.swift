@@ -74,6 +74,8 @@ class CoreDataHandler: ObservableObject {
         let weekRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let monthRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         
+     
+        
         let yesterdayDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [yesterdayFromPredicate, yesterdayPredicate])
         yesterdayRequest.predicate = yesterdayDatePredicate
         
@@ -86,6 +88,11 @@ class CoreDataHandler: ObservableObject {
         let monthDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [monthFromPredicate, monthPredicate])
         monthRequest.predicate = monthDatePredicate
         
+        
+        yesterdayRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        todayRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        weekRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        monthRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
         do  {
             all = try container.viewContext.fetch(request)
@@ -103,9 +110,9 @@ class CoreDataHandler: ObservableObject {
     func addTransactions(
         amount: Double?,
         name: String,
-        bank: Banks,
+        bank: String,
         merchant: String,
-        category: Categories,
+        category: String,
         date: Date) {
             
             let newTransaction = TransactionEntity(context: container.viewContext)
@@ -114,9 +121,9 @@ class CoreDataHandler: ObservableObject {
             
             newTransaction.amount = amount ?? 0.0
             newTransaction.name = name
-            newTransaction.bank = bank.rawValue
+            newTransaction.bank = bank
             newTransaction.merchant = merchant
-            newTransaction.category = category.rawValue
+            newTransaction.category = category
             newTransaction.date = date
             
             saveData()

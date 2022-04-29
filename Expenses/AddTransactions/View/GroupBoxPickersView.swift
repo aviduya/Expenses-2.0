@@ -9,21 +9,26 @@ import SwiftUI
 
 struct GroupBoxPickersView: View {
     
-    @Binding var categories: Categories
-    @Binding var banks: Banks
+    @Binding var categoryInput: String
+    @Binding var bankInput: String
+    
+    @ObservedObject var am = AppModel()
     
     var body: some View {
         HStack {
             HStack {
                 Menu(content: {
                     Section {
-                        Picker("", selection: $categories) {
-                            ForEach(Categories.allCases, id: \.self) { category in
+                        Picker("", selection: $categoryInput) {
+                            ForEach(am.categories) { category in
                                 HStack {
-                                    Text(category.rawValue.capitalized).tag(category)
+                                    Text(category.id)
+                                        .background(Color.red)
                                     Spacer()
-                                    Image(systemName: category.icon)
+                                    Image(systemName: category.symbol)
                                 }
+                                
+                                
                             }
                         }
                         
@@ -36,10 +41,10 @@ struct GroupBoxPickersView: View {
             HStack {
                 Menu(content: {
                     Section {
-                        Picker("", selection: $banks) {
-                            ForEach(Banks.allCases, id: \.self) { category in
+                        Picker("", selection: $bankInput) {
+                            ForEach(am.banks) { bank in
                                 HStack {
-                                    Text(category.rawValue.capitalized).tag(category)
+                                    Text(bank.id)
                                     Spacer()
                                 }
                             }
@@ -60,7 +65,7 @@ fileprivate struct GroupedModifier: ViewModifier {
         let material: Material = .thin
         
         content
-            .frame(maxWidth: .infinity, minHeight: 75, alignment: .leading)
+            .frame(maxWidth: .infinity)
             .padding()
             .background(material, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
@@ -70,24 +75,29 @@ fileprivate struct GroupedModifier: ViewModifier {
 extension GroupBoxPickersView {
     
     var bankLabel: some View {
-        HStack {
-            Image(systemName: "building.columns")
-                .font(.title)
-            Text(banks.id)
-                .bold()
+        VStack {
+            if bankInput.isEmpty {
+                Text("Bank")
+            } else {
+                Text(bankInput)
+            }
+            
         }
-        .padding(.vertical)
+        .font(.system(size: 18, weight: .bold))
         .modifier(GroupedModifier())
     }
     
     var catLabel: some View {
-        HStack {
-            Image(systemName: "list.bullet.indent")
-                .font(.title)
-            Text(categories.id)
-                .bold()
+        VStack {
+            
+            if categoryInput.isEmpty {
+                Text("Category")
+            } else {
+            Text(categoryInput)
+             
+            }
         }
-        .padding(.vertical)
+        .font(.system(size: 18, weight: .bold))
         .modifier(GroupedModifier())
     }
 }
