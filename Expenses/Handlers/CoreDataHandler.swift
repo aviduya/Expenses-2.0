@@ -17,10 +17,6 @@ class CoreDataHandler: ObservableObject {
     @Published var week: [TransactionEntity] = []
     @Published var month: [TransactionEntity] = []
     @Published var all: [TransactionEntity] = []
-    
-    private let formatFrom: String = "%@ <= %K"
-    private let formatTo: String = "%K < %@"
-   
 
     private let container: NSPersistentContainer
     
@@ -44,6 +40,22 @@ class CoreDataHandler: ObservableObject {
     }
     
     func getEverything() {
+        
+        func fromPredicate(dateFrom: Date) -> NSPredicate {
+            return NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
+        }
+        
+        func toPredicate(dateTo: Date?) -> NSPredicate {
+            return NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        }
+        
+        func compound(from: NSPredicate, to: NSPredicate) -> NSCompoundPredicate {
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [from, to])
+        }
+        
+        func sort() -> [NSSortDescriptor] {
+            return [NSSortDescriptor(key: "date", ascending: false)]
+        }
 
         let yesterdayDateTo = calendar.startOfDay(for: Date())
         let yesterdayDateFrom = calendar.date(byAdding: .day, value: -1, to: yesterdayDateTo)
@@ -54,45 +66,43 @@ class CoreDataHandler: ObservableObject {
         let weekDateFrom = calendar.startOfDay(for: Date().startOfWeek())
         let weekDateTo = calendar.date(byAdding: .day, value: 7,  to: weekDateFrom)
         
-        let monthDateFrom = Date().getThisMonthStart()
+        let monthDateFrom = calendar.startOfDay(for: Date().getThisMonthStart()!)
         let monthDateTo = Date().getThisMonthEnd()
         
-        let yesterdayFromPredicate = NSPredicate(format: formatFrom, yesterdayDateFrom! as NSDate, #keyPath(TransactionEntity.date))
-        let yesterdayPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), yesterdayDateTo as NSDate)
+        let yesterdayFromPredicate = fromPredicate(dateFrom: yesterdayDateFrom!)
+        let yesterdayPredicate = toPredicate(dateTo: yesterdayDateTo)
         
-        let todayFromPredicate = NSPredicate(format: formatFrom, todayDateFrom as NSDate, #keyPath(TransactionEntity.date))
-        let todayPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), todayDateTo! as NSDate)
+        let todayFromPredicate = fromPredicate(dateFrom: todayDateFrom)
+        let todayPredicate = toPredicate(dateTo: todayDateTo!)
         
-        let weekFromPredicate = NSPredicate(format: formatFrom, weekDateFrom as NSDate, #keyPath(TransactionEntity.date))
-        let weekPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), weekDateTo! as NSDate)
+        let weekFromPredicate = fromPredicate(dateFrom: weekDateFrom)
+        let weekPredicate = toPredicate(dateTo: weekDateTo!)
         
-        let monthFromPredicate = NSPredicate(format: formatFrom, monthDateFrom! as NSDate, #keyPath(TransactionEntity.date))
-        let monthPredicate = NSPredicate(format: formatTo, #keyPath(TransactionEntity.date), monthDateTo! as NSDate)
+        let monthFromPredicate = fromPredicate(dateFrom: monthDateFrom)
+        let monthPredicate = toPredicate(dateTo: monthDateTo!)
         
         let yesterdayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let todayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let weekRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let monthRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         
-     
-        
-        let yesterdayDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [yesterdayFromPredicate, yesterdayPredicate])
+        let yesterdayDatePredicate = compound(from: yesterdayFromPredicate, to: yesterdayPredicate)
         yesterdayRequest.predicate = yesterdayDatePredicate
         
-        let todayDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [todayFromPredicate, todayPredicate])
+        let todayDatePredicate = compound(from: todayFromPredicate, to: todayPredicate)
         todayRequest.predicate = todayDatePredicate
         
-        let weekDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [weekFromPredicate, weekPredicate])
+        let weekDatePredicate = compound(from: weekFromPredicate, to: weekPredicate)
         weekRequest.predicate = weekDatePredicate
         
-        let monthDatePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [monthFromPredicate, monthPredicate])
+        let monthDatePredicate = compound(from: monthFromPredicate, to: monthPredicate)
         monthRequest.predicate = monthDatePredicate
         
         
-        yesterdayRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        todayRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        weekRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        monthRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        yesterdayRequest.sortDescriptors = sort()
+        todayRequest.sortDescriptors = sort()
+        weekRequest.sortDescriptors = sort()
+        monthRequest.sortDescriptors = sort()
         
         do  {
             all = try container.viewContext.fetch(request)

@@ -10,6 +10,7 @@ import SwiftUI
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var dataManager = CoreDataHandler.shared
+    @ObservedObject var vm = AddTransactionsVM()
     @State private var fieldsValid = true
     @State private var showingAlert = false
     
@@ -17,9 +18,9 @@ struct AddTransactionView: View {
     AddTransactionsModel(
         amount: nil,
         name: "",
-        bank: "",
+        bank: "Chase",
         merchant: "",
-        category: "",
+        category: "Personal",
         date: Date())
     
     var body: some View {
@@ -28,7 +29,21 @@ struct AddTransactionView: View {
                 header
                 formBox
                 Button(action: {
-                    save()
+                    vm.save(amount: model.amount ?? 0.0, name: model.name, merchant: model.merchant) {
+                        fieldsValid = false
+                        showingAlert = true
+                    } _: {
+                        fieldsValid = true
+                        dataManager.addTransactions(
+                            amount: model.amount,
+                            name: model.name,
+                            bank: model.bank,
+                            merchant: model.merchant,
+                            category: model.category,
+                            date: model.date)
+                        dismiss()
+                    }
+
                 }) {
                     Text("Save")
                 }
@@ -103,34 +118,6 @@ extension AddTransactionView {
             .padding()
             
         }
-        
-        
-    }
-    
-    func save() {
-        let generator = UINotificationFeedbackGenerator()
-        let a = model.amount
-        let n = model.name
-        let m = model.merchant
-        
-        if a == 0.0 || n.isEmpty || m.isEmpty {
-            fieldsValid = false
-            showingAlert = true
-            generator.notificationOccurred(.error)
-            
-        } else {
-            fieldsValid = true
-            dataManager.addTransactions(
-                amount: model.amount,
-                name: model.name,
-                bank: model.bank,
-                merchant: model.merchant,
-                category: model.category,
-                date: model.date)
-            generator.notificationOccurred(.success)
-            dismiss()
-        }
-        
     }
 }
 

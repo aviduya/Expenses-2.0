@@ -32,7 +32,7 @@ class AppModel: ObservableObject {
     
     @Published var categories: [CategoryModel] = [
         CategoryModel(id: "Groceries", symbol: "cart"),
-        CategoryModel(id: "Biils", symbol: "list.bullet.rectangle.portrait"),
+        CategoryModel(id: "Bills", symbol: "list.bullet.rectangle.portrait"),
         CategoryModel(id: "Personal", symbol: "person.fill"),
         CategoryModel(id: "Necesities", symbol: "person.text.rectangle.fill"),
         CategoryModel(id: "Other", symbol: "questionmark")

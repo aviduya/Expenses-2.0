@@ -9,10 +9,10 @@ import SwiftUI
 
 struct GroupBoxPickersView: View {
     
+    @EnvironmentObject var settings: AppModel
+    
     @Binding var categoryInput: String
     @Binding var bankInput: String
-    
-    @ObservedObject var am = AppModel()
     
     var body: some View {
         HStack {
@@ -20,7 +20,7 @@ struct GroupBoxPickersView: View {
                 Menu(content: {
                     Section {
                         Picker("", selection: $categoryInput) {
-                            ForEach(am.categories) { category in
+                            ForEach(settings.categories) { category in
                                 HStack {
                                     Text(category.id)
                                         .background(Color.red)
@@ -42,7 +42,7 @@ struct GroupBoxPickersView: View {
                 Menu(content: {
                     Section {
                         Picker("", selection: $bankInput) {
-                            ForEach(am.banks) { bank in
+                            ForEach(settings.banks) { bank in
                                 HStack {
                                     Text(bank.id)
                                     Spacer()

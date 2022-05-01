@@ -12,6 +12,7 @@ import SwiftUI
 struct RowView: View {
     
     @Environment(\.editMode) var editMode
+    @EnvironmentObject var settings: AppModel
     
     let entity: TransactionEntity
     @Binding var entities: [TransactionEntity]
@@ -28,9 +29,12 @@ struct RowView: View {
         HStack {
             
             if self.editMode?.wrappedValue == .active {
+                let generator = UINotificationFeedbackGenerator()
+                
                 Button(action: {
                     if let index = entities.firstIndex(of: entity) {
                         self.onDelete(IndexSet(integer: index))
+                        generator.notificationOccurred(.success)
                     }
                 }) {
                     Image(systemName: "minus.circle")

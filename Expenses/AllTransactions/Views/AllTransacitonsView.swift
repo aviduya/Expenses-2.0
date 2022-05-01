@@ -32,16 +32,6 @@ struct AllTransacitonsView: View {
             }
             .padding()
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        self.mode.wrappedValue.dismiss()
-                    } label: {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                            Text("Home")
-                        }
-                    }
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Picker("Sort by", selection: $vm.page) {
@@ -74,7 +64,6 @@ struct AllTransacitonsView: View {
                     }
                 }
             }
-            .navigationBarBackButtonHidden(true)
             .navigationBarTitle(vm.status)
             .navigationBarItems(trailing: EditButton())
         }.onAppear(perform: dm.getEverything)
