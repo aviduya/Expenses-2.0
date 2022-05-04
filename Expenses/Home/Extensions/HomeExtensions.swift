@@ -12,24 +12,26 @@ import SwiftUI
 
 extension HomeView {
     
-    var transactionsList: some View {
-        
+    //MARK: List view of 5 Recent transactions.
+    
+    var HomeList: some View {
         ScrollView {
-            Section {
-                ForEach(dm.all.prefix(5)) { t in
-                    RowView(
-                        entity: t,
-                        entities: $dm.all,
-                        onDelete: dm.deleteTransactions(_:),
-                        item: t.name ?? "",
-                        date: t.date?.formatted() ?? "Something went wrong",
-                        amount: t.amount,
-                        category: t.category ?? "")
+                Section {
+                    ForEach(dm.all.prefix(5)) { t in
+                        RowView(
+                            entity: t,
+                            entities: $dm.all,
+                            onDelete: dm.deleteTransactions(_:),
+                            item: t.name ?? "",
+                            date: t.date?.formatted() ?? "Something went wrong",
+                            amount: t.amount,
+                            category: t.category ?? "")
+                    }
                 }
-            }
         }
-        .padding(.horizontal)
     }
+    
+    //MARK: Navigation header responsible for navigating to AllTransactionsView()
     
     var HomeNavigation: some View {
         HStack {
@@ -37,26 +39,37 @@ extension HomeView {
                 .bold()
                 .opacity(0.63)
             Spacer()
-            NavigationLink(destination: AllTransacitonsView(), label: {
+            Button {
+                isPresentedAll.toggle()
+            } label: {
                 HStack {
                     
                     Text("View All")
-                    Image(systemName: "chevron.right")
-                    
+                    Image(systemName: "chevron.down")
                 }
-                
-            })
-        }.padding([.horizontal, .top])
+            }
+            
+        }.padding(.top, 10)
     }
     
+    //MARK: SummaryView() of SpentToday, TopCategory, TopBank
+    
     var HomeSummary: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 10) {
             
             VStack(alignment: .leading) {
                 
                 Text("Spent Today")
                     .font(.system(size: 30, weight: .regular, design: .default))
                     .opacity(0.5)
+                
+            }
+            HStack(alignment: .center) {
+                Text("$\(spentToday, specifier: "%.2f")")
+                    .redacted(reason: dm.all.isEmpty ? .placeholder : [])
+                    .shimmering(active: dm.all.isEmpty)
+                    .font(.system(size: 35, weight: .regular, design: .rounded))
+                Spacer()
                 if diffPercentage > 0 {
                     
                     HStack {
@@ -65,7 +78,7 @@ extension HomeView {
                         Text("\(diffPercentage.rounded(), specifier: "%2.f")%")
                     }
                     .font(.system(size: 20, weight: .bold, design: .default))
-                } else if diffPercentage < 0{
+                } else if diffPercentage < 0 {
                     HStack {
                         Image(systemName: "arrow.down.right")
                             .foregroundColor(Color.green)
@@ -74,16 +87,15 @@ extension HomeView {
                     }
                     .font(.system(size: 20, weight: .bold, design: .default))
                 }
-                
-                
-                Text("$\(spentToday, specifier: "%.2f")")
-                    .font(.system(size: 35, weight: .regular, design: .rounded))
+
             }
             VStack(alignment: .leading) {
                 Text("Top Category")
                     .font(.headline)
                     .opacity(0.5)
                 Text(topCat)
+                    .redacted(reason: dm.all.isEmpty ? .placeholder : [])
+                    .shimmering(active: dm.all.isEmpty)
                     .font(Font.system(.largeTitle, design: .default).weight(.medium))
             }
             VStack(alignment: .leading) {
@@ -91,15 +103,18 @@ extension HomeView {
                     .font(.headline)
                     .opacity(0.5)
                 Text(topPayment)
+                    .redacted(reason: dm.all.isEmpty ? .placeholder : [])
+                    .shimmering(active: dm.all.isEmpty)
                     .font(Font.system(.largeTitle, design: .default).weight(.medium))
+                
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity)
         .clipped()
     }
 }
 
-//MARK: Computed Properties returning data.
+//MARK: Computed Properties returning data -> HomeSummary().
 
 extension HomeView {
     
@@ -118,23 +133,25 @@ extension HomeView {
         
         var total = 0.0
         
-        for transaction in dm.yesterday {
-            total += transaction.amount
+        if dm.yesterday.isEmpty {
+            total = 1.0
+        } else {
+            for transaction in dm.yesterday {
+                total += transaction.amount
+            }
         }
-        
         return total
     }
     
-    
-    
     var diffPercentage: Double {
-        
         let difference = spentToday - spentYesterday
-        
-        return (difference / spentYesterday) * 100
+        if dm.yesterday.isEmpty && dm.today.isEmpty {
+            return 0.0
+        } else {
+            return (difference / spentYesterday) * 100.099
+            
+        }
     }
-  
-    
     
     var topCat: String {
         var arry: [String] = []

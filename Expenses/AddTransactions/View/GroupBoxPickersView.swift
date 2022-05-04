@@ -93,8 +93,8 @@ extension GroupBoxPickersView {
             if categoryInput.isEmpty {
                 Text("Category")
             } else {
-            Text(categoryInput)
-             
+                Text(categoryInput)
+                
             }
         }
         .font(.system(size: 18, weight: .bold))

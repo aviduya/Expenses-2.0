@@ -18,8 +18,6 @@ struct BankModel: Hashable, Identifiable {
     var color: Color
 }
 
-
-
 class AppModel: ObservableObject {
     
     @Published var banks: [BankModel] = [

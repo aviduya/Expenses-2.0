@@ -31,7 +31,6 @@ class AllTransactionsViewModel: ObservableObject {
             return "This Month"
         case .year:
             return "All Transactions"
-            
         }
     }
 }

@@ -113,8 +113,6 @@ class CoreDataHandler: ObservableObject {
         } catch let error {
             print("Error Fetching. \(error)")
         }
-        
-        
     }
     
     func addTransactions(

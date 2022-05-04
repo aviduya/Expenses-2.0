@@ -9,35 +9,69 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var isPresented: Bool = false
+    
     @ObservedObject var vm = HomeViewModel()
     @StateObject var dm = CoreDataHandler.shared
     
+    @State  var isPresentedAdd: Bool = false
+    @State  var isPresentedAll: Bool = false
+    
     var body: some View {
-        NavigationView {
-            VStack {
+        
+        VStack {
+            VStack(alignment: .leading) {
+                Text(Date().formatted())
+                    .font(.body)
+                    .opacity(0.66)
+                Text(vm.greeting)
+                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
                 HomeSummary
-                    .padding(.leading)
-                HomeNavigation
-                transactionsList
-            }
-            .navigationTitle(vm.greeting)
-            .toolbar {
-                EditButton()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        isPresented.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+                    .padding(.top, 10)
+                
+                if dm.all.isEmpty {
+                    EmptyView()
+                } else {
+                    HomeNavigation
+                    HomeList
                 }
+                HStack {
+                    Menu {
+                        Section {
+                            EditButton()
+                            
+                        }
+                        Section {
+                            Button(action: { }) {
+                                Label("Settings", systemImage: "person.text.rectangle")
+                            }
+                        }
+                        
+                    } label: {
+                        Image(systemName: "bolt.fill")
+                            
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: { isPresentedAdd.toggle() }) {
+                        Label("Add", systemImage: "plus")
+                    }
+                    
+                    
+                    
+                }
+                .font(.title3)
+                
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            
         }
-        .onAppear(perform: dm.getEverything)
-        .sheet(isPresented: $isPresented, onDismiss: { dm.getEverything() }) {
+        .padding([.top, .leading, .trailing], 20)
+        .sheet(isPresented: $isPresentedAdd, onDismiss: { dm.getEverything() }) {
             AddTransactionView()
+        }
+        .sheet(isPresented: $isPresentedAll, onDismiss: { dm.getEverything() }) {
+            AllTransacitonsView()
         }
     }
     
