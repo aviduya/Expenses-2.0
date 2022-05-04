@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AllTransacitonsView: View {
+    @EnvironmentObject var settings: AppSettings
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @StateObject private var dm = CoreDataHandler.shared
@@ -19,7 +20,7 @@ struct AllTransacitonsView: View {
         
         VStack {
             VStack(alignment: .leading) {
-                HStack {
+                HStack(alignment: .center) {
                     Text(vm.status)
                         .font(Font.system(.title2, design: .default).weight(.bold))
                     Spacer()
@@ -27,6 +28,7 @@ struct AllTransacitonsView: View {
                         mode.wrappedValue.dismiss()
                     } label: {
                         Text("Dismiss")
+                            .font(.title3)
 
                     }
 
@@ -51,7 +53,6 @@ struct AllTransacitonsView: View {
                 HStack {
                     EditButton()
                     Spacer()
-                    
                     Menu {
                         Section {
                             Picker("Sort by", selection: $vm.page) {
@@ -78,10 +79,13 @@ struct AllTransacitonsView: View {
                             }
                         }
                     } label: {
-                        Image(systemName: "square.stack.3d.up.fill")
-                            .font(.title3)
+                            Image(systemName: "square.stack.3d.up.fill")
+                    }
+                    .onTapGesture {
+                        settings.haptic(style: .light)
                     }
                 }
+                .font(.title2)
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

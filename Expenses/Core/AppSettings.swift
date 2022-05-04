@@ -18,7 +18,15 @@ struct BankModel: Hashable, Identifiable {
     var color: Color
 }
 
-class AppModel: ObservableObject {
+enum HapticStyle {
+    case light
+    case medium
+    case heavy
+    case rigid
+    
+}
+
+class AppSettings: ObservableObject {
     
     @Published var banks: [BankModel] = [
         BankModel(id: "Chase", color: .blue),
@@ -37,6 +45,27 @@ class AppModel: ObservableObject {
     ]
     
     init() {
+    }
+    
+    func haptic(style: HapticStyle) {
+        let heavy = UIImpactFeedbackGenerator(style: .heavy)
+        let soft = UIImpactFeedbackGenerator(style: .soft)
+        let medium = UIImpactFeedbackGenerator(style: .medium)
+        let rigid = UIImpactFeedbackGenerator(style: .rigid)
+        
+       
+        switch style {
+        case .light:
+            soft.impactOccurred()
+        case .medium:
+            medium.impactOccurred()
+        case .heavy:
+            heavy.impactOccurred()
+        case .rigid:
+            rigid.impactOccurred()
+        }
+       
+        
     }
     
     

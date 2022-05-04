@@ -14,11 +14,12 @@ struct EmptyView: View {
             Spacer()
             HStack {
                 Spacer()
-                VStack {
+                VStack(alignment: .leading, spacing: 10) {
                     Image(systemName: "plus.forwardslash.minus")
                         .foregroundColor(Color.green)
                     Text("Add a Transaction")
                 }
+                .padding()
                 .font(.largeTitle)
                 
                 Spacer()

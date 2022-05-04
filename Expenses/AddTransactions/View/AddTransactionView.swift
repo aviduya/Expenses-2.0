@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var settings: AppModel
+    @EnvironmentObject var settings: AppSettings
     @StateObject var dataManager = CoreDataHandler.shared
     @ObservedObject var vm = AddTransactionsVM()
     @State private var fieldsValid = true

@@ -61,6 +61,15 @@ extension Date {
         calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
     }
     
+    func returnTitleString() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMMM d, YYYY"
+        let dayInWeek = dateFormatter.string(from: date)
+        
+        return dayInWeek
+    }
+    
 }
 
 

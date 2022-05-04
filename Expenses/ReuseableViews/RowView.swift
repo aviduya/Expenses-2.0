@@ -12,7 +12,7 @@ import SwiftUI
 struct RowView: View {
     
     @Environment(\.editMode) var editMode
-    @EnvironmentObject var settings: AppModel
+    @EnvironmentObject var settings: AppSettings
     
     let entity: TransactionEntity
     @Binding var entities: [TransactionEntity]

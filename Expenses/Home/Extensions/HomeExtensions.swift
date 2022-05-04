@@ -40,7 +40,8 @@ extension HomeView {
                 .opacity(0.63)
             Spacer()
             Button {
-                isPresentedAll.toggle()
+                activeSheet = .all
+                settings.haptic(style: .medium)
             } label: {
                 HStack {
                     

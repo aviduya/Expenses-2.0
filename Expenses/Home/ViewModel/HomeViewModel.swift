@@ -9,7 +9,21 @@ import Foundation
 import UIKit
 
 
+enum ActiveView: Identifiable {
+    
+    case settings
+    case add
+    case all
+    
+    var id: Int {
+        hashValue
+    }
+    
+}
+
 class HomeViewModel: ObservableObject {
+    
+   
     
     @Published var greeting: String = "Hello!"
     

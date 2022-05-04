@@ -9,10 +9,11 @@ import SwiftUI
 
 struct GroupBoxPickersView: View {
     
-    @EnvironmentObject var settings: AppModel
+    @EnvironmentObject var settings: AppSettings
     
     @Binding var categoryInput: String
     @Binding var bankInput: String
+    var selectedColor: Color = .clear
     
     var body: some View {
         HStack {
