@@ -42,7 +42,7 @@ struct RowView: View {
                         .frame(width: 30)
                 }
             } else {
-                Image(systemName: convertSymbols(category))
+                Text(category)
                     .frame(width: 30)
             }
             Divider()
@@ -61,25 +61,4 @@ struct RowView: View {
         
         
     }
-    
-    
-}
-
-func convertSymbols(_ category: String) -> String {
-    
-    switch category.lowercased() {
-    case "groceries":
-        return "cart"
-    case "bills":
-        return "list.bullet.rectangle.portrait"
-    case "personal":
-        return "person.fill"
-    case "necesities":
-        return "person.text.rectangle.fill"
-    case "other":
-        return "questionmark"
-    default:
-        return "xmark.diamond"
-    }
-    
 }

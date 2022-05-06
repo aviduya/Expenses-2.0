@@ -19,9 +19,9 @@ struct AddTransactionView: View {
     AddTransactionsModel(
         amount: nil,
         name: "",
-        bank: "Chase",
+        bank: "",
         merchant: "",
-        category: "Personal",
+        category: "",
         date: Date())
     
     var body: some View {

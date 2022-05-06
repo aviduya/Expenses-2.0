@@ -8,16 +8,6 @@
 import Foundation
 import SwiftUI
 
-struct CategoryModel:Hashable, Identifiable {
-    var id: String
-    var symbol: String
-}
-
-struct BankModel: Hashable, Identifiable {
-    var id: String
-    var color: Color
-}
-
 enum HapticStyle {
     case light
     case medium
@@ -26,26 +16,50 @@ enum HapticStyle {
     
 }
 
+enum Keys: String {
+    
+    case bank = "bank"
+    case category = "category"
+    
+}
+
 class AppSettings: ObservableObject {
     
-    @Published var banks: [BankModel] = [
-        BankModel(id: "Chase", color: .blue),
-        BankModel(id: "Capital One", color: .red),
-        BankModel(id: "Apple", color: .white),
-        BankModel(id: "Schwab", color: .teal),
-        BankModel(id: "Amex", color: .orange)
-    ]
+    @Published var banks: [String] = []
+    @Published var categories: [String] = []
     
-    @Published var categories: [CategoryModel] = [
-        CategoryModel(id: "Groceries", symbol: "cart"),
-        CategoryModel(id: "Bills", symbol: "list.bullet.rectangle.portrait"),
-        CategoryModel(id: "Personal", symbol: "person.fill"),
-        CategoryModel(id: "Necesities", symbol: "person.text.rectangle.fill"),
-        CategoryModel(id: "Other", symbol: "questionmark")
-    ]
+    let userDefaults = UserDefaults.standard
+    
+    let bankKey = Keys.bank.rawValue
+    let categoryKey = Keys.category.rawValue
+
     
     init() {
+        
+        banks = userDefaults.object(forKey: bankKey) as? [String] ?? []
+        categories = userDefaults.object(forKey: categoryKey) as? [String] ?? []
+        
     }
+    
+    func addElement(new: String, element: inout [String], key: String) {
+        withAnimation {
+            element.append(new)
+            userDefaults.set(element, forKey: key)
+        }
+        
+    }
+    
+    
+    func removeBank(at offsets: IndexSet) {
+        banks.remove(atOffsets: offsets)
+        userDefaults.set(banks, forKey: bankKey)
+    }
+    
+    func removeCategory(at offsets: IndexSet) {
+        categories.remove(atOffsets: offsets)
+        userDefaults.set(categories, forKey: categoryKey)
+    }
+    
     
     func haptic(style: HapticStyle) {
         let heavy = UIImpactFeedbackGenerator(style: .heavy)

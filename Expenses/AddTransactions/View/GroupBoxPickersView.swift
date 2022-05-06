@@ -21,12 +21,12 @@ struct GroupBoxPickersView: View {
                 Menu(content: {
                     Section {
                         Picker("", selection: $categoryInput) {
-                            ForEach(settings.categories) { category in
+                            ForEach(settings.categories, id: \.self) { category in
                                 HStack {
-                                    Text(category.id)
+                                    Text(category)
                                         .background(Color.red)
                                     Spacer()
-                                    Image(systemName: category.symbol)
+                            
                                 }
                                 
                                 
@@ -43,10 +43,9 @@ struct GroupBoxPickersView: View {
                 Menu(content: {
                     Section {
                         Picker("", selection: $bankInput) {
-                            ForEach(settings.banks) { bank in
+                            ForEach(settings.banks, id: \.self) { bank in
                                 HStack {
-                                    Text(bank.id)
-                                    Spacer()
+                                    Text(bank)
                                 }
                             }
                         }

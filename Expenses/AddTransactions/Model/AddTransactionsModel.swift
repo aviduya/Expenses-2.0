@@ -13,7 +13,7 @@ struct AddTransactionsModel {
     var amount: Double?
     var name: String
     var bank: String
-    var merchant :String
+    var merchant: String
     var category: String
     var date: Date
     
