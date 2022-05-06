@@ -23,7 +23,7 @@ extension HomeView {
                             entities: $dm.all,
                             onDelete: dm.deleteTransactions(_:),
                             item: t.name ?? "",
-                            date: t.date?.formatted() ?? "Something went wrong",
+                            date: t.date ?? Date(),
                             amount: t.amount,
                             category: t.category ?? "")
                     }

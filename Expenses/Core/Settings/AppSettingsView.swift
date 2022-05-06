@@ -18,64 +18,85 @@ struct AppSettingsView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List() {
-                    NavigationLink {
-                        List {
-                            HStack {
-                                TextField("Enter a Bank", text: $bank)
-                                Spacer()
-                                Image(systemName: "plus")
-                                    .onTapGesture {
-                                        settings.addElement(new: bank, element: &settings.banks, key: settings.bankKey)
-                                        
-                                        bank = ""
-                                    }
-                            }
-                            ForEach(settings.banks, id: \.self) { i in
-                                    Text(i)
-                            }
-                            .onDelete(perform: settings.removeBank)
-                            
+                Section {
+                    List {
+                        HStack {
+                            Image(systemName: "building.columns")
+                                .foregroundColor(.orange)
+                            Divider()
+                            bankList
                         }
-                    } label: {
-                        Text("Banks")
-                    }
-                    NavigationLink {
-                        
-                        
-                        List() {
-                            HStack {
-                                TextField("Enter a Category", text: $category)
-                                Spacer()
-                                Image(systemName: "plus")
-                                    .onTapGesture {
-                                        settings.addElement(new: category, element: &settings.categories, key: settings.categoryKey)
-                                        category = ""
-                                    }
-                            }
-                            
-                            ForEach(settings.categories, id: \.self) { i in
-                                HStack {
-                                    Text(i)
-                                    Spacer()
-                                }
-                            }
-                            .onDelete(perform: settings.removeCategory)
-                            
+                        HStack {
+                            Image(systemName: "checklist")
+                                .foregroundColor(.green)
+                            Divider()
+                            categoryList
                         }
-                        .toolbar(content: {
-                            ToolbarItem {
-                                EditButton()
-                            }
-                        })
-                    } label: {
-                        Text("Categories")
                     }
-                    
-                    
                 }
-                .navigationTitle("Settings")
+                .padding(.top)
+
             }
+            .navigationTitle("Settings")
         }
     }
+}
+
+
+
+extension AppSettingsView {
+    var bankList: some View {
+            NavigationLink {
+                List {
+                    HStack {
+                        TextField("Add a Bank", text: $bank)
+                        Spacer()
+                        Image(systemName: "plus")
+                            .onTapGesture {
+                                settings.addElement(new: bank, element: &settings.banks, key: settings.bankKey)
+                                bank = ""
+                            }
+                    }
+                    ForEach(settings.banks, id: \.self) { i in
+                        Text(i)
+                    }
+                    .onDelete(perform: settings.removeBank)
+                    
+                }
+            } label: {
+                Text("Banks")
+            }
+    }
+    
+    var categoryList: some View {
+        
+        NavigationLink {
+            List {
+                HStack {
+                    TextField("Enter a Category", text: $category)
+                    Spacer()
+                    Image(systemName: "plus")
+                        .onTapGesture {
+                            settings.addElement(new: category, element: &settings.categories, key: settings.categoryKey)
+                            category = ""
+                        }
+                }
+                
+                ForEach(settings.categories, id: \.self) { i in
+                    HStack {
+                        Text(i)
+                        Spacer()
+                    }
+                }
+                .onDelete(perform: settings.removeCategory)
+                
+            }
+
+        } label: {
+            Text("Categories")
+        }
+        
+        
+    }
+    
 }

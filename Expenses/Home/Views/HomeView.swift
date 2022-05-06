@@ -48,9 +48,6 @@ struct HomeView: View {
                     } label: {
                         Image(systemName: "bolt.fill")
                     }
-                    .onTapGesture {
-                        settings.haptic(style: .heavy)
-                    }
                     Spacer()
                     Button(action: {
                         activeSheet = .add

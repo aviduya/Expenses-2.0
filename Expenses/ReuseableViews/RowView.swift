@@ -19,9 +19,26 @@ struct RowView: View {
     let onDelete: (IndexSet) -> ()
     
     @State var item: String
-    @State var date: String
+    @State var date: Date
     @State var amount: Double?
     @State var category: String
+    
+    var todayFormatter: String {
+        
+        let input = Calendar.current.dateComponents([.day], from: date)
+        let dateTo = Calendar.current.dateComponents([.day], from: Date())
+        
+        let yesterday = Calendar.current.dateComponents([.day], from: Date().getYesterday() ?? Date())
+        
+        
+        if input == dateTo {
+            return "Today"
+        } else if input == yesterday {
+            return "Yesterday"
+        }
+        
+        return date.formatted()
+    }
     
     private let material: Material = .regularMaterial
     
@@ -49,7 +66,7 @@ struct RowView: View {
             VStack(alignment: .leading) {
                 Text(item)
                     .bold()
-                Text(date)
+                Text(todayFormatter)
                     .font(.caption)
                     .opacity(0.5)
             }

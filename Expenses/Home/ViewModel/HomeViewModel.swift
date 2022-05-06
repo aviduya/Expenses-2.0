@@ -22,9 +22,6 @@ enum ActiveView: Identifiable {
 }
 
 class HomeViewModel: ObservableObject {
-    
-   
-    
     @Published var greeting: String = "Hello!"
     
     init() {

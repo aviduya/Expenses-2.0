@@ -9,6 +9,7 @@ import Foundation
 
 
 extension Date {
+    
     func getLast6Month() -> Date? {
         return Calendar.current.date(byAdding: .month, value: -6, to: self)
     }
@@ -64,7 +65,7 @@ extension Date {
     func returnTitleString() -> String {
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMMM d, YYYY"
+        dateFormatter.dateFormat = "EEEE MMMM d, YYYY"
         let dayInWeek = dateFormatter.string(from: date)
         
         return dayInWeek

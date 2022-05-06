@@ -17,10 +17,8 @@ enum HapticStyle {
 }
 
 enum Keys: String {
-    
     case bank = "bank"
     case category = "category"
-    
 }
 
 class AppSettings: ObservableObject {
@@ -48,8 +46,7 @@ class AppSettings: ObservableObject {
         }
         
     }
-    
-    
+
     func removeBank(at offsets: IndexSet) {
         banks.remove(atOffsets: offsets)
         userDefaults.set(banks, forKey: bankKey)

@@ -14,7 +14,7 @@ struct AllTransacitonsView: View {
     @StateObject private var dm = CoreDataHandler.shared
     @StateObject private var vm = AllTransactionsViewModel()
     
-    private let error = "Something went wrong"
+    private let error = Date()
     
     var body: some View {
         
@@ -81,9 +81,6 @@ struct AllTransacitonsView: View {
                     } label: {
                             Image(systemName: "square.stack.3d.up.fill")
                     }
-                    .onTapGesture {
-                        settings.haptic(style: .light)
-                    }
                 }
                 .font(.title2)
                 
@@ -112,7 +109,7 @@ extension AllTransacitonsView {
                     entities: $dm.all,
                     onDelete: dm.deleteTransactions(_:),
                     item: t.name ?? "",
-                    date: t.date?.formatted() ?? error,
+                    date: t.date ?? error,
                     amount: t.amount,
                     category: t.category ?? "")
         }
@@ -132,7 +129,7 @@ extension AllTransacitonsView {
                     entities: $dm.all,
                     onDelete: dm.deleteTransactions(_:),
                     item: t.name ?? "",
-                    date: t.date?.formatted() ?? error,
+                    date: t.date ?? error,
                     amount: t.amount,
                     category: t.category ?? "")
         }
@@ -150,7 +147,7 @@ extension AllTransacitonsView {
                     entities: $dm.all,
                     onDelete: dm.deleteTransactions(_:),
                     item: t.name ?? "",
-                    date: t.date?.formatted() ?? error,
+                    date: t.date ?? error,
                     amount: t.amount,
                     category: t.category ?? "")
             }
@@ -169,7 +166,7 @@ extension AllTransacitonsView {
                     entities: $dm.all,
                     onDelete: dm.deleteTransactions(_:),
                     item: t.name ?? "",
-                    date: t.date?.formatted() ?? error,
+                    date: t.date ?? error,
                     amount: t.amount,
                     category: t.category ?? "")
             }

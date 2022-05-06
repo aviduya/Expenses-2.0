@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0E07B6182823109B00405764 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E07B6172823109B00405764 /* AppSettingsView.swift */; };
-		0E07B61A282310AA00405764 /* AppSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E07B619282310AA00405764 /* AppSettingsViewModel.swift */; };
 		0E0ED65728120BB900A318E6 /* AllTransacitonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */; };
 		0E0ED65A2812172C00A318E6 /* AllTransactionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */; };
 		0E0ED65D28136ACD00A318E6 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED65C28136ACD00A318E6 /* DateExtensions.swift */; };
@@ -37,7 +36,6 @@
 
 /* Begin PBXFileReference section */
 		0E07B6172823109B00405764 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
-		0E07B619282310AA00405764 /* AppSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewModel.swift; sourceTree = "<group>"; };
 		0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransacitonsView.swift; sourceTree = "<group>"; };
 		0E0ED6592812172C00A318E6 /* AllTransactionsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsVM.swift; sourceTree = "<group>"; };
 		0E0ED65C28136ACD00A318E6 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 				0E07B6162823108F00405764 /* Settings */,
 				0E0ED65B28136ABB00A318E6 /* Extensions */,
 				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
-				0E28470D2755CD52006CD281 /* AppSettings.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -90,8 +87,8 @@
 		0E07B6162823108F00405764 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				0E28470D2755CD52006CD281 /* AppSettings.swift */,
 				0E07B6172823109B00405764 /* AppSettingsView.swift */,
-				0E07B619282310AA00405764 /* AppSettingsViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -360,7 +357,6 @@
 				0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */,
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
 				0E07B6182823109B00405764 /* AppSettingsView.swift in Sources */,
-				0E07B61A282310AA00405764 /* AppSettingsViewModel.swift in Sources */,
 				0E0ED6692813C71D00A318E6 /* DatePickerView.swift in Sources */,
 				0E0ED6632813C48200A318E6 /* InputTextField.swift in Sources */,
 				0EA75E9F28222943005DCB14 /* ShimmerModifier.swift in Sources */,
