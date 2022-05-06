@@ -59,7 +59,7 @@ struct RowView: View {
                         .frame(width: 30)
                 }
             } else {
-                Text(category)
+                Text(category.prefix(1).capitalized)
                     .frame(width: 30)
             }
             Divider()
