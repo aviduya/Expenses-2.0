@@ -161,18 +161,25 @@ extension AllTransacitonsView {
                 EmptyView()
             }
             ForEach(dm.all) { t in
-                RowView(
-                    entity: t,
-                    entities: $dm.all,
-                    onDelete: dm.deleteTransactions(_:),
-                    item: t.name ?? "",
-                    date: t.date ?? error,
-                    amount: t.amount,
-                    category: t.category ?? "")
+                
+                Section {
+                    RowView(
+                        entity: t,
+                        entities: $dm.all,
+                        onDelete: dm.deleteTransactions(_:),
+                        item: t.name ?? "",
+                        date: t.date ?? error,
+                        amount: t.amount,
+                        category: t.category ?? "")
+                } header: {
+                    HStack {
+                        Text(vm.monthDay(input:t.date ?? Date()))
+                            .bold()
+                        Spacer()
+                    }
+                }
             }
         }
-        
-       
     }
 }
 
