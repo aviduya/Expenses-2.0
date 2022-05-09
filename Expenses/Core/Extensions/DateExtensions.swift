@@ -10,6 +10,8 @@ import Foundation
 
 extension Date {
     
+   
+    
     func getLast6Month() -> Date? {
         return Calendar.current.date(byAdding: .month, value: -6, to: self)
     }

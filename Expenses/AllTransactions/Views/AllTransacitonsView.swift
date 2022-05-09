@@ -44,7 +44,7 @@ struct AllTransacitonsView: View {
                         case .month:
                             month
                         case .year:
-                            year
+                            YearView()
                         }
                     }
                     
