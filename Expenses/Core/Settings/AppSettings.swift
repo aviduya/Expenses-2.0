@@ -19,13 +19,13 @@ enum HapticStyle {
 enum Keys: String {
     case bank = "bank"
     case category = "category"
+    case threshold = "threshold"
 }
 
 class AppSettings: ObservableObject {
     
     @Published var banks: [String] = []
     @Published var categories: [String] = []
-    
     let userDefaults = UserDefaults.standard
     
     let bankKey = Keys.bank.rawValue
@@ -33,10 +33,8 @@ class AppSettings: ObservableObject {
 
     
     init() {
-        
         banks = userDefaults.object(forKey: bankKey) as? [String] ?? []
         categories = userDefaults.object(forKey: categoryKey) as? [String] ?? []
-        
     }
     
     func addElement(new: String, element: inout [String], key: String) {
@@ -46,7 +44,7 @@ class AppSettings: ObservableObject {
         }
         
     }
-
+    
     func removeBank(at offsets: IndexSet) {
         banks.remove(atOffsets: offsets)
         userDefaults.set(banks, forKey: bankKey)

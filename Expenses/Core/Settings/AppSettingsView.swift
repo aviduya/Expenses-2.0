@@ -11,10 +11,11 @@ import SwiftUI
 struct AppSettingsView: View {
     
     @EnvironmentObject var settings: AppSettings
+    @AppStorage(Keys.threshold.rawValue) var setThreshold: Double = 0.0
     
     @State var bank: String = ""
     @State var category: String  = ""
-    
+        
     var body: some View {
         NavigationView {
             VStack {
@@ -31,6 +32,14 @@ struct AppSettingsView: View {
                                 .foregroundColor(.green)
                             Divider()
                             categoryList
+                        }
+                        
+                        HStack {
+                            Image(systemName: "slider.horizontal.below.rectangle")
+                                .foregroundColor(.teal)
+                            Divider()
+                            threshold
+                            
                         }
                     }
                 }
@@ -96,6 +105,26 @@ extension AppSettingsView {
             Text("Categories")
         }
         
+        
+    }
+    
+    var threshold: some View {
+        
+        NavigationLink {
+            VStack {
+                Text("\(setThreshold)")
+                List {
+                    HStack{
+                        TextField("Set Amount", value: $setThreshold, format: .number)
+                        Spacer()
+                    }
+                }
+            }
+            
+            
+        } label: {
+            Text("Threshold")
+        }
         
     }
     

@@ -20,6 +20,7 @@ struct HomeView: View {
                 
                 Text(Date().returnTitleString())
                     .font(.body)
+                    .bold()
                     .opacity(0.66)
                 Text(vm.greeting)
                     .font(Font.system(.largeTitle, design: .default).weight(.bold))
