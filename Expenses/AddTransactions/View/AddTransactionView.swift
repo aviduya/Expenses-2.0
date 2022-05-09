@@ -104,7 +104,6 @@ extension AddTransactionView {
     
     private var formBox: some View {
         
-        
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Transaction Details")

@@ -61,8 +61,7 @@ class AppSettings: ObservableObject {
         let soft = UIImpactFeedbackGenerator(style: .soft)
         let medium = UIImpactFeedbackGenerator(style: .medium)
         let rigid = UIImpactFeedbackGenerator(style: .rigid)
-        
-       
+
         switch style {
         case .light:
             soft.impactOccurred()
