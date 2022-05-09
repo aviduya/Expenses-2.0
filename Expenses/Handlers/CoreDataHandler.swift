@@ -37,6 +37,20 @@ class CoreDataHandler: ObservableObject {
             }
         }
         getEverything()
+        
+    }
+    
+    deinit {
+        let container = NSPersistentContainer(name: "TransactionsContainer")
+        container.loadPersistentStores { (description, error) in
+            if let error = error {
+                print("error deinitializing core data. \(error)")
+            } else {
+                print("Deinitialized Core Data")
+            }
+        }
+        getEverything()
+        print("Deinitializing handler.")
     }
     
     func getEverything() {
@@ -110,6 +124,7 @@ class CoreDataHandler: ObservableObject {
             today = try container.viewContext.fetch(todayRequest)
             week = try container.viewContext.fetch(weekRequest)
             month = try container.viewContext.fetch(monthRequest)
+            print("Core Data Initialized")
         } catch let error {
             print("Error Fetching. \(error)")
         }

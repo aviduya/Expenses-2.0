@@ -15,7 +15,6 @@ enum HapticStyle {
     case rigid
     
 }
-
 enum Keys: String {
     case bank = "bank"
     case category = "category"
