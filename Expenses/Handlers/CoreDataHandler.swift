@@ -19,14 +19,9 @@ class CoreDataHandler: ObservableObject {
     @Published var all: [TransactionEntity] = []
 
     private let container: NSPersistentContainer
-    
-    private let request = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
-    
-    
     private var calendar = Calendar.current
     
     private init() {
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         calendar.timeZone = NSTimeZone.local
         container = NSPersistentContainer(name: "TransactionsContainer")
         container.loadPersistentStores { (description, error) in
@@ -95,6 +90,7 @@ class CoreDataHandler: ObservableObject {
         let monthFromPredicate = fromPredicate(dateFrom: monthDateFrom)
         let monthPredicate = toPredicate(dateTo: monthDateTo!)
         
+        let allRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let yesterdayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let todayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
         let weekRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
@@ -112,14 +108,14 @@ class CoreDataHandler: ObservableObject {
         let monthDatePredicate = compound(from: monthFromPredicate, to: monthPredicate)
         monthRequest.predicate = monthDatePredicate
         
-        
+        allRequest.sortDescriptors = sort()
         yesterdayRequest.sortDescriptors = sort()
         todayRequest.sortDescriptors = sort()
         weekRequest.sortDescriptors = sort()
         monthRequest.sortDescriptors = sort()
         
         do  {
-            all = try container.viewContext.fetch(request)
+            all = try container.viewContext.fetch(allRequest)
             yesterday = try container.viewContext.fetch(yesterdayRequest)
             today = try container.viewContext.fetch(todayRequest)
             week = try container.viewContext.fetch(weekRequest)

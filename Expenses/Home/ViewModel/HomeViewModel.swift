@@ -18,17 +18,16 @@ enum ActiveView: Identifiable {
     var id: Int {
         hashValue
     }
-    
 }
 
 class HomeViewModel: ObservableObject {
-    @Published var greeting: String = "Hello!"
+    
     
     init() {
-        computedGreeting()
+      
     }
     
-    func computedGreeting() {
+    var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
         let newDay = 0
         let noon = 12
@@ -36,7 +35,6 @@ class HomeViewModel: ObservableObject {
         let midnight = 24
         
         var message = ""
-        
         switch hour {
             
         case newDay ..< noon:
@@ -50,7 +48,7 @@ class HomeViewModel: ObservableObject {
             message = "Hello!"
         }
         
-        greeting = message
+        return message
     }
 }
 

@@ -17,15 +17,15 @@ extension HomeView {
     var HomeList: some View {
         ScrollView {
                 Section {
-                    ForEach(dm.all.prefix(5)) { t in
+                    ForEach(dm.all.prefix(5)) { data in
                         RowView(
-                            entity: t,
+                            entity: data,
                             entities: $dm.all,
                             onDelete: dm.deleteTransactions(_:),
-                            item: t.name ?? "",
-                            date: t.date ?? Date(),
-                            amount: t.amount,
-                            category: t.category ?? "")
+                            item: data.name ?? "",
+                            date: data.date ?? Date(),
+                            amount: data.amount,
+                            category: data.category ?? "")
                     }
                 }
         }
@@ -112,6 +112,34 @@ extension HomeView {
         }
         .frame(maxWidth: .infinity)
         .clipped()
+    }
+    
+    var HomeBottomBar: some View {
+        HStack {
+            Menu {
+                Section {
+                    EditButton()
+                        .disabled(dm.all.isEmpty)
+                }
+                Section {
+                    Button(action: {
+                        activeSheet = .settings
+                    }) {
+                        Label("Settings", systemImage: "person.text.rectangle")
+                    }
+                }
+            } label: {
+                Image(systemName: "bolt.fill")
+            }
+            Spacer()
+            Button(action: {
+                activeSheet = .add
+                settings.haptic(style: .heavy)
+            }) {
+                Label("Add", systemImage: "plus")
+            }
+        }
+        .font(.title3)
     }
 }
 

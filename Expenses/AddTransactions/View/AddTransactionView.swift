@@ -10,7 +10,7 @@ import SwiftUI
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var settings: AppSettings
-    @StateObject var dataManager = CoreDataHandler.shared
+    @StateObject var dm = CoreDataHandler.shared
     @ObservedObject var vm = AddTransactionsVM()
     @State private var fieldsValid = true
     @State private var showingAlert = false
@@ -35,7 +35,7 @@ struct AddTransactionView: View {
                         showingAlert = true
                     } _: {
                         fieldsValid = true
-                        dataManager.addTransactions(
+                        dm.addTransactions(
                             amount: model.amount,
                             name: model.name,
                             bank: model.bank,
@@ -69,7 +69,7 @@ struct AddTransactionView: View {
             Button("OK", role: .cancel) { }
         }
         .onDisappear {
-            dataManager.getEverything()
+            dm.getEverything()
         }
     }
 }
