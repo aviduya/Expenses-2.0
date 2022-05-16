@@ -42,6 +42,7 @@ extension HomeView {
             Button {
                 activeSheet = .all
                 settings.haptic(style: .medium)
+                fatalError()
             } label: {
                 HStack {
                     
