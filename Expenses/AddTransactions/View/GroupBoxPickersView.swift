@@ -28,8 +28,6 @@ struct GroupBoxPickersView: View {
                                     Spacer()
                             
                                 }
-                                
-                                
                             }
                         }
                         

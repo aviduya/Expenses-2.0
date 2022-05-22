@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//TODO: Add navgiationlink() -> under forEach() to direct to another view.
+
 enum Months: String, CaseIterable {
     case jan = "January"
     case feb = "February"
