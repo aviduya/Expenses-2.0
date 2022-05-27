@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Sentry
 
 enum HapticStyle {
     case light
@@ -15,6 +16,20 @@ enum HapticStyle {
     case rigid
     
 }
+
+enum FeedbackType: String, CaseIterable, Identifiable {
+    case bug
+    case feature
+    case enhancement
+    case tweak
+    case other
+    
+    var id: String {
+        self.rawValue
+    }
+    
+}
+
 enum Keys: String {
     case bank = "bank"
     case category = "category"
@@ -41,6 +56,18 @@ class AppSettings: ObservableObject {
             element.append(new)
             userDefaults.set(element, forKey: key)
         }
+        
+    }
+    
+    func submitFeedback(subject: String, comment: String, email: String, type: FeedbackType) {
+        let eventID = SentrySDK.capture(message: subject)
+        let feedback = UserFeedback(eventId: eventID)
+        
+        feedback.comments = comment
+        feedback.email = email
+        feedback.name = type.rawValue
+        
+        SentrySDK.capture(userFeedback: feedback)
         
     }
     

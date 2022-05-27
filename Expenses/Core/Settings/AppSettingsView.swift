@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Sentry
 
 
 struct AppSettingsView: View {
@@ -15,6 +16,10 @@ struct AppSettingsView: View {
     
     @State private var bank: String = ""
     @State private var category: String  = ""
+    
+    @State private var subject: String = ""
+    @State private var comment: String = ""
+    @State private var email: String = ""
     
     let material: Material = .thin
     
@@ -30,6 +35,10 @@ struct AppSettingsView: View {
     private var thresholdEnd: Double {
         let t = setThreshold
         return t / 2
+    }
+    
+    init() {
+        UITextView.appearance().backgroundColor = .clear
     }
     
     var body: some View {
@@ -59,6 +68,14 @@ struct AppSettingsView: View {
                             Divider()
                             threshold
                             
+                        }
+                        
+                        HStack  {
+                            Image(systemName: "waveform.path.ecg")
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.red)
+                            Divider()
+                            feedback
                         }
                         
                     } header: {
@@ -250,6 +267,52 @@ extension AppSettingsView {
             }.padding()
         } label: {
             Text("Threshold")
+        }
+    }
+    
+    var feedback: some View {
+        NavigationLink {
+            VStack(alignment: .leading) {
+                Section {
+                    
+                    TextField("Subject", text: $subject)
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 16))
+                    
+                    
+                } header: {
+                    Text("Information")
+                }
+                
+                Section {
+                    TextEditor(text: $comment)
+                        .frame(maxHeight: 100)
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 16))
+                }
+                
+                Spacer()
+                
+                Button {
+                    
+                    let eventId = SentrySDK.capture(message: comment)
+                    
+                    let userFeedback = UserFeedback(eventId: eventId)
+                    userFeedback.comments = "It broke, by anfernee"
+                    userFeedback.email = "john.doe@example.com"
+                    userFeedback.name = "John Doe"
+                    SentrySDK.capture(userFeedback: userFeedback)
+                    
+                } label: {
+                    Text("Submit Feedback")
+                }
+                .buttonStyle(CustomButtonStyle())
+                
+            }
+            .navigationTitle("Submit Feedback")
+            .padding()
+        } label: {
+            Text("Feedback")
         }
     }
     
