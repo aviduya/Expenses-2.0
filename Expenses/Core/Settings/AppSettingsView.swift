@@ -12,6 +12,7 @@ import Sentry
 struct AppSettingsView: View {
     
     @EnvironmentObject var settings: AppSettings
+    @Environment(\.dismiss) var dismiss
     @AppStorage(Keys.threshold.rawValue) var setThreshold: Double = 0.0
     
     @State private var bank: String = ""
@@ -19,7 +20,9 @@ struct AppSettingsView: View {
     
     @State private var subject: String = ""
     @State private var comment: String = ""
+    @State private var name: String = ""
     @State private var email: String = ""
+    @State private var type: FeedbackType = .bug
     
     let material: Material = .thin
     
@@ -39,6 +42,11 @@ struct AppSettingsView: View {
     
     init() {
         UITextView.appearance().backgroundColor = .clear
+        subject = ""
+        comment = ""
+        name = ""
+        email = ""
+        type = .bug
     }
     
     var body: some View {
@@ -273,38 +281,69 @@ extension AppSettingsView {
     var feedback: some View {
         NavigationLink {
             VStack(alignment: .leading) {
+                Picker("", selection: $type) {
+                    ForEach(FeedbackType.allCases, id: \.self) { t in
+                        Text(t.id)
+                            .bold()
+        
+                        
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.vertical)
                 Section {
                     
                     TextField("Subject", text: $subject)
                         .padding()
                         .background(material, in: RoundedRectangle(cornerRadius: 16))
+                    TextField("Name", text: $name)
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 16))
+                    TextField("Email Address", text: $email)
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 16))
+                    
                     
                     
                 } header: {
                     Text("Information")
+                        .bold()
+                        .opacity(0.33)
                 }
+                
+               Divider()
                 
                 Section {
                     TextEditor(text: $comment)
                         .frame(maxHeight: 100)
                         .padding()
                         .background(material, in: RoundedRectangle(cornerRadius: 16))
+                } header: {
+                    Text("Additional Comments")
+                        .bold()
+                        .opacity(0.33)
                 }
                 
                 Spacer()
                 
                 Button {
                     
-                    let eventId = SentrySDK.capture(message: comment)
+                    let eventId = SentrySDK.capture(message: "[\(type.rawValue.capitalized)] \(subject)")
                     
                     let userFeedback = UserFeedback(eventId: eventId)
-                    userFeedback.comments = "It broke, by anfernee"
-                    userFeedback.email = "john.doe@example.com"
-                    userFeedback.name = "John Doe"
+                    userFeedback.comments = comment
+                    userFeedback.email = email
+                    userFeedback.name = name
                     SentrySDK.capture(userFeedback: userFeedback)
+                   
                     
                 } label: {
-                    Text("Submit Feedback")
+                    HStack {
+                        Text("Send")
+                        Image(systemName: "paperplane")
+                    }
+                    .font(Font.system(size: 24, weight: .bold, design: .default))
+                    
                 }
                 .buttonStyle(CustomButtonStyle())
                 

@@ -18,11 +18,10 @@ enum HapticStyle {
 }
 
 enum FeedbackType: String, CaseIterable, Identifiable {
-    case bug
-    case feature
-    case enhancement
-    case tweak
-    case other
+    case bug = "Bug"
+    case feature = "Feature"
+    case tweak = "Tweak"
+    case other = "Other"
     
     var id: String {
         self.rawValue
