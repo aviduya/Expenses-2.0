@@ -15,9 +15,11 @@ struct ExpensesApp: App {
     let settings = AppSettings()
     let data = CoreDataHandler.shared
     
+    //TODO: Do not fucking merge pls or i will lose it 😡😡😡😡😡😡😡😡😡😡😡😡😡
+    
     init() {
         SentrySDK.start { options in
-                    
+            //TODO: Hide keys before merging into main branch.
             options.dsn = "https://6fdb56a518074040a048b811f39e3e73@o1249741.ingest.sentry.io/6410567"
             options.debug = true // Enabled debug when first installing is always helpful
             options.enableUIViewControllerTracking = true
