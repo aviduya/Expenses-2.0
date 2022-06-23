@@ -11,6 +11,8 @@ struct GroupBoxPickersView: View {
     
     @EnvironmentObject var settings: AppSettings
     
+    //TODO: Have the buttons disbales if categories and banks are empty. 
+    
     @Binding var categoryInput: String
     @Binding var bankInput: String
     var selectedColor: Color = .clear
@@ -25,6 +27,7 @@ struct GroupBoxPickersView: View {
                                 HStack {
                                     Text(category)
                                         .background(Color.red)
+                                        .disabled(settings.categories.isEmpty)
                                     Spacer()
                             
                                 }
