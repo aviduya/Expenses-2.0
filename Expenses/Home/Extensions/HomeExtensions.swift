@@ -66,24 +66,24 @@ extension HomeView {
                 
             }
             HStack(alignment: .center) {
-                Text("$\(spentToday, specifier: "%.2f")")
+                Text("$\(vm.spentToday, specifier: "%.2f")")
                     .redacted(reason: dm.all.isEmpty ? .placeholder : [])
                     .shimmering(active: dm.all.isEmpty)
                     .font(.system(size: 35, weight: .regular, design: .rounded))
                 Spacer()
-                if diffPercentage > 0 {
+                if vm.diffPercentage > 0 {
                     
                     HStack {
                         Image(systemName: "arrow.up.right")
                             .foregroundColor(Color.red)
-                        Text("\(diffPercentage.rounded(), specifier: "%2.f")%")
+                        Text("\(vm.diffPercentage.rounded(), specifier: "%2.f")%")
                     }
                     .font(.system(size: 20, weight: .bold, design: .default))
-                } else if diffPercentage < 0 {
+                } else if vm.diffPercentage < 0 {
                     HStack {
                         Image(systemName: "arrow.down.right")
                             .foregroundColor(Color.green)
-                        Text("\(diffPercentage.rounded(), specifier: "%2.f")%" )
+                        Text("\(vm.diffPercentage.rounded(), specifier: "%2.f")%" )
                         
                     }
                     .font(.system(size: 20, weight: .bold, design: .default))
@@ -94,7 +94,7 @@ extension HomeView {
                 Text("Top Category")
                     .font(.headline)
                     .opacity(0.5)
-                Text(topCat)
+                Text(vm.topCat)
                     .redacted(reason: dm.all.isEmpty ? .placeholder : [])
                     .shimmering(active: dm.all.isEmpty)
                     .font(Font.system(.largeTitle, design: .default).weight(.medium))
@@ -103,7 +103,7 @@ extension HomeView {
                 Text("Most Used payment")
                     .font(.headline)
                     .opacity(0.5)
-                Text(topPayment)
+                Text(vm.topPayment)
                     .redacted(reason: dm.all.isEmpty ? .placeholder : [])
                     .shimmering(active: dm.all.isEmpty)
                     .font(Font.system(.largeTitle, design: .default).weight(.medium))
@@ -140,67 +140,6 @@ extension HomeView {
             }
         }
         .font(.title3)
-    }
-}
-
-//MARK: Computed Properties returning data -> HomeSummary().
-
-extension HomeView {
-    
-    var spentToday: Double {
-        
-        var total = 0.0
-        
-        for transaction in dm.today {
-            total += transaction.amount
-        }
-        
-        return total
-    }
-    
-    var spentYesterday: Double {
-        
-        var total = 0.0
-        
-        if dm.yesterday.isEmpty {
-            total = 1.0
-        } else {
-            for transaction in dm.yesterday {
-                total += transaction.amount
-            }
-        }
-        return total
-    }
-    
-    var diffPercentage: Double {
-        let difference = spentToday - spentYesterday
-        if dm.yesterday.isEmpty && dm.today.isEmpty {
-            return 0.0
-        } else {
-            return (difference / spentYesterday) * 100.099
-            
-        }
-    }
-    
-    var topCat: String {
-        var arry: [String] = []
-        
-        for transaction in dm.all {
-            arry.append(transaction.category ?? "")
-            
-        }
-        
-        return arry.filtered().first ?? "No Category Recorded"
-    }
-    
-    var topPayment: String {
-        var arry: [String] = []
-        
-        for transaction in dm.all {
-            arry.append(transaction.bank ?? "")
-        }
-        
-        return arry.filtered().first ?? "No Payment Recorded"
     }
 }
 
