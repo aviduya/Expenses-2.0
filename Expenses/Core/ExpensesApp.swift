@@ -14,9 +14,7 @@ struct ExpensesApp: App {
     
     let settings = AppSettings()
     let data = CoreDataHandler.shared
-    
-    //TODO: Do not fucking merge pls or i will lose it 😡😡😡😡😡😡😡😡😡😡😡😡😡
-    
+        
     init() {
         SentrySDK.start { options in
             //TODO: Hide keys before merging into main branch.
