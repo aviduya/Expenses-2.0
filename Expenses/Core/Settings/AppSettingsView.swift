@@ -6,15 +6,23 @@
 //
 
 import SwiftUI
+import Sentry
 
 
 struct AppSettingsView: View {
     
     @EnvironmentObject var settings: AppSettings
+    @Environment(\.dismiss) var dismiss
     @AppStorage(Keys.threshold.rawValue) var setThreshold: Double = 0.0
     
     @State private var bank: String = ""
     @State private var category: String  = ""
+    
+    @State private var subject: String = ""
+    @State private var comment: String = ""
+    @State private var name: String = ""
+    @State private var email: String = ""
+    @State private var type: FeedbackType = .bug
     
     let material: Material = .thin
     
@@ -30,6 +38,15 @@ struct AppSettingsView: View {
     private var thresholdEnd: Double {
         let t = setThreshold
         return t / 2
+    }
+    
+    init() {
+        UITextView.appearance().backgroundColor = .clear
+        subject = ""
+        comment = ""
+        name = ""
+        email = ""
+        type = .bug
     }
     
     var body: some View {
@@ -59,6 +76,14 @@ struct AppSettingsView: View {
                             Divider()
                             threshold
                             
+                        }
+                        
+                        HStack  {
+                            Image(systemName: "waveform.path.ecg")
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.red)
+                            Divider()
+                            feedback
                         }
                         
                     } header: {
@@ -250,6 +275,83 @@ extension AppSettingsView {
             }.padding()
         } label: {
             Text("Threshold")
+        }
+    }
+    
+    var feedback: some View {
+        NavigationLink {
+            VStack(alignment: .leading) {
+                Picker("", selection: $type) {
+                    ForEach(FeedbackType.allCases, id: \.self) { t in
+                        Text(t.id)
+                            .bold()
+        
+                        
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.vertical)
+                Section {
+                    
+                    TextField("Subject", text: $subject)
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 16))
+                    TextField("Name", text: $name)
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 16))
+                    TextField("Email Address", text: $email)
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 16))
+                    
+                    
+                    
+                } header: {
+                    Text("Information")
+                        .bold()
+                        .opacity(0.33)
+                }
+                
+               Divider()
+                
+                Section {
+                    TextEditor(text: $comment)
+                        .frame(maxHeight: 100)
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 16))
+                } header: {
+                    Text("Additional Comments")
+                        .bold()
+                        .opacity(0.33)
+                }
+                
+                Spacer()
+                
+                Button {
+                    
+                    let eventId = SentrySDK.capture(message: "[\(type.rawValue.capitalized)] \(subject)")
+                    
+                    let userFeedback = UserFeedback(eventId: eventId)
+                    userFeedback.comments = comment
+                    userFeedback.email = email
+                    userFeedback.name = name
+                    SentrySDK.capture(userFeedback: userFeedback)
+                   
+                    
+                } label: {
+                    HStack {
+                        Text("Send")
+                        Image(systemName: "paperplane")
+                    }
+                    .font(Font.system(size: 24, weight: .bold, design: .default))
+                    
+                }
+                .buttonStyle(CustomButtonStyle())
+                
+            }
+            .navigationTitle("Submit Feedback")
+            .padding()
+        } label: {
+            Text("Feedback")
         }
     }
     
