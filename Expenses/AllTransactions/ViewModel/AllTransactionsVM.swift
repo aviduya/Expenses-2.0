@@ -31,8 +31,15 @@ class AllTransactionsViewModel: ObservableObject {
             return "This Month"
         case .year:
             return "All Transactions"
-            
         }
+    }
+    
+    func monthDay(input: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, YY"
+        let dayInWeek = dateFormatter.string(from: input)
+        
+        return dayInWeek
     }
 }
 

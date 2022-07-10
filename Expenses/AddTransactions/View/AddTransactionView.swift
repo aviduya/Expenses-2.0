@@ -9,17 +9,19 @@ import SwiftUI
 
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var dataManager = CoreDataHandler.shared
-    @State var fieldsValid = true
-    @State var showingAlert = false
+    @EnvironmentObject var settings: AppSettings
+    @StateObject var dm = CoreDataHandler.shared
+    @ObservedObject var vm = AddTransactionsVM()
+    @State private var fieldsValid = true
+    @State private var showingAlert = false
     
     @State var model =
     AddTransactionsModel(
         amount: nil,
         name: "",
-        bank: .schwab,
+        bank: "",
         merchant: "",
-        category: .personal,
+        category: "",
         date: Date())
     
     var body: some View {
@@ -27,6 +29,27 @@ struct AddTransactionView: View {
             VStack {
                 header
                 formBox
+                Button(action: {
+                    vm.save(amount: model.amount ?? 0.0, name: model.name, merchant: model.merchant) {
+                        fieldsValid = false
+                        showingAlert = true
+                    } _: {
+                        fieldsValid = true
+                        dm.addTransactions(
+                            amount: model.amount,
+                            name: model.name,
+                            bank: model.bank,
+                            merchant: model.merchant,
+                            category: model.category,
+                            date: model.date)
+                        dismiss()
+                    }
+
+                }) {
+                    Text("Save")
+                }
+                .padding()
+                .buttonStyle(CustomButtonStyle())
             }
             .navigationTitle("Add Expense")
             .navigationBarTitleDisplayMode(.inline)
@@ -46,17 +69,27 @@ struct AddTransactionView: View {
             Button("OK", role: .cancel) { }
         }
         .onDisappear {
-            dataManager.getEverything()
+            dm.getEverything()
         }
     }
 }
 
 extension AddTransactionView {
     private var header: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text(model.name)
-                .font(Font.system(.largeTitle, design: .default).weight(.bold))
-                .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+        VStack(alignment: .leading) {
+            
+            if model.name.isEmpty {
+                Text("Name...")
+                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
+                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+                    .opacity(0.33)
+            } else {
+                Text(model.name)
+                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
+                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+            }
+            
+            
             Text("$\(model.amount ?? 0.0, specifier: "%.2f")")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.bold))
             
@@ -80,43 +113,11 @@ extension AddTransactionView {
                 InputTextField(input: $model.name, isValidated: $fieldsValid, placeholder: "Item...")
                 InputTextField(input: $model.merchant, isValidated: $fieldsValid, placeholder: "Merchant...")
                 DatePickerView(date: $model.date)
-                GroupBoxPickersView(categories: $model.category, banks: $model.bank)
-                Spacer()
-                Button(action: {
-                    save()
-                }) {
-                    Text("Save")
-                }.buttonStyle(CustomButtonStyle())
+                GroupBoxPickersView(categoryInput: $model.category, bankInput: $model.bank)
             }
             .padding()
-        }
-        
-    }
-    
-    func save() {
-        let generator = UINotificationFeedbackGenerator()
-        let a = model.amount
-        let n = model.name
-        let m = model.merchant
-        
-        if a == 0.0 || n.isEmpty || m.isEmpty {
-            fieldsValid = false
-            showingAlert = true
-            generator.notificationOccurred(.error)
             
-        } else {
-            fieldsValid = true
-            dataManager.addTransactions(
-                amount: model.amount,
-                name: model.name,
-                bank: model.bank,
-                merchant: model.merchant,
-                category: model.category,
-                date: model.date)
-            generator.notificationOccurred(.success)
-            dismiss()
         }
-        
     }
 }
 

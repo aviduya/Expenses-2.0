@@ -12,9 +12,9 @@ struct AddTransactionsModel {
     var id: UUID = UUID()
     var amount: Double?
     var name: String
-    var bank: Banks
-    var merchant :String
-    var category: Categories
+    var bank: String
+    var merchant: String
+    var category: String
     var date: Date
     
 }

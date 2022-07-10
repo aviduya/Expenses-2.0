@@ -8,35 +8,54 @@
 import SwiftUI
 
 struct HomeView: View {
-    
-    @State var isPresented: Bool = false
+    @EnvironmentObject var settings: AppSettings
     @ObservedObject var vm = HomeViewModel()
     @StateObject var dm = CoreDataHandler.shared
     
+    @State var activeSheet: ActiveView?
+    
     var body: some View {
-        NavigationView {
-            VStack {
+        
+        // Most of the View components are extracted into HomeExtensions.swift for clarity.
+        
+        VStack {
+            VStack(alignment: .leading) {
+                Text(Date().returnTitleString())
+                    .font(.body)
+                    .bold()
+                    .opacity(0.66)
+                Text(vm.greeting)
+                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
+                
+                // This is responsible for checking if transactions are empty, if it is show the EmptyView()
                 HomeSummary
-                    .padding(.leading)
-                transactionsList
-            }
-            .navigationTitle(vm.greeting)
-            .toolbar {
-                EditButton()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        isPresented.toggle()
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+                    .padding(.top, 10)
+                if dm.all.isEmpty {
+                    EmptyView()
+                } else {
+                    HomeNavigation
+                    HomeList
                 }
+                
+                // Bottom Bar that includes Adding a transaction and settings.
+               HomeBottomBar
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
-        .onAppear(perform: dm.getEverything)
-        .sheet(isPresented: $isPresented, onDismiss: { dm.getEverything() }) {
-            AddTransactionView()
+        .padding([.top, .leading, .trailing], 20)
+        
+        /// This sheet is responsible for navigation to all of the pages that the user can navigate from the HomeView()
+        /// When dismissed it calls upon the CoreDataHandler() method to fetch and appends all transactions to their respective formats.
+        
+        .sheet(item: $activeSheet, onDismiss: { }) { item in
+            switch item {
+            case .all:
+                AllTransacitonsView()
+            case .settings:
+                AppSettingsView()
+            case .add:
+                AddTransactionView()
+            }
         }
     }
     

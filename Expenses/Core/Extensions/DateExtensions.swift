@@ -9,6 +9,9 @@ import Foundation
 
 
 extension Date {
+    
+   
+    
     func getLast6Month() -> Date? {
         return Calendar.current.date(byAdding: .month, value: -6, to: self)
     }
@@ -39,11 +42,7 @@ extension Date {
     }
     
     func getThisMonthEnd() -> Date? {
-        let components:NSDateComponents = Calendar.current.dateComponents([.year, .month], from: self) as NSDateComponents
-        components.month += 1
-        components.day = 1
-        components.day -= 1
-        return Calendar.current.date(from: components as DateComponents)!
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: 1), to: self.getThisMonthStart()!)!
     }
     
     //Last Month Start
@@ -64,6 +63,17 @@ extension Date {
     func startOfWeek(using calendar: Calendar = .gregorian) -> Date {
         calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
     }
+    
+    func returnTitleString() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE MMMM d, YYYY"
+        let dayInWeek = dateFormatter.string(from: date)
+        
+        return dayInWeek
+    }
+    
+    
     
 }
 
