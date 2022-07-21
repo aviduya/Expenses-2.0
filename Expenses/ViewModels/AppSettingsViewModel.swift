@@ -35,7 +35,7 @@ enum Keys: String {
     case threshold = "threshold"
 }
 
-class AppSettings: ObservableObject {
+class AppSettingsViewModel: ObservableObject {
     
     @Published var banks: [String] = []
     @Published var categories: [String] = []

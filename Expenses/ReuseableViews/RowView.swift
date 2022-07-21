@@ -12,7 +12,7 @@ import SwiftUI
 struct RowView: View {
     
     @Environment(\.editMode) var editMode
-    @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var settings: AppSettingsViewModel
     @AppStorage(Keys.threshold.rawValue) var setThreshold: Double = 0.0
     
     let entity: TransactionEntity

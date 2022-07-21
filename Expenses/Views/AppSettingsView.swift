@@ -11,7 +11,7 @@ import Sentry
 
 struct AppSettingsView: View {
     
-    @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var settings: AppSettingsViewModel
     @Environment(\.dismiss) var dismiss
     @AppStorage(Keys.threshold.rawValue) var setThreshold: Double = 0.0
     

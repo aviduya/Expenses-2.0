@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import UIKit
 
-class AddTransactionsVM: ObservableObject {
+class AddTransactionsViewModel: ObservableObject {
     
     func save(amount: Double, name: String, merchant: String, _ comlpletion1: () -> (), _ completion2: () ->()) {
         

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AllTransacitonsView: View {
-    @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var settings: AppSettingsViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @StateObject private var dm = CoreDataHandler.shared
