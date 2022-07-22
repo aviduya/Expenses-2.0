@@ -14,35 +14,71 @@ struct HomeView: View {
     
     @State var activeSheet: ActiveView?
     
+    let material: Material = .ultraThinMaterial
+    
     var body: some View {
         
         // Most of the View components are extracted into HomeExtensions.swift for clarity.
         
-        VStack {
-            VStack(alignment: .leading) {
-                Text(Date().returnTitleString())
-                    .font(.body)
-                    .bold()
-                    .opacity(0.66)
-                Text(vm.greeting)
-                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
+        ZStack(alignment: .bottom) {
+            VStack {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(Date().returnTitleString())
+                                    .font(.body)
+                                    .bold()
+                                    .opacity(0.66)
+                                Text(vm.homeMessage)
+                                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
+                            }
+                            
+                            Spacer()
+                            
+                            Menu {
+                                Section {
+                                    EditButton()
+                                        .disabled(dm.all.isEmpty)
+                                }
+                                Section {
+                                    Button(action: {
+                                        activeSheet = .settings
+                                    }) {
+                                        Label("Settings", systemImage: "person.text.rectangle")
+                                    }
+                                }
+                            } label: {
+                                Image(systemName: "bolt.fill")
+                            }
+                        }
+                        
+                        
+                        // This is responsible for checking if transactions are empty, if it is show the EmptyView()
+                        HomeSummary
+                            .padding(.top, 10)
+                        if dm.all.isEmpty {
+                            EmptyView()
+                        } else {
+                            HomeNavigation
+                            HomeList
+                        }
+                        
+                        // Bottom Bar that includes Adding a transaction and settings.
+                       
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    
                 
-                // This is responsible for checking if transactions are empty, if it is show the EmptyView()
-                HomeSummary
-                    .padding(.top, 10)
-                if dm.all.isEmpty {
-                    EmptyView()
-                } else {
-                    HomeNavigation
-                    HomeList
-                }
-                
-                // Bottom Bar that includes Adding a transaction and settings.
-               HomeBottomBar
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding([.top, .leading, .trailing], 20)
+            
+            HomeBottomBar
+                .padding()
+                .background(material, in: RoundedRectangle(cornerRadius: 30))
+                .padding(5)
         }
-        .padding([.top, .leading, .trailing], 20)
+        
+        
         
         /// This sheet is responsible for navigation to all of the pages that the user can navigate from the HomeView()
         /// When dismissed it calls upon the CoreDataHandler() method to fetch and appends all transactions to their respective formats.
@@ -60,9 +96,9 @@ struct HomeView: View {
     }
     
     var HomeList: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
                 Section {
-                    ForEach(dm.all.prefix(5)) { data in
+                    ForEach(vm.allTransactions) { data in
                         RowView(
                             entity: data,
                             entities: $dm.all,
@@ -111,28 +147,33 @@ struct HomeView: View {
                 
             }
             HStack(alignment: .center) {
-                Text("$\(vm.spentToday, specifier: "%.2f")")
+                Text("$\(vm.todayTransactions, specifier: "%.2f")")
                     .redacted(reason: dm.all.isEmpty ? .placeholder : [])
                     .shimmering(active: dm.all.isEmpty)
                     .font(.system(size: 35, weight: .regular, design: .rounded))
                 Spacer()
-                if vm.diffPercentage > 0 {
-                    
-                    HStack {
-                        Image(systemName: "arrow.up.right")
-                            .foregroundColor(Color.red)
-                        Text("\(vm.diffPercentage.rounded(), specifier: "%2.f")%")
-                    }
+                
+                Text(vm.differenceMessage)
+                    .foregroundColor(vm.hasNegative ? .green : .red)
                     .font(.system(size: 20, weight: .bold, design: .default))
-                } else if vm.diffPercentage < 0 {
-                    HStack {
-                        Image(systemName: "arrow.down.right")
-                            .foregroundColor(Color.green)
-                        Text("\(vm.diffPercentage.rounded(), specifier: "%2.f")%" )
-                        
-                    }
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                }
+                
+//                if vm.diffPercentage > 0 {
+//
+//                    HStack {
+//                        Image(systemName: "arrow.up.right")
+//                            .foregroundColor(Color.red)
+//                        Text("\(vm.diffPercentage.rounded(), specifier: "%2.f")")
+//                    }
+//                    .font(.system(size: 20, weight: .bold, design: .default))
+//                } else if vm.diffPercentage < 0 {
+//                    HStack {
+//                        Image(systemName: "arrow.down.right")
+//                            .foregroundColor(Color.green)
+//                        Text("\(vm.diffPercentage.rounded(), specifier: "%2.f")" )
+//
+//                    }
+//                    .font(.system(size: 20, weight: .bold, design: .default))
+//                }
 
             }
             VStack(alignment: .leading) {
@@ -161,27 +202,13 @@ struct HomeView: View {
     
     var HomeBottomBar: some View {
         HStack {
-            Menu {
-                Section {
-                    EditButton()
-                        .disabled(dm.all.isEmpty)
-                }
-                Section {
-                    Button(action: {
-                        activeSheet = .settings
-                    }) {
-                        Label("Settings", systemImage: "person.text.rectangle")
-                    }
-                }
-            } label: {
-                Image(systemName: "bolt.fill")
-            }
+            
             Spacer()
             Button(action: {
                 activeSheet = .add
-                settings.haptic(style: .heavy)
             }) {
-                Label("Add", systemImage: "plus")
+                Image(systemName: "plus")
+                    
             }
         }
         .font(.title3)

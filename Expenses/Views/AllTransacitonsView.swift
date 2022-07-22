@@ -60,22 +60,22 @@ struct AllTransacitonsView: View {
                                 HStack {
                                     Text("Today [\(dm.today.count)]")
                                 }
-                                .tag(selectedFilter.today)
+                                .tag(vm.filter.today)
                                 
                                 HStack {
                                     Text("7 Days [\(dm.week.count)]")
                                 }
-                                .tag(selectedFilter.seven)
+                                .tag(vm.filter.seven)
                                 
                                 HStack {
                                     Text("Month [\(dm.month.count)]")
                                 }
-                                .tag(selectedFilter.month)
+                                .tag(vm.filter.month)
                                 
                                 HStack {
                                     Text("All Transactions [\(dm.all.count)]")
                                 }
-                                .tag(selectedFilter.year)
+                                    .tag(vm.filter.year)
                             }
                         }
                     } label: {

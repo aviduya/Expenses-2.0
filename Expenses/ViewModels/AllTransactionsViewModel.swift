@@ -9,16 +9,20 @@ import Foundation
 import CoreData
 
 
-enum selectedFilter: Hashable {
-     case today
-     case seven
-     case month
-     case year
- }
+
 
 class AllTransactionsViewModel: ObservableObject {
     
     @Published var page: selectedFilter = .today
+    
+    enum selectedFilter: Hashable {
+         case today
+         case seven
+         case month
+         case year
+     }
+    
+    var filter = selectedFilter.self
     
     var status: String {
         

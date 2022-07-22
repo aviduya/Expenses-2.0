@@ -17,7 +17,7 @@ class CoreDataHandler: ObservableObject {
     @Published var week: [TransactionEntity] = []
     @Published var month: [TransactionEntity] = []
     @Published var all: [TransactionEntity] = []
-
+    
     private let container: NSPersistentContainer
     private var calendar = Calendar.current
     
@@ -36,16 +36,27 @@ class CoreDataHandler: ObservableObject {
     }
     
     deinit {
-        let container = NSPersistentContainer(name: "TransactionsContainer")
-        container.loadPersistentStores { (description, error) in
-            if let error = error {
-                print("error deinitializing core data. \(error)")
-            } else {
-                print("Deinitialized Core Data")
-            }
-        }
-        getEverything()
         print("Deinitializing handler.")
+        
+    }
+    
+    // Look into making a function that takes in a fiter by input from other viewModels. Lets try to make a bridge instead of an island
+    
+    func getTransaction(_ input: inout [TransactionEntity]) {
+        
+        var sort: [NSSortDescriptor] {
+            return [NSSortDescriptor(key: "date", ascending: false)]
+        }
+        
+        let genericRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+        genericRequest.sortDescriptors = sort
+        
+        do {
+            input = try container.viewContext.fetch(genericRequest)
+            print("Core Data Initialized")
+        } catch let error {
+            print("Error Fetching. \(error)")
+        }
     }
     
     func getEverything() {
@@ -65,7 +76,7 @@ class CoreDataHandler: ObservableObject {
         func sort() -> [NSSortDescriptor] {
             return [NSSortDescriptor(key: "date", ascending: false)]
         }
-
+        
         let yesterdayDateTo = calendar.startOfDay(for: Date())
         let yesterdayDateFrom = calendar.date(byAdding: .day, value: -1, to: yesterdayDateTo)
         
