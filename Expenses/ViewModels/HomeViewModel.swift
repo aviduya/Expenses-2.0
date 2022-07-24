@@ -11,16 +11,15 @@ import SwiftUI
 class HomeViewModel: ObservableObject {
     
     @Published var homeMessage: String = ""
-    
+    @Published var todayTransactions: Double = 0.0
+    @Published var differenceMessage: LocalizedStringKey = ""
+    @Published var hasNegative: Bool = false
     @Published var allTransactions: [TransactionEntity] = [] {
         didSet {
             calculateWidgets()
         }
     }
-    
-    @Published var todayTransactions: Double = 0.0
-    @Published var differenceMessage: LocalizedStringKey = ""
-    @Published var hasNegative: Bool = false
+      
     
     private var yesterdayTransaction: Double = 0.0
     private let dataManager = CoreDataHandler.shared
@@ -80,11 +79,8 @@ class HomeViewModel: ObservableObject {
         } else {
             differenceMessage = "+ $\(differenceSpendingValue.rounded(), specifier: "%.2f")"
         }
-        
-        
-        
-        
-        print(todayTransactions) 
+
+        print(allTransactions) 
         
         
     }
