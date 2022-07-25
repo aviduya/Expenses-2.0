@@ -50,6 +50,7 @@ struct HomeView: View {
             homeBottomBarSubview
             
         }
+        
         .sheet(item: $activeSheet, onDismiss: { }) { page in
             switch page {
                 
@@ -62,6 +63,7 @@ struct HomeView: View {
                 
             }
         }
+        
     }
     
     private var homeSummarySubview: some View {

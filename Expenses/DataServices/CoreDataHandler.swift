@@ -137,28 +137,6 @@ class CoreDataHandler: ObservableObject {
         }
     }
     
-    func addTransactions(
-        amount: Double?,
-        name: String,
-        bank: String,
-        merchant: String,
-        category: String,
-        date: Date) {
-            
-            let newTransaction = TransactionEntity(context: container.viewContext)
-            
-            newTransaction.id = UUID()
-            
-            newTransaction.amount = amount ?? 0.0
-            newTransaction.name = name
-            newTransaction.bank = bank
-            newTransaction.merchant = merchant
-            newTransaction.category = category
-            newTransaction.date = date
-            
-            saveData()
-        }
-    
     func deleteTransactions(_ indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
         let entity = all[index]
