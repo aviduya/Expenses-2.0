@@ -79,8 +79,6 @@ struct AddTransactionView: View {
                     }
                 }
             }
-            
-            
         }
         .alert("Complete Details", isPresented: $vm.isShowingAlert) {
             Button("OK", role: .cancel) { }
@@ -94,26 +92,22 @@ extension AddTransactionView {
             
             if model.name.isEmpty {
                 Text("Name...")
-                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
-                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+                    .addTransactionTitleStyle()
                     .opacity(0.33)
             } else {
                 
                 Text(model.name)
-                    .font(Font.system(.largeTitle, design: .default).weight(.bold))
-                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+                    .addTransactionTitleStyle()
             }
-            
             
             Text("$\(model.amount ?? 0.0, specifier: "%.2f")")
                 .font(Font.system(.largeTitle, design: .rounded).weight(.bold))
             
             Divider()
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .clipped()
         .padding(.horizontal)
-        
     }
     
     

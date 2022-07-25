@@ -14,9 +14,13 @@ extension View {
         modifier(HomeSummaryStyle(isArrayEmpty: isArrayEmpty))
     }
     
+    func addTransactionTitleStyle() -> some View {
+        modifier(AddTransactionTitleStyle())
+    }
+    
 }
 
-struct HomeSummaryStyle: ViewModifier {
+fileprivate struct HomeSummaryStyle: ViewModifier {
     
     var isArrayEmpty: Bool
     
@@ -25,6 +29,16 @@ struct HomeSummaryStyle: ViewModifier {
             .redacted(reason: isArrayEmpty ? .placeholder : [])
             .shimmering(active: isArrayEmpty)
             .font(.system(size: 35, weight: .regular, design: .rounded))
+    }
+    
+}
+
+fileprivate struct AddTransactionTitleStyle: ViewModifier {
+    
+    func body(content: Content) -> some View {
+        content
+            .font(Font.system(.largeTitle, design: .default).weight(.bold))
+            .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
     }
     
 }
