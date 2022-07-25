@@ -10,9 +10,15 @@ import SwiftUI
 struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var settings: AppSettingsViewModel
-    
-    @StateObject var dm = CoreDataHandler.shared
     @StateObject var vm = AddTransactionsViewModel()
+    
+    private var areOptionsEmpty: Bool {
+        if settings.banks.isEmpty && settings.categories.isEmpty {
+            return true
+        } else {
+            return false
+        }
+    }
     
     @State var model =
     AddTransactionsModel(
@@ -55,11 +61,11 @@ struct AddTransactionView: View {
                                 dismiss()
                             }
                     }) {
-                        Text("Save")
+                        Text(areOptionsEmpty ?  "Add a Bank & Category in Settings" : "Save Transaction")
                     }
                     .padding()
                     .buttonStyle(CustomButtonStyle())
-                    .disabled(settings.banks.isEmpty && settings.categories.isEmpty)
+                    .disabled(areOptionsEmpty)
                 }
                 .navigationTitle("Add Expense")
                 .navigationBarTitleDisplayMode(.inline)

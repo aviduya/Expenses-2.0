@@ -96,6 +96,28 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		0E072F21288E6008008FBF36 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				0E5901D228295CD5000045C2 /* YearView.swift */,
+				0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */,
+				0E5901D428296250000045C2 /* MonthView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		0E072F22288E6012008FBF36 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */,
+				0E07B6172823109B00405764 /* AppSettingsView.swift */,
+				0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */,
+				0EBBB4352800D10300F0A875 /* HomeView.swift */,
+				0E086B572889FAE80055C04A /* TransactionsListView.swift */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
 		0E086B5328891E160055C04A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,14 +141,8 @@
 		0E086B5528891E2A0055C04A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */,
-				0E5901D228295CD5000045C2 /* YearView.swift */,
-				0E5901D428296250000045C2 /* MonthView.swift */,
-				0E07B6172823109B00405764 /* AppSettingsView.swift */,
-				0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */,
-				0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */,
-				0EBBB4352800D10300F0A875 /* HomeView.swift */,
-				0E086B572889FAE80055C04A /* TransactionsListView.swift */,
+				0E072F22288E6012008FBF36 /* MainViews */,
+				0E072F21288E6008008FBF36 /* SubViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
