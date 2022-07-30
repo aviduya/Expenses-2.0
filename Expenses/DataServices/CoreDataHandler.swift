@@ -39,9 +39,7 @@ class CoreDataHandler: ObservableObject {
         print("Deinitializing handler.")
         
     }
-    
-    // Look into making a function that takes in a fiter by input from other viewModels. Lets try to make a bridge instead of an island
-    
+        
     func getTransaction(_ input: inout [TransactionEntity]) {
         
         var sort: [NSSortDescriptor] {

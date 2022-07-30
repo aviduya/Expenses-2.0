@@ -10,7 +10,6 @@ import CoreData
 
 
 
-
 class AllTransactionsViewModel: ObservableObject {
     
     @Published var page: selectedFilter = .today

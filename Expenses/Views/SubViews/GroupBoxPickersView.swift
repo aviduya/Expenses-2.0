@@ -18,7 +18,7 @@ struct GroupBoxPickersView: View {
     var selectedColor: Color = .clear
     
     var body: some View {
-        HStack {
+        VStack {
             HStack {
                 Menu(content: {
                     Section {

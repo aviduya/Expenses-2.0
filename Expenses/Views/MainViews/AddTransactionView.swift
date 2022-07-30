@@ -8,19 +8,12 @@
 import SwiftUI
 
 struct AddTransactionView: View {
+    
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var settings: AppSettingsViewModel
     @StateObject var vm = AddTransactionsViewModel()
     
-    private var areOptionsEmpty: Bool {
-        if settings.banks.isEmpty && settings.categories.isEmpty {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    @State var model =
+    @State private var model =
     AddTransactionsModel(
         amount:
             nil,
@@ -37,45 +30,24 @@ struct AddTransactionView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                VStack {
-                    
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 20) {
                     header
                     
                     formBox
                     
-                    Button(action: {
-                        vm.saveTransaction(
-                            amount:
-                                model.amount,
-                            name:
-                                model.name,
-                            bank:
-                                model.bank,
-                            merchant:
-                                model.merchant,
-                            category:
-                                model.category,
-                            date:
-                                model.date) {
-                                dismiss()
-                            }
-                    }) {
-                        Text(areOptionsEmpty ?  "Add a Bank & Category in Settings" : "Save Transaction")
-                    }
-                    .padding()
-                    .buttonStyle(CustomButtonStyle())
-                    .disabled(areOptionsEmpty)
+                    addTransactionButton
                 }
-                .navigationTitle("Add Expense")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Text("Cancel")
-                        }
+
+            }
+            .navigationTitle("Add Expense")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Cancel")
                     }
                 }
             }
@@ -83,15 +55,65 @@ struct AddTransactionView: View {
         .alert("Complete Details", isPresented: $vm.isShowingAlert) {
             Button("OK", role: .cancel) { }
         }
+        .overlay(settings.areOptionsEmpty ? emptyTransactionsView : nil)
     }
 }
 
+// MARK: Extension of AddTransactionsViwq
+
+
 extension AddTransactionView {
+    
+    // MARK: Empty transactions view
+    
+    private var emptyTransactionsView: some View {
+        VStack {
+            Text("Add an Bank & Expense Catergory in settings to get started.")
+                .font(.title)
+                .fontWeight(.bold)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
+        .ignoresSafeArea()
+        
+    }
+    
+    // MARK: Save Transactions
+    
+    private var addTransactionButton: some View {
+        
+        Button(action: {
+            vm.saveTransaction(
+                amount:
+                    model.amount,
+                name:
+                    model.name,
+                bank:
+                    model.bank,
+                merchant:
+                    model.merchant,
+                category:
+                    model.category,
+                date:
+                    model.date) {
+                        dismiss()
+                    }
+        }) {
+            Text("Save Transaction")
+        }
+        .padding()
+        .buttonStyle(CustomButtonStyle())
+        .background(in: RoundedRectangle(cornerRadius: 10))
+        
+    }
+    
+    // MARK: Header and title
+    
     private var header: some View {
         VStack(alignment: .leading) {
             
             if model.name.isEmpty {
-                Text("Name...")
+                Text("Item...")
                     .addTransactionTitleStyle()
                     .opacity(0.33)
             } else {
@@ -110,29 +132,30 @@ extension AddTransactionView {
         .padding(.horizontal)
     }
     
+    // MARK: Main transactions form
+    
     
     private var formBox: some View {
         
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 10) {
-                
-                Text("Transaction Details")
-                    .font(.subheadline)
-                    .opacity(0.30)
-                
-                InputValueField(input: $model.amount, isValidated: $vm.areFieldsValid)
-                
-                InputTextField(input: $model.name, isValidated: $vm.areFieldsValid, placeholder: "Item...")
-                
-                InputTextField(input: $model.merchant, isValidated: $vm.areFieldsValid, placeholder: "Merchant...")
-                
-                DatePickerView(date: $model.date)
-                
-                GroupBoxPickersView(categoryInput: $model.category, bankInput: $model.bank)
-            }
-            .padding()
+        VStack(alignment: .leading, spacing: 10) {
             
+            Text("Transaction Details")
+                .font(.subheadline)
+                .opacity(0.30)
+            
+            InputValueField(input: $model.amount, isValidated: $vm.areFieldsValid)
+            
+            InputTextField(input: $model.name, isValidated: $vm.areFieldsValid, placeholder: "Item...")
+            
+            InputTextField(input: $model.merchant, isValidated: $vm.areFieldsValid, placeholder: "Merchant...")
+            
+            DatePickerView(date: $model.date)
+            
+            GroupBoxPickersView(categoryInput: $model.category, bankInput: $model.bank)
         }
+        .padding()
+        
     }
+    
 }
 

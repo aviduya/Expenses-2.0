@@ -13,41 +13,18 @@ struct AppSettingsView: View {
     
     @EnvironmentObject var settings: AppSettingsViewModel
     @Environment(\.dismiss) var dismiss
-    @AppStorage(Keys.threshold.rawValue) var setThreshold: Double = 0.0
+    @AppStorage(Keys.threshold.rawValue) var userValueThreshold: Double = 0.0
     
     @State private var bank: String = ""
     @State private var category: String  = ""
     
-    @State private var subject: String = ""
-    @State private var comment: String = ""
-    @State private var name: String = ""
-    @State private var email: String = ""
-    @State private var type: FeedbackType = .bug
-    
     let material: Material = .thin
-    
-    private var regularT: Double {
-        return setThreshold
-    }
-    
-    private var thresholdStart: Double {
-        let t = setThreshold
-        return  t / 3
-    }
-    
-    private var thresholdEnd: Double {
-        let t = setThreshold
-        return t / 2
-    }
     
     init() {
         UITextView.appearance().backgroundColor = .clear
-        subject = ""
-        comment = ""
-        name = ""
-        email = ""
-        type = .bug
     }
+    
+    // MARK: Main view
     
     var body: some View {
         NavigationView {
@@ -56,34 +33,23 @@ struct AppSettingsView: View {
                     Section {
                         HStack {
                             Image(systemName: "building.columns")
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.orange)
+                                .appSettingsListStyle(color: .orange)
                             Divider()
                             bankList
                         }
                         HStack {
                             Image(systemName: "checklist")
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.green)
+                                .appSettingsListStyle(color: .green)
                             Divider()
                             categoryList
                         }
                         
                         HStack {
                             Image(systemName: "slider.horizontal.below.rectangle")
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.teal)
+                                .appSettingsListStyle(color: .teal)
                             Divider()
                             threshold
                             
-                        }
-                        
-                        HStack  {
-                            Image(systemName: "waveform.path.ecg")
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.red)
-                            Divider()
-                            feedback
                         }
                         
                     } header: {
@@ -97,7 +63,13 @@ struct AppSettingsView: View {
     }
 }
 
+
+// MARK: App Settings View extension.
+
 extension AppSettingsView {
+    
+    // MARK: Bank List view from navigation.
+    
     var bankList: some View {
         NavigationLink {
             List {
@@ -137,7 +109,11 @@ extension AppSettingsView {
         }
     }
     
+    
+    // MARK: Category list view from navigation view
+    
     var categoryList: some View {
+        
         NavigationLink {
             List {
                 Section {
@@ -180,11 +156,13 @@ extension AppSettingsView {
         }
     }
     
+    // MARK: Threshold view from navigation view.
+    
     var threshold: some View {
         NavigationLink {
             VStack {
                 
-                Text("$\(setThreshold, specifier: "%.2f")")
+                Text("$\(userValueThreshold, specifier: "%.2f")")
                     .font(.system(size: 60, weight: .bold, design: .rounded))
                 
                 
@@ -192,8 +170,14 @@ extension AppSettingsView {
                 
                 Section {
                     HStack{
-                        TextField  ("", value: $setThreshold, format: .currency(code: "usd"))
+                        TextField  ("", value: $userValueThreshold, format: .currency(code: "usd"))
                         Spacer()
+                        Button {
+                            settings.setUserValueThreshold(value: userValueThreshold)
+                        } label: {
+                            Text("Set")
+                        }
+                        
                     }
                     .padding()
                     .background(material, in: RoundedRectangle(cornerRadius: 16))
@@ -209,32 +193,23 @@ extension AppSettingsView {
                 }
                 
                 Section {
+                    
                     VStack(alignment: .leading, spacing: 10) {
+                        
                         HStack {
-                            Text("$\(thresholdStart, specifier: "%.2f")")
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
-                                .frame(width: 150, height: 100, alignment: .center)
-                                .background(RoundedRectangle(cornerRadius: 5)
-                                    .fill(LinearGradient(colors: [.primaryGreen, .secondaryGreen], startPoint: .topLeading, endPoint: .bottomTrailing))
-                                )
+                            Text("$\(settings.belowValueThreshold, specifier: "%.2f")")
+                                .appSettingsThresholdStyle(primary: .primaryGreen, secondary: .secondaryGreen)
                             Spacer()
                             VStack(alignment: .trailing) {
                                 Image(systemName: "arrow.backward")
                                 Text("Less Than")
                             }
                             .font(.title2)
-                            
-                            
-                            
                         }
+                        
                         HStack {
-                            
-                            Text("$\(thresholdEnd, specifier: "%.2f")")
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
-                                .frame(width: 150, height: 100, alignment: .center)
-                                .background(RoundedRectangle(cornerRadius: 5)
-                                    .fill(LinearGradient(colors: [.primaryOrange, .secondaryOrange], startPoint: .topLeading, endPoint: .bottomTrailing))
-                                )
+                            Text("$\(settings.aboveValueThreshold, specifier: "%.2f")")
+                                .appSettingsThresholdStyle(primary: .primaryOrange, secondary: .secondaryOrange)
                             Spacer()
                             VStack(alignment: .trailing) {
                                 Image(systemName: "arrow.left.arrow.right")
@@ -242,18 +217,12 @@ extension AppSettingsView {
                             }
                             .font(.title2)
                         }
+                        
                         HStack {
-                            
-                            Text("$\(regularT, specifier: "%.2f")")
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
-                                .frame(width: 150, height: 100, alignment: .center)
-                                .background(RoundedRectangle(cornerRadius: 5)
-                                    .fill(LinearGradient(colors: [.primaryRed, .secondaryRed], startPoint: .topLeading, endPoint: .bottomTrailing))
-                                            
-                                )
-                            
+                            Text("$\(settings.rangeOfValueThreshold, specifier: "%.2f")")
+                                .appSettingsThresholdStyle(primary: .primaryRed, secondary: .secondaryRed)
                             Spacer()
-                            VStack(alignment: .trailing) {
+                            VStack(alignment: .center) {
                                 Image(systemName: "arrow.right")
                                 Text("Greater than")
                             }
@@ -275,83 +244,6 @@ extension AppSettingsView {
             }.padding()
         } label: {
             Text("Threshold")
-        }
-    }
-    
-    var feedback: some View {
-        NavigationLink {
-            VStack(alignment: .leading) {
-                Picker("", selection: $type) {
-                    ForEach(FeedbackType.allCases, id: \.self) { t in
-                        Text(t.id)
-                            .bold()
-        
-                        
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(.vertical)
-                Section {
-                    
-                    TextField("Subject", text: $subject)
-                        .padding()
-                        .background(material, in: RoundedRectangle(cornerRadius: 16))
-                    TextField("Name", text: $name)
-                        .padding()
-                        .background(material, in: RoundedRectangle(cornerRadius: 16))
-                    TextField("Email Address", text: $email)
-                        .padding()
-                        .background(material, in: RoundedRectangle(cornerRadius: 16))
-                    
-                    
-                    
-                } header: {
-                    Text("Information")
-                        .bold()
-                        .opacity(0.33)
-                }
-                
-               Divider()
-                
-                Section {
-                    TextEditor(text: $comment)
-                        .frame(maxHeight: 100)
-                        .padding()
-                        .background(material, in: RoundedRectangle(cornerRadius: 16))
-                } header: {
-                    Text("Additional Comments")
-                        .bold()
-                        .opacity(0.33)
-                }
-                
-                Spacer()
-                
-                Button {
-                    
-                    let eventId = SentrySDK.capture(message: "[\(type.rawValue.capitalized)] \(subject)")
-                    
-                    let userFeedback = UserFeedback(eventId: eventId)
-                    userFeedback.comments = comment
-                    userFeedback.email = email
-                    userFeedback.name = name
-                    SentrySDK.capture(userFeedback: userFeedback)
-                   
-                    
-                } label: {
-                    HStack {
-                        Text("Send")
-                        Image(systemName: "paperplane")
-                    }
-                    .font(Font.system(size: 24, weight: .bold, design: .default))
-                    
-                }
-                .buttonStyle(CustomButtonStyle())
-                
-            }
-            .navigationTitle("Submit Feedback")
-            .padding()
-        } label: {
-            Text("Feedback")
         }
     }
     

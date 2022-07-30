@@ -78,6 +78,8 @@ struct DatePickerView: View {
     var body: some View {
         HStack {
             Image(systemName: "calendar")
+                .frame(maxWidth: 20, maxHeight: 20)
+                .padding(.horizontal, 5)
                 .font(.title)
             Text(convertDate(date: date))
                 .bold()

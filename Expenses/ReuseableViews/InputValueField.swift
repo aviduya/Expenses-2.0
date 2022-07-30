@@ -17,6 +17,8 @@ struct InputValueField: View {
     var body: some View {
         HStack {
             Image(systemName: "textformat.superscript")
+                .frame(maxWidth: 20, maxHeight: 20)
+                .padding(.horizontal, 10)
                 .font(.title)
             TextField("Amount...", value: $input, format: .currency(code: "usd"))
                 .keyboardType(.decimalPad)

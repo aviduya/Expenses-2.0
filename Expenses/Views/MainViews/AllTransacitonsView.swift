@@ -19,6 +19,7 @@ struct AllTransacitonsView: View {
     var body: some View {
         
         VStack {
+            
             VStack(alignment: .leading) {
                 HStack(alignment: .center) {
                     Text(vm.status)
