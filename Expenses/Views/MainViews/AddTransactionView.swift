@@ -39,6 +39,7 @@ struct AddTransactionView: View {
                     
                     formBox
                     
+                    Spacer()
                     addTransactionButton
                     
                 }

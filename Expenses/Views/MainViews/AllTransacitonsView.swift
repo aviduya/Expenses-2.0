@@ -18,74 +18,90 @@ struct AllTransacitonsView: View {
     private let material: Material = .ultraThinMaterial
     
     var body: some View {
-        
-        VStack {
-            
-            VStack(alignment: .leading) {
-                HStack(alignment: .center) {
-                    Text(vm.status)
-                        .font(Font.system(.title2, design: .default).weight(.bold))
-                    Spacer()
-                    EditButton()
-                        .foregroundColor(.themeThree)
-
-                }
+        NavigationView {
+            VStack {
                 
-                ScrollView {
-                    VStack {
-                        switch vm.page {
-                        case .today:
-                            today
-                        case .seven:
-                            week
-                        case .month:
-                            month
-                        case .year:
-                            year
+                VStack(alignment: .leading) {
+                    HStack(alignment: .center) {
+                        Text(vm.status)
+                            .font(Font.system(.title2, design: .default).weight(.bold))
+                        Spacer()
+                        
+                        if vm.page == .year {
+                            Button {
+                                vm.runRangeRequest()
+                            } label: {
+                                Text("Set Custom Filter")
+                                    .foregroundColor(.themeThree)
+                            }
+                        } else {
+                            EditButton()
+                                .foregroundColor(.themeThree)
                         }
+                        
+
                     }
                     
-                }
-                
-                HStack {
-                    Spacer()
-                    Menu {
-                        Section {
-                            Picker("Sort by", selection: $vm.page) {
-                                
-                                HStack {
-                                    Text("Today [\(dm.today.count)]")
-                                }
-                                .tag(vm.filter.today)
-                                
-                                HStack {
-                                    Text("7 Days [\(dm.week.count)]")
-                                }
-                                .tag(vm.filter.seven)
-                                
-                                HStack {
-                                    Text("Month [\(dm.month.count)]")
-                                }
-                                .tag(vm.filter.month)
-                                
-                                HStack {
-                                    Text("All Transactions [\(dm.all.count)]")
-                                }
-                                    .tag(vm.filter.year)
+                    ScrollView {
+                        VStack {
+                            switch vm.page {
+                            case .today:
+                                today
+                            case .seven:
+                                week
+                            case .month:
+                                month
+                            case .year:
+                                year
                             }
                         }
-                    } label: {
-                            Image(systemName: "square.stack.3d.up.fill")
-                                .padding(10)
-                                .background(material, in: Circle())
+                        
                     }
+                    
+                    HStack {
+                        
+                        
+                        Spacer()
+                        Menu {
+                            Section {
+                                Picker("Sort by", selection: $vm.page) {
+                                    
+                                    HStack {
+                                        Text("Today")
+                                    }
+                                    .tag(vm.filter.today)
+                                    
+                                    HStack {
+                                        Text("Last 7 Days")
+                                    }
+                                    .tag(vm.filter.seven)
+                                    
+                                    HStack {
+                                        Text("Current Month")
+                                    }
+                                    .tag(vm.filter.month)
+                                    
+                                    HStack {
+                                        Text("Custom")
+                                    }
+                                        .tag(vm.filter.year)
+                                }
+                            }
+                        } label: {
+                                Image(systemName: "line.3.horizontal.decrease.circle")
+                                .foregroundColor(.themeThree)
+                                    .padding(10)
+                                    .background(material, in: Circle())
+                        }
+                    }
+                    .font(.title2)
+                    
                 }
-                .font(.title2)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            
         }
+        
         .padding([.top, .leading, .trailing], 20)
         }
         
@@ -153,31 +169,28 @@ extension AllTransacitonsView {
     }
     
     var year: some View {
-        
-        VStack {
-            if dm.all.isEmpty {
-                EmptyView()
-            }
-            ForEach(dm.all) { t in
+            VStack {
                 
-                Section {
-                    RowView(
-                        entity: t,
-                        entities: $dm.all,
-                        onDelete: dm.deleteTransactions(_:),
-                        item: t.name ?? "",
-                        date: t.date ?? error,
-                        amount: t.amount,
-                        category: t.category ?? "")
-                } header: {
-                    HStack {
-                        Text(vm.monthDay(input:t.date ?? Date()))
-                            .bold()
-                        Spacer()
+                DatePickerView(date: $vm.startDate)
+                DatePickerView(date: $vm.endDate)
+                
+                
+                ForEach(vm.rangeOfTransactions) { t in
+                    withAnimation {
+                        RowView(
+                            entity: t,
+                            entities: $dm.all,
+                            onDelete: dm.deleteTransactions(_:),
+                            item: t.name ?? "",
+                            date: t.date ?? error,
+                            amount: t.amount,
+                            category: t.category ?? "")
                     }
+                    
                 }
             }
-        }
+        
+        
     }
 }
 

@@ -13,13 +13,27 @@ import CoreData
 class AllTransactionsViewModel: ObservableObject {
     
     @Published var page: selectedFilter = .today
+    @Published var startDate: Date = Date()
+    @Published var endDate: Date = Date()
+    @Published var rangeOfTransactions: [TransactionEntity] = []
     
+    let dataManager = CoreDataHandler.shared
+        
     enum selectedFilter: Hashable {
          case today
          case seven
          case month
          case year
      }
+    
+    func runRangeRequest() {
+        
+        let calendar = Calendar.current
+        
+        dataManager.getRangeOfTransactions(start: startDate, end: endDate, &rangeOfTransactions)
+        
+        print(calendar.startOfDay(for: Date()))
+    }
     
     var filter = selectedFilter.self
     
@@ -29,11 +43,11 @@ class AllTransactionsViewModel: ObservableObject {
         case .today:
             return "Today"
         case .seven:
-            return "7 Days"
+            return "Last 7 Days"
         case .month:
-            return "Month"
+            return "Current Month"
         case .year:
-            return "All"
+            return "Custom"
         }
     }
     
