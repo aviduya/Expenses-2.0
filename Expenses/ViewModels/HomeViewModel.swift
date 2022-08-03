@@ -13,17 +13,20 @@ class HomeViewModel: ObservableObject {
     @Published var homeMessage: String = ""
     @Published var todayTransactions: Double = 0.0
     @Published var differenceMessage: LocalizedStringKey = ""
+    @Published var mostUsedCategory: String = ""
+    @Published var mostUsedPayment: String = ""
     @Published var hasNegative: Bool = false
+
     @Published var allTransactions: [TransactionEntity] = [] {
         didSet {
             calculateWidgets()
+            print(allTransactions.count)
+            
         }
     }
-      
-    
+
     private var yesterdayTransaction: Double = 0.0
     private let dataManager = CoreDataHandler.shared
-    
 
     init() {
         
@@ -59,7 +62,11 @@ class HomeViewModel: ObservableObject {
         
         let calendar = Calendar.current
         var differenceSpendingValue: Double = 0.0
-    
+        var mostFrequentPayment: [String] = []
+        var mostFrequentCategory: [String] = []
+        
+        // MARK: Calculate the spending amount
+        
         for transaction in allTransactions {
             if calendar.isDateInToday(transaction.date ?? Date()) {
                 todayTransactions += transaction.amount
@@ -68,77 +75,30 @@ class HomeViewModel: ObservableObject {
             if calendar.isDateInYesterday(transaction.date ?? Date()) {
                 yesterdayTransaction += transaction.amount
             }
+    
+            mostFrequentPayment.append(transaction.category ?? "Error")
+            mostFrequentCategory.append(transaction.bank ?? "Error")
+
         }
         
         differenceSpendingValue = todayTransactions - yesterdayTransaction
-
+        
         if differenceSpendingValue.sign == .minus {
             hasNegative = true
-   
+            
             differenceMessage = "- $\(abs(differenceSpendingValue.rounded()), specifier: "%.2f")"
         } else {
             differenceMessage = "+ $\(differenceSpendingValue.rounded(), specifier: "%.2f")"
         }
-
+        
+        // MARK: Calculate the most used items
+        
+        mostUsedCategory = mostFrequentCategory.filtered().first ?? "None"
+        mostUsedPayment = mostFrequentPayment.filtered().first ?? "None"
+                
         print(allTransactions) 
         
         
-    }
-    
-    var spentToday: Double {
-        
-        var total = 0.0
-        
-        for transaction in dataManager.today {
-            total += transaction.amount
-        }
-        
-        return total
-    }
-    
-    var spentYesterday: Double {
-        
-        var total = 0.0
-        
-        if dataManager.yesterday.isEmpty {
-            total = 1.0
-        } else {
-            for transaction in dataManager.yesterday {
-                total += transaction.amount
-            }
-        }
-        return total
-    }
-    
-    var diffPercentage: Double {
-        let difference = spentToday - spentYesterday
-        if dataManager.yesterday.isEmpty && dataManager.today.isEmpty {
-            return 0.0
-        } else {
-            return (difference / spentYesterday) * 100.099
-            
-        }
-    }
-    
-    var topCat: String {
-        var arry: [String] = []
-        
-        for transaction in dataManager.all {
-            arry.append(transaction.category ?? "")
-            
-        }
-        
-        return arry.filtered().first ?? "No Category Recorded"
-    }
-    
-    var topPayment: String {
-        var arry: [String] = []
-        
-        for transaction in dataManager.all {
-            arry.append(transaction.bank ?? "")
-        }
-        
-        return arry.filtered().first ?? "No Payment Recorded"
     }
 }
 

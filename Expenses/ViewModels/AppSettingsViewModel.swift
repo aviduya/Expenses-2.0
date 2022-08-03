@@ -17,12 +17,6 @@ enum HapticStyle {
     
 }
 
-enum Keys: String {
-    case bank = "bank"
-    case category = "category"
-    case threshold = "threshold"
-}
-
 class AppSettingsViewModel: ObservableObject {
     
     @Published var banks: [String] = []
@@ -58,6 +52,8 @@ class AppSettingsViewModel: ObservableObject {
         let key = "threshold"
         userDefaults.set(value, forKey: key)
         calculateThresholdValues()
+        userValueTreshold =  userDefaults.object(forKey: thresholdKey) as? Double ?? 0.0
+
     }
     
     func calculateThresholdValues() {

@@ -28,15 +28,19 @@ struct AddTransactionView: View {
         date:
             Date())
     
+    // MARK: Main View
+    
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
+                    
                     header
                     
                     formBox
                     
                     addTransactionButton
+                    
                 }
 
             }
@@ -59,7 +63,7 @@ struct AddTransactionView: View {
     }
 }
 
-// MARK: Extension of AddTransactionsViwq
+// MARK: Extension of AddTransactionsView
 
 
 extension AddTransactionView {
@@ -68,7 +72,7 @@ extension AddTransactionView {
     
     private var emptyTransactionsView: some View {
         VStack {
-            Text("Add an Bank & Expense Catergory in settings to get started.")
+            Text("Add an Bank & Catergory in settings to get started.")
                 .font(.title)
                 .fontWeight(.bold)
         }

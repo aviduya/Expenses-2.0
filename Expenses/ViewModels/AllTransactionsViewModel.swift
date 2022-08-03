@@ -27,13 +27,13 @@ class AllTransactionsViewModel: ObservableObject {
         
         switch page {
         case .today:
-            return "Today's Transactions"
+            return "Today"
         case .seven:
-            return "Last 7 Days"
+            return "7 Days"
         case .month:
-            return "This Month"
+            return "Month"
         case .year:
-            return "All Transactions"
+            return "All"
         }
     }
     

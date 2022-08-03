@@ -34,6 +34,7 @@ fileprivate struct HomeSummaryStyle: ViewModifier {
     
     func body(content: Content) -> some View {
         content
+            .foregroundColor(Color.themeThree)
             .redacted(reason: isArrayEmpty ? .placeholder : [])
             .shimmering(active: isArrayEmpty)
             .font(.system(size: 35, weight: .regular, design: .rounded))

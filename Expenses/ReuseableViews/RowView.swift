@@ -13,7 +13,7 @@ struct RowView: View {
     
     @Environment(\.editMode) var editMode
     @EnvironmentObject var settings: AppSettingsViewModel
-    @AppStorage(Keys.threshold.rawValue) var setThreshold: Double = 0.0
+    @AppStorage("threshold") var setThreshold: Double = 0.0
     
     let entity: TransactionEntity
     @Binding var entities: [TransactionEntity]

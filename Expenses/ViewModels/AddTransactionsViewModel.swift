@@ -20,7 +20,6 @@ class AddTransactionsViewModel: ObservableObject {
         
     }
     
-    
     func saveTransaction(amount: Double?, name: String, bank: String, merchant: String, category: String, date: Date, _ completionHandler: () -> Void) {
         
         let generator = UINotificationFeedbackGenerator()

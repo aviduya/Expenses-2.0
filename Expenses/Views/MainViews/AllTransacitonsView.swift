@@ -11,10 +11,11 @@ struct AllTransacitonsView: View {
     @EnvironmentObject var settings: AppSettingsViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @StateObject private var dm = CoreDataHandler.shared
+    @ObservedObject private var dm = CoreDataHandler.shared
     @StateObject private var vm = AllTransactionsViewModel()
     
     private let error = Date()
+    private let material: Material = .ultraThinMaterial
     
     var body: some View {
         
@@ -25,13 +26,8 @@ struct AllTransacitonsView: View {
                     Text(vm.status)
                         .font(Font.system(.title2, design: .default).weight(.bold))
                     Spacer()
-                    Button {
-                        mode.wrappedValue.dismiss()
-                    } label: {
-                        Text("Dismiss")
-                            .font(.title3)
-
-                    }
+                    EditButton()
+                        .foregroundColor(.themeThree)
 
                 }
                 
@@ -45,14 +41,13 @@ struct AllTransacitonsView: View {
                         case .month:
                             month
                         case .year:
-                            YearView()
+                            year
                         }
                     }
                     
                 }
                 
                 HStack {
-                    EditButton()
                     Spacer()
                     Menu {
                         Section {
@@ -81,6 +76,8 @@ struct AllTransacitonsView: View {
                         }
                     } label: {
                             Image(systemName: "square.stack.3d.up.fill")
+                                .padding(10)
+                                .background(material, in: Circle())
                     }
                 }
                 .font(.title2)

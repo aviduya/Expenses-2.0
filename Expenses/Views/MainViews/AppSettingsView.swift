@@ -6,15 +6,13 @@
 //
 
 import SwiftUI
-import Sentry
-
 
 struct AppSettingsView: View {
     
     @EnvironmentObject var settings: AppSettingsViewModel
     @Environment(\.dismiss) var dismiss
-    @AppStorage(Keys.threshold.rawValue) var userValueThreshold: Double = 0.0
     
+    @State private var userValueThreshold: Double = 0.0
     @State private var bank: String = ""
     @State private var category: String  = ""
     
@@ -162,7 +160,7 @@ extension AppSettingsView {
         NavigationLink {
             VStack {
                 
-                Text("$\(userValueThreshold, specifier: "%.2f")")
+                Text("$\(settings.userValueTreshold, specifier: "%.2f")")
                     .font(.system(size: 60, weight: .bold, design: .rounded))
                 
                 
@@ -170,7 +168,7 @@ extension AppSettingsView {
                 
                 Section {
                     HStack{
-                        TextField  ("", value: $userValueThreshold, format: .currency(code: "usd"))
+                        TextField  ("\(settings.userValueTreshold)", value: $userValueThreshold, format: .currency(code: "usd"))
                         Spacer()
                         Button {
                             settings.setUserValueThreshold(value: userValueThreshold)
@@ -199,7 +197,7 @@ extension AppSettingsView {
                         HStack {
                             Text("$\(settings.belowValueThreshold, specifier: "%.2f")")
                                 .appSettingsThresholdStyle(primary: .primaryGreen, secondary: .secondaryGreen)
-                            Spacer()
+                            
                             VStack(alignment: .trailing) {
                                 Image(systemName: "arrow.backward")
                                 Text("Less Than")
@@ -210,7 +208,7 @@ extension AppSettingsView {
                         HStack {
                             Text("$\(settings.aboveValueThreshold, specifier: "%.2f")")
                                 .appSettingsThresholdStyle(primary: .primaryOrange, secondary: .secondaryOrange)
-                            Spacer()
+                        
                             VStack(alignment: .trailing) {
                                 Image(systemName: "arrow.left.arrow.right")
                                 Text("Range of")
@@ -218,10 +216,10 @@ extension AppSettingsView {
                             .font(.title2)
                         }
                         
-                        HStack {
+                        HStack(spacing: 10) {
                             Text("$\(settings.rangeOfValueThreshold, specifier: "%.2f")")
                                 .appSettingsThresholdStyle(primary: .primaryRed, secondary: .secondaryRed)
-                            Spacer()
+                        
                             VStack(alignment: .center) {
                                 Image(systemName: "arrow.right")
                                 Text("Greater than")

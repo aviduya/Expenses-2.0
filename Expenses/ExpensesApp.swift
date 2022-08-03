@@ -11,7 +11,6 @@ import Sentry
 @main
 struct ExpensesApp: App {
     @Environment(\.scenePhase) var scenePhase
-    
     @StateObject private var settings = AppSettingsViewModel()
     @StateObject private var dm = CoreDataHandler.shared
     
@@ -51,9 +50,16 @@ struct ExpensesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .environmentObject(settings)
-                .environmentObject(dm)
+            ZStack {
+                Rectangle()
+                    .fill(Color.appTheme)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .ignoresSafeArea()
+                HomeView()
+                    .environmentObject(settings)
+                    .environmentObject(dm)
+            }
+            
         }
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {

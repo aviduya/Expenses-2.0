@@ -10,7 +10,7 @@ import SwiftUI
 struct CardView: View {
     
     @EnvironmentObject var settings: AppSettingsViewModel
-    @AppStorage(Keys.threshold.rawValue) var setThreshold: Double = 0.0
+    @AppStorage("threshold") var setThreshold: Double = 0.0
     
     @State var item: String
     @State var date: Date

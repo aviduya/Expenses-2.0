@@ -33,14 +33,12 @@ struct HomeView: View {
         .padding(10)
         .sheet(item: $activeSheet) { page in
             switch page {
-                
             case .all:
                 AllTransacitonsView()
             case .settings:
                 AppSettingsView()
             case .add:
                 AddTransactionView()
-                
             }
         }
         
@@ -61,6 +59,7 @@ extension HomeView {
                 .bold()
                 .opacity(0.66)
             Text(vm.homeMessage)
+                .foregroundColor(Color.themeThree)
                 .font(Font.system(.largeTitle, design: .default).weight(.bold))
         }
     }
@@ -91,12 +90,12 @@ extension HomeView {
                 Text("Top Category")
                     .font(.headline)
                     .opacity(0.5)
-                Text(vm.topCat)
+                Text(vm.mostUsedPayment)
                     .homeSummaryStyle(for: vm.allTransactions.isEmpty)
                 Text("Most Used payment")
                     .font(.headline)
                     .opacity(0.5)
-                Text(vm.topPayment)
+                Text(vm.mostUsedCategory)
                     .homeSummaryStyle(for: vm.allTransactions.isEmpty)
             }
             
@@ -130,7 +129,7 @@ extension HomeView {
                         .padding(10)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .tabViewStyle(PageTabViewStyle())
             }
         }
     }
@@ -147,7 +146,7 @@ extension HomeView {
                 Button(action: {
                     activeSheet = .settings
                 }) {
-                    Label("Settings", systemImage: "person.text.rectangle")
+                    Label("Settings", systemImage: "")
                 }
             }
         } label: {
@@ -155,7 +154,7 @@ extension HomeView {
                 .font(.system(size: 16, weight: .bold))
                 .padding()
                 .background(material, in: Circle())
-                .foregroundColor(.white)
+                .foregroundColor(.themeThree)
         }
     }
     
@@ -172,7 +171,7 @@ extension HomeView {
                     Text("View All")
                 }
                 .font(.system(size: 18, weight: .bold))
-                .foregroundColor(.white)
+                .foregroundColor(.themeThree)
             }
             .padding()
             .background(material, in: RoundedRectangle(cornerRadius: 10))
@@ -183,7 +182,7 @@ extension HomeView {
                     Text("Add a transaction")
                 }
                 .font(.system(size: 18, weight: .bold))
-                .foregroundColor(.white)
+                .foregroundColor(.themeThree)
             }
             .padding()
             .background(material, in: RoundedRectangle(cornerRadius: 10))
