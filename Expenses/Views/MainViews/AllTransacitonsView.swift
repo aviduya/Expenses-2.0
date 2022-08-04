@@ -11,7 +11,7 @@ struct AllTransacitonsView: View {
     @EnvironmentObject var settings: AppSettingsViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @ObservedObject private var dm = CoreDataHandler.shared
+    @StateObject private var dm = CoreDataHandler.shared
     @StateObject private var vm = AllTransactionsViewModel()
     
     private let error = Date()
@@ -20,96 +20,100 @@ struct AllTransacitonsView: View {
     var body: some View {
         NavigationView {
             VStack {
-                
                 VStack(alignment: .leading) {
-                    HStack(alignment: .center) {
-                        Text(vm.status)
-                            .font(Font.system(.title2, design: .default).weight(.bold))
-                        Spacer()
-                        
-                        if vm.page == .year {
-                            Button {
-                                vm.runRangeRequest()
-                            } label: {
-                                Text("Set Custom Filter")
-                                    .foregroundColor(.themeThree)
-                            }
-                        } else {
-                            EditButton()
-                                .foregroundColor(.themeThree)
-                        }
-                        
-
-                    }
+                    header
                     
-                    ScrollView {
-                        VStack {
-                            switch vm.page {
-                            case .today:
-                                today
-                            case .seven:
-                                week
-                            case .month:
-                                month
-                            case .year:
-                                year
-                            }
-                        }
-                        
-                    }
+                    scrollBody
                     
-                    HStack {
-                        
-                        
-                        Spacer()
-                        Menu {
-                            Section {
-                                Picker("Sort by", selection: $vm.page) {
-                                    
-                                    HStack {
-                                        Text("Today")
-                                    }
-                                    .tag(vm.filter.today)
-                                    
-                                    HStack {
-                                        Text("Last 7 Days")
-                                    }
-                                    .tag(vm.filter.seven)
-                                    
-                                    HStack {
-                                        Text("Current Month")
-                                    }
-                                    .tag(vm.filter.month)
-                                    
-                                    HStack {
-                                        Text("Custom")
-                                    }
-                                        .tag(vm.filter.year)
-                                }
-                            }
-                        } label: {
-                                Image(systemName: "line.3.horizontal.decrease.circle")
-                                .foregroundColor(.themeThree)
-                                    .padding(10)
-                                    .background(material, in: Circle())
-                        }
-                    }
-                    .font(.title2)
-                    
+                    footer
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                
             }
         }
-        
         .padding([.top, .leading, .trailing], 20)
-        }
-        
     }
+}
 
-
+// MARK: Extension of AllTransactionView()
 
 extension AllTransacitonsView {
+    
+    var header: some View {
+        HStack(alignment: .center) {
+            Text(vm.status)
+                .font(Font.system(.title2, design: .default).weight(.bold))
+            Spacer()
+            if vm.page == .year {
+                Button {
+                    vm.runRangeRequest()
+                } label: {
+                    Text("Set Custom Filter")
+                        .foregroundColor(.themeThree)
+                }
+            } else {
+                EditButton()
+                    .foregroundColor(.themeThree)
+            }
+            
+            
+        }
+    }
+    
+    var scrollBody: some View {
+        ScrollView(showsIndicators: false) {
+            VStack {
+                switch vm.page {
+                case .today:
+                    today
+                case .seven:
+                    week
+                case .month:
+                    month
+                case .year:
+                    year
+                }
+            }
+            
+        }
+    }
+    
+    var footer: some View {
+        HStack {
+            Spacer()
+            Menu {
+                Section {
+                    Picker("Sort by", selection: $vm.page) {
+                        
+                        HStack {
+                            Text("Today")
+                        }
+                        .tag(vm.filter.today)
+                        
+                        HStack {
+                            Text("Last 7 Days")
+                        }
+                        .tag(vm.filter.seven)
+                        
+                        HStack {
+                            Text("Current Month")
+                        }
+                        .tag(vm.filter.month)
+                        
+                        HStack {
+                            Text("Custom")
+                        }
+                        .tag(vm.filter.year)
+                    }
+                }
+            } label: {
+                Image(systemName: "line.3.horizontal.decrease.circle")
+                    .foregroundColor(.themeThree)
+                    .padding(10)
+                    .background(material, in: Circle())
+            }
+        }
+        .font(.title2)
+    }
     
     var today: some View {
         
@@ -126,8 +130,8 @@ extension AllTransacitonsView {
                     date: t.date ?? error,
                     amount: t.amount,
                     category: t.category ?? "")
-        }
-        
+            }
+            
         }
     }
     
@@ -146,7 +150,7 @@ extension AllTransacitonsView {
                     date: t.date ?? error,
                     amount: t.amount,
                     category: t.category ?? "")
-        }
+            }
         }
     }
     
@@ -169,25 +173,25 @@ extension AllTransacitonsView {
     }
     
     var year: some View {
-            VStack {
-                
-                DatePickerView(date: $vm.startDate)
-                DatePickerView(date: $vm.endDate)
-                
-                ForEach(vm.rangeOfTransactions) { t in
-                    withAnimation {
-                        RowView(
-                            entity: t,
-                            entities: $dm.all,
-                            onDelete: dm.deleteTransactions(_:),
-                            item: t.name ?? "",
-                            date: t.date ?? error,
-                            amount: t.amount,
-                            category: t.category ?? "")
-                    }
-                    
+        VStack {
+            
+            DatePickerView(date: $vm.startDate)
+            DatePickerView(date: $vm.endDate)
+            
+            ForEach(vm.rangeOfTransactions) { t in
+                withAnimation {
+                    RowView(
+                        entity: t,
+                        entities: $dm.all,
+                        onDelete: dm.deleteTransactions(_:),
+                        item: t.name ?? "",
+                        date: t.date ?? error,
+                        amount: t.amount,
+                        category: t.category ?? "")
                 }
+                
             }
+        }
         
         
     }
