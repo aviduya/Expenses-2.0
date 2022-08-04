@@ -11,8 +11,10 @@ struct AllTransacitonsView: View {
     @EnvironmentObject var settings: AppSettingsViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @StateObject private var dm = CoreDataHandler.shared
+    @StateObject private var dm: CoreDataHandler = .shared
     @StateObject private var vm = AllTransactionsViewModel()
+    
+    @State private var isShowing: Bool = true
     
     private let error = Date()
     private let material: Material = .ultraThinMaterial
@@ -51,7 +53,11 @@ extension AllTransacitonsView {
             Spacer()
             if vm.page == .custom {
                 Button {
-                    vm.runRangeRequest()
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        vm.runRangeRequest()
+                        isShowing = false
+                    }
+                    
                 } label: {
                     Text("Set Custom Filter")
                         .foregroundColor(.themeThree)
@@ -91,35 +97,50 @@ extension AllTransacitonsView {
         HStack {
             Spacer()
             Menu {
-                Section {
-                    Picker("Sort by", selection: $vm.page) {
-                        
-                        HStack {
-                            Text("Today")
+                withAnimation {
+                    Section {
+                        Picker("Sort by", selection: $vm.page) {
+                            
+                            HStack {
+                                Text("Today")
+                            }
+                            .tag(vm.filter.today)
+                            
+                            HStack {
+                                Text("Last 7 Days")
+                            }
+                            .tag(vm.filter.seven)
+                            
+                            HStack {
+                                Text("Current Month")
+                            }
+                            .tag(vm.filter.month)
+                            
+                            HStack {
+                                Text("Custom")
+                            }
+                            .tag(vm.filter.custom)
                         }
-                        .tag(vm.filter.today)
-                        
-                        HStack {
-                            Text("Last 7 Days")
-                        }
-                        .tag(vm.filter.seven)
-                        
-                        HStack {
-                            Text("Current Month")
-                        }
-                        .tag(vm.filter.month)
-                        
-                        HStack {
-                            Text("Custom")
-                        }
-                        .tag(vm.filter.custom)
                     }
                 }
+                
             } label: {
-                Image(systemName: "line.3.horizontal.decrease.circle")
+                
+            
+                    HStack {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            
+                        Text(vm.status)
+                    }
+                
                     .foregroundColor(.themeThree)
                     .padding(10)
-                    .background(material, in: Circle())
+                    .background(material, in: Capsule())
+                    .shadow(radius: 10)
+                    
+                
+                
+                
             }
         }
         .font(.title2)
@@ -181,9 +202,39 @@ extension AllTransacitonsView {
     
     var custom: some View {
         VStack {
+            VStack {
+                HStack {
+                    Text("Edit Date Range")
+                    Spacer()
+                    Image(systemName: isShowing ? "chevron.right.circle.fill" : "chevron.right.circle")
+                        .font(.system(size: 20))
+                        .onTapGesture {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                isShowing.toggle()
+                            }
+                            
+                        }
+                        .rotationEffect(.degrees(
+                            isShowing ? 90 : 0
+                        ))
+                }
+                
+                if isShowing == true {
+                    
+                    HStack {
+                        DateRangePickerView(date: $vm.startDate)
+                        Spacer()
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 20))
+                        Spacer()
+                        DateRangePickerView(date: $vm.endDate)
+   
+                    }
+                }
+            }
+            .padding()
+            .background(material, in: RoundedRectangle(cornerRadius: 14))
             
-            DatePickerView(date: $vm.startDate)
-            DatePickerView(date: $vm.endDate)
             
             ForEach(vm.rangeOfTransactions) { t in
                 withAnimation {

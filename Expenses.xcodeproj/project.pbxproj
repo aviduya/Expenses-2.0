@@ -21,8 +21,6 @@
 		0E1C4B05287A388200DE127C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C4B04287A388200DE127C /* HomeModel.swift */; };
 		0E28470E2755CD52006CD281 /* AppSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppSettingsViewModel.swift */; };
 		0E5901D128287A75000045C2 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5901D028287A75000045C2 /* ColorExtensions.swift */; };
-		0E5901D328295CD5000045C2 /* YearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5901D228295CD5000045C2 /* YearView.swift */; };
-		0E5901D528296250000045C2 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5901D428296250000045C2 /* MonthView.swift */; };
 		0E5C762D2808C513006E4D02 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5C762C2808C513006E4D02 /* HomeViewModel.swift */; };
 		0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */; };
 		0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68B274F13C200F10D5C /* ExpensesApp.swift */; };
@@ -55,8 +53,6 @@
 		0E1C4B04287A388200DE127C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		0E28470D2755CD52006CD281 /* AppSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewModel.swift; sourceTree = "<group>"; };
 		0E5901D028287A75000045C2 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
-		0E5901D228295CD5000045C2 /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
-		0E5901D428296250000045C2 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		0E5C762C2808C513006E4D02 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBoxPickersView.swift; sourceTree = "<group>"; };
 		0E83B688274F13C200F10D5C /* Expn.se.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expn.se.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,9 +93,7 @@
 		0E072F21288E6008008FBF36 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				0E5901D228295CD5000045C2 /* YearView.swift */,
 				0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */,
-				0E5901D428296250000045C2 /* MonthView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -302,8 +296,6 @@
 				0E0ED6632813C48200A318E6 /* InputTextField.swift in Sources */,
 				0EA75E9F28222943005DCB14 /* ShimmerModifier.swift in Sources */,
 				0E977D1A288A8998000BA21F /* CardView.swift in Sources */,
-				0E5901D328295CD5000045C2 /* YearView.swift in Sources */,
-				0E5901D528296250000045C2 /* MonthView.swift in Sources */,
 				0E0ED6652813C62400A318E6 /* RowView.swift in Sources */,
 				0EB9EE2B281A105B00B68520 /* ArrayExtensions.swift in Sources */,
 				0E0ED65D28136ACD00A318E6 /* DateExtensions.swift in Sources */,

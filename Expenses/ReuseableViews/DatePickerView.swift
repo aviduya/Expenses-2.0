@@ -107,3 +107,30 @@ struct DatePickerView: View {
     }
     
 }
+
+struct DateRangePickerView: View {
+    let material: Material = .thin
+
+    @Binding var date: Date
+    
+    var body: some View {
+        NavigationLink(destination: CalendarView(input: $date)) {
+            HStack {
+                Text(convertDate(date))
+                    .foregroundColor(.themeThree)
+            }
+            .padding(10)
+            .background(material, in: RoundedRectangle(cornerRadius: 14))
+            .shadow(radius: 10)
+        }
+    }
+    
+    func convertDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "MM/dd/yyyy"
+        
+        return formatter.string(from: date)
+    }
+    
+}
