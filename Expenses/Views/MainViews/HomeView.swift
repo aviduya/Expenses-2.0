@@ -150,7 +150,7 @@ extension HomeView {
                 }
             }
         } label: {
-            Image(systemName: "bolt.fill")
+            Image(systemName: "ellipsis")
                 .font(.system(size: 16, weight: .bold))
                 .padding()
                 .background(material, in: Circle())

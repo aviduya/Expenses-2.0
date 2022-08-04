@@ -174,7 +174,6 @@ extension AllTransacitonsView {
                 DatePickerView(date: $vm.startDate)
                 DatePickerView(date: $vm.endDate)
                 
-                
                 ForEach(vm.rangeOfTransactions) { t in
                     withAnimation {
                         RowView(

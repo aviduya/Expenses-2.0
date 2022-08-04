@@ -12,10 +12,10 @@ class CoreDataHandler: ObservableObject {
     
     static let shared = CoreDataHandler()
     
-    @Published var yesterday: [TransactionEntity] = []
-    @Published var today: [TransactionEntity] = []
-    @Published var week: [TransactionEntity] = []
-    @Published var month: [TransactionEntity] = []
+    @Published private(set) var yesterday: [TransactionEntity] = []
+    @Published private(set) var today: [TransactionEntity] = []
+    @Published private(set) var week: [TransactionEntity] = []
+    @Published private(set) var month: [TransactionEntity] = []
     @Published var all: [TransactionEntity] = []
     
     private let container: NSPersistentContainer
@@ -35,11 +35,29 @@ class CoreDataHandler: ObservableObject {
         
     }
     
-    deinit {
-        print("Deinitializing handler.")
+    func getEverything() {
         
+        let yesterdayDateTo = calendar.startOfDay(for: Date())
+        let yesterdayDateFrom = calendar.date(byAdding: .day, value: -1, to: yesterdayDateTo)
+        
+        let todayDateFrom = calendar.startOfDay(for: Date())
+        let todayDateTo = calendar.date(byAdding: .day, value: 1, to: todayDateFrom)
+        
+        let weekDateFrom = calendar.startOfDay(for: Date().startOfWeek())
+        let weekDateTo = calendar.date(byAdding: .day, value: 7,  to: weekDateFrom)
+        
+        let monthDateFrom = calendar.startOfDay(for: Date().getThisMonthStart()!)
+        let monthDateTo = Date().getThisMonthEnd()
+        
+        getTransaction(&all)
+        getRangeOfTransactions(start: todayDateFrom, end: todayDateTo ?? Date(), &today)
+        getRangeOfTransactions(start: yesterdayDateFrom  ?? Date(), end: yesterdayDateTo, &yesterday)
+        getRangeOfTransactions(start: weekDateFrom, end: weekDateTo ?? Date() , &week)
+        getRangeOfTransactions(start: monthDateFrom, end: monthDateTo ?? Date(), &month)
+        print("Core Data Initialized")
+       
     }
-        
+
     func getTransaction(_ input: inout [TransactionEntity]) {
         
         var sort: [NSSortDescriptor] {
@@ -95,84 +113,6 @@ class CoreDataHandler: ObservableObject {
             print("Error Fetching. \(error)")
         }
         
-    }
-    
-    func getEverything() {
-        
-        func fromPredicate(dateFrom: Date) -> NSPredicate {
-            return NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
-        }
-        
-        func toPredicate(dateTo: Date?) -> NSPredicate {
-            return NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
-        }
-        
-        func compound(from: NSPredicate, to: NSPredicate) -> NSCompoundPredicate {
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [from, to])
-        }
-        
-        func sort() -> [NSSortDescriptor] {
-            return [NSSortDescriptor(key: "date", ascending: false)]
-        }
-        
-        let yesterdayDateTo = calendar.startOfDay(for: Date())
-        let yesterdayDateFrom = calendar.date(byAdding: .day, value: -1, to: yesterdayDateTo)
-        
-        let todayDateFrom = calendar.startOfDay(for: Date())
-        let todayDateTo = calendar.date(byAdding: .day, value: 1, to: todayDateFrom)
-        
-        let weekDateFrom = calendar.startOfDay(for: Date().startOfWeek())
-        let weekDateTo = calendar.date(byAdding: .day, value: 7,  to: weekDateFrom)
-        
-        let monthDateFrom = calendar.startOfDay(for: Date().getThisMonthStart()!)
-        let monthDateTo = Date().getThisMonthEnd()
-        
-        let yesterdayFromPredicate = fromPredicate(dateFrom: yesterdayDateFrom!)
-        let yesterdayPredicate = toPredicate(dateTo: yesterdayDateTo)
-        
-        let todayFromPredicate = fromPredicate(dateFrom: todayDateFrom)
-        let todayPredicate = toPredicate(dateTo: todayDateTo!)
-        
-        let weekFromPredicate = fromPredicate(dateFrom: weekDateFrom)
-        let weekPredicate = toPredicate(dateTo: weekDateTo!)
-        
-        let monthFromPredicate = fromPredicate(dateFrom: monthDateFrom)
-        let monthPredicate = toPredicate(dateTo: monthDateTo!)
-        
-        let allRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
-        let yesterdayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
-        let todayRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
-        let weekRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
-        let monthRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
-        
-        let yesterdayDatePredicate = compound(from: yesterdayFromPredicate, to: yesterdayPredicate)
-        yesterdayRequest.predicate = yesterdayDatePredicate
-        
-        let todayDatePredicate = compound(from: todayFromPredicate, to: todayPredicate)
-        todayRequest.predicate = todayDatePredicate
-        
-        let weekDatePredicate = compound(from: weekFromPredicate, to: weekPredicate)
-        weekRequest.predicate = weekDatePredicate
-        
-        let monthDatePredicate = compound(from: monthFromPredicate, to: monthPredicate)
-        monthRequest.predicate = monthDatePredicate
-        
-        allRequest.sortDescriptors = sort()
-        yesterdayRequest.sortDescriptors = sort()
-        todayRequest.sortDescriptors = sort()
-        weekRequest.sortDescriptors = sort()
-        monthRequest.sortDescriptors = sort()
-        
-        do  {
-            all = try container.viewContext.fetch(allRequest)
-            yesterday = try container.viewContext.fetch(yesterdayRequest)
-            today = try container.viewContext.fetch(todayRequest)
-            week = try container.viewContext.fetch(weekRequest)
-            month = try container.viewContext.fetch(monthRequest)
-            print("Core Data Initialized")
-        } catch let error {
-            print("Error Fetching. \(error)")
-        }
     }
     
     func deleteTransactions(_ indexSet: IndexSet) {
