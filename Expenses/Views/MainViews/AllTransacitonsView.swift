@@ -23,7 +23,11 @@ struct AllTransacitonsView: View {
                 VStack(alignment: .leading) {
                     header
                     
-                    scrollBody
+                    if dm.all.isEmpty {
+                        EmptyView()
+                    } else {
+                        scrollBody
+                    }
                     
                     footer
                 }
@@ -38,12 +42,14 @@ struct AllTransacitonsView: View {
 
 extension AllTransacitonsView {
     
+    // MARK: Header of View
+    
     var header: some View {
         HStack(alignment: .center) {
             Text(vm.status)
                 .font(Font.system(.title2, design: .default).weight(.bold))
             Spacer()
-            if vm.page == .year {
+            if vm.page == .custom {
                 Button {
                     vm.runRangeRequest()
                 } label: {
@@ -59,6 +65,8 @@ extension AllTransacitonsView {
         }
     }
     
+    // MARK: Scrolling Body
+    
     var scrollBody: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -69,13 +77,15 @@ extension AllTransacitonsView {
                     week
                 case .month:
                     month
-                case .year:
-                    year
+                case .custom:
+                    custom
                 }
             }
             
         }
     }
+    
+    // MARK: Footer
     
     var footer: some View {
         HStack {
@@ -102,7 +112,7 @@ extension AllTransacitonsView {
                         HStack {
                             Text("Custom")
                         }
-                        .tag(vm.filter.year)
+                        .tag(vm.filter.custom)
                     }
                 }
             } label: {
@@ -115,12 +125,10 @@ extension AllTransacitonsView {
         .font(.title2)
     }
     
+    // MARK: Today List View
+    
     var today: some View {
-        
         VStack {
-            if dm.today.isEmpty {
-                EmptyView()
-            }
             ForEach(dm.today) { t in
                 RowView(
                     entity: t,
@@ -135,12 +143,10 @@ extension AllTransacitonsView {
         }
     }
     
+    // MARK: Week List View
+    
     var week: some View {
-        
         VStack {
-            if dm.week.isEmpty {
-                EmptyView()
-            }
             ForEach(dm.week) { t in
                 RowView(
                     entity: t,
@@ -154,11 +160,10 @@ extension AllTransacitonsView {
         }
     }
     
+    // MARK: Month List View
+    
     var month: some View {
         VStack {
-            if dm.month.isEmpty {
-                EmptyView()
-            }
             ForEach(dm.month) { t in
                 RowView(
                     entity: t,
@@ -172,7 +177,9 @@ extension AllTransacitonsView {
         }
     }
     
-    var year: some View {
+    // MARK: Custom Range List View
+    
+    var custom: some View {
         VStack {
             
             DatePickerView(date: $vm.startDate)

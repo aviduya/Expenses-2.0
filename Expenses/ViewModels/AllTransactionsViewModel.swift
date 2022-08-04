@@ -23,7 +23,7 @@ class AllTransactionsViewModel: ObservableObject {
          case today
          case seven
          case month
-         case year
+         case custom
      }
     
     func runRangeRequest() {
@@ -46,7 +46,7 @@ class AllTransactionsViewModel: ObservableObject {
             return "Last 7 Days"
         case .month:
             return "Current Month"
-        case .year:
+        case .custom:
             return "Custom"
         }
     }
