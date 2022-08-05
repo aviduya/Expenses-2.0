@@ -13,6 +13,8 @@ struct AddTransactionView: View {
     @EnvironmentObject var settings: AppSettingsViewModel
     @StateObject var vm = AddTransactionsViewModel()
     
+    
+    @State private var counter: Int = 0
     @State private var model =
     AddTransactionsModel(
         amount:
@@ -43,7 +45,7 @@ struct AddTransactionView: View {
                     addTransactionButton
                     
                 }
-
+                
             }
             .navigationTitle("Add Expense")
             .navigationBarTitleDisplayMode(.inline)
@@ -53,6 +55,7 @@ struct AddTransactionView: View {
                         dismiss()
                     } label: {
                         Text("Cancel")
+                            .foregroundColor(.red)
                     }
                 }
             }
@@ -108,7 +111,9 @@ extension AddTransactionView {
         }
         .padding()
         .buttonStyle(CustomButtonStyle())
+        .shadow(radius: 10)
         .background(in: RoundedRectangle(cornerRadius: 10))
+        
         
     }
     
@@ -119,15 +124,18 @@ extension AddTransactionView {
             
             if model.name.isEmpty {
                 Text("Item...")
+                    .foregroundColor(.themeThree)
                     .addTransactionTitleStyle()
                     .opacity(0.33)
             } else {
                 
                 Text(model.name)
+                    .foregroundColor(.themeThree)
                     .addTransactionTitleStyle()
             }
             
             Text("$\(model.amount ?? 0.0, specifier: "%.2f")")
+                .foregroundColor(.themeThree)
                 .font(Font.system(.largeTitle, design: .rounded).weight(.bold))
             
             Divider()
@@ -149,14 +157,21 @@ extension AddTransactionView {
                 .opacity(0.30)
             
             InputValueField(input: $model.amount, isValidated: $vm.areFieldsValid)
+                .foregroundColor(.themeThree)
+            
             
             InputTextField(input: $model.name, isValidated: $vm.areFieldsValid, placeholder: "Item...")
+                .foregroundColor(.themeThree)
             
             InputTextField(input: $model.merchant, isValidated: $vm.areFieldsValid, placeholder: "Merchant...")
+                .foregroundColor(.themeThree)
             
             DatePickerView(date: $model.date)
+                .foregroundColor(.themeThree)
             
             GroupBoxPickersView(categoryInput: $model.category, bankInput: $model.bank)
+                .foregroundColor(.themeThree)
+            
         }
         .padding()
         

@@ -97,9 +97,9 @@ extension AllTransacitonsView {
         HStack {
             Spacer()
             Menu {
-                withAnimation {
                     Section {
                         Picker("Sort by", selection: $vm.page) {
+                            
                             
                             HStack {
                                 Text("Today")
@@ -122,25 +122,21 @@ extension AllTransacitonsView {
                             .tag(vm.filter.custom)
                         }
                     }
-                }
-                
             } label: {
-                
-            
                     HStack {
                         Image(systemName: "line.3.horizontal.decrease.circle")
-                            
+                        
                         Text(vm.status)
-                    }
-                
+                }
+                    .id("Title" + vm.status)
                     .foregroundColor(.themeThree)
                     .padding(10)
                     .background(material, in: Capsule())
                     .shadow(radius: 10)
-                    
-                
-                
-                
+                                    
+            }
+            .transaction { transaction in
+                transaction.animation = nil
             }
         }
         .font(.title2)
@@ -208,6 +204,7 @@ extension AllTransacitonsView {
                     Spacer()
                     Image(systemName: isShowing ? "chevron.right.circle.fill" : "chevron.right.circle")
                         .font(.system(size: 20))
+                        .foregroundColor(.themeThree)
                         .onTapGesture {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 isShowing.toggle()
@@ -237,7 +234,7 @@ extension AllTransacitonsView {
             
             
             ForEach(vm.rangeOfTransactions) { t in
-                withAnimation {
+                
                     RowView(
                         entity: t,
                         entities: $dm.all,
@@ -246,7 +243,8 @@ extension AllTransacitonsView {
                         date: t.date ?? error,
                         amount: t.amount,
                         category: t.category ?? "")
-                }
+                    .transition(.move(edge: .bottom))
+                
                 
             }
         }
