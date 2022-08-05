@@ -32,6 +32,8 @@ struct InputTextField: View {
     var body: some View {
         HStack {
             Image(systemName: icon)
+                .frame(maxWidth: 20, maxHeight: 20)
+                .padding(.horizontal, 10)
                 .font(.title)
             TextField(placeholder, text: $input)
                 .font(Font.headline.weight(.bold))

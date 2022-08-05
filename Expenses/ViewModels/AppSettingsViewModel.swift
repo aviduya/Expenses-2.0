@@ -17,37 +17,58 @@ enum HapticStyle {
     
 }
 
-enum FeedbackType: String, CaseIterable, Identifiable {
-    case bug = "Bug"
-    case feature = "Feature"
-    case tweak = "Tweak"
-    case other = "Other"
-    
-    var id: String {
-        self.rawValue
-    }
-    
-}
-
-enum Keys: String {
-    case bank = "bank"
-    case category = "category"
-    case threshold = "threshold"
-}
-
-class AppSettings: ObservableObject {
+class AppSettingsViewModel: ObservableObject {
     
     @Published var banks: [String] = []
     @Published var categories: [String] = []
+    @Published var userValueTreshold: Double = 0.0
+    @Published var belowValueThreshold: Double = 0.0
+    @Published var rangeOfValueThreshold: Double = 0.0
+    @Published var aboveValueThreshold: Double = 0.0
+    
     let userDefaults = UserDefaults.standard
     
-    let bankKey = Keys.bank.rawValue
-    let categoryKey = Keys.category.rawValue
-
+    let bankKey = "bank"
+    let categoryKey = "category"
+    let thresholdKey = "threshold"
     
+    var areOptionsEmpty: Bool {
+        if banks.isEmpty && categories.isEmpty {
+            return true
+        } else {
+            return false
+        }
+    }
+
     init() {
+        
+        calculateThresholdValues()
         banks = userDefaults.object(forKey: bankKey) as? [String] ?? []
         categories = userDefaults.object(forKey: categoryKey) as? [String] ?? []
+        userValueTreshold =  userDefaults.object(forKey: thresholdKey) as? Double ?? 0.0
+    }
+    
+    func setUserValueThreshold(value: Double) {
+        let key = "threshold"
+        userDefaults.set(value, forKey: key)
+        calculateThresholdValues()
+        userValueTreshold =  userDefaults.object(forKey: thresholdKey) as? Double ?? 0.0
+
+    }
+    
+    func calculateThresholdValues() {
+        
+        let value = userDefaults.object(forKey: thresholdKey) as? Double ?? 0.0
+        
+        // Return rangeOfValueThreshold
+        rangeOfValueThreshold = value
+        
+        //Return belowValue
+        belowValueThreshold = value / 3
+        
+        //Return aboveValue
+        aboveValueThreshold = value / 2
+        
     }
     
     func addElement(new: String, element: inout [String], key: String) {
@@ -55,18 +76,6 @@ class AppSettings: ObservableObject {
             element.append(new)
             userDefaults.set(element, forKey: key)
         }
-        
-    }
-    
-    func submitFeedback(subject: String, comment: String, email: String, type: FeedbackType) {
-        let eventID = SentrySDK.capture(message: subject)
-        let feedback = UserFeedback(eventId: eventID)
-        
-        feedback.comments = comment
-        feedback.email = email
-        feedback.name = type.rawValue
-        
-        SentrySDK.capture(userFeedback: feedback)
         
     }
     

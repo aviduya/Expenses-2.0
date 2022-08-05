@@ -15,7 +15,7 @@ struct EmptyView: View {
             HStack {
                 Spacer()
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("To get started.")
+                    Text("To get started")
                     Text("Add a Transaction")
                         .opacity(0.33)
                 }

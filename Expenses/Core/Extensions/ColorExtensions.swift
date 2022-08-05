@@ -15,4 +15,12 @@ extension Color {
     static let secondaryOrange = Color("SecondaryOrange")
     static let primaryRed = Color("PrimaryRed")
     static let secondaryRed = Color("SecondaryRed")
+    
+    static let appTheme = Color("appTheme")
+    static let themeOne = Color("themeOne")
+    static let themeTwo = Color("themeTwo")
+    static let themeThree = Color("themeThree")
+    static let themeFour = Color("themeFour")
+    
+    
 }

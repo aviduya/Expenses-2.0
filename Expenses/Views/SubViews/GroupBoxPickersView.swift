@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroupBoxPickersView: View {
     
-    @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject var settings: AppSettingsViewModel
     
     //TODO: Have the buttons disbales if categories and banks are empty. 
     
@@ -18,7 +18,7 @@ struct GroupBoxPickersView: View {
     var selectedColor: Color = .clear
     
     var body: some View {
-        HStack {
+        VStack {
             HStack {
                 Menu(content: {
                     Section {
