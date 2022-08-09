@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import UIKit
+import CoreLocation
 
 class AddTransactionsViewModel: ObservableObject {
     
@@ -20,7 +21,7 @@ class AddTransactionsViewModel: ObservableObject {
         
     }
     
-    func saveTransaction(amount: Double?, name: String, bank: String, merchant: String, category: String, date: Date, _ completionHandler: () -> Void) {
+    func saveTransaction(amount: Double?, name: String, bank: String, merchant: String, category: String, date: Date, coordinate: CLLocationCoordinate2D, _ completionHandler: () -> Void) {
         
         let generator = UINotificationFeedbackGenerator()
         
@@ -51,6 +52,8 @@ class AddTransactionsViewModel: ObservableObject {
             newTransaction.merchant = merchant
             newTransaction.category = category
             newTransaction.date = date
+            newTransaction.longitude = coordinate.longitude
+            newTransaction.latitude = coordinate.latitude
             
             do {
                 try container.viewContext.save()

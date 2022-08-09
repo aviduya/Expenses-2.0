@@ -10,6 +10,7 @@ import SwiftUI
 struct AppSettingsView: View {
     
     @EnvironmentObject var settings: AppSettingsViewModel
+    @EnvironmentObject var locationHandler: LocationsHandler
     @Environment(\.dismiss) var dismiss
     
     @State private var userValueThreshold: Double = 0.0
@@ -48,6 +49,13 @@ struct AppSettingsView: View {
                             Divider()
                             threshold
                             
+                        }
+                        
+                        HStack {
+                            Image(systemName: "location.fill.viewfinder")
+                                .appSettingsListStyle(color: .red)
+                            Divider()
+                            locationSetting
                         }
                         
                     } header: {
@@ -242,6 +250,30 @@ extension AppSettingsView {
             }.padding()
         } label: {
             Text("Threshold")
+        }
+    }
+    
+    var locationSetting: some View {
+        
+        NavigationLink {
+            List {
+                Section {
+                    VStack {
+                        Button {
+                            locationHandler.requestPermission()
+                        } label: {
+                            Text("Allow Location Tracking")
+                        }
+                        Text("\(locationHandler.authorizationMessage)")
+                    }
+                    
+                } footer: {
+                    
+                }
+                
+            }
+        } label: {
+            Text("Location")
         }
     }
     

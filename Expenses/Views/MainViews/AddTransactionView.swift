@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct AddTransactionView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var settings: AppSettingsViewModel
+    @EnvironmentObject var locationHandler: LocationsHandler
     @StateObject var vm = AddTransactionsViewModel()
     
     
@@ -28,7 +30,9 @@ struct AddTransactionView: View {
         category:
             "",
         date:
-            Date())
+            Date(),
+        coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+    )
     
     // MARK: Main View
     
@@ -40,6 +44,9 @@ struct AddTransactionView: View {
                     header
                     
                     formBox
+                    
+                    Text("\(model.coordinate.latitude)")
+                    Text("\(model.coordinate.longitude)")
                     
                     Spacer()
                     addTransactionButton
@@ -59,6 +66,15 @@ struct AddTransactionView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            locationHandler.startUpdatingLocation {
+                model.coordinate.longitude = locationHandler.lastSeenLocation?.coordinate.longitude ?? 0.0
+                model.coordinate.latitude = locationHandler.lastSeenLocation?.coordinate.latitude ?? 0.0
+            }
+        }
+        .onDisappear {
+            locationHandler.stopUpdatingLocation()
         }
         .alert("Complete Details", isPresented: $vm.isShowingAlert) {
             Button("OK", role: .cancel) { }
@@ -103,9 +119,11 @@ extension AddTransactionView {
                 category:
                     model.category,
                 date:
-                    model.date) {
-                        dismiss()
-                    }
+                    model.date,
+                coordinate: model.coordinate)
+                {
+                    dismiss()
+                }
         }) {
             Text("Save Transaction")
         }
