@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct HomeView: View {
     
@@ -125,7 +126,10 @@ extension HomeView {
                             item: transaction.name ?? "",
                             date: transaction.date ?? Date(),
                             amount: transaction.amount,
-                            category: transaction.category ?? "")
+                            category: transaction.category ?? "",
+                            region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+                            
+                        )
                         .padding(10)
                     }
                 }

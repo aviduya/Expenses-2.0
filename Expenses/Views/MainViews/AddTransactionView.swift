@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import MapKit
 
 struct AddTransactionView: View {
     
@@ -34,6 +35,7 @@ struct AddTransactionView: View {
         coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     )
     
+    
     // MARK: Main View
     
     var body: some View {
@@ -44,14 +46,6 @@ struct AddTransactionView: View {
                     header
                     
                     formBox
-                    
-                    Text("\(model.coordinate.latitude)")
-                    Text("\(model.coordinate.longitude)")
-                    
-                    Spacer()
-                    
-                    addTransactionButton
-                    
                 }
                 
             }
@@ -65,6 +59,9 @@ struct AddTransactionView: View {
                         Text("Cancel")
                             .foregroundColor(.red)
                     }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    addTransactionButton
                 }
             }
         }
@@ -123,12 +120,9 @@ extension AddTransactionView {
                     dismiss()
                 }
         }) {
-            Text("Save Transaction")
+            Text("Save")
         }
-        .padding()
-        .buttonStyle(CustomButtonStyle())
-        .shadow(radius: 10)
-        .background(in: RoundedRectangle(cornerRadius: 10))
+        .foregroundColor(.themeThree)
         
         
     }

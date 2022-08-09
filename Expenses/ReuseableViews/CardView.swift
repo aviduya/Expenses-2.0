@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct CardView: View {
     
@@ -16,6 +17,9 @@ struct CardView: View {
     @State var date: Date
     @State var amount: Double
     @State var category: String
+    @State var region: MKCoordinateRegion
+    
+    
     
     private var gradientBackground: LinearGradient {
         
@@ -73,18 +77,14 @@ struct CardView: View {
                 Text("\(todayFormatter)")
                     .font(Font.system(.callout, design: .default))
                     .opacity(0.5)
-                Spacer()
-                HStack {
-                Text("$\(amount, specifier: "%.2f")")
-                    .font(.system(size: 50, weight: .regular, design: .default))
-                Spacer()
-                }
             }
+            .padding(10)
+            .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 14))
             .padding(30)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .clipped()
         .overlay(
-            
             Text(category.capitalized)
                 .bold()
                 .padding(10)
@@ -94,11 +94,32 @@ struct CardView: View {
                 ),
             alignment: .topTrailing
         )
+        .overlay(
+            VStack {
+                
+                Text("$\(amount, specifier: "%.2f")")
+                    .font(Font.system(.headline, design: .rounded))
+                    .padding()
+                    .background(Material.ultraThin, in:
+                        RoundedRectangle(cornerRadius: 14)
+                            
+                    )
+                Image(systemName: "arrowtriangle.down.fill")
+                    .font(.body)
+                    .foregroundColor(.themeThree)
+                    .offset(x: 0, y: -5)
+                    
+            },
+            
+                
+            alignment: .center
+        )
         .background(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(Color(.systemFill))
+            Map(coordinateRegion: $region)
+                .allowsHitTesting(false)
+                .clipShape(RoundedRectangle(cornerRadius: 14))
                 .padding(10)
-            , alignment: .center)
+        )
         
         .padding(.bottom, 50)
     }
