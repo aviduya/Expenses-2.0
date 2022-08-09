@@ -43,15 +43,12 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func startUpdatingLocation(_ completionHandler: @escaping () -> Void) {
         locationManager.startUpdatingLocation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             completionHandler()
         }
-        
-    }
-    
-    func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
+
     
     func requestPermission() {
         locationManager.requestWhenInUseAuthorization()

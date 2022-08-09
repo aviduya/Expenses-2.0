@@ -49,6 +49,7 @@ struct AddTransactionView: View {
                     Text("\(model.coordinate.longitude)")
                     
                     Spacer()
+                    
                     addTransactionButton
                     
                 }
@@ -72,9 +73,6 @@ struct AddTransactionView: View {
                 model.coordinate.longitude = locationHandler.lastSeenLocation?.coordinate.longitude ?? 0.0
                 model.coordinate.latitude = locationHandler.lastSeenLocation?.coordinate.latitude ?? 0.0
             }
-        }
-        .onDisappear {
-            locationHandler.stopUpdatingLocation()
         }
         .alert("Complete Details", isPresented: $vm.isShowingAlert) {
             Button("OK", role: .cancel) { }
