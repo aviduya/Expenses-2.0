@@ -16,7 +16,7 @@ struct AddTransactionView: View {
     @EnvironmentObject var locationHandler: LocationsHandler
     @StateObject var vm = AddTransactionsViewModel()
     
-    
+    @State private var isLocationLoaded: Bool = false
     @State private var counter: Int = 0
     @State private var model =
     AddTransactionsModel(
@@ -34,9 +34,9 @@ struct AddTransactionView: View {
             Date(),
         coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     )
-    
-    
     // MARK: Main View
+    
+    let material: Material = .ultraThin
     
     var body: some View {
         NavigationView {
@@ -44,6 +44,8 @@ struct AddTransactionView: View {
                 VStack(spacing: 20) {
                     
                     header
+                    
+                    locationIndicator
                     
                     formBox
                 }
@@ -69,6 +71,9 @@ struct AddTransactionView: View {
             locationHandler.startUpdatingLocation {
                 model.coordinate.longitude = locationHandler.lastSeenLocation?.coordinate.longitude ?? 0.0
                 model.coordinate.latitude = locationHandler.lastSeenLocation?.coordinate.latitude ?? 0.0
+                withAnimation {
+                    isLocationLoaded = true
+                }
             }
         }
         .alert("Complete Details", isPresented: $vm.isShowingAlert) {
@@ -138,7 +143,6 @@ extension AddTransactionView {
                     .addTransactionTitleStyle()
                     .opacity(0.33)
             } else {
-                
                 Text(model.name)
                     .foregroundColor(.themeThree)
                     .addTransactionTitleStyle()
@@ -156,7 +160,6 @@ extension AddTransactionView {
     }
     
     // MARK: Main transactions form
-    
     
     private var formBox: some View {
         
@@ -185,6 +188,42 @@ extension AddTransactionView {
         }
         .padding()
         
+    }
+    
+    private var locationIndicator: some View {
+
+        VStack {
+            
+            if isLocationLoaded == false {
+                ProgressView {
+                    Text("Loading")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .progressViewStyle(CircularProgressViewStyle())
+            } else {
+                HStack {
+                    Image(systemName: "checkmark.circle")
+                        .frame(maxWidth: 20, maxHeight: 20)
+                        .padding(.horizontal, 10)
+                        .font(.title)
+                    Text("Location Loaded")
+                        .font(Font.headline.weight(.bold))
+                }
+                .foregroundColor(.themeThree)
+                .transition(.opacity)
+            }
+            
+            
+            
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .center)
+        .clipped()
+        .background(material, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .padding(.horizontal)
+        
+
     }
     
 }

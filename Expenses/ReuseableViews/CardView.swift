@@ -22,7 +22,7 @@ struct CardView: View {
     private var gradientBackground: LinearGradient {
         
         func returnGradient(_ color1: Color, _ color2: Color) -> LinearGradient {
-            return LinearGradient(colors: [color1, color2], startPoint: .topLeading, endPoint: .bottomLeading)
+            return LinearGradient(colors: [color1, color2], startPoint: .leading, endPoint: .trailing)
         }
         
         let green = returnGradient(.primaryGreen, .primaryOrange)
@@ -71,7 +71,7 @@ struct CardView: View {
         VStack {
             VStack(alignment: .leading) {
                 Text(item)
-                    .font(.title)
+                    .font(.title3)
                 Text("\(todayFormatter)")
                     .font(Font.system(.callout, design: .default))
                     .opacity(0.5)
@@ -81,21 +81,11 @@ struct CardView: View {
             .padding(30)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .clipped()
-        .overlay(
-            Text(category.capitalized)
-                .bold()
-                .padding(10)
-                .background(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(gradientBackground)
-                ),
-            alignment: .topTrailing
-        )
         .overlay(
             VStack {
                 
                 Text("$\(amount, specifier: "%.2f")")
+                    .foregroundStyle(gradientBackground)
                     .font(Font.system(.headline, design: .rounded))
                     .padding()
                     .background(Material.ultraThin, in:
