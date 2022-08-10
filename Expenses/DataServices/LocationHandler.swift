@@ -54,6 +54,9 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
     }
     
+    func resetPermission() {
+        locationManager.
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastSeenLocation = locations.first

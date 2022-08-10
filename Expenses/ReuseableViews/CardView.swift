@@ -76,19 +76,16 @@ struct CardView: View {
                     .font(Font.system(.callout, design: .default))
                     .opacity(0.5)
             }
-            .padding(10)
+            .padding()
             .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 14))
             .shadow(radius: 5)
-            .padding(30)
+            .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(
             MapSnapshotView(amount: amount, gradient: gradientBackground, location: region)
                 .clipShape(RoundedRectangle(cornerRadius: 14))
-                .padding()
         )
-        
-        
         .padding(.bottom, 50)
     }
 }

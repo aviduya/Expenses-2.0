@@ -29,7 +29,7 @@ struct MapSnapshotView: View {
                             ZStack {
                                 Image(systemName: "arrowtriangle.down.fill")
                                     .font(.body)
-                                    .foregroundStyle(Material.ultraThin)
+                                    .foregroundColor(.themeThree)
                                     .offset(x: 0, y: 30)
                                 Text("$\(amount, specifier: "%.2f")")
                                     .foregroundStyle(gradient)
@@ -39,6 +39,7 @@ struct MapSnapshotView: View {
                                         RoundedRectangle(cornerRadius: 14)
                                     )
                             }
+                                .offset(x: 0, y: -20)
                                 .shadow(radius: 5)
                             ,
                             alignment: .center
@@ -99,7 +100,7 @@ struct MapSnapshotView: View {
                 return
             }
             if let snapshot = snapshotOrNil {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     withAnimation {
                         self.snapshotImage = snapshot.image
                     }

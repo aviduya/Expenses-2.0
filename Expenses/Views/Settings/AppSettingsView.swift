@@ -264,13 +264,13 @@ extension AppSettingsView {
                         } label: {
                             Text("Allow Location Tracking")
                         }
-                        Text("\(locationHandler.authorizationMessage)")
+                        
                     }
                     
                 } footer: {
                     
                 }
-                
+                Text("\(locationHandler.authorizationMessage)")
             }
         } label: {
             Text("Location")

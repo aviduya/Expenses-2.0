@@ -28,8 +28,10 @@ struct HomeView: View {
                 }
                 homeSummarySubview
                 recentTransactionsSubview
+                Spacer()
             }
             homeBottomBarSubview
+            
         }
         .padding(10)
         .sheet(item: $activeSheet) { page in
@@ -128,7 +130,6 @@ extension HomeView {
                             amount: transaction.amount,
                             category: transaction.category ?? "",
                             region: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude)
-                            
                         )
                         .padding(10)
                     }
