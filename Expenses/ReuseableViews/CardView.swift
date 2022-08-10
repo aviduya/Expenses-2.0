@@ -19,8 +19,6 @@ struct CardView: View {
     @State var category: String
     @State var region: MKCoordinateRegion
     
-    
-    
     private var gradientBackground: LinearGradient {
         
         func returnGradient(_ color1: Color, _ color2: Color) -> LinearGradient {
