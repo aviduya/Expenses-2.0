@@ -17,7 +17,7 @@ struct CardView: View {
     @State var date: Date
     @State var amount: Double
     @State var category: String
-    @State var region: MKCoordinateRegion
+    @State var region: CLLocationCoordinate2D
     
     private var gradientBackground: LinearGradient {
         
@@ -78,36 +78,16 @@ struct CardView: View {
             }
             .padding(10)
             .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 14))
+            .shadow(radius: 5)
             .padding(30)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .overlay(
-            VStack {
-                
-                Text("$\(amount, specifier: "%.2f")")
-                    .foregroundStyle(gradientBackground)
-                    .font(Font.system(.headline, design: .rounded))
-                    .padding()
-                    .background(Material.ultraThin, in:
-                        RoundedRectangle(cornerRadius: 14)
-                            
-                    )
-                Image(systemName: "arrowtriangle.down.fill")
-                    .font(.body)
-                    .foregroundColor(.themeThree)
-                    .offset(x: 0, y: -5)
-                    
-            },
-            
-                
-            alignment: .center
-        )
         .background(
-            Map(coordinateRegion: $region)
-                .allowsHitTesting(false)
+            MapSnapshotView(amount: amount, gradient: gradientBackground, location: region)
                 .clipShape(RoundedRectangle(cornerRadius: 14))
-                .padding(10)
+                .padding()
         )
+        
         
         .padding(.bottom, 50)
     }

@@ -18,6 +18,7 @@
 		0E0ED6672813C6A300A318E6 /* InputValueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6662813C6A300A318E6 /* InputValueField.swift */; };
 		0E0ED6692813C71D00A318E6 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED6682813C71D00A318E6 /* DatePickerView.swift */; };
 		0E0ED66B2813CC5B00A318E6 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0ED66A2813CC5B00A318E6 /* CustomButtonStyle.swift */; };
+		0E1BBE1428A3795F00483848 /* MapSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1BBE1328A3795F00483848 /* MapSnapshotView.swift */; };
 		0E1C4B05287A388200DE127C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C4B04287A388200DE127C /* HomeModel.swift */; };
 		0E28470E2755CD52006CD281 /* AppSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E28470D2755CD52006CD281 /* AppSettingsViewModel.swift */; };
 		0E5901D128287A75000045C2 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5901D028287A75000045C2 /* ColorExtensions.swift */; };
@@ -51,6 +52,7 @@
 		0E0ED6662813C6A300A318E6 /* InputValueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValueField.swift; sourceTree = "<group>"; };
 		0E0ED6682813C71D00A318E6 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		0E0ED66A2813CC5B00A318E6 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
+		0E1BBE1328A3795F00483848 /* MapSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSnapshotView.swift; sourceTree = "<group>"; };
 		0E1C4B04287A388200DE127C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		0E28470D2755CD52006CD281 /* AppSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewModel.swift; sourceTree = "<group>"; };
 		0E5901D028287A75000045C2 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				0EBBB4352800D10300F0A875 /* HomeView.swift */,
+				0E1BBE1328A3795F00483848 /* MapSnapshotView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				0EB9EE2B281A105B00B68520 /* ArrayExtensions.swift in Sources */,
 				0E0ED65D28136ACD00A318E6 /* DateExtensions.swift in Sources */,
 				0E63B11C28A265D900936E82 /* LocationHandler.swift in Sources */,
+				0E1BBE1428A3795F00483848 /* MapSnapshotView.swift in Sources */,
 				0E0ED65A2812172C00A318E6 /* AllTransactionsViewModel.swift in Sources */,
 				0E0ED6672813C6A300A318E6 /* InputValueField.swift in Sources */,
 				0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */,

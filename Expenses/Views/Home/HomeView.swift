@@ -127,7 +127,7 @@ extension HomeView {
                             date: transaction.date ?? Date(),
                             amount: transaction.amount,
                             category: transaction.category ?? "",
-                            region: MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                            region: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude)
                             
                         )
                         .padding(10)
