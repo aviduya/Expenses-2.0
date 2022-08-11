@@ -55,7 +55,7 @@ struct AppSettingsView: View {
                             Image(systemName: "location.fill.viewfinder")
                                 .appSettingsListStyle(color: .red)
                             Divider()
-                            locationSetting
+                            LocationSettingsView()
                         }
                         
                     } header: {
@@ -253,28 +253,5 @@ extension AppSettingsView {
         }
     }
     
-    var locationSetting: some View {
-        
-        NavigationLink {
-            List {
-                Section {
-                    VStack {
-                        Button {
-                            locationHandler.requestPermission()
-                        } label: {
-                            Text("Allow Location Tracking")
-                        }
-                        
-                    }
-                    
-                } footer: {
-                    
-                }
-                Text("\(locationHandler.authorizationMessage)")
-            }
-        } label: {
-            Text("Location")
-        }
+   
     }
-    
-}

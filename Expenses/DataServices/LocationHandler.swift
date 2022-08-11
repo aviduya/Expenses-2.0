@@ -27,15 +27,15 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
     var authorizationMessage: String {
         switch authorizationStatus {
         case .authorizedAlways:
-            return "Authorization: All Times"
+            return "All Times"
         case .authorizedWhenInUse:
-            return "Authorization: When in use"
+            return "When in use"
         case .denied:
-            return "Authorization: Denied"
+            return "Denied"
         case .notDetermined:
-            return "Authorization: Not Determined"
+            return "Not Determined"
         case .restricted:
-            return "Authorization: Restricted"
+            return "Restricted"
         default:
             return "Error, Something has gone wrong."
         }
@@ -52,10 +52,6 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func requestPermission() {
         locationManager.requestWhenInUseAuthorization()
-    }
-    
-    func resetPermission() {
-        locationManager.
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
