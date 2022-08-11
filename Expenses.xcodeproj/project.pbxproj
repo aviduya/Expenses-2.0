@@ -28,6 +28,9 @@
 		0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */; };
 		0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68B274F13C200F10D5C /* ExpensesApp.swift */; };
 		0E83B690274F13C200F10D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B68F274F13C200F10D5C /* Assets.xcassets */; };
+		0E8DE73728A5C8DC005B00A0 /* ThresholdSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DE73628A5C8DC005B00A0 /* ThresholdSettingView.swift */; };
+		0E8DE73928A5C9F7005B00A0 /* CategorySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DE73828A5C9F7005B00A0 /* CategorySettingsView.swift */; };
+		0E8DE73B28A5CACF005B00A0 /* BankSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DE73A28A5CACF005B00A0 /* BankSettingsView.swift */; };
 		0E977D1A288A8998000BA21F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E977D19288A8998000BA21F /* CardView.swift */; };
 		0EA75E9D28222223005DCB14 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA75E9C28222223005DCB14 /* EmptyView.swift */; };
 		0EA75E9F28222943005DCB14 /* ShimmerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA75E9E28222943005DCB14 /* ShimmerModifier.swift */; };
@@ -64,6 +67,9 @@
 		0E83B688274F13C200F10D5C /* Expn.se.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expn.se.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E83B68B274F13C200F10D5C /* ExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesApp.swift; sourceTree = "<group>"; };
 		0E83B68F274F13C200F10D5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E8DE73628A5C8DC005B00A0 /* ThresholdSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdSettingView.swift; sourceTree = "<group>"; };
+		0E8DE73828A5C9F7005B00A0 /* CategorySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsView.swift; sourceTree = "<group>"; };
+		0E8DE73A28A5CACF005B00A0 /* BankSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankSettingsView.swift; sourceTree = "<group>"; };
 		0E977D19288A8998000BA21F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		0EA75E9C28222223005DCB14 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		0EA75E9E28222943005DCB14 /* ShimmerModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerModifier.swift; sourceTree = "<group>"; };
@@ -185,7 +191,10 @@
 			isa = PBXGroup;
 			children = (
 				0E07B6172823109B00405764 /* AppSettingsView.swift */,
+				0E8DE73828A5C9F7005B00A0 /* CategorySettingsView.swift */,
 				0E162DAC28A431650098BFB6 /* LocationSettingsView.swift */,
+				0E8DE73628A5C8DC005B00A0 /* ThresholdSettingView.swift */,
+				0E8DE73A28A5CACF005B00A0 /* BankSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -353,6 +362,7 @@
 				0E0ED6692813C71D00A318E6 /* DatePickerView.swift in Sources */,
 				0E0ED6632813C48200A318E6 /* InputTextField.swift in Sources */,
 				0EA75E9F28222943005DCB14 /* ShimmerModifier.swift in Sources */,
+				0E8DE73B28A5CACF005B00A0 /* BankSettingsView.swift in Sources */,
 				0E977D1A288A8998000BA21F /* CardView.swift in Sources */,
 				0E0ED6652813C62400A318E6 /* RowView.swift in Sources */,
 				0EB9EE2B281A105B00B68520 /* ArrayExtensions.swift in Sources */,
@@ -366,7 +376,9 @@
 				0EBBB4362800D10300F0A875 /* HomeView.swift in Sources */,
 				0EA75E9D28222223005DCB14 /* EmptyView.swift in Sources */,
 				0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */,
+				0E8DE73728A5C8DC005B00A0 /* ThresholdSettingView.swift in Sources */,
 				0E5901D128287A75000045C2 /* ColorExtensions.swift in Sources */,
+				0E8DE73928A5C9F7005B00A0 /* CategorySettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
