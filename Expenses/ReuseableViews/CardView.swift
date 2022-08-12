@@ -11,13 +11,34 @@ import MapKit
 struct CardView: View {
     
     @EnvironmentObject var settings: AppSettingsViewModel
+    @EnvironmentObject var locationHandler: LocationsHandler
     @AppStorage("threshold") var setThreshold: Double = 0.0
     
     @State var item: String
     @State var date: Date
     @State var amount: Double
     @State var category: String
+    @State var merchant: String
+    @State var bank: String 
     @State var region: CLLocationCoordinate2D
+    @State var long: Double
+    @State var lat: Double
+    
+    @State private var isExpanded: Bool = false
+    @State private var address: String = ""
+    
+   
+    func getAdress() {
+        let location = CLLocation(latitude: lat, longitude: long)
+        location.placemark { placemark, error in
+            guard let placemark = placemark else {
+                print("Error:", error ?? "nil")
+                return
+            }
+            address = placemark.postalAddressFormatted ?? ""
+          
+        }
+    }
     
     private var gradientBackground: LinearGradient {
         
@@ -69,17 +90,74 @@ struct CardView: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading) {
-                Text(item)
-                    .font(.title3)
-                Text("\(todayFormatter)")
-                    .font(Font.system(.callout, design: .default))
-                    .opacity(0.5)
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(item)
+                            .font(.title3)
+                        Text("\(todayFormatter)")
+                            .font(Font.system(.callout, design: .default))
+                            .opacity(0.5)
+                    }
+                    Spacer()
+                    Image(systemName: isExpanded ? "info.circle.fill":"info.circle")
+                        .foregroundColor(.themeThree)
+                        .font(.system(size: 20))
+                        .shadow(radius: 10)
+                        .onTapGesture {
+                            withAnimation {
+                                isExpanded.toggle()
+                            }
+                        }
+                    
+                }
+                if isExpanded == true {
+                    Divider()
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            Image(systemName: "dollarsign")
+                                .frame(width: 20, height: 20)
+                            Divider()
+                            Text("\(amount, specifier: "%.2f")")
+                            Spacer()
+                        }
+                        HStack {
+                            Image(systemName: "bag")
+                                .frame(width: 20, height: 20)
+                            Divider()
+                            Text(merchant)
+                            Spacer()
+                        }
+                        HStack {
+                            Image(systemName: "list.bullet")
+                                .frame(width: 20, height: 20)
+                            Divider()
+                            Text(category)
+                            Spacer()
+                        }
+                        HStack {
+                            Image(systemName: "building.columns")
+                                .frame(width: 20, height: 20)
+                            Divider()
+                            Text(bank)
+                            Spacer()
+                        }
+                        HStack {
+                            Image(systemName: "house")
+                                .frame(width: 20, height: 20)
+                            Divider()
+                            Text(address)
+                                .fixedSize(horizontal: false, vertical: true)
+                            Spacer()
+                        }
+                    }
+                    .font(.headline)
+                    Spacer()
+                }
             }
             .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
             .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 14))
-            .shadow(radius: 5)
-            .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(
@@ -87,5 +165,11 @@ struct CardView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 14))
         )
         .padding(.bottom, 50)
+        .onAppear {
+            getAdress()
+        }
+        .onDisappear {
+            isExpanded = false
+        }
     }
 }

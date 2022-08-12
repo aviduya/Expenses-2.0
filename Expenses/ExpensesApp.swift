@@ -24,7 +24,6 @@ struct ExpensesApp: App {
                     .environmentObject(dm)
                     .environmentObject(location)
         }
-        
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {
             case .active:

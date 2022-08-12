@@ -12,17 +12,17 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var lastSeenLocation: CLLocation?
     @Published var currentPlacemark: CLPlacemark?
-
+    
     @Published var authorizationStatus: CLAuthorizationStatus
     private let locationManager = CLLocationManager()
     
     override init() {
-            authorizationStatus = locationManager.authorizationStatus
-            
-            super.init()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        }
+        authorizationStatus = locationManager.authorizationStatus
+        
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
     
     var authorizationMessage: String {
         switch authorizationStatus {
@@ -48,7 +48,7 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         locationManager.stopUpdatingLocation()
     }
-
+    
     
     func requestPermission() {
         locationManager.requestWhenInUseAuthorization()
@@ -57,7 +57,7 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastSeenLocation = locations.first
     }
-
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
     }

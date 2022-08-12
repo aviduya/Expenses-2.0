@@ -37,6 +37,7 @@
 		0EB9EE2B281A105B00B68520 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9EE2A281A105B00B68520 /* ArrayExtensions.swift */; };
 		0EBBB43427FFF46C00F0A875 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBB43327FFF46C00F0A875 /* CoreDataHandler.swift */; };
 		0EBBB4362800D10300F0A875 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBB4352800D10300F0A875 /* HomeView.swift */; };
+		0EC5633228A633DC003926D3 /* LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5633128A633DC003926D3 /* LocationExtension.swift */; };
 		0EC9B3282832E25F0009B6C3 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 0EC9B3272832E25F0009B6C3 /* Sentry */; };
 		0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */; };
 		0EDA98DA27F3A66E007E86A5 /* AddTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D927F3A66E007E86A5 /* AddTransactionsViewModel.swift */; };
@@ -76,6 +77,7 @@
 		0EB9EE2A281A105B00B68520 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		0EBBB43327FFF46C00F0A875 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		0EBBB4352800D10300F0A875 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0EC5633128A633DC003926D3 /* LocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationExtension.swift; sourceTree = "<group>"; };
 		0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsModel.swift; sourceTree = "<group>"; };
 		0EDA98D927F3A66E007E86A5 /* AddTransactionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsViewModel.swift; sourceTree = "<group>"; };
 		0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsContainer.xcdatamodel; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				0E5901D028287A75000045C2 /* ColorExtensions.swift */,
 				0E086B59288A1EFB0055C04A /* StringExtension.swift */,
 				0E072F1F288CC144008FBF36 /* ModifiersExtension.swift */,
+				0EC5633128A633DC003926D3 /* LocationExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
 				0E07B6182823109B00405764 /* AppSettingsView.swift in Sources */,
 				0E0ED6692813C71D00A318E6 /* DatePickerView.swift in Sources */,
+				0EC5633228A633DC003926D3 /* LocationExtension.swift in Sources */,
 				0E0ED6632813C48200A318E6 /* InputTextField.swift in Sources */,
 				0EA75E9F28222943005DCB14 /* ShimmerModifier.swift in Sources */,
 				0E8DE73B28A5CACF005B00A0 /* BankSettingsView.swift in Sources */,

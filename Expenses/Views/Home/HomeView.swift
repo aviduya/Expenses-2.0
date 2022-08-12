@@ -129,7 +129,11 @@ extension HomeView {
                             date: transaction.date ?? Date(),
                             amount: transaction.amount,
                             category: transaction.category ?? "",
-                            region: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude)
+                            merchant: transaction.merchant ?? "",
+                            bank: transaction.bank ?? "",
+                            region: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude),
+                            long: transaction.longitude,
+                            lat: transaction.latitude
                         )
                         .padding(10)
                     }
