@@ -12,7 +12,7 @@ struct AppSettingsView: View {
     @EnvironmentObject var settings: AppSettingsViewModel
     @EnvironmentObject var locationHandler: LocationsHandler
     @Environment(\.dismiss) var dismiss
-            
+    
     init() {
         UITextView.appearance().backgroundColor = .clear
     }
@@ -24,33 +24,15 @@ struct AppSettingsView: View {
             VStack {
                 List {
                     Section {
-                        HStack {
-                            Image(systemName: "building.columns")
-                                .appSettingsListStyle(color: .orange)
-                            Divider()
-                            BankSettingsView()
-                        }
-                        HStack {
-                            Image(systemName: "checklist")
-                                .appSettingsListStyle(color: .green)
-                            Divider()
-                            CategorySettingsView()
-                        }
                         
-                        HStack {
-                            Image(systemName: "slider.horizontal.below.rectangle")
-                                .appSettingsListStyle(color: .teal)
-                            Divider()
-                            ThresholdSettingView()
-                        }
+                        banks
                         
-                        HStack {
-                            Image(systemName: "location.fill.viewfinder")
-                                .appSettingsListStyle(color: .red)
-                            Divider()
-                            LocationSettingsView()
-                        }
+                        category
                         
+                        threshold
+                        
+                        loation
+    
                     } header: {
                         Text("Primary Settings")
                     }
@@ -60,4 +42,44 @@ struct AppSettingsView: View {
             .navigationTitle("Settings")
         }
     }
+}
+
+extension AppSettingsView {
+    
+    var banks: some View {
+        HStack {
+            Image(systemName: "building.columns")
+                .appSettingsListStyle(color: .orange)
+            Divider()
+            BankSettingsView()
+        }
+    }
+    
+    var category: some View {
+        HStack {
+            Image(systemName: "checklist")
+                .appSettingsListStyle(color: .green)
+            Divider()
+            CategorySettingsView()
+        }
+    }
+    
+    var threshold: some View {
+        HStack {
+            Image(systemName: "slider.horizontal.below.rectangle")
+                .appSettingsListStyle(color: .teal)
+            Divider()
+            ThresholdSettingView()
+        }
+    }
+    
+    var loation: some View {
+        HStack {
+            Image(systemName: "location.fill.viewfinder")
+                .appSettingsListStyle(color: .red)
+            Divider()
+            LocationSettingsView()
+        }
+    }
+    
 }
