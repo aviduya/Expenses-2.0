@@ -139,7 +139,7 @@ struct CardView: View {
                             Image(systemName: "building.columns")
                                 .frame(width: 20, height: 20)
                             Divider()
-                            Text(bank)
+                            Text(bank + " Card")
                             Spacer()
                         }
                         HStack {
@@ -152,17 +152,17 @@ struct CardView: View {
                         }
                     }
                     .font(.headline)
-                    Spacer()
+                    
                 }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 14))
+            .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 16))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(
             MapSnapshotView(amount: amount, gradient: gradientBackground, location: region)
-                .clipShape(RoundedRectangle(cornerRadius: 14))
+                .clipShape(RoundedRectangle(cornerRadius: 16))
         )
         .padding(.bottom, 50)
         .onAppear {
