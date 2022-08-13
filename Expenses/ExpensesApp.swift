@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Sentry
 import CoreLocation
 
 @main
