@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
+import MapKit
 
 class HomeViewModel: ObservableObject {
     
@@ -16,7 +18,7 @@ class HomeViewModel: ObservableObject {
     @Published var mostUsedCategory: String = ""
     @Published var mostUsedPayment: String = ""
     @Published var hasNegative: Bool = false
-
+    
     @Published var allTransactions: [TransactionEntity] = [] {
         didSet {
             calculateWidgets()
@@ -24,15 +26,15 @@ class HomeViewModel: ObservableObject {
             
         }
     }
-
+    
     private var yesterdayTransaction: Double = 0.0
     private let dataManager = CoreDataHandler.shared
-
+    
     init() {
         
         dataManager.getTransaction(&allTransactions)
         generateMessage()
-      
+        
     }
     
     func generateMessage() {
@@ -75,10 +77,10 @@ class HomeViewModel: ObservableObject {
             if calendar.isDateInYesterday(transaction.date ?? Date()) {
                 yesterdayTransaction += transaction.amount
             }
-    
+            
             mostFrequentPayment.append(transaction.category ?? "Error")
             mostFrequentCategory.append(transaction.bank ?? "Error")
-
+            
         }
         
         differenceSpendingValue = todayTransactions - yesterdayTransaction
@@ -96,9 +98,7 @@ class HomeViewModel: ObservableObject {
         mostUsedCategory = mostFrequentCategory.filtered().first ?? "None"
         mostUsedPayment = mostFrequentPayment.filtered().first ?? "None"
                 
-        print(allTransactions) 
-        
-        
+        print(allTransactions)
     }
 }
 

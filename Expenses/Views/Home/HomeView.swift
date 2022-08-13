@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct HomeView: View {
     
@@ -27,8 +28,10 @@ struct HomeView: View {
                 }
                 homeSummarySubview
                 recentTransactionsSubview
+                Spacer()
             }
             homeBottomBarSubview
+            
         }
         .padding(10)
         .sheet(item: $activeSheet) { page in
@@ -125,7 +128,13 @@ extension HomeView {
                             item: transaction.name ?? "",
                             date: transaction.date ?? Date(),
                             amount: transaction.amount,
-                            category: transaction.category ?? "")
+                            category: transaction.category ?? "",
+                            merchant: transaction.merchant ?? "",
+                            bank: transaction.bank ?? "",
+                            region: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude),
+                            long: transaction.longitude,
+                            lat: transaction.latitude
+                        )
                         .padding(10)
                     }
                 }

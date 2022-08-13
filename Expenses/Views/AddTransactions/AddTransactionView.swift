@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import CoreLocation
+import MapKit
 
 struct AddTransactionView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var settings: AppSettingsViewModel
+    @EnvironmentObject var locationHandler: LocationsHandler
     @StateObject var vm = AddTransactionsViewModel()
     
-    
+    @State private var isLocationLoaded: Bool = false
     @State private var counter: Int = 0
     @State private var model =
     AddTransactionsModel(
@@ -28,9 +31,12 @@ struct AddTransactionView: View {
         category:
             "",
         date:
-            Date())
-    
+            Date(),
+        coordinate: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+    )
     // MARK: Main View
+    
+    let material: Material = .ultraThin
     
     var body: some View {
         NavigationView {
@@ -39,11 +45,9 @@ struct AddTransactionView: View {
                     
                     header
                     
+                    locationIndicator
+                    
                     formBox
-                    
-                    Spacer()
-                    addTransactionButton
-                    
                 }
                 
             }
@@ -57,6 +61,18 @@ struct AddTransactionView: View {
                         Text("Cancel")
                             .foregroundColor(.red)
                     }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    addTransactionButton
+                }
+            }
+        }
+        .onAppear {
+            locationHandler.startUpdatingLocation {
+                model.coordinate.longitude = locationHandler.lastSeenLocation?.coordinate.longitude ?? 0.0
+                model.coordinate.latitude = locationHandler.lastSeenLocation?.coordinate.latitude ?? 0.0
+                withAnimation {
+                    isLocationLoaded = true
                 }
             }
         }
@@ -103,16 +119,15 @@ extension AddTransactionView {
                 category:
                     model.category,
                 date:
-                    model.date) {
-                        dismiss()
-                    }
+                    model.date,
+                coordinate: model.coordinate)
+                {
+                    dismiss()
+                }
         }) {
-            Text("Save Transaction")
+            Text("Save")
         }
-        .padding()
-        .buttonStyle(CustomButtonStyle())
-        .shadow(radius: 10)
-        .background(in: RoundedRectangle(cornerRadius: 10))
+        .foregroundColor(.themeThree)
         
         
     }
@@ -128,7 +143,6 @@ extension AddTransactionView {
                     .addTransactionTitleStyle()
                     .opacity(0.33)
             } else {
-                
                 Text(model.name)
                     .foregroundColor(.themeThree)
                     .addTransactionTitleStyle()
@@ -146,7 +160,6 @@ extension AddTransactionView {
     }
     
     // MARK: Main transactions form
-    
     
     private var formBox: some View {
         
@@ -175,6 +188,42 @@ extension AddTransactionView {
         }
         .padding()
         
+    }
+    
+    private var locationIndicator: some View {
+
+        VStack {
+            
+            if isLocationLoaded == false {
+                ProgressView {
+                    Text("Loading")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .progressViewStyle(CircularProgressViewStyle())
+            } else {
+                HStack {
+                    Image(systemName: "checkmark.circle")
+                        .frame(maxWidth: 20, maxHeight: 20)
+                        .padding(.horizontal, 10)
+                        .font(.title)
+                    Text("Location Loaded")
+                        .font(Font.headline.weight(.bold))
+                }
+                .foregroundColor(.themeThree)
+                .transition(.opacity)
+            }
+            
+            
+            
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .center)
+        .clipped()
+        .background(material, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .padding(.horizontal)
+        
+
     }
     
 }

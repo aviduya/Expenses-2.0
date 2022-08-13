@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct AddTransactionsModel {
     
@@ -16,5 +17,6 @@ struct AddTransactionsModel {
     var merchant: String
     var category: String
     var date: Date
+    var coordinate: CLLocationCoordinate2D
     
 }
