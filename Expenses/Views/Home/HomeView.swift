@@ -11,6 +11,7 @@ import MapKit
 struct HomeView: View {
     
     @EnvironmentObject var settings: AppSettingsViewModel
+    @EnvironmentObject var locationHandler: LocationsHandler
     @ObservedObject var vm = HomeViewModel()
     
     @State private var activeSheet: ActiveView?
@@ -43,6 +44,9 @@ struct HomeView: View {
             case .add:
                 AddTransactionView()
             }
+        }
+        .onAppear {
+            locationHandler.requestPermission()
         }
         
     }

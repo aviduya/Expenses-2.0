@@ -11,17 +11,18 @@ import CoreLocation
 @main
 struct ExpensesApp: App {
     @Environment(\.scenePhase) var scenePhase
+
     @StateObject private var settings = AppSettingsViewModel()
-    @StateObject private var dm = CoreDataHandler.shared
-    @StateObject private var location = LocationsHandler()
+    @StateObject private var dataHandler: CoreDataHandler = .shared
+    @StateObject private var locationHandler: LocationsHandler = .shared
 
     
     var body: some Scene {
         WindowGroup {
                 HomeView()
                     .environmentObject(settings)
-                    .environmentObject(dm)
-                    .environmentObject(location)
+                    .environmentObject(dataHandler)
+                    .environmentObject(locationHandler)
         }
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {

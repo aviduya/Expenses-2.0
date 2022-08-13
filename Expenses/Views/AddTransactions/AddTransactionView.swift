@@ -68,7 +68,7 @@ struct AddTransactionView: View {
             }
         }
         .onAppear {
-            locationHandler.startUpdatingLocation {
+            locationHandler.getSnapshotOfLocation {
                 model.coordinate.longitude = locationHandler.lastSeenLocation?.coordinate.longitude ?? 0.0
                 model.coordinate.latitude = locationHandler.lastSeenLocation?.coordinate.latitude ?? 0.0
                 withAnimation {
