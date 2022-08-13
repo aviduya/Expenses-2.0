@@ -10,13 +10,15 @@ import CoreLocation
 
 class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
     
+    static let shared = LocationsHandler()
+    
     @Published var lastSeenLocation: CLLocation?
     @Published var currentPlacemark: CLPlacemark?
     
     @Published var authorizationStatus: CLAuthorizationStatus
     private let locationManager = CLLocationManager()
     
-    override init() {
+    private override init() {
         authorizationStatus = locationManager.authorizationStatus
         
         super.init()
@@ -41,7 +43,7 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    func startUpdatingLocation(_ completionHandler: @escaping () -> Void) {
+    func getSnapshotOfLocation(_ completionHandler: @escaping () -> Void) {
         locationManager.startUpdatingLocation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             completionHandler()
