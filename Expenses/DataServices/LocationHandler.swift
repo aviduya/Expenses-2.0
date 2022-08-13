@@ -51,7 +51,6 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
     
-    
     func requestPermission() {
         locationManager.requestWhenInUseAuthorization()
     }

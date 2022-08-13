@@ -11,6 +11,17 @@ struct LocationSettingsView: View {
     
     @EnvironmentObject var locationHandler: LocationsHandler
     
+    private var authorizationState: Color {
+        switch locationHandler.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            return .themeThree
+        case .denied, .notDetermined, .restricted:
+            return .red
+        default:
+            return .orange
+        }
+    }
+    
     var body: some View {
         NavigationLink {
             List {
@@ -22,6 +33,7 @@ struct LocationSettingsView: View {
                         
                         Label("\(locationHandler.authorizationMessage)", systemImage: "location.viewfinder")
                             .foregroundColor(.themeThree)
+
                     }
                 } footer: {
                     VStack(spacing: 5) {
@@ -35,21 +47,21 @@ struct LocationSettingsView: View {
                     
                     VStack(alignment: .leading, spacing: 10) {
                         Label("When in Use", systemImage: "location.viewfinder")
-                            .foregroundColor(.themeThree)
+                            .foregroundColor(authorizationState)
                         Text("The app has permission to use location, when app is only on use.")
                     }
                     
                     
                     VStack(alignment: .leading, spacing: 10) {
                         Label("At All Times", systemImage: "location.viewfinder")
-                            .foregroundColor(.themeThree)
+                            .foregroundColor(authorizationState)
                         Text("The app has permission to use location at all times.")
                     }
                     
                     
                     VStack(alignment: .leading, spacing: 10) {
                         Label("Denied", systemImage: "location.viewfinder")
-                            .foregroundColor(.red)
+                            .foregroundColor(authorizationState)
                         Text("The app has been denied to use location services for transactions")
                     }
                     
@@ -58,11 +70,5 @@ struct LocationSettingsView: View {
         } label: {
             Text("Location")
         }
-    }
-}
-
-struct LocationSettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationSettingsView()
     }
 }

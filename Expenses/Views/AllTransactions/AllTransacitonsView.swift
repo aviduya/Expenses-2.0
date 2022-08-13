@@ -20,7 +20,6 @@ struct AllTransacitonsView: View {
     private let material: Material = .ultraThinMaterial
     
     var body: some View {
-        NavigationView {
             VStack {
                 VStack(alignment: .leading) {
                     header
@@ -35,8 +34,8 @@ struct AllTransacitonsView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
-        }
-        .padding([.top, .leading, .trailing], 20)
+        
+            .padding([.top, .leading, .trailing])
     }
 }
 
