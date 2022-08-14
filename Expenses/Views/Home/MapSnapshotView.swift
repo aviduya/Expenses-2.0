@@ -103,6 +103,7 @@ struct MapSnapshotView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     withAnimation {
                         self.snapshotImage = snapshot.image
+                        print("Image generated")
                     }
                 }
             }

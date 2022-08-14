@@ -115,7 +115,7 @@ struct CardView: View {
                     Divider()
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Image(systemName: "dollarsign")
+                            Image(systemName: "dollarsign.circle")
                                 .frame(width: 20, height: 20)
                             Divider()
                             Text("\(amount, specifier: "%.2f")")
