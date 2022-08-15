@@ -142,7 +142,7 @@ extension HomeView {
                         .padding(10)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle())
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
         }
     }
