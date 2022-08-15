@@ -513,6 +513,7 @@
 				DEVELOPMENT_TEAM = 9E5233F7BC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Expn.se;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses the location to provide transaction locations made in real time.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses the location data for tracking real time transactions that were created.";
@@ -550,6 +551,7 @@
 				DEVELOPMENT_TEAM = 9E5233F7BC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Expn.se;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses the location to provide transaction locations made in real time.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses the location data for tracking real time transactions that were created.";
