@@ -44,16 +44,30 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func getSnapshotOfLocation(_ completionHandler: @escaping () -> Void) {
-        locationManager.startUpdatingLocation()
+        
+        if #available(iOS 16, *) {
+            locationManager.startUpdatingLocation()
+        } else {
+            locationManager.requestLocation()
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             completionHandler()
         }
-        locationManager.stopUpdatingLocation()
+        
+        if #available(iOS 16, *) {
+            locationManager.stopUpdatingLocation()
+        }
     }
+    
     
     func requestPermission() {
         locationManager.requestWhenInUseAuthorization()
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+             print("error:: \(error.localizedDescription)")
+        }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastSeenLocation = locations.first
