@@ -17,6 +17,8 @@ struct AddTransactionView: View {
     @StateObject var vm = AddTransactionsViewModel()
     
     @State private var isLocationLoaded: Bool = false
+    @State private var isLocationVerified: Bool = false
+    
     @State private var counter: Int = 0
     @State private var model =
     AddTransactionsModel(
@@ -69,11 +71,23 @@ struct AddTransactionView: View {
         }
         .onAppear {
             locationHandler.getSnapshotOfLocation {
-                model.coordinate.longitude = locationHandler.lastSeenLocation?.coordinate.longitude ?? 0.0
-                model.coordinate.latitude = locationHandler.lastSeenLocation?.coordinate.latitude ?? 0.0
-                withAnimation {
-                    isLocationLoaded = true
+                if let userLocation = locationHandler.lastSeenLocation?.coordinate {
+                    model.coordinate = userLocation
+                    withAnimation {
+                        isLocationLoaded = true
+                        isLocationVerified = true
+                    }
+                    
+                } else {
+                    withAnimation {
+                        isLocationLoaded = true
+                        isLocationVerified = false
+                    }
                 }
+                
+                print("Coordinate: \(model.coordinate.longitude)")
+                print("Coordinate: \(model.coordinate.latitude)")
+                print(isLocationVerified)
             }
         }
         .alert("Complete Details", isPresented: $vm.isShowingAlert) {
@@ -203,19 +217,16 @@ extension AddTransactionView {
                 .progressViewStyle(CircularProgressViewStyle())
             } else {
                 HStack {
-                    Image(systemName: "checkmark.circle")
+                    Image(systemName: isLocationVerified ? "checkmark.circle" : "xmark.circle")
                         .frame(maxWidth: 20, maxHeight: 20)
                         .padding(.horizontal, 10)
                         .font(.title)
-                    Text("Location Loaded")
+                    Text(isLocationVerified ? "Location Loaded" : "Unable to load location")
                         .font(Font.headline.weight(.bold))
                 }
-                .foregroundColor(.themeThree)
+                .foregroundColor(isLocationVerified ? .themeThree : .red)
                 .transition(.opacity)
             }
-            
-            
-            
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .center)
