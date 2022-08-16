@@ -37,6 +37,10 @@ struct AppSettingsView: View {
                         Text("Primary Settings")
                     }
                 }
+                Spacer()
+                Text("Made with ❤️ by Abe")
+                    .opacity(0.33)
+                    .font(.callout)
                 
             }
             .navigationTitle("Settings")

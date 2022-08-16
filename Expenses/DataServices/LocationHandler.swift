@@ -12,10 +12,15 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     static let shared = LocationsHandler()
     
+    @Published private(set) var isAuthorized: Bool = false
+    @Published private(set) var authorizationState: String = ""
+    
     @Published var lastSeenLocation: CLLocation?
     @Published var currentPlacemark: CLPlacemark?
     
     @Published var authorizationStatus: CLAuthorizationStatus
+    
+    
     private let locationManager = CLLocationManager()
     
     private override init() {
@@ -24,23 +29,23 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        authState()
     }
     
-    var authorizationMessage: String {
+    func authState() {
+        
         switch authorizationStatus {
-        case .authorizedAlways:
-            return "All Times"
-        case .authorizedWhenInUse:
-            return "When in use"
-        case .denied:
-            return "Denied"
-        case .notDetermined:
-            return "Not Determined"
-        case .restricted:
-            return "Restricted"
+        case .authorizedAlways, .authorizedWhenInUse:
+            isAuthorized = true
+            authorizationState = "Allowed"
+        case .denied, .notDetermined, .restricted:
+            isAuthorized = false
+            authorizationState = "Denied"
         default:
-            return "Error, Something has gone wrong."
+            print("Error: Could not get Authorization State")
         }
+        
     }
     
     func getSnapshotOfLocation(_ completionHandler: @escaping () -> Void) {

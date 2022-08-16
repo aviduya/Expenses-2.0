@@ -31,40 +31,34 @@ struct LocationSettingsView: View {
                         
                         Spacer()
                         
-                        Label("\(locationHandler.authorizationMessage)", systemImage: "location.viewfinder")
-                            .foregroundColor(.themeThree)
+                        Label("\(locationHandler.authorizationState)", systemImage: locationHandler.isAuthorized ? "location.viewfinder" : "location.slash")
+                            .foregroundColor(locationHandler.isAuthorized ? .themeThree : .red)
 
                     }
                 } footer: {
                     VStack(spacing: 5) {
-                        Text("When location is enabled, the app takes a snapshot of your current location when adding a transaction and stores the coordinates along with the transaction information, then the only time when the location is used is when the transaction has been recent and shown in the Home page.")
+                        Text("When location is enabled, the app takes a snapshot of your current location when adding a transaction and stores the coordinates along with the transaction information, then the only time when the location is used is when the transaction has been recent and shown in the Home page, to change location permissions,")
+                        Text("Settings > Expn.se > Location")
                     }
+                  
                     
                 }
                 
                 Section(header: Text("Legend")) {
                     
-                    
                     VStack(alignment: .leading, spacing: 10) {
-                        Label("When in Use", systemImage: "location.viewfinder")
-                            .foregroundColor(authorizationState)
-                        Text("The app has permission to use location, when app is only on use.")
+                        Label("Allowed", systemImage: "location.viewfinder")
+                            .foregroundColor(.themeThree)
+                        Text("The app has permission to use location, when adding transactions only.")
                     }
                     
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Label("At All Times", systemImage: "location.viewfinder")
-                            .foregroundColor(authorizationState)
-                        Text("The app has permission to use location at all times.")
+                        Label("Denied", systemImage: "location.slash")
+                            .foregroundColor(.red)
+                        Text("The app has been denied to use location tracking.")
                     }
-                    
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        Label("Denied", systemImage: "location.viewfinder")
-                            .foregroundColor(authorizationState)
-                        Text("The app has been denied to use location services for transactions")
-                    }
-                    
+   
                 }
             }
         } label: {
