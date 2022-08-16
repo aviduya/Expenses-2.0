@@ -208,7 +208,6 @@ extension AllTransacitonsView {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 isShowing.toggle()
                             }
-                            
                         }
                         .rotationEffect(.degrees(
                             isShowing ? 90 : 0
@@ -217,20 +216,24 @@ extension AllTransacitonsView {
                 
                 if isShowing == true {
                     
-                    HStack {
-                        DateRangePickerView(date: $vm.startDate)
-                        Spacer()
-                        Image(systemName: "arrow.right")
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        Divider()
+                        
+                        DatePicker("Start", selection: $vm.startDate, in: ...Date(), displayedComponents: .date)
+                    
+                        Image(systemName: "arrow.down")
+                            .foregroundColor(.themeThree)
                             .font(.system(size: 20))
-                        Spacer()
-                        DateRangePickerView(date: $vm.endDate)
+                        
+                        DatePicker("End", selection: $vm.endDate, in: ...Date(), displayedComponents: .date)
+                            
    
                     }
                 }
             }
             .padding()
             .background(material, in: RoundedRectangle(cornerRadius: 14))
-            
             
             ForEach(vm.rangeOfTransactions) { t in
                 
