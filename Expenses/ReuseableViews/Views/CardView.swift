@@ -60,7 +60,7 @@ struct CardView: View {
                         CardRowView(sysImage: "bag", text: merchant)
                         CardRowView(sysImage: "list.bullet", text: category)
                         CardRowView(sysImage: "building.columns", text: bank + "Card")
-                        CardRowView(sysImage: "house", text: locationHandler.isAuthorized ? vm.viewAdress: "Location Disabled")
+                        CardRowView(sysImage: "house", text: locationHandler.isAuthorized ? vm.viewAdress : "Location Disabled")
                     }
                     
                 }
@@ -83,7 +83,9 @@ struct CardView: View {
             }
         }
         .onDisappear {
-            isExpanded = false
+            if locationHandler.isAuthorized {
+                isExpanded = false
+            }
         }
     }
 }
