@@ -12,8 +12,8 @@ import MapKit
 struct MapSnapshotView: View {
     
     @State var amount: Double
-    @State var gradient: LinearGradient
     @State var location: CLLocationCoordinate2D
+    
     let span: CLLocationDegrees = 0.005
     
     @State private var snapshotImage: UIImage? = nil
@@ -32,7 +32,6 @@ struct MapSnapshotView: View {
                                     .foregroundColor(.themeThree)
                                     .offset(x: 0, y: 30)
                                 Text("$\(amount, specifier: "%.2f")")
-                                    .foregroundStyle(gradient)
                                     .font(Font.system(.headline, design: .rounded))
                                     .padding()
                                     .background(Material.ultraThin, in:
