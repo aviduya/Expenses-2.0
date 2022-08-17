@@ -18,12 +18,13 @@ struct CategorySettingsView: View {
                     HStack {
                         TextField("Enter a Category", text: $category)
                         Spacer()
-                        Image(systemName: "plus")
-                            .foregroundColor(.blue)
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.themeThree)
                             .onTapGesture {
                                 settings.addElement(new: category, element: &settings.categories, key: settings.categoryKey)
                                 category = ""
                             }
+                            .shadow(radius: 10)
                             .disabled(category.isEmpty)
                     }
                     
