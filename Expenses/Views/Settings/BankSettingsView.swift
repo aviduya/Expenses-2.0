@@ -19,12 +19,13 @@ struct BankSettingsView: View {
                     HStack {
                         TextField("Add a Bank", text: $bank)
                         Spacer()
-                        Image(systemName: "plus")
-                            .foregroundColor(.blue)
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.themeThree)
                             .onTapGesture {
                                 settings.addElement(new: bank, element: &settings.banks, key: settings.bankKey)
                                 bank = ""
                             }
+                            .shadow(radius: 10)
                             .disabled(bank.isEmpty)
                     }
                     
@@ -33,8 +34,8 @@ struct BankSettingsView: View {
                 }
                 
                 Section {
-                    ForEach(settings.banks, id: \.self) { i in
-                        Text(i)
+                    ForEach(settings.banks, id: \.self) { bank in
+                        Text(bank)
                     }
                     .onDelete(perform: settings.removeBank)
                 } header: {
@@ -44,7 +45,6 @@ struct BankSettingsView: View {
                         Text("Active Accounts")
                     }
                 }
-                
             }
         } label: {
             Text("Banks")
