@@ -43,6 +43,8 @@ struct HomeView: View {
                 AppSettingsView()
             case .add:
                 AddTransactionView()
+            case .generator:
+                GeneratorView()
             }
         }
         .onAppear {
@@ -152,14 +154,17 @@ extension HomeView {
     private var settingsMenuSubview: some View {
         Menu {
             Section {
-                EditButton()
-                    .disabled(vm.allTransactions.isEmpty)
+                
+                Button(action: { activeSheet = .generator } ) {
+                    Label("Generate Stats", systemImage: "wand.and.rays")
+                }
+                
             }
             Section {
                 Button(action: {
                     activeSheet = .settings
                 }) {
-                    Label("Settings", systemImage: "")
+                    Label("Settings", systemImage: "gear")
                 }
             }
         } label: {
