@@ -8,82 +8,97 @@
 import SwiftUI
 
 struct GeneratorView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = GeneratorViewModel()
     
+    @State private var isGenerating: Bool = false
     @State private var isGenerated: Bool = false
-    @State private var tabCount: Int = 1
     
     var body: some View {
-        
-        VStack(alignment: .leading) {
-            Text("Generate Spending Report")
-                .font(Font.system(.title2, design: .default).weight(.bold))
-            Spacer()
-            
-            TabView(selection: $tabCount) {
+            VStack {
+                Text("Generate Spending Report")
+                    .font(Font.system(.title2, design: .default).weight(.bold))
                 
-                Button {
-                    withAnimation {
-                        tabCount = 2
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                            isGenerated = true
-                            viewModel.generateWeekReport()
+                HStack {
+                    Button {
+                        withAnimation {
+                            isGenerating = true
                         }
-                        
-                    }
-                    //generate 1 week report
-                    
-                } label: {
-                    Text("Generate This week")
-                }
-                .onAppear {
-                    withAnimation {
-                        tabCount = 1
-                    }
-                    
-                }
-                
-                VStack {
-                    if isGenerated {
-                        mockView
-                            .transition(.move(edge: .top))
-                    } else {
-                        Text("Generating Report")
-                        ProgressView()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                            withAnimation {
+                                
+                                viewModel.generateReport(type: .thisYear, customStart: nil, customEnd: nil) {
+                                    viewModel.publishReport()
+                                }
+                                
+                                isGenerated = true
+                                isGenerating = false
+                            }
+                        }
+                    } label: {
+                        GroupBox("Generate Week") {
+                        }
                     }
                 }
-                .tag(2)
                 
                 
-                
+                Spacer()
             }
-            .tabViewStyle(PageTabViewStyle())
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .overlay {
+                if isGenerating {
+                        VStack {
+                            Text("Generating Report")
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                        }
+                        .padding()
+                        .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 10))
+                    
+                }
+                if isGenerated {
+                    mockView
+                        .padding()
+                        .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 10))
+                        .padding()
+                        .onDisappear {
+                            viewModel.resetStats()
+                        }
+                }
+
+            }
             
-        }
-        .padding()
-        
-        
-        
     }
     
     
     var mockView: some View {
-        
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading) {
-                Text("Spent Today")
-                    .font(.system(size: 30, weight: .regular, design: .default))
-                    .opacity(0.5)
+                HStack {
+                    Text("Spent This week")
+                        .font(.system(size: 30, weight: .regular, design: .default))
+                    Spacer()
+                    Button {
+
+                        isGenerated = false
+                        
+                    } label: {
+                        Image(systemName: "x.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.themeThree)
+                            .shadow(radius: 10)
+                    }
+                    
+                }
+                
                 
             }
             
             HStack(alignment: .center) {
-                Text("\(viewModel.generatedAmount)")
+                Text("$\(viewModel.generatedAmount, specifier: "%.2f")")
                 
                 Spacer()
-                Text("-200")
-                    .foregroundColor(.red)
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
                 
             }
             
@@ -91,20 +106,18 @@ struct GeneratorView: View {
                 Text("Top Category")
                     .font(.headline)
                     .opacity(0.5)
-                Text("Amex")
+                Text(viewModel.generatedCategory.first ?? "")
                 
                 Text("Most Used payment")
                     .font(.headline)
                     .opacity(0.5)
-                Text("Bills")
+                Text(viewModel.generatedPayment.first ?? "")
                 
             }
             
         }
-        .onAppear {
-            
-        }
+        .transition(.scale)
     }
-    
 }
+
 

@@ -49,16 +49,16 @@ class CoreDataHandler: ObservableObject {
         let monthDateFrom = calendar.startOfDay(for: Date().getThisMonthStart()!)
         let monthDateTo = Date().getThisMonthEnd()
         
-        getTransaction(&all)
+        getTransaction(&all, debugStatement: "CoreDataHandler() Line 52")
         getRangeOfTransactions(start: todayDateFrom, end: todayDateTo ?? Date(), &today)
         getRangeOfTransactions(start: yesterdayDateFrom  ?? Date(), end: yesterdayDateTo, &yesterday)
         getRangeOfTransactions(start: weekDateFrom, end: weekDateTo ?? Date() , &week)
         getRangeOfTransactions(start: monthDateFrom, end: monthDateTo ?? Date(), &month)
-        print("Core Data Initialized")
+        print("Core Data Initialized From: CoreDataHandler() Line 57")
        
     }
 
-    func getTransaction(_ input: inout [TransactionEntity]) {
+    func getTransaction(_ input: inout [TransactionEntity], debugStatement: String) {
         
         var sort: [NSSortDescriptor] {
             return [NSSortDescriptor(key: "date", ascending: false)]
@@ -69,7 +69,6 @@ class CoreDataHandler: ObservableObject {
         
         do {
             input = try container.viewContext.fetch(genericRequest)
-            print("Core Data Initialized")
         } catch let error {
             print("Error Fetching. \(error)")
         }
