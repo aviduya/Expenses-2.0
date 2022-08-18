@@ -27,6 +27,7 @@
 		0E63B11C28A265D900936E82 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E63B11B28A265D900936E82 /* LocationHandler.swift */; };
 		0E75596528ACBCE6002B0898 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75596428ACBCE6002B0898 /* CardViewModel.swift */; };
 		0E75596928ACDC2F002B0898 /* GeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75596828ACDC2F002B0898 /* GeneratorView.swift */; };
+		0E75596C28ADC970002B0898 /* GeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E75596B28ADC970002B0898 /* GeneratorViewModel.swift */; };
 		0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */; };
 		0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68B274F13C200F10D5C /* ExpensesApp.swift */; };
 		0E83B690274F13C200F10D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B68F274F13C200F10D5C /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		0E63B11B28A265D900936E82 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		0E75596428ACBCE6002B0898 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		0E75596828ACDC2F002B0898 /* GeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorView.swift; sourceTree = "<group>"; };
+		0E75596B28ADC970002B0898 /* GeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorViewModel.swift; sourceTree = "<group>"; };
 		0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBoxPickersView.swift; sourceTree = "<group>"; };
 		0E83B688274F13C200F10D5C /* Expn.se.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expn.se.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E83B68B274F13C200F10D5C /* ExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesApp.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		0E086B5328891E160055C04A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				0E75596A28ADC94C002B0898 /* Generator */,
 				0E1BBE1228A36AF200483848 /* AllTransactions */,
 				0E1BBE1128A36AE700483848 /* AddTransactions */,
 				0E1BBE1028A36ADC00483848 /* Settings */,
@@ -271,6 +274,14 @@
 			path = GeneratorView;
 			sourceTree = "<group>";
 		};
+		0E75596A28ADC94C002B0898 /* Generator */ = {
+			isa = PBXGroup;
+			children = (
+				0E75596B28ADC970002B0898 /* GeneratorViewModel.swift */,
+			);
+			path = Generator;
+			sourceTree = "<group>";
+		};
 		0E83B67F274F13C100F10D5C = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +417,7 @@
 				0E0ED65728120BB900A318E6 /* AllTransacitonsView.swift in Sources */,
 				0EBBB4362800D10300F0A875 /* HomeView.swift in Sources */,
 				0EA75E9D28222223005DCB14 /* EmptyView.swift in Sources */,
+				0E75596C28ADC970002B0898 /* GeneratorViewModel.swift in Sources */,
 				0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */,
 				0E8DE73728A5C8DC005B00A0 /* ThresholdSettingView.swift in Sources */,
 				0E5901D128287A75000045C2 /* ColorExtensions.swift in Sources */,

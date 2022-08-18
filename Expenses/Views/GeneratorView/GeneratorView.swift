@@ -8,26 +8,67 @@
 import SwiftUI
 
 struct GeneratorView: View {
+    @StateObject private var viewModel = GeneratorViewModel()
     
+    @State private var isGenerated: Bool = false
     @State private var tabCount: Int = 1
     
     var body: some View {
-        NavigationView {
-            TabView{
-                Text("test")
-                    .tabItem {
-                        Label("Menu", systemImage: "list.dash")
+        
+        VStack(alignment: .leading) {
+            Text("Generate Spending Report")
+                .font(Font.system(.title2, design: .default).weight(.bold))
+            Spacer()
+            
+            TabView(selection: $tabCount) {
+                
+                Button {
+                    withAnimation {
+                        tabCount = 2
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                            isGenerated = true
+                            viewModel.generateWeekReport()
+                        }
+                        
+                    }
+                    //generate 1 week report
+                    
+                } label: {
+                    Text("Generate This week")
                 }
-                mockView
-                    .tabItem {
-                                        Label("Order", systemImage: "square.and.pencil")
-                                    }
+                .onAppear {
+                    withAnimation {
+                        tabCount = 1
+                    }
+                    
+                }
+                
+                VStack {
+                    if isGenerated {
+                        mockView
+                            .transition(.move(edge: .top))
+                    } else {
+                        Text("Generating Report")
+                        ProgressView()
+                    }
+                }
+                .tag(2)
+                
+                
+                
             }
+            .tabViewStyle(PageTabViewStyle())
+            
         }
+        .padding()
+        
+        
+        
     }
     
     
     var mockView: some View {
+        
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading) {
                 Text("Spent Today")
@@ -37,8 +78,8 @@ struct GeneratorView: View {
             }
             
             HStack(alignment: .center) {
-                Text("$200")
-                    
+                Text("\(viewModel.generatedAmount)")
+                
                 Spacer()
                 Text("-200")
                     .foregroundColor(.red)
@@ -56,8 +97,11 @@ struct GeneratorView: View {
                     .font(.headline)
                     .opacity(0.5)
                 Text("Bills")
-                   
+                
             }
+            
+        }
+        .onAppear {
             
         }
     }
