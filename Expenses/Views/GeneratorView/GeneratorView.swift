@@ -14,10 +14,23 @@ struct GeneratorView: View {
     @State private var isGenerating: Bool = false
     @State private var isGenerated: Bool = false
     
+    
+    @State private var selectedGeneratorType: GeneratedTypes = .yesterday {
+        didSet {
+            isGenerated = false
+        }
+    }
+    
     var body: some View {
             VStack {
                 Text("Generate Spending Report")
                     .font(Font.system(.title2, design: .default).weight(.bold))
+                
+                Picker("Select Me", selection: $selectedGeneratorType) {
+                    ForEach(GeneratedTypes.allCases, id: \.self) {
+                        Text($0.rawValue)
+                    }
+                }
                 
                 HStack {
                     Button {
@@ -27,7 +40,7 @@ struct GeneratorView: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                             withAnimation {
                                 
-                                viewModel.generateReport(type: .thisYear, customStart: nil, customEnd: nil) {
+                                viewModel.generateReport(type: selectedGeneratorType, customStart: nil, customEnd: nil) {
                                     viewModel.publishReport()
                                 }
                                 
@@ -36,8 +49,7 @@ struct GeneratorView: View {
                             }
                         }
                     } label: {
-                        GroupBox("Generate Week") {
-                        }
+                      Text("Generate")
                     }
                 }
                 
@@ -76,7 +88,7 @@ struct GeneratorView: View {
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Spent This week")
+                    Text("Spent This \(selectedGeneratorType.rawValue)")
                         .font(.system(size: 30, weight: .regular, design: .default))
                     Spacer()
                     Button {

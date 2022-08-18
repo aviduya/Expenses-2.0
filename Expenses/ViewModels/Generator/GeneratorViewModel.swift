@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum GeneratedTypes {
-    case yesterday
-    case thisWeek
-    case thisMonth
-    case lastSixMonth
-    case thisYear
-    case custom
+enum GeneratedTypes: String, CaseIterable, Hashable {
+    case yesterday = "Yesterday"
+    case thisWeek = "This week"
+    case thisMonth = "This Month"
+    case lastSixMonth = "Last 6 Months"
+    case thisYear = "This Year"
+    case custom = "Custom"
     
 }
 
@@ -73,7 +73,7 @@ final class GeneratorViewModel: ObservableObject {
         
         closure()
         
-        print(generatedEntity)
+        print(generatedEntity.count)
         
     }
     
@@ -83,7 +83,6 @@ final class GeneratorViewModel: ObservableObject {
             generatedAmount += generatedContent.amount
             generatedCategory.append(generatedContent.category ?? "Error")
             generatedPayment.append(generatedContent.bank ?? "Error")
-            
         }
         
     }
