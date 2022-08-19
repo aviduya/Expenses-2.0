@@ -14,6 +14,7 @@ enum GeneratedTypes: String, CaseIterable, Hashable {
     case lastSixMonth = "Last 6 Months"
     case thisYear = "This Year"
     case custom = "Custom"
+    case none = "None"
     
 }
 
@@ -27,6 +28,7 @@ final class GeneratorViewModel: ObservableObject {
     
     let dataManager: CoreDataHandler = .shared
     private var calendar = Calendar.current
+    
     init() {
         
     }
@@ -37,7 +39,7 @@ final class GeneratorViewModel: ObservableObject {
         print("Deinited \(generatedEntity.count)")
     }
     
-    func generateReport(type: GeneratedTypes, customStart: Date?, customEnd: Date?, _ closure: () -> Void) {
+    func generateReport(type: GeneratedTypes, customStart: Date?, customEnd: Date?, success successClosure: () -> Void, none noneClosure: () -> Void) {
         let calendar = Calendar.current
         
         var startDate = Date()
@@ -63,6 +65,8 @@ final class GeneratorViewModel: ObservableObject {
         case .custom:
             startDate = calendar.startOfDay(for: customStart ?? Date())
             endDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: customEnd ?? Date()) ?? Date()
+        case .none:
+            return
         
         }
         
@@ -71,7 +75,11 @@ final class GeneratorViewModel: ObservableObject {
         
         dataManager.getRangeOfTransactions(start: startDate, end: endDate, &generatedEntity)
         
-        closure()
+        if !generatedEntity.isEmpty {
+            successClosure()
+        } else {
+            noneClosure()
+        }
         
         print(generatedEntity.count)
         
