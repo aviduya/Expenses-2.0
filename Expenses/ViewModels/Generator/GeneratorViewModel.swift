@@ -23,6 +23,7 @@ final class GeneratorViewModel: ObservableObject {
     @Published private (set) var generatedAmount: Double = 0.0
     @Published private (set) var generatedCategory: [String] = []
     @Published private (set) var generatedPayment: [String] = []
+    @Published private (set) var generatedMerchant: [String] = []
     
     @Published var generatedEntity: [TransactionEntity] = []
     
@@ -88,6 +89,7 @@ final class GeneratorViewModel: ObservableObject {
             generatedAmount += generatedContent.amount
             generatedCategory.append(generatedContent.category ?? "Error")
             generatedPayment.append(generatedContent.bank ?? "Error")
+            generatedMerchant.append(generatedContent.merchant ?? "Error")
         }
         
     }
@@ -96,6 +98,7 @@ final class GeneratorViewModel: ObservableObject {
         generatedAmount = 0.0
         generatedCategory = []
         generatedPayment = []
+        generatedMerchant = []
     }
     
 }

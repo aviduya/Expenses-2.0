@@ -24,14 +24,23 @@ struct GeneratorView: View {
             
             Text("Generate Spending Report")
                 .font(Font.system(.title2, design: .default).weight(.bold))
-            
+            Spacer()
             if isGenerated {
-                mock
-                    .transition(.opacity)
+                Group {
+                    mock
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 14))
+                    Divider()
+                    highlights
+                }
+                
+                .transition(.opacity)
+                
+                
                 
             }
-            
             Spacer()
+            
             
             HStack {
                 Picker("Select Me", selection: $selectedGeneratorType) {
@@ -41,8 +50,8 @@ struct GeneratorView: View {
                             .foregroundColor(.themeThree)
                     }
                 }
-              
-               
+                
+                
                 .frame(maxWidth: .infinity, maxHeight: 50)
                 .background(material, in: RoundedRectangle(cornerRadius: 14))
                 Button {
@@ -64,7 +73,7 @@ struct GeneratorView: View {
                             
                             isGenerated = true
                             isGenerating = false
-                                                    
+                            
                         }
                     }
                     withAnimation {
@@ -75,10 +84,10 @@ struct GeneratorView: View {
                     HStack {
                         Text("Generate")
                         Image(systemName: "arrow.clockwise")
-                            
+                        
                     }
                     
-                        
+                    
                 }
                 .foregroundColor(.themeThree)
                 .padding()
@@ -86,13 +95,56 @@ struct GeneratorView: View {
                 .background(material, in: RoundedRectangle(cornerRadius: 14))
                 
             }
-   
-
+            
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .overlay {
+            if isGenerating {
+                VStack(spacing: 5) {
+                    ProgressView()
+                        .tint(.themeThree)
+                    Text("Generating Report")
+                }
+                .padding()
+                .background(material, in: RoundedRectangle(cornerRadius: 14))
+            }
+        }
         .padding()
     }
-
+    
+    var highlights: some View {
+        
+        Group {
+            HStack {
+                Image(systemName: "building.columns")
+                    .font(.title)
+                Text("You have used your \(viewModel.generatedPayment.first ?? "") account \(viewModel.generatedPayment.count) times in this selected period.")
+                
+            }
+            
+            HStack {
+                Image(systemName: "tag")
+                    .font(.title)
+                Text("Your favorite place to shop is at was \(viewModel.generatedMerchant.first ?? "").")
+                
+            }
+            
+            HStack {
+                Image(systemName: "bag")
+                    .font(.title)
+                Text("You mostly spend your money on \(viewModel.generatedCategory.first ?? "") during this set period.")
+                
+            }
+            
+        }
+        
+        
+        
+        
+        
+    }
+    
     
     
     var mock: some View {
@@ -110,98 +162,58 @@ struct GeneratorView: View {
                     
                 }
             } else {
-                GeometryReader { geo in
-                    
-                    VStack(alignment: .leading) {
-                        Text("Spending Statistics")
-                            .opacity(0.33)
-                        HStack {
-                            VStack {
-                                VStack(alignment: .leading) {
-                                    Text("Top Payment")
-                                        .font(.footnote)
-                                    Text("\(viewModel.generatedPayment.first ?? "")" + " Card")
-                                        .font(.headline)
-                                }
-                                
-                                .padding()
-                                .frame(maxWidth: geo.size.width, maxHeight: 75, alignment: .leading)
-                                .background(material, in: RoundedRectangle(cornerRadius: 14))
-                                
-                                
-                                VStack(alignment: .leading) {
-                                    Text("Top Category")
-                                        .font(.footnote)
-                                    Text("\(viewModel.generatedCategory.first ?? "")")
-                                        .font(.headline)
-                                }
-                                .padding()
-                                .frame(maxWidth: geo.size.width, maxHeight: 75, alignment: .leading)
-                                .background(material, in: RoundedRectangle(cornerRadius: 14))
+                
+                
+                VStack(alignment: .leading) {
+                    Text("Spending Statistics")
+                        .opacity(0.33)
+                    HStack {
+                        VStack {
+                            VStack(alignment: .leading) {
+                                Text("Top Payment")
+                                    .font(.footnote)
+                                Text("\(viewModel.generatedPayment.first ?? "")" + " Card")
+                                    .font(.headline)
                             }
+                            
+                            .padding()
+                            .frame(maxWidth: .infinity, maxHeight: 75, alignment: .leading)
+                            .background(material, in: RoundedRectangle(cornerRadius: 14))
+                            .shadow(radius: 5)
                             
                             
                             VStack(alignment: .leading) {
-                                Text("Total Amount")
-                                Spacer()
-                                Text("$\(viewModel.generatedAmount, specifier: "%.2f")")
-                                    .font(.system(.title, design: .rounded))
-                                Spacer()
+                                Text("Top Category")
+                                    .font(.footnote)
+                                Text("\(viewModel.generatedCategory.first ?? "")")
+                                    .font(.headline)
                             }
                             .padding()
-                            .frame(maxWidth: geo.size.width, maxHeight: 160, alignment: .topLeading)
+                            .frame(maxWidth: .infinity, maxHeight: 75, alignment: .leading)
                             .background(material, in: RoundedRectangle(cornerRadius: 14))
+                            .shadow(radius: 5)
+                        }
+                        
+                        
+                        VStack(alignment: .leading) {
+                            Text("Total Amount")
+                            Spacer()
+                            Text("$\(viewModel.generatedAmount, specifier: "%.2f")")
+                                .font(.system(.title, design: .rounded))
+                            Spacer()
                             
                         }
+                        .padding()
+                        .frame(maxWidth: .infinity, maxHeight: 160, alignment: .topLeading)
+                        .background(material, in: RoundedRectangle(cornerRadius: 14))
+                        .shadow(radius: 5)
+                        
                     }
                 }
                 
                 
-//                VStack(alignment: .leading) {
-//                    HStack {
-//                        Text("\(selectedGeneratorType.rawValue)")
-//                            .font(.system(size: 30, weight: .regular, design: .default))
-//                        Spacer()
-//                        Button {
-//                            withAnimation {
-//                                isGenerated = false
-//                            }
-//
-//                        } label: {
-//                            Image(systemName: "arrow.down")
-//                                .font(.title)
-//                                .foregroundColor(.themeThree)
-//                                .shadow(radius: 10)
-//                        }
-//
-//                    }
-//
-//
-//                }
-//
-//                HStack(alignment: .center) {
-//                    Text("$\(viewModel.generatedAmount, specifier: "%.2f")")
-//
-//                    Spacer()
-//
-//                }
-//
-//                VStack(alignment: .leading, spacing: 10) {
-//                    Text("Top Category")
-//                        .font(.headline)
-//                        .opacity(0.5)
-//                    Text(viewModel.generatedCategory.first ?? "")
-//
-//                    Text("Most Used payment")
-//                        .font(.headline)
-//                        .opacity(0.5)
-//                    Text(viewModel.generatedPayment.first ?? "")
-//
-//                }
             }
         }
- 
-        .transition(.opacity)
         .onDisappear {
             viewModel.resetStats()
         }
