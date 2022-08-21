@@ -7,27 +7,26 @@
 
 import Foundation
 
-enum GeneratedTypes: String, CaseIterable, Hashable {
-    case yesterday = "Yesterday"
-    case thisWeek = "This week"
-    case thisMonth = "This Month"
-    case lastSixMonth = "Last 6 Months"
-    case thisYear = "This Year"
-    case custom = "Custom"
-    case none = "None"
-    
-}
+
 
 final class GeneratorViewModel: ObservableObject {
     
-    @Published private(set) var generatedAmount: Double = 0.0
-    @Published private(set) var generatedCategory: [String] = []
-    @Published private(set) var generatedPayment: [String] = []
+    enum GeneratedTypes: String, CaseIterable, Hashable {
+        case yesterday = "Yesterday"
+        case thisWeek = "This week"
+        case thisMonth = "This Month"
+        case lastSixMonth = "Last 6 Months"
+        case thisYear = "This Year"
+        case custom = "Custom"
+    }
+    
+    @Published private (set) var generatedAmount: Double = 0.0
+    @Published private (set) var generatedCategory: [String] = []
+    @Published private (set) var generatedPayment: [String] = []
     
     @Published var generatedEntity: [TransactionEntity] = []
     
     let dataManager: CoreDataHandler = .shared
-    private var calendar = Calendar.current
     
     init() {
         
@@ -65,8 +64,6 @@ final class GeneratorViewModel: ObservableObject {
         case .custom:
             startDate = calendar.startOfDay(for: customStart ?? Date())
             endDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: customEnd ?? Date()) ?? Date()
-        case .none:
-            return
         
         }
         
