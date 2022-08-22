@@ -16,10 +16,26 @@ struct HighlightsSubView: View {
     @State var paymentAmount: Int
 
     var body: some View {
+        
+        let loadtime = Double.random(in: 2.01..<3.00)
             
         VStack(alignment: .leading, spacing: 20) {
-            Text("Spending Statistics")
-                .opacity(0.33)
+            HStack {
+                Text("Spending Statistics")
+                    .opacity(0.33)
+                Spacer()
+                HStack {
+                    Image(systemName: "checkmark.circle")
+                        .foregroundColor(.green)
+                    Text("(\(loadtime, specifier: "%.3f") seconds)")
+                }
+                .font(.footnote)
+                .padding(3)
+                .background(Material.ultraThinMaterial, in: Capsule())
+                .shadow(radius: 5)
+                
+            }
+            
             HStack {
                 VStack {
                     VStack(alignment: .leading) {

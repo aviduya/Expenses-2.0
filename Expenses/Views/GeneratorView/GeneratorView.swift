@@ -40,11 +40,13 @@ struct GeneratorView: View {
                             .font(.title)
                             .foregroundColor(.themeThree)
                         Spacer()
+                     
                     }
                     HighlightView
                         .padding()
                         .background(material, in: RoundedRectangle(cornerRadius: 14))
                 }
+                .padding(.top, 20)
                 .transition(.move(edge: .bottom))
                 
                     
@@ -191,7 +193,7 @@ extension GeneratorView {
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.3)) {
                             isShowingPicker.toggle()
-                            isGenerated = false 
+                            isGenerated = false
                         }
                     }
                     .rotationEffect(.degrees(
