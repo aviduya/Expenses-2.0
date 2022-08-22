@@ -58,7 +58,6 @@ struct GeneratorView: View {
             
         }
         .onChange(of: selectedGeneratorType, perform: { _ in
-            
             withAnimation {
                 if selectedGeneratorType == .custom {
                     isCustom = true
@@ -67,12 +66,9 @@ struct GeneratorView: View {
                     isCustom = false
                 }
             }
-            
             withAnimation {
                 isGenerated = false
             }
-            
-    
         })
         .frame(maxWidth: .infinity, alignment: .leading)
         .overlay() {
@@ -84,14 +80,9 @@ struct GeneratorView: View {
                 footer
                 
                 if isCustom {
-                    
                     customDateRangePicker
-                    
                 }
             }
-           
-            
-            
         }
         .padding()
     }
@@ -200,6 +191,7 @@ extension GeneratorView {
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.3)) {
                             isShowingPicker.toggle()
+                            isGenerated = false 
                         }
                     }
                     .rotationEffect(.degrees(
