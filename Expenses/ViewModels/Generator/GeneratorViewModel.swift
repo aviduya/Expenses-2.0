@@ -24,7 +24,6 @@ final class GeneratorViewModel: ObservableObject {
     @Published private (set) var generatedCategory: [String] = []
     @Published private (set) var generatedPayment: [String] = []
     @Published private (set) var generatedMerchant: [String] = []
-    
     @Published var generatedEntity: [TransactionEntity] = []
     
     let dataManager: CoreDataHandler = .shared

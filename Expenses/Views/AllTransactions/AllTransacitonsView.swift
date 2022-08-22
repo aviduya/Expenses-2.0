@@ -25,7 +25,7 @@ struct AllTransacitonsView: View {
                     header
                     
                     if dm.all.isEmpty {
-                        EmptyView()
+                        EmptyView(message: "Add a transaction")
                     } else {
                         scrollBody
                     }
@@ -145,6 +145,9 @@ extension AllTransacitonsView {
     
     var today: some View {
         VStack {
+            if dm.today.isEmpty {
+                EmptyView(message: "Add a transactioj")
+            }
             ForEach(dm.today) { t in
                 RowView(
                     entity: t,
@@ -214,7 +217,7 @@ extension AllTransacitonsView {
                         ))
                 }
                 
-                if isShowing == true {
+                if isShowing {
                     
                     VStack(alignment: .leading, spacing: 10) {
                         
@@ -222,10 +225,6 @@ extension AllTransacitonsView {
                         
                         DatePicker("Start", selection: $vm.startDate, in: ...Date(), displayedComponents: .date)
                     
-                        Image(systemName: "arrow.down")
-                            .foregroundColor(.themeThree)
-                            .font(.system(size: 20))
-                        
                         DatePicker("End", selection: $vm.endDate, in: ...Date(), displayedComponents: .date)
                             
    

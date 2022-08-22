@@ -14,6 +14,12 @@ struct GeneratorView: View {
     @State private var isGenerating: Bool = false
     @State private var isGenerated: Bool = false
     @State private var isGeneratedEmpty: Bool = false
+    @State private var isCustom: Bool = false
+    @State private var isShowingPicker: Bool = false
+    
+    @State private var customStart: Date = Date()
+    @State private var customEnd: Date = Date()
+    
     
     @State private var selectedGeneratorType: GeneratorViewModel.GeneratedTypes = .yesterday
     
@@ -21,10 +27,14 @@ struct GeneratorView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading) {
             
-            Text("Generate Spending Report")
+            Text("Spending Report")
                 .font(Font.system(.title2, design: .default).weight(.bold))
+            
+            if isCustom {
+                customDateRangePicker
+            }
             
             Spacer()
             if isGenerated {
@@ -39,13 +49,25 @@ struct GeneratorView: View {
                     .background(material, in: RoundedRectangle(cornerRadius: 14))
                     .transition(.opacity)
                 
+            } else {
+                EmptyView(message: "Generate a Report")
             }
             Spacer()
             
             footer
             
         }
-        .onChange(of: selectedGeneratorType, perform: { newValue in
+        .onChange(of: selectedGeneratorType, perform: { _ in
+            
+            withAnimation {
+                if selectedGeneratorType == .custom {
+                    isCustom = true
+                    isShowingPicker = true
+                } else {
+                    isCustom = false
+                }
+            }
+    
             isGenerated = false
         })
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -99,12 +121,12 @@ extension GeneratorView {
             Button {
                 withAnimation {
                     isGenerating = true
-                    
+                    isShowingPicker = false
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     withAnimation {
                         
-                        viewModel.generateReport(type: selectedGeneratorType, customStart: nil, customEnd: nil) {
+                        viewModel.generateReport(type: selectedGeneratorType, customStart: customStart, customEnd: customEnd) {
                             viewModel.publishReport()
                             isGeneratedEmpty = false
                             print("success")
@@ -148,5 +170,41 @@ extension GeneratorView {
         .padding()
         .background(material, in: RoundedRectangle(cornerRadius: 14))
         
+    }
+    
+    var customDateRangePicker: some View {
+        VStack {
+            HStack {
+                Text("Edit Date Range")
+                Spacer()
+                Image(systemName: isShowingPicker ? "chevron.right.circle.fill" : "chevron.right.circle")
+                    .font(.system(size: 20))
+                    .foregroundColor(.themeThree)
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            isShowingPicker.toggle()
+                        }
+                    }
+                    .rotationEffect(.degrees(
+                        isShowingPicker ? 90 : 0
+                    ))
+            }
+            
+            if isShowingPicker {
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    
+                    Divider()
+                    
+                    DatePicker("Start", selection: $customStart, in: ...Date(), displayedComponents: .date)
+                    
+                    DatePicker("End", selection: $customEnd, in: ...Date(), displayedComponents: .date)
+                        
+
+                }
+            }
+        }
+        .padding()
+        .materialBackground()
     }
 }

@@ -126,7 +126,7 @@ extension HomeView {
             .padding(.top, 5)
             
             if vm.allTransactions.isEmpty {
-                EmptyView()
+                EmptyView(message: "Add a transaction")
             } else {
                 TabView(selection: $tabCount) {
                     ForEach(vm.allTransactions.prefix(5)) { transaction in
