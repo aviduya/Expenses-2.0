@@ -17,7 +17,7 @@ struct EmptyView: View {
             HStack {
                 Spacer()
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("To get started,")
+                    Text("To get started")
                     Text(message)
                         .foregroundColor(.themeThree)
                         .opacity(0.33)

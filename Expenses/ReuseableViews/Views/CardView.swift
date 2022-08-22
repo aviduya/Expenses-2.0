@@ -28,16 +28,11 @@ struct CardView: View {
     @State private var isExpanded: Bool = false
 
     var handledAddress: String {
-        
-        var placeholder = ""
-        
-        if vm.viewAdress == ", , " {
-            placeholder = "Could not determine Location"
+        if vm.viewAdress.count < 10 {
+            return "Location was not saved."
         } else {
-            placeholder = vm.viewAdress
+            return vm.viewAdress
         }
-        
-        return placeholder
     }
     
     var body: some View {

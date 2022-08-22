@@ -27,34 +27,34 @@ struct GeneratorView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             
             Text("Spending Report")
                 .font(Font.system(.title2, design: .default).weight(.bold))
             
-            if isCustom {
-                customDateRangePicker
-            }
             
-            Spacer()
             if isGenerated {
-                HStack {
-                    Text("\(selectedGeneratorType.rawValue)'s Report")
-                        .font(.title)
-                        .foregroundColor(.themeThree)
-                    Spacer()
+                VStack {
+                    HStack {
+                        Text("\(selectedGeneratorType.rawValue)'s Report")
+                            .font(.title)
+                            .foregroundColor(.themeThree)
+                        Spacer()
+                    }
+                    HighlightView
+                        .padding()
+                        .background(material, in: RoundedRectangle(cornerRadius: 14))
                 }
-                HighlightView
-                    .padding()
-                    .background(material, in: RoundedRectangle(cornerRadius: 14))
-                    .transition(.opacity)
+                .transition(.move(edge: .bottom))
+                
+                    
                 
             } else {
                 EmptyView(message: "Generate a Report")
             }
             Spacer()
             
-            footer
+            
             
         }
         .onChange(of: selectedGeneratorType, perform: { _ in
@@ -67,14 +67,31 @@ struct GeneratorView: View {
                     isCustom = false
                 }
             }
+            
+            withAnimation {
+                isGenerated = false
+            }
+            
     
-            isGenerated = false
         })
         .frame(maxWidth: .infinity, alignment: .leading)
-        .overlay {
+        .overlay() {
             if isGenerating {
                 loading
             }
+            VStack {
+                Spacer()
+                footer
+                
+                if isCustom {
+                    
+                    customDateRangePicker
+                    
+                }
+            }
+           
+            
+            
         }
         .padding()
     }
@@ -88,7 +105,7 @@ extension GeneratorView {
         VStack(alignment: .leading, spacing: 10) {
             if isGeneratedEmpty {
                 VStack {
-                    Text("No Transactions Recorded")
+                    Text("No Transactions Recorded within timeframe")
                         .font(.title)
                     
                 }
@@ -199,8 +216,8 @@ extension GeneratorView {
                     DatePicker("Start", selection: $customStart, in: ...Date(), displayedComponents: .date)
                     
                     DatePicker("End", selection: $customEnd, in: ...Date(), displayedComponents: .date)
-                        
-
+                    
+                    
                 }
             }
         }

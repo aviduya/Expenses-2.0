@@ -17,7 +17,7 @@ final class GeneratorViewModel: ObservableObject {
         case thisMonth = "This Month"
         case lastSixMonth = "Last 6 Months"
         case thisYear = "This Year"
-        case custom = "Custom"
+        case custom = "Custom Date"
     }
     
     @Published private (set) var generatedAmount: Double = 0.0

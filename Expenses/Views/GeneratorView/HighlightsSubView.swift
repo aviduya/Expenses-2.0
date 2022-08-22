@@ -71,9 +71,11 @@ struct HighlightsSubView: View {
                 .opacity(0.33)
             HStack {
                 Image(systemName: "building.columns")
+                    .foregroundColor(.orange)
                     .font(.title2)
                     .frame(width: 30, height: 30)
-                
+                Divider()
+                    .frame(height: 30)
                 if let payment = payment {
                     Text("You have used your \(payment) account \(paymentAmount) times in this selected period.")
                 }
@@ -82,8 +84,11 @@ struct HighlightsSubView: View {
             
             HStack {
                 Image(systemName: "tag")
+                    .foregroundColor(.blue)
                     .font(.title2)
                     .frame(width: 30, height: 30)
+                Divider()
+                    .frame(height: 30)
                 if let merchant = merchant {
                     Text("Your favorite place to shop at was \(merchant).")
                 }
@@ -91,9 +96,12 @@ struct HighlightsSubView: View {
             }
             
             HStack {
-                Image(systemName: "bag")
+                Image(systemName: "checklist")
+                    .foregroundColor(.green)
                     .font(.title2)
                     .frame(width: 30, height: 30)
+                Divider()
+                    .frame(height: 30)
                 if let category = category {
                     Text("You mostly spend your money on \(category) during this set period.")
                 }
