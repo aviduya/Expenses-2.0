@@ -9,6 +9,7 @@ import Foundation
 import MapKit
 
 final class CardViewModel: ObservableObject {
+    
     @Published private(set) var viewAdress: String = ""
 
 

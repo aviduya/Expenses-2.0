@@ -14,6 +14,7 @@ struct GeneratorView: View {
     @State private var isGenerating: Bool = false
     @State private var isGenerated: Bool = false
     @State private var isGeneratedEmpty: Bool = false
+    
     @State private var selectedGeneratorType: GeneratorViewModel.GeneratedTypes = .yesterday
     
     private let material: Material = .ultraThinMaterial
@@ -26,17 +27,37 @@ struct GeneratorView: View {
                 .font(Font.system(.title2, design: .default).weight(.bold))
             Spacer()
             if isGenerated {
+                HStack {
+                    Text("\(selectedGeneratorType.rawValue)'s Report")
+                        .font(.title)
+                        .foregroundColor(.themeThree)
+                    Spacer()
+                    Button {
+                        withAnimation {
+                            isGenerated = false
+                        }
+                        
+                    } label: {
+                        Image(systemName: "arrow.down.forward.and.arrow.up.backward")
+                            .font(.title)
+                            .foregroundColor(.themeThree)
+                    }
+
+                }
+                
+                
                 Group {
                     mock
                         .padding()
                         .background(material, in: RoundedRectangle(cornerRadius: 14))
-                    Divider()
-                    highlights
+                    if !isGeneratedEmpty {
+                        Divider()
+                        highlights
+                    }
+                    
                 }
                 
                 .transition(.opacity)
-                
-                
                 
             }
             Spacer()
@@ -98,6 +119,12 @@ struct GeneratorView: View {
             
             
         }
+        .onChange(of: selectedGeneratorType, perform: { newValue in
+            
+            isGenerated = false
+            
+            
+        })
         .frame(maxWidth: .infinity, alignment: .leading)
         .overlay {
             if isGenerating {
@@ -116,6 +143,8 @@ struct GeneratorView: View {
     var highlights: some View {
         
         Group {
+            Text("Highlights")
+                .opacity(0.33)
             HStack {
                 Image(systemName: "building.columns")
                     .font(.title)
@@ -210,6 +239,7 @@ struct GeneratorView: View {
                         
                     }
                 }
+                
                 
                 
             }
