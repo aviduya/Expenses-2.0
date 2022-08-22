@@ -41,6 +41,7 @@
 		0EBBB43427FFF46C00F0A875 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBB43327FFF46C00F0A875 /* CoreDataHandler.swift */; };
 		0EBBB4362800D10300F0A875 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBBB4352800D10300F0A875 /* HomeView.swift */; };
 		0EC5633228A633DC003926D3 /* LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5633128A633DC003926D3 /* LocationExtension.swift */; };
+		0ED2485228B3E9C0005DA716 /* HighlightsSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED2485128B3E9C0005DA716 /* HighlightsSubView.swift */; };
 		0EDA98D827F3A1F7007E86A5 /* AddTransactionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */; };
 		0EDA98DA27F3A66E007E86A5 /* AddTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D927F3A66E007E86A5 /* AddTransactionsViewModel.swift */; };
 		0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */; };
@@ -83,6 +84,7 @@
 		0EBBB43327FFF46C00F0A875 /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		0EBBB4352800D10300F0A875 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0EC5633128A633DC003926D3 /* LocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationExtension.swift; sourceTree = "<group>"; };
+		0ED2485128B3E9C0005DA716 /* HighlightsSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsSubView.swift; sourceTree = "<group>"; };
 		0EDA98D727F3A1F7007E86A5 /* AddTransactionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsModel.swift; sourceTree = "<group>"; };
 		0EDA98D927F3A66E007E86A5 /* AddTransactionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsViewModel.swift; sourceTree = "<group>"; };
 		0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsContainer.xcdatamodel; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				0E75596828ACDC2F002B0898 /* GeneratorView.swift */,
+				0ED2485128B3E9C0005DA716 /* HighlightsSubView.swift */,
 			);
 			path = GeneratorView;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				0EBBB43427FFF46C00F0A875 /* CoreDataHandler.swift in Sources */,
 				0E1C4B05287A388200DE127C /* HomeModel.swift in Sources */,
 				0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */,
+				0ED2485228B3E9C0005DA716 /* HighlightsSubView.swift in Sources */,
 				0EDA98DA27F3A66E007E86A5 /* AddTransactionsViewModel.swift in Sources */,
 				0E0ED66B2813CC5B00A318E6 /* CustomButtonStyle.swift in Sources */,
 				0E28470E2755CD52006CD281 /* AppSettingsViewModel.swift in Sources */,

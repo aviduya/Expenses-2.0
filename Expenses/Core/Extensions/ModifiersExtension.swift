@@ -26,6 +26,14 @@ extension View {
         modifier(AppSettingsThresholdStyle(primaryColor: primary, secondaryColor: secondary))
     }
     
+    func highlightSubViewStyle(maxHeight: CGFloat) -> some View {
+        modifier(HighlightSubViewStyle(maxHeight: maxHeight))
+    }
+    
+    func materialBackground() -> some View {
+        modifier(MaterialBackGround())
+    }
+    
 }
 
 fileprivate struct HomeSummaryStyle: ViewModifier {
@@ -63,6 +71,7 @@ fileprivate struct AppSettingsListStyle: ViewModifier {
     }
     
 }
+
 fileprivate struct AppSettingsThresholdStyle: ViewModifier {
     var primaryColor: Color
     var secondaryColor: Color
@@ -76,5 +85,35 @@ fileprivate struct AppSettingsThresholdStyle: ViewModifier {
             )
         
     }
+    
+}
+
+fileprivate struct MaterialBackGround: ViewModifier {
+
+    let material: Material = .ultraThinMaterial
+    let shape = RoundedRectangle(cornerRadius: 14)
+    
+    func body(content: Content) -> some View {
+        content
+            .background(material, in: shape)
+    }
+}
+
+fileprivate struct HighlightSubViewStyle: ViewModifier {
+    var maxHeight: CGFloat
+    
+    let material: Material = .ultraThinMaterial
+    
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: maxHeight, alignment: .topLeading)
+            .materialBackground()
+            .shadow(radius: 5)
+        
+    }
+        
+    
+    
     
 }
