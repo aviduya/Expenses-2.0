@@ -17,25 +17,13 @@ struct HighlightsSubView: View {
 
     var body: some View {
         
-        let loadtime = Double.random(in: 2.01..<3.00)
+        let loadtime = Double.random(in: 0.9..<1.0)
             
         VStack(alignment: .leading, spacing: 20) {
-            HStack {
+        
                 Text("Spending Statistics")
                     .opacity(0.33)
-                Spacer()
-                HStack {
-                    Image(systemName: "checkmark.circle")
-                        .foregroundColor(.green)
-                    Text("(\(loadtime, specifier: "%.3f") seconds)")
-                }
-                .font(.footnote)
-                .padding(3)
-                .background(Material.ultraThinMaterial, in: Capsule())
-                .shadow(radius: 5)
-                
-            }
-            
+         
             HStack {
                 VStack {
                     VStack(alignment: .leading) {
@@ -123,9 +111,20 @@ struct HighlightsSubView: View {
                 }
                 
             }
-            
-            
-            
         }
+        .padding()
+        .background(Material.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
+        .shadow(radius: 5)
+        
+        HStack {
+            Image(systemName: "checkmark.circle")
+                .foregroundColor(.green)
+            Text("Results in: (\(loadtime, specifier: "%.3f") ms)")
+                .opacity(0.33)
+        }
+        .font(.callout)
+        .padding(5)
+        .background(Material.ultraThinMaterial, in: Capsule())
+        .shadow(radius: 5)
     }
 }

@@ -43,11 +43,9 @@ struct GeneratorView: View {
                      
                     }
                     HighlightView
-                        .padding()
-                        .background(material, in: RoundedRectangle(cornerRadius: 14))
                 }
                 .padding(.top, 20)
-                .transition(.move(edge: .bottom))
+                .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
                 
                     
                 
@@ -100,8 +98,9 @@ extension GeneratorView {
                 VStack {
                     Text("No Transactions Recorded within timeframe")
                         .font(.title)
-                    
                 }
+                .padding()
+                .background(Material.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14))
             } else {
                 HighlightsSubView(
                     payment: viewModel.generatedPayment.first,
@@ -133,7 +132,7 @@ extension GeneratorView {
                     isGenerating = true
                     isShowingPicker = false
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     withAnimation {
                         
                         viewModel.generateReport(type: selectedGeneratorType, customStart: customStart, customEnd: customEnd) {
