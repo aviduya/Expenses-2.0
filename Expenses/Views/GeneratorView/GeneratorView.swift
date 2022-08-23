@@ -16,6 +16,7 @@ struct GeneratorView: View {
     @State private var isGeneratedEmpty: Bool = false
     @State private var isCustom: Bool = false
     @State private var isShowingPicker: Bool = false
+    @State private var isButtonPressed: Bool = false
     
     @State private var customStart: Date = Date()
     @State private var customEnd: Date = Date()
@@ -30,32 +31,30 @@ struct GeneratorView: View {
         VStack(alignment: .leading, spacing: 10) {
             
             Text("Spending Report")
-                .font(Font.system(.title2, design: .default).weight(.bold))
+                .font(Font.system(.title3, design: .default).weight(.bold))
+            header
             
+            if isCustom {
+                customDateRangePicker
+            }
             
             if isGenerated {
-                VStack {
-                    HStack {
-                        Text("\(selectedGeneratorType.rawValue)'s Report")
-                            .font(.title)
-                            .foregroundColor(.themeThree)
-                        Spacer()
-                     
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        HStack {
+                            Text("\(selectedGeneratorType.rawValue)'s Report")
+                                .font(.title3)
+                                .foregroundColor(.themeThree)
+                            Spacer()
+                        }
+                        HighlightView
                     }
-                    HighlightView
                 }
                 .padding(.top, 20)
                 .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
-                
-                    
-                
             } else {
                 EmptyView(message: "Generate a Report")
             }
-            Spacer()
-            
-            
-            
         }
         .onChange(of: selectedGeneratorType, perform: { _ in
             withAnimation {
@@ -75,16 +74,8 @@ struct GeneratorView: View {
             if isGenerating {
                 loading
             }
-            VStack {
-                Spacer()
-                footer
-                
-                if isCustom {
-                    customDateRangePicker
-                }
-            }
         }
-        .padding()
+        .padding(15)
     }
 }
 
@@ -108,7 +99,6 @@ extension GeneratorView {
                     merchant: viewModel.generatedMerchant.first,
                     amount: viewModel.generatedAmount,
                     paymentAmount: viewModel.generatedPayment.count)
-                
             }
         }
         .onDisappear {
@@ -116,7 +106,7 @@ extension GeneratorView {
         }
     }
     
-    var footer: some View {
+    var header: some View {
         HStack {
             Picker("Select Me", selection: $selectedGeneratorType) {
                 ForEach(GeneratorViewModel.GeneratedTypes.allCases, id: \.self) {
@@ -131,7 +121,9 @@ extension GeneratorView {
                 withAnimation {
                     isGenerating = true
                     isShowingPicker = false
+                    isButtonPressed.toggle()
                 }
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     withAnimation {
                         
@@ -144,10 +136,14 @@ extension GeneratorView {
                             print("none")
                         }
                         
+                        
                         isGenerated = true
                         isGenerating = false
                         
                     }
+                    
+                    isButtonPressed = false
+                    
                 }
                 withAnimation {
                     isGenerated = false
@@ -157,6 +153,7 @@ extension GeneratorView {
                 HStack {
                     Text("Generate")
                     Image(systemName: "arrow.clockwise")
+                        .rotationEffect(.degrees(isButtonPressed ? 360 : 0))
                     
                 }
                 

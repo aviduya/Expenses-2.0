@@ -20,6 +20,7 @@ struct ExpensesApp: App {
     var body: some Scene {
         WindowGroup {
                 HomeView()
+                    .preferredColorScheme(.dark)
                     .environmentObject(settings)
                     .environmentObject(dataHandler)
                     .environmentObject(locationHandler)
@@ -36,5 +37,6 @@ struct ExpensesApp: App {
                 print("Oh - interesting: I received an unexpected new value.")
             }
         }
+        
     }
 }

@@ -94,7 +94,7 @@ struct HighlightsSubView: View {
                 Divider()
                     .frame(height: 30)
                 if let merchant = merchant {
-                    Text("Your favorite place to shop at was \(merchant).")
+                    Text("Your favorite place to shop was at \(merchant).")
                 }
                 
             }
@@ -107,7 +107,7 @@ struct HighlightsSubView: View {
                 Divider()
                     .frame(height: 30)
                 if let category = category {
-                    Text("You mostly spend your money on \(category) during this set period.")
+                    Text("You mostly spent your money on \(category) during this set period.")
                 }
                 
             }

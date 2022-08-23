@@ -31,6 +31,8 @@ class LocationsHandler: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         authState()
+        
+        print(authorizationStatus)
     }
     
     func authState() {
