@@ -27,6 +27,14 @@ struct CardView: View {
     
     @State private var isExpanded: Bool = false
 
+    var handledAddress: String {
+        if vm.viewAdress.count < 10 {
+            return "Location was not saved."
+        } else {
+            return vm.viewAdress
+        }
+    }
+    
     var body: some View {
         VStack {
             VStack {
@@ -59,8 +67,8 @@ struct CardView: View {
                         CardRowView(sysImage: "dollarsign.circle", text: String(format: "%.2f", amount))
                         CardRowView(sysImage: "bag", text: merchant)
                         CardRowView(sysImage: "list.bullet", text: category)
-                        CardRowView(sysImage: "building.columns", text: bank + "Card")
-                        CardRowView(sysImage: "house", text: locationHandler.isAuthorized ? vm.viewAdress : "Location Disabled")
+                        CardRowView(sysImage: "building.columns", text: bank + " Card")
+                        CardRowView(sysImage: "mappin.and.ellipse", text: locationHandler.isAuthorized ? handledAddress : "Location Disabled")
                     }
                     
                 }

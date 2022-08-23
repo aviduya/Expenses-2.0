@@ -23,13 +23,9 @@ struct AllTransacitonsView: View {
             VStack {
                 VStack(alignment: .leading) {
                     header
-                    
-                    if dm.all.isEmpty {
-                        EmptyView()
-                    } else {
-                        scrollBody
-                    }
-                    
+                
+                    scrollBody
+                
                     footer
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -99,7 +95,6 @@ extension AllTransacitonsView {
                     Section {
                         Picker("Sort by", selection: $vm.page) {
                             
-                            
                             HStack {
                                 Text("Today")
                             }
@@ -145,6 +140,9 @@ extension AllTransacitonsView {
     
     var today: some View {
         VStack {
+            if dm.today.isEmpty {
+                EmptyView(message: "Add a transaction")
+            }
             ForEach(dm.today) { t in
                 RowView(
                     entity: t,
@@ -163,6 +161,11 @@ extension AllTransacitonsView {
     
     var week: some View {
         VStack {
+            
+            if dm.week.isEmpty {
+                EmptyView(message: "Add a transaction")
+            }
+            
             ForEach(dm.week) { t in
                 RowView(
                     entity: t,
@@ -180,6 +183,10 @@ extension AllTransacitonsView {
     
     var month: some View {
         VStack {
+            
+            if dm.month.isEmpty {
+                EmptyView(message: "Add a transaction")
+            }
             ForEach(dm.month) { t in
                 RowView(
                     entity: t,
@@ -214,7 +221,7 @@ extension AllTransacitonsView {
                         ))
                 }
                 
-                if isShowing == true {
+                if isShowing {
                     
                     VStack(alignment: .leading, spacing: 10) {
                         
@@ -222,10 +229,6 @@ extension AllTransacitonsView {
                         
                         DatePicker("Start", selection: $vm.startDate, in: ...Date(), displayedComponents: .date)
                     
-                        Image(systemName: "arrow.down")
-                            .foregroundColor(.themeThree)
-                            .font(.system(size: 20))
-                        
                         DatePicker("End", selection: $vm.endDate, in: ...Date(), displayedComponents: .date)
                             
    

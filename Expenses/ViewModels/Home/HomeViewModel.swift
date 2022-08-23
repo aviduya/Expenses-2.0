@@ -32,7 +32,7 @@ class HomeViewModel: ObservableObject {
     
     init() {
         
-        dataManager.getTransaction(&allTransactions)
+        dataManager.getTransaction(&allTransactions, debugStatement: "HomeViewModel , Line 35")
         generateMessage()
         
     }
@@ -97,8 +97,7 @@ class HomeViewModel: ObservableObject {
         
         mostUsedCategory = mostFrequentCategory.filtered().first ?? "None"
         mostUsedPayment = mostFrequentPayment.filtered().first ?? "None"
-                
-        print(allTransactions)
+            
     }
 }
 
