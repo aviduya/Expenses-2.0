@@ -123,10 +123,8 @@ extension GeneratorView {
                     isShowingPicker = false
                     isButtonPressed.toggle()
                 }
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     withAnimation {
-                        
                         viewModel.generateReport(type: selectedGeneratorType, customStart: customStart, customEnd: customEnd) {
                             viewModel.publishReport()
                             isGeneratedEmpty = false
@@ -135,29 +133,20 @@ extension GeneratorView {
                             isGeneratedEmpty = true
                             print("none")
                         }
-                        
-                        
                         isGenerated = true
                         isGenerating = false
-                        
                     }
-                    
                     isButtonPressed = false
-                    
                 }
                 withAnimation {
                     isGenerated = false
                 }
-                
             } label: {
                 HStack {
                     Text("Generate")
                     Image(systemName: "arrow.clockwise")
                         .rotationEffect(.degrees(isButtonPressed ? 360 : 0))
-                    
                 }
-                
-                
             }
             .foregroundColor(.themeThree)
             .padding()
@@ -196,18 +185,11 @@ extension GeneratorView {
                         isShowingPicker ? 90 : 0
                     ))
             }
-            
             if isShowingPicker {
-                
                 VStack(alignment: .leading, spacing: 10) {
-                    
                     Divider()
-                    
                     DatePicker("Start", selection: $customStart, in: ...Date(), displayedComponents: .date)
-                    
                     DatePicker("End", selection: $customEnd, in: ...Date(), displayedComponents: .date)
-                    
-                    
                 }
             }
         }
