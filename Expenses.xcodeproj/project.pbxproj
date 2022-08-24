@@ -110,18 +110,6 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		0E086B5328891E160055C04A /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				0E75596A28ADC94C002B0898 /* Generator */,
-				0E1BBE1228A36AF200483848 /* AllTransactions */,
-				0E1BBE1128A36AE700483848 /* AddTransactions */,
-				0E1BBE1028A36ADC00483848 /* Settings */,
-				0E1BBE0F28A36AD700483848 /* Home */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		0E086B5428891E220055C04A /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,18 +117,6 @@
 				0E1C4B04287A388200DE127C /* HomeModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		0E086B5528891E2A0055C04A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0E75596728ACDC14002B0898 /* GeneratorView */,
-				0E1BBE0D28A36AAA00483848 /* AddTransactions */,
-				0E1BBE0C28A323EA00483848 /* Settings */,
-				0E1BBE0B28A323DA00483848 /* AllTransactions */,
-				0E1BBE0A28A323D000483848 /* Home */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		0E086B56288921700055C04A /* DataServices */ = {
@@ -182,76 +158,6 @@
 			path = ReuseableViews;
 			sourceTree = "<group>";
 		};
-		0E1BBE0A28A323D000483848 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				0EBBB4352800D10300F0A875 /* HomeView.swift */,
-				0E1BBE1328A3795F00483848 /* MapSnapshotView.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		0E1BBE0B28A323DA00483848 /* AllTransactions */ = {
-			isa = PBXGroup;
-			children = (
-				0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */,
-			);
-			path = AllTransactions;
-			sourceTree = "<group>";
-		};
-		0E1BBE0C28A323EA00483848 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				0E07B6172823109B00405764 /* AppSettingsView.swift */,
-				0E8DE73828A5C9F7005B00A0 /* CategorySettingsView.swift */,
-				0E162DAC28A431650098BFB6 /* LocationSettingsView.swift */,
-				0E8DE73628A5C8DC005B00A0 /* ThresholdSettingView.swift */,
-				0E8DE73A28A5CACF005B00A0 /* BankSettingsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		0E1BBE0D28A36AAA00483848 /* AddTransactions */ = {
-			isa = PBXGroup;
-			children = (
-				0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */,
-				0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */,
-			);
-			path = AddTransactions;
-			sourceTree = "<group>";
-		};
-		0E1BBE0F28A36AD700483848 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				0E5C762C2808C513006E4D02 /* HomeViewModel.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		0E1BBE1028A36ADC00483848 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				0E28470D2755CD52006CD281 /* AppSettingsViewModel.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		0E1BBE1128A36AE700483848 /* AddTransactions */ = {
-			isa = PBXGroup;
-			children = (
-				0EDA98D927F3A66E007E86A5 /* AddTransactionsViewModel.swift */,
-			);
-			path = AddTransactions;
-			sourceTree = "<group>";
-		};
-		0E1BBE1228A36AF200483848 /* AllTransactions */ = {
-			isa = PBXGroup;
-			children = (
-				0E0ED6592812172C00A318E6 /* AllTransactionsViewModel.swift */,
-			);
-			path = AllTransactions;
-			sourceTree = "<group>";
-		};
 		0E75596328ACBCCA002B0898 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,23 +172,6 @@
 				0E977D19288A8998000BA21F /* CardView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		0E75596728ACDC14002B0898 /* GeneratorView */ = {
-			isa = PBXGroup;
-			children = (
-				0E75596828ACDC2F002B0898 /* GeneratorView.swift */,
-				0ED2485128B3E9C0005DA716 /* HighlightsSubView.swift */,
-			);
-			path = GeneratorView;
-			sourceTree = "<group>";
-		};
-		0E75596A28ADC94C002B0898 /* Generator */ = {
-			isa = PBXGroup;
-			children = (
-				0E75596B28ADC970002B0898 /* GeneratorViewModel.swift */,
-			);
-			path = Generator;
 			sourceTree = "<group>";
 		};
 		0E83B67F274F13C100F10D5C = {
@@ -306,14 +195,149 @@
 			children = (
 				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
 				0E83B68F274F13C200F10D5C /* Assets.xcassets */,
+				0EDF97E628B6274700DAB368 /* Report */,
+				0EDF97E528B6273D00DAB368 /* Settings */,
+				0EDF97E428B6272300DAB368 /* AddTransaction */,
+				0EDF97E328B6271200DAB368 /* AllTransactions */,
+				0EDF97E228B6270C00DAB368 /* Home */,
 				0E086B56288921700055C04A /* DataServices */,
-				0E086B5528891E2A0055C04A /* Views */,
 				0E086B5428891E220055C04A /* Models */,
-				0E086B5328891E160055C04A /* ViewModels */,
 				0E0ED65E2813BE9D00A318E6 /* ReuseableViews */,
 				0E044AF42809F87E00A4FDB5 /* Core */,
 			);
 			path = Expenses;
+			sourceTree = "<group>";
+		};
+		0EDF97E228B6270C00DAB368 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0EDF97E828B6277000DAB368 /* ViewModel */,
+				0EDF97E728B6276A00DAB368 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0EDF97E328B6271200DAB368 /* AllTransactions */ = {
+			isa = PBXGroup;
+			children = (
+				0EDF97EA28B6278700DAB368 /* ViewModel */,
+				0EDF97E928B6278000DAB368 /* View */,
+			);
+			path = AllTransactions;
+			sourceTree = "<group>";
+		};
+		0EDF97E428B6272300DAB368 /* AddTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				0EDF97EC28B627B500DAB368 /* ViewModel */,
+				0EDF97EB28B627AF00DAB368 /* View */,
+			);
+			path = AddTransaction;
+			sourceTree = "<group>";
+		};
+		0EDF97E528B6273D00DAB368 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0EDF97EE28B627C100DAB368 /* ViewModel */,
+				0EDF97ED28B627BC00DAB368 /* View */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0EDF97E628B6274700DAB368 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				0EDF97F028B627CD00DAB368 /* ViewModel */,
+				0EDF97EF28B627C900DAB368 /* View */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		0EDF97E728B6276A00DAB368 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0EBBB4352800D10300F0A875 /* HomeView.swift */,
+				0E1BBE1328A3795F00483848 /* MapSnapshotView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EDF97E828B6277000DAB368 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E5C762C2808C513006E4D02 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EDF97E928B6278000DAB368 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E0ED65628120BB900A318E6 /* AllTransacitonsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EDF97EA28B6278700DAB368 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E0ED6592812172C00A318E6 /* AllTransactionsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EDF97EB28B627AF00DAB368 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */,
+				0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EDF97EC28B627B500DAB368 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EDA98D927F3A66E007E86A5 /* AddTransactionsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EDF97ED28B627BC00DAB368 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E07B6172823109B00405764 /* AppSettingsView.swift */,
+				0E8DE73828A5C9F7005B00A0 /* CategorySettingsView.swift */,
+				0E162DAC28A431650098BFB6 /* LocationSettingsView.swift */,
+				0E8DE73628A5C8DC005B00A0 /* ThresholdSettingView.swift */,
+				0E8DE73A28A5CACF005B00A0 /* BankSettingsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EDF97EE28B627C100DAB368 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E28470D2755CD52006CD281 /* AppSettingsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0EDF97EF28B627C900DAB368 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E75596828ACDC2F002B0898 /* GeneratorView.swift */,
+				0ED2485128B3E9C0005DA716 /* HighlightsSubView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0EDF97F028B627CD00DAB368 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0E75596B28ADC970002B0898 /* GeneratorViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
