@@ -26,6 +26,17 @@ class AllTransactionsViewModel: ObservableObject {
          case custom
      }
     
+    let cal = Calendar.current
+    
+    var groupedByDate: [Date: [TransactionEntity]] {
+        Dictionary(grouping: rangeOfTransactions, by: { cal.startOfDay(for: $0.date ?? Date() )})
+    }
+    
+    var headers: [Date] {
+        groupedByDate.map( { $0.key }).sorted()
+    }
+ 
+    
     func runRangeRequest() {
         
         let calendar = Calendar.current
@@ -58,6 +69,9 @@ class AllTransactionsViewModel: ObservableObject {
         
         return dayInWeek
     }
+    
 }
+
+
 
 

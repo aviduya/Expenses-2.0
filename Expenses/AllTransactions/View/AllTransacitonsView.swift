@@ -20,18 +20,18 @@ struct AllTransacitonsView: View {
     private let material: Material = .ultraThinMaterial
     
     var body: some View {
-            VStack {
-                VStack(alignment: .leading) {
-                    header
+        VStack {
+            VStack(alignment: .leading) {
+                header
                 
-                    scrollBody
+                scrollBody
                 
-                    footer
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                footer
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
         
-            .padding([.top, .leading, .trailing])
+        .padding([.top, .leading, .trailing])
     }
 }
 
@@ -92,42 +92,42 @@ extension AllTransacitonsView {
         HStack {
             Spacer()
             Menu {
-                    Section {
-                        Picker("Sort by", selection: $vm.page) {
-                            
-                            HStack {
-                                Text("Today")
-                            }
-                            .tag(vm.filter.today)
-                            
-                            HStack {
-                                Text("Last 7 Days")
-                            }
-                            .tag(vm.filter.seven)
-                            
-                            HStack {
-                                Text("Current Month")
-                            }
-                            .tag(vm.filter.month)
-                            
-                            HStack {
-                                Text("Custom")
-                            }
-                            .tag(vm.filter.custom)
-                        }
-                    }
-            } label: {
-                    HStack {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
+                Section {
+                    Picker("Sort by", selection: $vm.page) {
                         
-                        Text(vm.status)
+                        HStack {
+                            Text("Today")
+                        }
+                        .tag(vm.filter.today)
+                        
+                        HStack {
+                            Text("Last 7 Days")
+                        }
+                        .tag(vm.filter.seven)
+                        
+                        HStack {
+                            Text("Current Month")
+                        }
+                        .tag(vm.filter.month)
+                        
+                        HStack {
+                            Text("Custom")
+                        }
+                        .tag(vm.filter.custom)
+                    }
                 }
-                    .id("Title" + vm.status)
-                    .foregroundColor(.themeThree)
-                    .padding(10)
-                    .background(material, in: Capsule())
-                    .shadow(radius: 10)
-                                    
+            } label: {
+                HStack {
+                    Image(systemName: "line.3.horizontal.decrease.circle")
+                    
+                    Text(vm.status)
+                }
+                .id("Title" + vm.status)
+                .foregroundColor(.themeThree)
+                .padding(10)
+                .background(material, in: Capsule())
+                .shadow(radius: 10)
+                
             }
             .transaction { transaction in
                 transaction.animation = nil
@@ -228,34 +228,38 @@ extension AllTransacitonsView {
                         Divider()
                         
                         DatePicker("Start", selection: $vm.startDate, in: ...Date(), displayedComponents: .date)
-                    
+                        
                         DatePicker("End", selection: $vm.endDate, in: ...Date(), displayedComponents: .date)
-                            
-   
+                        
+                        
                     }
                 }
             }
             .padding()
             .background(material, in: RoundedRectangle(cornerRadius: 14))
             
-            ForEach(vm.rangeOfTransactions) { t in
-                
-                    RowView(
-                        entity: t,
-                        entities: $dm.all,
-                        onDelete: dm.deleteTransactions(_:),
-                        item: t.name ?? "",
-                        date: t.date ?? error,
-                        amount: t.amount,
-                        category: t.category ?? "")
-                    .transition(.move(edge: .bottom))
-                
+            ForEach(vm.headers, id: \.self) { header in
+                Section {
+                    ForEach(vm.groupedByDate[header]!) { t in
+                        RowView(
+                            entity: t,
+                            entities: $dm.all,
+                            onDelete: dm.deleteTransactions(_:),
+                            item: t.name ?? "",
+                            date: t.date ?? error,
+                            amount: t.amount,
+                            category: t.category ?? "")
+                    }
+                } header: {
+                    HStack {
+                        Text(header, style: .date)
+                            .bold()
+                        Spacer()
+                    }
+                }
                 
             }
         }
-        
-        
     }
 }
-
 
