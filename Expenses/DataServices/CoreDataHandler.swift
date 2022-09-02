@@ -35,6 +35,15 @@ class CoreDataHandler: ObservableObject {
         
     }
     
+    var groupedByDate: [Date: [TransactionEntity]] {
+        Dictionary(grouping: all, by: { calendar.startOfDay(for: $0.date?.getThisMonthStart() ?? Date() )})
+    }
+    
+    var headers: [Date] {
+        groupedByDate.map( { $0.key }).sorted(by: >)
+    }
+
+    
     func getEverything() {
         
         let yesterdayDateTo = calendar.startOfDay(for: Date())
@@ -77,19 +86,19 @@ class CoreDataHandler: ObservableObject {
     func getRangeOfTransactions(start: Date ,end: Date, _ input: inout [TransactionEntity]) {
         
         func fromPredicate(dateFrom: Date) -> NSPredicate {
-            return NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
+            NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
         }
         
         func toPredicate(dateTo: Date?) -> NSPredicate {
-            return NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+           NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
         }
         
         func compound(from: NSPredicate, to: NSPredicate) -> NSCompoundPredicate {
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [from, to])
+            NSCompoundPredicate(andPredicateWithSubpredicates: [from, to])
         }
         
         func sort() -> [NSSortDescriptor] {
-            return [NSSortDescriptor(key: "date", ascending: false)]
+            [NSSortDescriptor(key: "date", ascending: false)]
         }
         
         let startDate = calendar.startOfDay(for: start)
@@ -130,5 +139,21 @@ class CoreDataHandler: ObservableObject {
             print("Error Saving. \(error)")
         }
         
+    }
+    
+    func returnDateShorthand(input: Date?) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd"
+        let dayInWeek = dateFormatter.string(from: input ?? Date())
+        
+        return dayInWeek
+    }
+    
+    func returnMonth(input: Date?) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        let dayInWeek = dateFormatter.string(from: input ?? Date())
+        
+        return dayInWeek
     }
 }

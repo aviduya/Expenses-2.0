@@ -29,11 +29,11 @@ class AllTransactionsViewModel: ObservableObject {
     let cal = Calendar.current
     
     var groupedByDate: [Date: [TransactionEntity]] {
-        Dictionary(grouping: rangeOfTransactions, by: { cal.startOfDay(for: $0.date ?? Date() )})
+        Dictionary(grouping: rangeOfTransactions, by: {  $0.date?.getThisMonthStart() ?? Date() })
     }
     
     var headers: [Date] {
-        groupedByDate.map( { $0.key }).sorted()
+        groupedByDate.map( { $0.key }).sorted(by: >)
     }
  
     

@@ -46,6 +46,7 @@
 		0EDA98DA27F3A66E007E86A5 /* AddTransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98D927F3A66E007E86A5 /* AddTransactionsViewModel.swift */; };
 		0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */; };
 		0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */; };
+		0EDF97F228B96BF100DAB368 /* CoreDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF97F128B96BF100DAB368 /* CoreDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		0EDA98D927F3A66E007E86A5 /* AddTransactionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionsViewModel.swift; sourceTree = "<group>"; };
 		0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsContainer.xcdatamodel; sourceTree = "<group>"; };
 		0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
+		0EDF97F128B96BF100DAB368 /* CoreDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,8 @@
 				0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */,
 				0EBBB43327FFF46C00F0A875 /* CoreDataHandler.swift */,
 				0E63B11B28A265D900936E82 /* LocationHandler.swift */,
+				0EDF97F128B96BF100DAB368 /* CoreDataView.swift */,
+				0E086B5428891E220055C04A /* Models */,
 			);
 			path = DataServices;
 			sourceTree = "<group>";
@@ -201,7 +205,6 @@
 				0EDF97E328B6271200DAB368 /* AllTransactions */,
 				0EDF97E228B6270C00DAB368 /* Home */,
 				0E086B56288921700055C04A /* DataServices */,
-				0E086B5428891E220055C04A /* Models */,
 				0E0ED65E2813BE9D00A318E6 /* ReuseableViews */,
 				0E044AF42809F87E00A4FDB5 /* Core */,
 			);
@@ -430,6 +433,7 @@
 				0E07B6182823109B00405764 /* AppSettingsView.swift in Sources */,
 				0E0ED6692813C71D00A318E6 /* DatePickerView.swift in Sources */,
 				0EC5633228A633DC003926D3 /* LocationExtension.swift in Sources */,
+				0EDF97F228B96BF100DAB368 /* CoreDataView.swift in Sources */,
 				0E0ED6632813C48200A318E6 /* InputTextField.swift in Sources */,
 				0EA75E9F28222943005DCB14 /* ShimmerModifier.swift in Sources */,
 				0E8DE73B28A5CACF005B00A0 /* BankSettingsView.swift in Sources */,

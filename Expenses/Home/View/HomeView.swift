@@ -45,6 +45,8 @@ struct HomeView: View {
                 AddTransactionView()
             case .generator:
                 GeneratorView()
+            case .repository:
+                CoreDataView()
             }
         }
         .onAppear {
@@ -155,12 +157,16 @@ extension HomeView {
         Menu {
             Section {
                 
+                Button {
+                    activeSheet = .repository
+                } label: {
+                    Label("Edit Transactions", systemImage: "list.bullet.indent")
+                }
+                
                 Button(action: { activeSheet = .generator } ) {
                     Label("Generate Stats", systemImage: "wand.and.rays")
                 }
                 
-            }
-            Section {
                 Button(action: {
                     activeSheet = .settings
                 }) {

@@ -71,10 +71,7 @@ extension Date {
         let dayInWeek = dateFormatter.string(from: date)
         
         return dayInWeek
-    }
-    
-    
-    
+    } 
 }
 
 

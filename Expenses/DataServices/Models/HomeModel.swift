@@ -13,6 +13,7 @@ enum ActiveView: Identifiable {
     case add
     case all
     case generator
+    case repository
     
     var id: Int {
         hashValue

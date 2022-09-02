@@ -7,7 +7,22 @@
 
 import SwiftUI
 
-struct AllTransacitonsView: View {
+protocol FormatableDates {
+    
+    func month(input: Date) -> String
+}
+
+struct AllTransacitonsView: View, FormatableDates {
+
+    func month(input: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        let month = dateFormatter.string(from: input )
+        
+        return month
+    }
+    
+    
     @EnvironmentObject var settings: AppSettingsViewModel
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -52,17 +67,11 @@ extension AllTransacitonsView {
                         vm.runRangeRequest()
                         isShowing = false
                     }
-                    
                 } label: {
                     Text("Set Custom Filter")
                         .foregroundColor(.themeThree)
                 }
-            } else {
-                EditButton()
-                    .foregroundColor(.themeThree)
             }
-            
-            
         }
     }
     
@@ -145,9 +154,6 @@ extension AllTransacitonsView {
             }
             ForEach(dm.today) { t in
                 RowView(
-                    entity: t,
-                    entities: $dm.all,
-                    onDelete: dm.deleteTransactions(_:),
                     item: t.name ?? "",
                     date: t.date ?? error,
                     amount: t.amount,
@@ -168,9 +174,7 @@ extension AllTransacitonsView {
             
             ForEach(dm.week) { t in
                 RowView(
-                    entity: t,
-                    entities: $dm.all,
-                    onDelete: dm.deleteTransactions(_:),
+                    
                     item: t.name ?? "",
                     date: t.date ?? error,
                     amount: t.amount,
@@ -189,9 +193,7 @@ extension AllTransacitonsView {
             }
             ForEach(dm.month) { t in
                 RowView(
-                    entity: t,
-                    entities: $dm.all,
-                    onDelete: dm.deleteTransactions(_:),
+                   
                     item: t.name ?? "",
                     date: t.date ?? error,
                     amount: t.amount,
@@ -242,9 +244,6 @@ extension AllTransacitonsView {
                 Section {
                     ForEach(vm.groupedByDate[header]!) { t in
                         RowView(
-                            entity: t,
-                            entities: $dm.all,
-                            onDelete: dm.deleteTransactions(_:),
                             item: t.name ?? "",
                             date: t.date ?? error,
                             amount: t.amount,
@@ -252,7 +251,7 @@ extension AllTransacitonsView {
                     }
                 } header: {
                     HStack {
-                        Text(header, style: .date)
+                        Text("\(month(input: header))")
                             .bold()
                         Spacer()
                     }
