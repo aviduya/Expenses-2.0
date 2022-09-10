@@ -39,7 +39,7 @@ struct AllTransacitonsView: View, FormatableDates {
             VStack(alignment: .leading) {
 //                header
                 
-                ViewAllTransactionsWithDateRow()
+                AllTransactionsWeekView()
                 
 //                footer
             }
