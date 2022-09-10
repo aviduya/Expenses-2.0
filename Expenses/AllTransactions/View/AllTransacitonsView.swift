@@ -37,11 +37,11 @@ struct AllTransacitonsView: View, FormatableDates {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                header
+//                header
                 
-                scrollBody
+                ViewAllTransactionsWithDateRow()
                 
-                footer
+//                footer
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }

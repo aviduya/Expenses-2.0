@@ -83,6 +83,51 @@ class CoreDataHandler: ObservableObject {
         }
     }
     
+    
+    func getRangeOfTransactionsExample(start: Date ,end: Date) -> [TransactionEntity] {
+        
+        var input: [TransactionEntity] = []
+        
+        func fromPredicate(dateFrom: Date) -> NSPredicate {
+            NSPredicate(format: "%@ <= %K", dateFrom as NSDate, #keyPath(TransactionEntity.date))
+        }
+        
+        func toPredicate(dateTo: Date?) -> NSPredicate {
+           NSPredicate(format: "%K < %@", #keyPath(TransactionEntity.date), dateTo! as NSDate)
+        }
+        
+        func compound(from: NSPredicate, to: NSPredicate) -> NSCompoundPredicate {
+            NSCompoundPredicate(andPredicateWithSubpredicates: [from, to])
+        }
+        
+        func sort() -> [NSSortDescriptor] {
+            [NSSortDescriptor(key: "date", ascending: false)]
+        }
+        
+        let startDate = calendar.startOfDay(for: start)
+        let endDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: end)
+        
+        let startDatePredicate = fromPredicate(dateFrom: startDate)
+        let endDatePredicate = toPredicate(dateTo: endDate)
+        
+        let rangeTransactionRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+        
+        
+        let rangePredicate = compound(from: startDatePredicate, to: endDatePredicate)
+        rangeTransactionRequest.predicate = rangePredicate
+        
+        rangeTransactionRequest.sortDescriptors = sort()
+        
+        do {
+            input = try container.viewContext.fetch(rangeTransactionRequest)
+        } catch let error {
+            print("Error Fetching. \(error)")
+        }
+        
+        return input
+        
+    }
+    
     func getRangeOfTransactions(start: Date ,end: Date, _ input: inout [TransactionEntity]) {
         
         func fromPredicate(dateFrom: Date) -> NSPredicate {

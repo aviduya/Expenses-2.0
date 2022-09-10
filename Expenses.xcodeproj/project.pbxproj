@@ -47,6 +47,7 @@
 		0EDA98DD27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DB27F3A98C007E86A5 /* TransactionsContainer.xcdatamodeld */; };
 		0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */; };
 		0EDF97F228B96BF100DAB368 /* CoreDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF97F128B96BF100DAB368 /* CoreDataView.swift */; };
+		0EEE072B28CBE101000B1259 /* ViewAllTransactionsWithDateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEE072A28CBE101000B1259 /* ViewAllTransactionsWithDateRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		0EDA98DC27F3A98C007E86A5 /* TransactionsContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsContainer.xcdatamodel; sourceTree = "<group>"; };
 		0EDA98DE27F3AB69007E86A5 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		0EDF97F128B96BF100DAB368 /* CoreDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataView.swift; sourceTree = "<group>"; };
+		0EEE072A28CBE101000B1259 /* ViewAllTransactionsWithDateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllTransactionsWithDateRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 		0E83B68A274F13C200F10D5C /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
+				0EEE072A28CBE101000B1259 /* ViewAllTransactionsWithDateRow.swift */,
 				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
 				0E83B68F274F13C200F10D5C /* Assets.xcassets */,
 				0EDF97E628B6274700DAB368 /* Report */,
@@ -430,6 +433,7 @@
 				0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */,
 				0EDA98DF27F3AB69007E86A5 /* AddTransactionView.swift in Sources */,
 				0E75596928ACDC2F002B0898 /* GeneratorView.swift in Sources */,
+				0EEE072B28CBE101000B1259 /* ViewAllTransactionsWithDateRow.swift in Sources */,
 				0E07B6182823109B00405764 /* AppSettingsView.swift in Sources */,
 				0E0ED6692813C71D00A318E6 /* DatePickerView.swift in Sources */,
 				0EC5633228A633DC003926D3 /* LocationExtension.swift in Sources */,
@@ -512,7 +516,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -567,7 +571,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

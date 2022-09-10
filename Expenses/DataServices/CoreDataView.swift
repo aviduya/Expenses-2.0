@@ -40,12 +40,10 @@ struct CoreDataView: View {
                             .onDelete(perform: viewModel.deleteTransactions)
                         } header: {
                             HStack {
+                                Image(systemName: "calendar")
                                 Text(viewModel.returnMonth(input: header))
                                     .bold()
                                 Spacer()
-                                Image(systemName: "number")
-                                    .foregroundColor(.themeThree)
-                                Text("\(viewModel.groupedByDate[header]!.count)")
                             }
                         }
                     }
