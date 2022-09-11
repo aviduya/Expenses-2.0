@@ -21,13 +21,14 @@ struct AllTransactionsWeekView: View {
                     ForEach(viewModel.TransactionsList) { date in
                         VStack {
                             Text(date.dayName)
-                                .font(.footnote)
+                                .font(.title3)
                             Text(date.dayNumber)
+                                .font(.title)
                                 .foregroundColor(.white.opacity(selectedDay == date.savedDate ? 1 : 0.33))
                                 .padding(10)
                                 .background(selectedDay == date.savedDate ? Circle()
                                     .foregroundColor(.themeThree)
-                                    .frame(width: 30, height: 30, alignment: .center)
+                                    .frame(width: 40, height: 40, alignment: .center)
                                             : nil)
                                 .onTapGesture {
                                     withAnimation {
@@ -49,15 +50,24 @@ struct AllTransactionsWeekView: View {
                         EmptyView(message: "Please add a Transaction")
                     } else {
                         ScrollView {
-                            GroupBox("This day's transaction") {
+                            GroupBox(date.savedDate.returnTitleString()) {
                                 Chart(date.entities) { transaction in
                                     BarMark(
                                         x: .value("Day", transaction.date ?? Date(), unit: .hour),
                                         y: .value("Amount", transaction.amount)
                                         
                                     )
-                                    .cornerRadius(16)
+                                    
+                                    .cornerRadius(8)
                                     .foregroundStyle(.linearGradient(colors: [.themeOne, .themeTwo, .themeThree, .themeFour], startPoint: .bottom, endPoint: .top))
+                                }
+                              
+                                .chartXAxis {
+                                    AxisMarks(values: .stride(by: .hour, count: 1)) { _ in
+                                        AxisGridLine()
+                                        AxisTick()
+                                        AxisValueLabel(format: .dateTime.hour(), centered: true)
+                                    }
                                 }
                             }
                             .frame(height: 300)

@@ -37,11 +37,11 @@ struct AllTransacitonsView: View, FormatableDates {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-//                header
+                header
                 
                 AllTransactionsWeekView()
                 
-//                footer
+                footer
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
@@ -172,14 +172,8 @@ extension AllTransacitonsView {
                 EmptyView(message: "Add a transaction")
             }
             
-            ForEach(dm.week) { t in
-                RowView(
-                    
-                    item: t.name ?? "",
-                    date: t.date ?? error,
-                    amount: t.amount,
-                    category: t.category ?? "")
-            }
+            AllTransactionsWeekView()
+           
         }
     }
     
