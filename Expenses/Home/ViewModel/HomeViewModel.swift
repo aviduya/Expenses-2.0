@@ -22,8 +22,6 @@ class HomeViewModel: ObservableObject {
     @Published var allTransactions: [TransactionEntity] = [] {
         didSet {
             calculateWidgets()
-            print("Loaded \(allTransactions.count) Transactions Onto HomeView() ")
-            
         }
     }
     
