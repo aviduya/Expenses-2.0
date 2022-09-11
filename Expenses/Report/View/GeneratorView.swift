@@ -21,7 +21,6 @@ struct GeneratorView: View {
     @State private var customStart: Date = Date()
     @State private var customEnd: Date = Date()
     
-    
     @State private var selectedGeneratorType: GeneratorViewModel.GeneratedTypes = .yesterday
     
     private let material: Material = .ultraThinMaterial

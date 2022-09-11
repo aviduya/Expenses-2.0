@@ -7,9 +7,14 @@
 
 import Foundation
 
-
-
 final class GeneratorViewModel: ObservableObject {
+    
+    enum ReportStatus {
+        case generated
+        case generating
+        case empty
+        case inactive
+    }
     
     enum GeneratedTypes: String, CaseIterable, Hashable {
         case yesterday = "Yesterday"
@@ -38,7 +43,13 @@ final class GeneratorViewModel: ObservableObject {
         print("Deinited \(generatedEntity.count)")
     }
     
-    func generateReport(type: GeneratedTypes, customStart: Date?, customEnd: Date?, success successClosure: () -> Void, none noneClosure: () -> Void) {
+    func generateReport(
+        type: GeneratedTypes,
+        customStart: Date? = nil,
+        customEnd: Date? = nil,
+        success successClosure: () -> Void,
+        none noneClosure: () -> Void) {
+            
         let calendar = Calendar.current
         
         var startDate = Date()
