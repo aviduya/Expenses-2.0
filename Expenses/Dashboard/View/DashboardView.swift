@@ -64,23 +64,7 @@ struct DashboardView: View {
                     
                     VStack(alignment: .leading ,spacing: 20) {
                         Section {
-                       
-                            DashboardRecentView()
-                                .frame(height: proxy.size.height - 450)
-                                
-                        } header: {
-                            HStack {
-                                Image(systemName: "checklist.unchecked")
-                                    .foregroundColor(.themeThree)
-                                Text("Recent Transactions")
-                                    .opacity(0.33)
-                            }
-                            
-                            .font(.footnote)
-                            .bold()
-                        }
-                        
-                        Section {
+                            DashboardChartView()
                             
                         } header: {
                             HStack {
@@ -93,6 +77,8 @@ struct DashboardView: View {
                             .font(.footnote)
                             .bold()
                         }
+                        
+                        
                     }
                     
                     
@@ -100,12 +86,12 @@ struct DashboardView: View {
             }
         }
         .padding(10)
-        .sheet(item: $selectedPage) { page in
+        .sheet(item: $selectedPage, onDismiss: {viewModel.fetchTransactions()}) { page in
             switch page {
             case .all:
                 AllTransactionsWeekView()
             case .settings:
-                CoreDataView()
+                AppSettingsView()
             case .add:
                 AddTransactionView()
             }
@@ -126,8 +112,22 @@ struct DashboardView: View {
 
 class DashboardViewModel: ObservableObject {
     
+    @Published var transactions: [TransactionEntity] = []
+    
+    private let data: CoreDataHandler = .shared
     private let location: LocationsHandler = .shared
     
+    init() {
+        fetchTransactions()
+        print(transactions)
+    }
+    
+    func fetchTransactions() {
+        data.getTransaction(&transactions, debugStatement: "Invoking from: Line 126 in DashboardView()")
+        print(transactions.count)
+    }
+       
+
     var greeting: (message: String, symbol: String) {
         
         let hour = Calendar.current.component(.hour, from: Date())
@@ -150,6 +150,10 @@ class DashboardViewModel: ObservableObject {
         }
         
     }
+            
+        
+    }
     
+
     
-}
+

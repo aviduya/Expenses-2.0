@@ -79,9 +79,6 @@ struct MapSnapshotView: View {
         // Create the snapshotter and run it.
         let snapshotter = MKMapSnapshotter(options: mapOptions)
         
-        
-        snapshotter.sta
-        
         if snapshotter.isLoading == true {
             isMapLoaded = false
         } else {

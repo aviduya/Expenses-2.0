@@ -32,7 +32,6 @@ final class CardViewModel: ObservableObject {
     
     func getAddress(location: CLLocationCoordinate2D) {
         let location = CLLocation(latitude: location.latitude, longitude: location.longitude)
-        
         location.placemark { placemark, error in
             guard let placemark = placemark else {
                 print("Error: ", error ?? "nil")

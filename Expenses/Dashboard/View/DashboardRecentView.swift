@@ -74,21 +74,28 @@ struct DashboardRecentView: View {
 
     var body: some View {
         Group {
-            TabView(selection: $selectTab) {
-                ForEach(viewModel.transactions) { transaction in
-                  CardView(
-                    item: transaction.item ,
-                    date: transaction.date,
-                    amount: transaction.amount,
-                    category: transaction.category,
-                    merchant: transaction.merchant,
-                    bank: transaction.bank,
-                    location: transaction.location)
-                  .padding(.horizontal, 10)
-                  
-                }
+            
+            if viewModel.transactions.isEmpty {
+//                TabView(selection: $selectTab) {
+//                    ForEach(viewModel.transactions) { transaction in
+//                      CardView(
+//                        item: transaction.item ,
+//                        date: transaction.date,
+//                        amount: transaction.amount,
+//                        category: transaction.category,
+//                        merchant: transaction.merchant,
+//                        bank: transaction.bank,
+//                        location: transaction.location)
+//                      .padding(.horizontal, 10)
+//                      
+//                    }
+//                }
+//                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            } else {
+                EmptyView(message: "Add a Transaction")
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            
         }
         .onAppear {
             print("This View appeard")
