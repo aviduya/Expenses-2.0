@@ -50,7 +50,7 @@ struct AllTransactionsWeekView: View {
                         EmptyView(message: "Please add a Transaction")
                     } else {
                         ScrollView {
-                            GroupBox(date.savedDate.returnTitleString()) {
+                            GroupBox(date.savedDate.dateTitle()) {
                                 Chart(date.entities) { transaction in
                                     BarMark(
                                         x: .value("Day", transaction.date ?? Date(), unit: .hour),

@@ -27,7 +27,7 @@ class AllTransactionsWeekViewModel: ObservableObject {
         
         var days: [Date] = []
         
-        for x in 0...7 {
+        for x in 0...6 {
             days.append(calendar.date(byAdding: .day, value: -x, to: dateNow) ?? Date())
         }
         

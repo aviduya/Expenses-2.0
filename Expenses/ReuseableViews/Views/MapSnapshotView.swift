@@ -11,11 +11,13 @@ import MapKit
 
 struct MapSnapshotView: View {
     
+    
     @State var amount: Double
     @State var location: CLLocationCoordinate2D
     
     let span: CLLocationDegrees = 0.005
     
+    @State private var isMapLoaded: Bool = false
     @State private var snapshotImage: UIImage? = nil
     
     var body: some View {
@@ -24,6 +26,7 @@ struct MapSnapshotView: View {
             Group {
                 if let image = snapshotImage {
                     Image(uiImage: image)
+                        .resizable()
                         .transition(.opacity)
                         .overlay(
                             ZStack {
@@ -43,32 +46,14 @@ struct MapSnapshotView: View {
                             ,
                             alignment: .center
                         )
-                    
-                } else {
-                    VStack {
-                        Spacer()
-                        HStack {
-                            Spacer()
-                            HStack(spacing: 10) {
-                                Text("Loading Map...")
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle())
-                            }
-                            .padding()
-                            .background(Material.ultraThin, in: Capsule())
-                            .shadow(radius: 10)
-                            Spacer()
-                        }
-                        .foregroundColor(.themeThree)
-                        .padding()
-                        Spacer()
-                    }
-                    .background(Color(UIColor.secondarySystemBackground))
-
                 }
             }
             .onAppear {
                     generateSnapshot(width: geo.size.width, height: geo.size.height)
+                print("Map: \(isMapLoaded)")
+            }
+            .onDisappear {
+                snapshotImage = nil
             }
         }
         
@@ -93,19 +78,28 @@ struct MapSnapshotView: View {
         
         // Create the snapshotter and run it.
         let snapshotter = MKMapSnapshotter(options: mapOptions)
-        snapshotter.start { (snapshotOrNil, errorOrNil) in
-            if let error = errorOrNil {
-                print(error)
-                return
-            }
-            if let snapshot = snapshotOrNil {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        
+        
+        snapshotter.sta
+        
+        if snapshotter.isLoading == true {
+            isMapLoaded = false
+        } else {
+            snapshotter.start { (snapshotOrNil, errorOrNil) in
+                if let error = errorOrNil {
+                    print(error)
+                    return
+                }
+                if let snapshot = snapshotOrNil {
                     withAnimation {
+                        isMapLoaded = true
                         self.snapshotImage = snapshot.image
                         print("Image generated")
                     }
                 }
             }
         }
+        
+        
     }
 }

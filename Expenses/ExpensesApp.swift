@@ -19,11 +19,16 @@ struct ExpensesApp: App {
     
     var body: some Scene {
         WindowGroup {
-                HomeView()
-                    .preferredColorScheme(.dark)
-                    .environmentObject(settings)
-                    .environmentObject(dataHandler)
-                    .environmentObject(locationHandler)
+            DashboardView()
+                .preferredColorScheme(.dark)
+                .environmentObject(settings)
+                .environmentObject(dataHandler)
+                .environmentObject(locationHandler)
+//                HomeView()
+//                    .preferredColorScheme(.dark)
+//                    .environmentObject(settings)
+//                    .environmentObject(dataHandler)
+//                    .environmentObject(locationHandler)
         }
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {

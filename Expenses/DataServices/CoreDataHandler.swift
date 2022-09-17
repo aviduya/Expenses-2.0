@@ -83,6 +83,26 @@ class CoreDataHandler: ObservableObject {
         }
     }
     
+    func getTransactionExample(debugStatement: String) -> [TransactionEntity] {
+        
+        var data: [TransactionEntity] = []
+        
+        var sort: [NSSortDescriptor] {
+            return [NSSortDescriptor(key: "date", ascending: false)]
+        }
+        
+        let genericRequest = NSFetchRequest<TransactionEntity>(entityName: "TransactionEntity")
+        genericRequest.sortDescriptors = sort
+        
+        do {
+            data = try container.viewContext.fetch(genericRequest)
+        } catch let error {
+            print("Error Fetching. \(error)")
+        }
+        
+        return data
+    }
+    
     
     func getRangeOfTransactionsExample(start: Date ,end: Date) -> [TransactionEntity] {
         

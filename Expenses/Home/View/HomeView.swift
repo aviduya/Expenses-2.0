@@ -65,7 +65,7 @@ extension HomeView {
     
     private var homeTitle: some View {
         VStack(alignment: .leading) {
-            Text(Date().returnTitleString())
+            Text(Date().dateTitle())
                 .font(.body)
                 .bold()
                 .opacity(0.66)
@@ -134,15 +134,12 @@ extension HomeView {
                     ForEach(vm.allTransactions.prefix(5)) { transaction in
                         CardView(
                             item: transaction.name ?? "",
-                            date: transaction.date ?? Date(),
+                            date: transaction.date?.formatted() ?? "",
                             amount: transaction.amount,
                             category: transaction.category ?? "",
                             merchant: transaction.merchant ?? "",
                             bank: transaction.bank ?? "",
-                            region: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude),
-                            long: transaction.longitude,
-                            lat: transaction.latitude
-                        )
+                            location: CLLocationCoordinate2D(latitude: transaction.latitude, longitude: transaction.longitude))
                         .padding(10)
                     }
                 }

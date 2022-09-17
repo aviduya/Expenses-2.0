@@ -31,6 +31,9 @@
 		0E7F644327FE732A002C3449 /* GroupBoxPickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F644227FE732A002C3449 /* GroupBoxPickersView.swift */; };
 		0E83B68C274F13C200F10D5C /* ExpensesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B68B274F13C200F10D5C /* ExpensesApp.swift */; };
 		0E83B690274F13C200F10D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B68F274F13C200F10D5C /* Assets.xcassets */; };
+		0E86C42128CE8C8A005C016F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E86C42028CE8C8A005C016F /* DashboardView.swift */; };
+		0E86C42328D05533005C016F /* DashboardRecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E86C42228D05533005C016F /* DashboardRecentView.swift */; };
+		0E86C42528D24D75005C016F /* DashboardChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E86C42428D24D75005C016F /* DashboardChartView.swift */; };
 		0E8DE73728A5C8DC005B00A0 /* ThresholdSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DE73628A5C8DC005B00A0 /* ThresholdSettingView.swift */; };
 		0E8DE73928A5C9F7005B00A0 /* CategorySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DE73828A5C9F7005B00A0 /* CategorySettingsView.swift */; };
 		0E8DE73B28A5CACF005B00A0 /* BankSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DE73A28A5CACF005B00A0 /* BankSettingsView.swift */; };
@@ -78,6 +81,9 @@
 		0E83B688274F13C200F10D5C /* Expn.se.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expn.se.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E83B68B274F13C200F10D5C /* ExpensesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesApp.swift; sourceTree = "<group>"; };
 		0E83B68F274F13C200F10D5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0E86C42028CE8C8A005C016F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		0E86C42228D05533005C016F /* DashboardRecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardRecentView.swift; sourceTree = "<group>"; };
+		0E86C42428D24D75005C016F /* DashboardChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardChartView.swift; sourceTree = "<group>"; };
 		0E8DE73628A5C8DC005B00A0 /* ThresholdSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdSettingView.swift; sourceTree = "<group>"; };
 		0E8DE73828A5C9F7005B00A0 /* CategorySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingsView.swift; sourceTree = "<group>"; };
 		0E8DE73A28A5CACF005B00A0 /* BankSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankSettingsView.swift; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 		0E75596628ACBD12002B0898 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0E1BBE1328A3795F00483848 /* MapSnapshotView.swift */,
 				0E977D19288A8998000BA21F /* CardView.swift */,
 			);
 			path = Views;
@@ -203,6 +210,7 @@
 		0E83B68A274F13C200F10D5C /* Expenses */ = {
 			isa = PBXGroup;
 			children = (
+				0E86C41C28CE8B9C005C016F /* Dashboard */,
 				0E83B68B274F13C200F10D5C /* ExpensesApp.swift */,
 				0E83B68F274F13C200F10D5C /* Assets.xcassets */,
 				0EDF97E628B6274700DAB368 /* Report */,
@@ -215,6 +223,40 @@
 				0E044AF42809F87E00A4FDB5 /* Core */,
 			);
 			path = Expenses;
+			sourceTree = "<group>";
+		};
+		0E86C41C28CE8B9C005C016F /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				0E86C41F28CE8C29005C016F /* View */,
+				0E86C41E28CE8C23005C016F /* ViewModel */,
+				0E86C41D28CE8C1E005C016F /* Model */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		0E86C41D28CE8C1E005C016F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0E86C41E28CE8C23005C016F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E86C41F28CE8C29005C016F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0E86C42028CE8C8A005C016F /* DashboardView.swift */,
+				0E86C42228D05533005C016F /* DashboardRecentView.swift */,
+				0E86C42428D24D75005C016F /* DashboardChartView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0EDF97E228B6270C00DAB368 /* Home */ = {
@@ -267,7 +309,6 @@
 			isa = PBXGroup;
 			children = (
 				0EBBB4352800D10300F0A875 /* HomeView.swift */,
-				0E1BBE1328A3795F00483848 /* MapSnapshotView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -453,9 +494,11 @@
 				0EC5633228A633DC003926D3 /* LocationExtension.swift in Sources */,
 				0EDF97F228B96BF100DAB368 /* CoreDataView.swift in Sources */,
 				0E0ED6632813C48200A318E6 /* InputTextField.swift in Sources */,
+				0E86C42328D05533005C016F /* DashboardRecentView.swift in Sources */,
 				0EEE073128CD2560000B1259 /* AllTransactionsModel.swift in Sources */,
 				0EA75E9F28222943005DCB14 /* ShimmerModifier.swift in Sources */,
 				0E8DE73B28A5CACF005B00A0 /* BankSettingsView.swift in Sources */,
+				0E86C42128CE8C8A005C016F /* DashboardView.swift in Sources */,
 				0E977D1A288A8998000BA21F /* CardView.swift in Sources */,
 				0E0ED6652813C62400A318E6 /* RowView.swift in Sources */,
 				0EB9EE2B281A105B00B68520 /* ArrayExtensions.swift in Sources */,
@@ -473,6 +516,7 @@
 				0E8DE73728A5C8DC005B00A0 /* ThresholdSettingView.swift in Sources */,
 				0E5901D128287A75000045C2 /* ColorExtensions.swift in Sources */,
 				0E8DE73928A5C9F7005B00A0 /* CategorySettingsView.swift in Sources */,
+				0E86C42528D24D75005C016F /* DashboardChartView.swift in Sources */,
 				0EEE073528CD25CF000B1259 /* AllTransactionsWeekViewModel.swift in Sources */,
 				0E75596528ACBCE6002B0898 /* CardViewModel.swift in Sources */,
 			);
@@ -609,7 +653,7 @@
 				DEVELOPMENT_TEAM = 9E5233F7BC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Expn.se;
+				INFOPLIST_KEY_CFBundleDisplayName = "Expenses+";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses the location to provide transaction locations made in real time.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses the location data for tracking real time transactions that were created.";
@@ -647,7 +691,7 @@
 				DEVELOPMENT_TEAM = 9E5233F7BC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Expn.se;
+				INFOPLIST_KEY_CFBundleDisplayName = "Expenses+";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses the location to provide transaction locations made in real time.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses the location data for tracking real time transactions that were created.";

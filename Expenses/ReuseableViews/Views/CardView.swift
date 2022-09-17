@@ -12,19 +12,18 @@ struct CardView: View {
     
     @EnvironmentObject var settings: AppSettingsViewModel
     @EnvironmentObject var locationHandler: LocationsHandler
-    @AppStorage("threshold") var setThreshold: Double = 0.0
+
     @StateObject var vm = CardViewModel()
     
     @State var item: String
-    @State var date: Date
+    @State var date: String
     @State var amount: Double
     @State var category: String
     @State var merchant: String
-    @State var bank: String 
-    @State var region: CLLocationCoordinate2D
-    @State var long: Double
-    @State var lat: Double
+    @State var bank: String
+    @State var location: CLLocationCoordinate2D
     
+    @State private var isMapLoaded: Bool = false
     @State private var isExpanded: Bool = false
 
     var handledAddress: String {
@@ -42,7 +41,7 @@ struct CardView: View {
                     VStack(alignment: .leading) {
                         Text(item)
                             .font(.title3)
-                        Text("\(vm.formatDate(date))")
+                        Text(date)
                             .font(Font.system(.callout, design: .default))
                             .opacity(0.5)
                     }
@@ -58,7 +57,6 @@ struct CardView: View {
                                 }
                             }
                         }
-                    
                 }
                 
                 if isExpanded {
@@ -74,20 +72,17 @@ struct CardView: View {
                 }
             }
             .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
             .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 16))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(
-            MapSnapshotView(amount: amount, location: region)
+            MapSnapshotView(amount: amount, location: location)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
         )
-        .padding(.bottom, 50)
         .onAppear {
-            vm.getAddress(lat, long)
+            vm.getAddress(location: location)
             if !locationHandler.isAuthorized {
                 isExpanded = true
-                region = CLLocationCoordinate2D(latitude: 37.33182, longitude: -122.03118)
             }
         }
         .onDisappear {
